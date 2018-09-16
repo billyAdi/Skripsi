@@ -55,11 +55,9 @@ public class Main {
 
             File scrFile
                     = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.moveFile(scrFile, new File("hasil_screenshot\\screenshots" + i + ".png"));
+            FileUtils.moveFile(scrFile, new File("screenshots" + i + ".png"));
 
             driver.quit();
         }
-        
-        git.checkout().setName("master").call();
     }
 }

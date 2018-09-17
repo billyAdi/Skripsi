@@ -158,8 +158,83 @@ Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \texti
 \end{figure}
 
 \section{JGit}
+\label{sec:jgit}
 \subsection{Porcelain API}
 \subsection{Plumbing API}
 
 \section{Selenium WebDriver}
+\label{sec:selenium_webdriver}
+Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC bekerja dengan cara menginjeksi kode JavaScript ke \textit{browser} ketika \textit{browser} dimuat dan menggunakan JavaScript tersebut untuk menggerakkan \textit{Application Under Test} dalam \textit{browser}. Selenium RC sekarang sudah \textit{deprecated}/tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{prototyping} kakas untuk membangun \textit{script test}.
+
+WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada\textit{browser} untuk automasi. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
+
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Selenium WebDriver. 
+\cite{Selenium_java_doc}
+\subsection{WebDriver}
+\label{subsec:webdriver}
+Kelas ini merupakan \textit{interface} utama yang digunakan untuk pengujian, kelas ini merepresentasikan \textit{web browser} yang ideal \cite{Selenium_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+\begin{itemize}
+\item void close()\\
+Berfungsi untuk menutup \textit{window} pada \textit{browser}, jika \textit{window} yang sekarang merupakan satu-satunya \textit{window} yang terbuka maka \textit{browser} akan ditutup.
+\item void quit()\\
+Berfungsi untuk menutup driver dan semua \textit{window} yang sedang terbuka.
+\item void get(String url)\\
+Berfungsi untuk memuat halaman \textit{web} pada \textit{window} saat ini. \textit{Method} ini mengirim \textit{HTPP GET Request} untuk memuat halaman, dan \textit{method} ini akan melakukan \textit{blocking} sampai halaman \textit{web} selesai dimuat.\\
+Parameter: alamat \textit{url} untuk memuat halaman \textit{web}.
+\end{itemize}
+
+\subsection{WebElement}
+\label{subsec:webelement}  
+Kelas ini adalah \textit{Interface} yang  merupakan representasi dari elemen HTML\cite{Selenium_java_doc}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini:
+\begin{itemize}
+\item void click()\\
+Berfungsi untuk mengklik suatu elemen HTML.
+\item void submit()\\
+Berfungsi untuk mengirimkan elemen \textit{form} ke \textit{remote server}. Fungsi ini akan melempar \textit{NoSuchElementException} jika elemen yang dikirim tidak berada di dalam \textit{form}. 
+\item String getText()\\
+Berfungsi untuk mendapatkan teks pada suatu elemen.\\
+Kembalian: Teks yang \textit{visible} pada elemen.
+
+\item void clear()\\
+Berfungsi untuk menghapus teks pada elemen yang digunakan untuk memasukkan teks.
+\item WebElement findElement(By by)\\
+Berfungsi untuk mendapatkan \textit{WebElement} pertama menggunakan metode yang diberikan parameter. \textit{Method} ini akan melempar \textit{NoSuchElementException} jika \textit{WebElement} tidak ditemukan.\\
+Kembalian: \textit{WebElement} pertama yang sesuai dengan mekanisme pencarian.\\
+Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
+
+\item List<WebElement> findElements(By by)\\
+Berfungsi untuk mendapatkan semua \textit{WebElement} sesuai dengan mekanisme yang diberikan parameter.\\
+Kembalian: \textit{list} dari \textit{WebElement}, atau \textit{list} kosong jika pencarian tidak ditemukan.\\
+Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
+\item void sendKeys(java.lang.CharSequence... keysToSend)\\
+Berfungsi untuk mengirimkan kumpulan karakter/teks ke elemen \textit{input}. \textit{Method} ini akan melempar \textit{java.lang.IllegalArgumentException} jika parameter keysToSend bernilai \textit{null}.\\
+Parameter: kumpulan karakter/teks yang dikirim ke elemen.
+\end{itemize} 
+
+\subsection{OutputType}
+\label{subsec:output_type}
+Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}\cite{Selenium_java_doc}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
+\begin{itemize}
+\item static final OutputType<java.lang.String> BASE64]\\
+Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{base64 data}.
+\item static final OutputType<byte[]> BYTES\\
+Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{raw bytes}.
+\item static final OutputType<java.io.File> FILE\\
+Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{temprorary file} yang akan dihapus setelah program keluar dari \textit{Java Virtual Machine}.
+\end{itemize}
+
+
+\subsection{TakesScreenshot}
+\label{subsec:takes_screenshot}
+Kelas ini merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. Kelas ini hanya mempunyai satu method yaitu:
+\begin{itemize}
+\item <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException\\
+\textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan menyimpannya ke lokasi yang sudah ditentukan. Kelas\\
+Kembalian: objek yang menyimpan informasi terkait \textit{screenshot} \\
+Parameter: tipe \textit{output} yang diinginkan(lihat \ref{subsec:output_type}).
+
+\end{itemize}
+
+
 \section{Apache Commons CLI}
+\label{subsec:apache_cli}

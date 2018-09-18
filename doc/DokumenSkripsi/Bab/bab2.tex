@@ -159,8 +159,57 @@ Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \texti
 
 \section{JGit}
 \label{sec:jgit}
-\subsection{Porcelain API}
-\subsection{Plumbing API}
+JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}\cite{JGit}. Dengan menggunakan JGit, operasi-operasi dalam Git bisa dilakukan melalui program Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} JGit. 
+
+\subsection{Repository}
+\label{subsec:repository}
+Kelas ini merepresentasikan repositori Git\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+\begin{itemize}
+\item public void create() throws IOException\\
+Berfungsi untuk membuat repositori Git baru.
+\item public void create(boolean bare) throws IOException\\
+Berfungsi untuk membuat repositori Git baru. \\
+Parameter: jika bernilai \textit{true} maka dibuat \textit{bare repository} (repositori tanpa \textit{working directory}). 
+\end{itemize} 
+
+\subsection{Git}
+\label{subsec:Git}
+Kelas ini menyediakan API yang mirip GitPorcelain untuk berinteraksi dengan repositori git\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+\begin{itemize}
+\item public LogCommand log()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{Log}.\\
+Kembalian: objek \textit{LogCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{Log}.
+\item public CheckoutCommand checkout()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{checkout}.\\
+Kembalian: objek \textit{CheckoutCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{checkout}.
+\item public CommitCommand commit()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{commit}.\\
+Kembalian: objek \textit{CommitCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{commit}.
+\end{itemize}
+
+\subsection{RevWalk}
+\label{subsec:revwalk}
+Kelas ini digunakan untuk menelusuri \textit{commit graph}.  Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+\begin{itemize}
+\item public RevCommit parseCommit(AnyObjectId id)\\
+Menempatkan \textit{reference} ke suatu \textit{commit} kemudian melakukan \textit{parsing} pada isi \textit{commit}.
+Parameter: nama dari objek \textit{commit}.\\
+Kembalian: \textit{reference} ke objek \textit{commit}.
+\item public void sort(RevSort s)\\
+Berfungsi untuk mengurutkan \textit{commit} berdasarkan metode dari parameter.\\
+Parameter: metode untuk mengurutkan \textit{commit}.
+\end{itemize}
+
+\subsection{RevCommit}
+\label{subsec:revcommit}
+Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
+\begin{itemize}
+\item public final String getFullMessage()\\
+Berfungsi untuk melakukan \textit{parsing} pada \textit{commit message} dan mengubahnya ke \textit{string}.\\
+Kembalian: \textit{string} hasil \textit{decode} dari \textit{commit message}.
+\item public final String getName()\\
+\textit{Method} ini mengembalikan \textit{SHA-1} dalam bentuk \textit{string}.
+\end{itemize}
 
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
@@ -215,7 +264,7 @@ Parameter: kumpulan karakter/teks yang dikirim ke elemen.
 \label{subsec:output_type}
 Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}\cite{Selenium_java_doc}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
 \begin{itemize}
-\item static final OutputType<java.lang.String> BASE64]\\
+\item static final OutputType<String> BASE64]\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{base64 data}.
 \item static final OutputType<byte[]> BYTES\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{raw bytes}.

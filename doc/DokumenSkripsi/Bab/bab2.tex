@@ -1,4 +1,29 @@
 %versi 2 (8-10-2016)
+
+\lstdefinelanguage{plaintext}{
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  identifierstyle=\color{black},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset
+{ 
+    language=plaintext,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=leftline
+}
+
+
+
 \chapter{Landasan Teori}
 \label{chap:teori}
 
@@ -6,20 +31,20 @@ Pada bab ini dibahas dasar teori yang mendukung berjalannya skripsi ini. Dasar t
 
 \section{Git}
 \label{sec:git} 
-Seperti yang telah dijelaskan pada subbab \ref{sec:label}, Git merupakan perangkat lunak \textit{Version Control Systems}. Pada subbab ini, dijelaskan mengenai \textit{Version Control Systems}, cara kerja Git, Git \textit{checkout}, dan operasi-operasi dasar pada Git.   
+Git merupakan perangkat lunak \textit{Version Control Systems}. Pada subbab ini, dijelaskan mengenai \textit{Version Control Systems}, cara kerja Git, Git \textit{checkout}, dan operasi-operasi dasar pada Git. Subbab ini mengacu pada \cite{chacon2014pro}.   
 
 \subsection{Version Control Systems}
 \label{subsec:vcs}
-\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu\cite{chacon2014pro}.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam hampir semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{local Version Control Systems}, \textit{centralized Version Control Systems}, dan \textit{distributed Version Control Systems}.
+\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam hampir semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{local Version Control Systems}, \textit{centralized Version Control Systems}, dan \textit{distributed Version Control Systems}.
 
 \subsubsection{Local Version Control Systems}
-Metode \textit{version-controlled} yang banyak digunakan orang adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain\cite{chacon2014pro}. Namun cara tersebut rentan terhadap \textit{error}.
+Metode \textit{version-controlled} yang banyak digunakan orang adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain. Namun cara tersebut rentan terhadap \textit{error}.
 Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang terdapat pada direktori B, tetapi pengguna lupa kalau dia sedang berada di direktori A, maka pengguna mengubah \textit{file} pada direktori yang salah. Untuk mengatasi masalah tersebut, \textit{programmer} mengembangkan \textit{local Version Control Systems}. 
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.25]{Gambar/localvcs.png}
-	\caption{Local version control}
+	\caption{Local version control\cite{chacon2014pro}.}
 	\label{fig:localvcs}
 \end{figure}
 
@@ -29,11 +54,11 @@ Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.25]{Gambar/centralizedvcs.png}
-	\caption{Centralized version control}
+	\caption{Centralized version control\cite{chacon2014pro}.}
 	\label{fig:cvcs}
 \end{figure}
 
-\textit{Local Version Control} hanya menyimpan \textit{file} pada satu komputer saja. Muncul masalah baru ketika \textit{user} ingin berkolaborasi dengan \textit{user} lain. Untuk mengatasi masalah ini dikembangkan \textit{Centralized version control}. Gambar \ref{fig:cvcs} merupakan struktur dari \textit{Centralized Version Control Systems}. Dalam \textit{Centralized Control Version Systems} terdapat sebuah \textit{server} yang menyimpan setiap versi \textit{file}, dan klien yang dapat melakukan \textit{checkout} \textit{file}\cite{chacon2014pro}.
+\textit{Local Version Control} hanya menyimpan \textit{file} pada satu komputer saja. Muncul masalah baru ketika \textit{user} ingin berkolaborasi dengan \textit{user} lain. Untuk mengatasi masalah ini dikembangkan \textit{Centralized version control}. Gambar \ref{fig:cvcs} merupakan struktur dari \textit{Centralized Version Control Systems}. Dalam \textit{Centralized Control Version Systems} terdapat sebuah \textit{server} yang menyimpan setiap versi \textit{file}, dan klien yang dapat melakukan \textit{checkout} \textit{file}.
 
 Sistem \textit{Centralized Version Control Systems} memiliki beberapa kelebihan. Setiap \textit{user}  dapat mengetahui pekerjaan yang dilakukan oleh \textit{user} lain. Administrator dapat lebih mudah mengontrol \textit{database} \textit{Centralized Version Control Systems} dibandingkan dengan \textit{database} \textit{Local Version Control Systems} dari setiap klien.      
 
@@ -43,34 +68,34 @@ Tetapi, \textit{Centralized Version Control Systems} juga memiliki kelemahan. Ji
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/dvcs.png}
-	\caption{Distributed version control}
+	\caption{Distributed version control\cite{chacon2014pro}.}
 	\label{fig:dvcs}
 \end{figure}
-Gambar \ref{fig:dvcs} merupakan struktur dari \textit{Distributed Version Control Systems}. Dalam sebuah DVCS (seperti Git, Mercurial, Bazaar atau Darcs), klien tidak hanya melakukan \textit{checkout} untuk \textit{snapshot} terakhir setiap \textit{file}, namun klien juga memiliki salinan dari repositori tersebut\cite{chacon2014pro}. Dengan kata lain setiap klien memiliki \textit{version database local} pada komputernya. Jika server pusat mati, klien masih bisa melakukan kolaborasi dan klien manapun dapat mengirimkan kembali salinan repositori ke \textit{server}.
+Gambar \ref{fig:dvcs} merupakan struktur dari \textit{Distributed Version Control Systems}. Dalam sebuah DVCS (seperti Git, Mercurial, Bazaar atau Darcs), klien tidak hanya melakukan \textit{checkout} untuk \textit{snapshot} terakhir setiap \textit{file}, namun klien juga memiliki salinan dari repositori tersebut. Dengan kata lain setiap klien memiliki \textit{version database local} pada komputernya. Jika server pusat mati, klien masih bisa melakukan kolaborasi dan klien manapun dapat mengirimkan kembali salinan repositori ke \textit{server}.
 
 \subsection{Cara Kerja Git}
 \label{subsec:cara_kerja_git}
-Salah satu perbedaan antara Git dengan VCS lainnya adalah dalam cara Git memperlakukan datanya\cite{chacon2014pro}. Kebanyakan sistem \textit{Version Control Systems} lain menyimpan informasi sebagai daftar perubahan \textit{file}. Pada Gambar \ref{fig:deltas}, terdapat tiga \textit{file}.\textit{Version Control Systems} menyimpan \textit{file} A, B, dan C pada versi pertama saja. Untuk versi kedua dan seterusnya yang disimpan adalah perubahan pada setiap \textit{file}. Sistem ini disebut juga sebagai \textit{delta-based Version Control Systems}. 
+Salah satu perbedaan antara Git dengan VCS lainnya adalah dalam cara Git memperlakukan datanya. Kebanyakan sistem \textit{Version Control Systems} lain menyimpan informasi sebagai daftar perubahan \textit{file}. Pada Gambar \ref{fig:deltas}, terdapat tiga \textit{file}.\textit{Version Control Systems} menyimpan \textit{file} A, B, dan C pada versi pertama saja. Untuk versi kedua dan seterusnya yang disimpan adalah perubahan pada setiap \textit{file}. Sistem ini disebut juga sebagai \textit{delta-based Version Control Systems}. 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/deltas.png}
-	\caption{Menyimpan data sebagai \textit{snapshots} dari \textit{project}}
+	\caption{Menyimpan data sebagai \textit{snapshots} dari \textit{project}\cite{chacon2014pro}.}
 	\label{fig:deltas}
 \end{figure}
 
 
-Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datanya sebagai sebuah kumpulan \textit{snapshot} dari sebuah miniatur \textit{file system}\cite{chacon2014pro}. Setiap kali dilakukan \textit{commit}, git merekam \textit{state} dari sekumpulan \textit{file} dan menyimpanannya sebagai \textit{reference} \textit{snapshot} tersebut. Gambar \ref{fig:snapshots}, menunjukkan \textit{snapshots} dari \textit{file} A, B, dan C. Pada versi kedua, \textit{file} B tidak mengalami perubahan, sehingga \textit{file} yang disimpan adalah referensi \textit{file} B pada versi sebelumnya.
+Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datanya sebagai sebuah kumpulan \textit{snapshot} dari sebuah miniatur \textit{file system}. Setiap kali dilakukan \textit{commit}, git merekam \textit{state} dari sekumpulan \textit{file} dan menyimpanannya sebagai \textit{reference} \textit{snapshot} tersebut. Gambar \ref{fig:snapshots}, menunjukkan \textit{snapshots} dari \textit{file} A, B, dan C. Pada versi kedua, \textit{file} B tidak mengalami perubahan, sehingga \textit{file} yang disimpan adalah referensi \textit{file} B pada versi sebelumnya.
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/snapshots.png}
-	\caption{Menyimpan data sebagai perubahan terhadap versi dasar dari setiap \textit{file}}
+	\caption{Menyimpan data sebagai perubahan terhadap versi dasar dari setiap \textit{file}\cite{chacon2014pro}.}
 	\label{fig:snapshots}
 \end{figure}
 
 \subsubsection{State pada Git}
-Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}\cite{chacon2014pro}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan commit.
+Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan commit.
 
-Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, direktori kerja, dan staging area\cite{chacon2014pro}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working ree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah \textit{file} yang menyimpan informasi mengenai apa yang menjadi \textit{commit} selanjutnya. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
+Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, direktori kerja, dan staging area. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working ree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah \textit{file} yang menyimpan informasi mengenai apa yang menjadi \textit{commit} selanjutnya. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
 
 Alur kerja dari Git adalah sebagai berikut:
 \begin{enumerate}
@@ -82,23 +107,52 @@ Alur kerja dari Git adalah sebagai berikut:
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/git_state.png}
-	\caption{ \textit{Working tree}, \textit{Staging area}, dan Git direktori}
+	\caption{ \textit{Working tree}, \textit{Staging area}, dan Git direktori\cite{chacon2014pro}.}
 	\label{fig:git_state}
 \end{figure}
 
 \subsubsection{Commit}
 Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. \textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada versi/\textit{commit} keempat. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{commit} keempat. 
 
-Git melakukan \textit{check-summed} pada \textit{commit} sebelum menyimpannya ke Git repositori. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}\cite{chacon2014pro}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari \textit{working directory} atau struktur direktori Git.
+Git melakukan \textit{check-summed} pada \textit{commit} sebelum menyimpannya ke Git repositori. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari \textit{working directory} atau struktur direktori Git.
 
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.6]{Gambar/contoh_commit_history.png}
-	\caption{Contoh histori \textit{commit} dalam pengembangan perangkat lunak}
-	\label{fig:git_histori}
-\end{figure}
 
-Seperti yang diperlihatkan pada Gambar \ref{fig:git_histori}, setiap \textit{commit} memiliki beberapa informasi. Baris pertama menunjukkan \textit{commit} ID yang berupa \textit{SHA-1 hash}. Pada baris ini, \textit{Master} menunjukkan \textit{branch} yang sedang aktif, \textit{master} juga merupakan \textit{pointer} ke \textit{commit} terakhir. \textit{Head} merupakan \textit{reference} ke \textit{branch master}. \textit{Origin}/\textit{master} dan \textit{origin}/\textit{HEAD} merupakan \textit{master} dan \textit{HEAD} pada \textit{remote repository}. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu terjadinya \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
+\begin{lstlisting}[caption={Contoh histori commit dalam pengembangan perangkat lunak},label={lst:git_histori},language=plaintext]
+C:\Users\user\Documents\GitHub\train-tracker-ellena-angelica>git log
+
+commit b8aeacbd4743619b7b2d790d45bde26b899641e0 (HEAD -> master, origin/master, origin/HEAD)
+Author: adamadamadamadamadam <adamnurmishwari@gmail.com>
+Date:   Thu May 3 01:15:31 2018 +0700
+
+    commitan terakhir. mastiin g buang memory sm batre
+
+commit f836cc65bf6d50e274df54aa06c6fb529667aa06
+Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
+Date:   Wed May 2 22:03:25 2018 +0700
+
+    Update README.md
+
+commit 2e1ce9a03a1f417326c3c6586503303cf6daf6b8
+Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
+Date:   Wed May 2 22:01:10 2018 +0700
+
+    Create README.md
+
+commit 2f04488f9008745e8e6f67da33ffb2f6c2c9e747
+Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
+Date:   Wed May 2 14:08:02 2018 +0700
+
+    fix stasiun double
+
+commit 7d8b66a9c6500de2753cdeac1084dc049c0c9f20
+Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
+Date:   Wed May 2 13:32:21 2018 +0700
+
+    fix stasiun double
+    
+\end{lstlisting}
+
+Seperti yang diperlihatkan pada Listing \ref{lst:git_histori}, setiap \textit{commit} memiliki beberapa informasi. Baris pertama menunjukkan \textit{commit} ID yang berupa \textit{SHA-1 hash}. Pada baris ini, \textit{Master} menunjukkan \textit{branch} yang sedang aktif, \textit{master} juga merupakan \textit{pointer} ke \textit{commit} terakhir. \textit{Head} merupakan \textit{reference} ke \textit{branch master}. \textit{Origin}/\textit{master} dan \textit{origin}/\textit{HEAD} merupakan \textit{master} dan \textit{HEAD} pada \textit{remote repository}. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu terjadinya \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
 
 \subsection{Operasi Dasar pada Git}
 \label{subsec:operasi_dasar_git}
@@ -106,64 +160,64 @@ Pada subbab ini dijelaskan mengenai operasi dasar dalam Git dan sintaks-sintaksn
 \begin{enumerate}
 \item Init\\
 Operasi ini digunakan untuk membuat repositori lokal baru dengan nama tertentu. Bisa juga digunakan untuk merekam direktori yang sudah ada. Berikut adalah sintaks untuk melakukan operasi  \textit{init}:\\
-\$ git init [project-name]
+\texttt{\$ git init [project-name]}  
 \item Add\\
 Operasi ini digunakan untuk menandai perubahan pada \textit{file} dan memindahkan \textit{file} tersebut ke \textit{staging area}. Operasi ini juga digunakan untuk menambahkan \textit{file} yang dipantau perubahannya. Berikut adalah sintaks untuk melakukan operasi add:\\
-\$ git add [file]
+\texttt{\$ git add [file]}  
 \item Commit\\
 Operasi digunakan untuk merekam \textit{snapshot} atau \textit{state} \textit{file} atau sekumpulan \textit{file}. Operasi ini juga digunakan untuk memindahkan \textit{file} yang berada di \textit{stagging area} ke repositori Git. Berikut adalah sintaks untuk melakukan operasi \textit{commit}:\\
-\$ git commit -m "[descriptive message]"
+\texttt{\$ git commit -m "[descriptive message]"}  
 \item Branch\\
 Operasi ini digunakan untuk menampilkan semua \textit{branch} yang ada pada repositori Git, membuat \textit{branch} baru, dan menghapus \textit{branch}. Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{branch}:\\
-\$ git branch\\
-\$ git branch [branch-name]\\
-\$ git branch -d [branch-name]\\
-\$ git branch -D [branch-name]
+\texttt{\$ git branch}\\ 
+\texttt{\$ git branch [branch-name]}\\
+\texttt{\$ git branch -d [branch-name]}\\
+\texttt{\$ git branch -D [branch-name]} 
 \item Diff\\
 Operasi ini digunakan untuk menampilkan perbedaan pada \textit{file} yang belum masuk \textit{staging area}, menampilkan perbedaan pada \textit{file} yang berada di \textit{staging area} dengan \textit{file} di \textit{commit} sebelumnya, dan perbedaan \textit{file} antara dua \textit{branch}.  Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{diff}:\\
-\$ git diff \\
-\$ git diff --staged\\
-\$ git diff [first-branch]...[second-branch]
+\texttt{\$ git diff} \\
+\texttt{\$ git diff --staged}\\
+\texttt{\$ git diff [first-branch]...[second-branch]}
 \item Clone\\
 Operasi ini digunakan untuk menyalin repositori Git yang berada di komputer lain atau suatu \textit{server}. Berikut adalah sintaks untuk melakukan operasi \textit{clone}:\\
-\$ git clone [url]
+\texttt{\$ git clone [url]}
 \item Fetch\\
 Operasi ini digunakan untuk mengambil data dari \textit{remote} repositori ke repositori lokal. Berikut adalah sintaks untuk melakukan operasi \textit{fetch}:\\
-\$ git fetch [bookmark]
+\texttt{\$ git fetch [bookmark]}
 \item Merge\\
 Operasi ini digunakan untuk menggabungkan \textit{branch} tertentu dengan \textit{branch} yang sedang aktif. Operasi ini juga digunakan untuk menggabungkan data yang diambil dari \textit{remote} repositori dengan data pada \textit{working directory}. Berikut adalah sintaks untuk melakukan operasi \textit{merge}:\\
-\$ git merge [branch]/[bookmark]
+\texttt{\$ git merge [branch]/[bookmark]}
 \item Pull\\
 Operasi ini adalah gabungan dari operasi \textit{fetch} dan \textit{merge}. Berikut adalah sintaks untuk melakukan operasi \textit{pull}:\\
-\$ git pull
+\texttt{\$ git pull}
 \item Push\\
 Operasi ini digunakan untuk mengirim data pada reposipori Git lokal ke \textit{remote repository}.
 Berikut adalah sintaks untuk melakukan operasi \textit{push}:\\
-\$ git push [alias] [branch]
+\texttt{\$ git push [alias] [branch]}
 \item Checkout\\
 Operasi ini digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu, setelah itu memperbarui \textit{file} pada \textit{working directory} berdasarkan \textit{branch} atau \textit{commit} tersebut. Berikut ini adalah sintaks-sintaks untuk operasi \textit{checkout}:\\
-\$ git checkout [SHA-1 commit]\\
-\$ git checkout [branch-name]
+\texttt{\$ git checkout [SHA-1 commit]}\\
+\texttt{\$ git checkout [branch-name]}
 \item Log\\
 Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \textit{branch} yang sedang aktif. Berikut ini adalah sintaks untuk melakukan operasi \textit{log}:\\
-\$ git log
+\texttt{\$ git log}
 \end{enumerate}
 \subsection{Git Checkout}
 Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \textit{checkout} dapat digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu. Operasi \textit{checkout} dapat dilakukan menggunakan sintaks "\$ git checkout" diikuti dengan nama \textit{branch} atau \textit{SHA-1 hash}. Gambar \ref{fig:git_checkout} menunjukkan contoh \textit{checkout} pada \textit{commit}. Posisi awal \textit{HEAD} menunjuk pada \textit{branch master}, setelah dilakukan \textit{checkout} ke \textit{commit kedua}, posisi \textit{HEAD} menunjuk pada \textit{commit kedua}. \textit{Working directory} diperbarui berdasarkan \textit{state} pada \textit{commit} kedua. 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.7]{Gambar/gitcheckoutcommit.png}
+		\includegraphics[scale=0.4]{Gambar/gitcheckoutcommit.png}
 	\caption{\textit{Checkout} pada \textit{commit}}
 	\label{fig:git_checkout}
 \end{figure}
 
 \section{JGit}
 \label{sec:jgit}
-JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}\cite{JGit}. Dengan menggunakan JGit, operasi-operasi dalam Git bisa dilakukan melalui program Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} JGit. 
+JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}\cite{JGit}. Dengan menggunakan JGit, operasi-operasi dalam Git bisa dilakukan melalui program Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} JGit. Subbab ini mengacu pada \cite{JGit_java_doc}. 
 
 \subsection{Repository}
 \label{subsec:repository}
-Kelas ini merepresentasikan repositori Git\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Kelas ini merepresentasikan repositori Git. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item public void create() throws IOException\\
 Berfungsi untuk membuat repositori Git baru.
@@ -174,7 +228,7 @@ Parameter: jika bernilai \textit{true} maka dibuat \textit{bare repository} (rep
 
 \subsection{Git}
 \label{subsec:Git}
-Kelas ini menyediakan API yang mirip GitPorcelain untuk berinteraksi dengan repositori git\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Kelas ini menyediakan API yang mirip Git \textit{Command Line} untuk berinteraksi dengan repositori git. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item public LogCommand log()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{Log}.\\
@@ -202,7 +256,7 @@ Parameter: metode untuk mengurutkan \textit{commit}.
 
 \subsection{RevCommit}
 \label{subsec:revcommit}
-Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}\cite{JGit_java_doc}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
+Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
 \begin{itemize}
 \item public final String getFullMessage()\\
 Berfungsi untuk melakukan \textit{parsing} pada \textit{commit message} dan mengubahnya ke \textit{string}.\\
@@ -217,11 +271,11 @@ Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berb
 
 WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada\textit{browser} untuk automasi. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
 
-Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Selenium WebDriver. 
-\cite{Selenium_java_doc}
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
+
 \subsection{WebDriver}
 \label{subsec:webdriver}
-Kelas ini merupakan \textit{interface} utama yang digunakan untuk pengujian, kelas ini merepresentasikan \textit{web browser} yang ideal \cite{Selenium_java_doc}. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Kelas ini merupakan \textit{interface} utama yang digunakan untuk pengujian, kelas ini merepresentasikan \textit{web browser} yang ideal . Berikut ini adalah beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item void close()\\
 Berfungsi untuk menutup \textit{window} pada \textit{browser}, jika \textit{window} yang sekarang merupakan satu-satunya \textit{window} yang terbuka maka \textit{browser} akan ditutup.
@@ -234,7 +288,7 @@ Parameter: alamat \textit{url} untuk memuat halaman \textit{web}.
 
 \subsection{WebElement}
 \label{subsec:webelement}  
-Kelas ini adalah \textit{Interface} yang  merupakan representasi dari elemen HTML\cite{Selenium_java_doc}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini:
+Kelas ini adalah \textit{Interface} yang  merupakan representasi dari elemen HTML. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini:
 \begin{itemize}
 \item void click()\\
 Berfungsi untuk mengklik suatu elemen HTML.
@@ -262,7 +316,7 @@ Parameter: kumpulan karakter/teks yang dikirim ke elemen.
 
 \subsection{OutputType}
 \label{subsec:output_type}
-Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}\cite{Selenium_java_doc}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
+Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
 \begin{itemize}
 \item static final OutputType<String> BASE64]\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{base64 data}.
@@ -287,3 +341,5 @@ Parameter: tipe \textit{output} yang diinginkan(lihat \ref{subsec:output_type}).
 
 \section{Apache Commons CLI}
 \label{subsec:apache_cli}
+
+

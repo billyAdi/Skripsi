@@ -35,11 +35,11 @@ Git merupakan perangkat lunak \textit{Version Control Systems}. Pada subbab ini,
 
 \subsection{Version Control Systems}
 \label{subsec:vcs}
-\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam hampir semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{local Version Control Systems}, \textit{centralized Version Control Systems}, dan \textit{distributed Version Control Systems}.
+\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam hampir semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}.
 
 \subsubsection{Local Version Control Systems}
 Metode \textit{version-controlled} yang banyak digunakan orang adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain. Namun cara tersebut rentan terhadap \textit{error}.
-Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang terdapat pada direktori B, tetapi pengguna lupa kalau dia sedang berada di direktori A, maka pengguna mengubah \textit{file} pada direktori yang salah. Untuk mengatasi masalah tersebut, \textit{programmer} mengembangkan \textit{local Version Control Systems}. 
+Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang terdapat pada direktori B, tetapi pengguna lupa kalau dia sedang berada di direktori A, maka pengguna mengubah \textit{file} pada direktori yang salah. Untuk mengatasi masalah tersebut, \textit{programmer} mengembangkan \textit{Local Version Control Systems}. 
 
 \begin{figure}[H]
 	\centering
@@ -48,7 +48,7 @@ Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang
 	\label{fig:localvcs}
 \end{figure}
 
-Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada \textit{local} direktori di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi atau \textit{state}.\textit{Local Version Control}, dapat melakukan \textit{checkout} \textit{file} ke versi atau \textit{state} tertentu.   
+Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada \textit{local directory} di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi atau \textit{state}. \textit{Local Version Control}, dapat melakukan \textit{checkout} \textit{file} ke versi atau \textit{state} tertentu.   
  
 \subsubsection{Centralized Version Control Systems}
 \begin{figure}[H]
@@ -62,7 +62,7 @@ Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control 
 
 Sistem \textit{Centralized Version Control Systems} memiliki beberapa kelebihan. Setiap \textit{user}  dapat mengetahui pekerjaan yang dilakukan oleh \textit{user} lain. Administrator dapat lebih mudah mengontrol \textit{database} \textit{Centralized Version Control Systems} dibandingkan dengan \textit{database} \textit{Local Version Control Systems} dari setiap klien.      
 
-Tetapi, \textit{Centralized Version Control Systems} juga memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati , maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
+Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati , maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
 
 \subsubsection{Distributed Version Control Systems}
 \begin{figure}[H]
@@ -95,11 +95,11 @@ Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datan
 \subsubsection{State pada Git}
 Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan commit.
 
-Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, direktori kerja, dan staging area. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working ree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah \textit{file} yang menyimpan informasi mengenai apa yang menjadi \textit{commit} selanjutnya. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
+Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, \textit{working directory}, dan \textit{staging area}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working tree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah \textit{file} yang menyimpan informasi mengenai apa yang menjadi \textit{commit} selanjutnya. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
 
 Alur kerja dari Git adalah sebagai berikut:
 \begin{enumerate}
-\item Melakukan modifikasi pada \textit{file}
+\item Melakukan modifikasi pada \textit{file}.
 \item Menandai perubahan pada \textit{file} dan memindahkannya ke \textit{staging area}.
 \item Mengambil \textit{file} dari \textit{staging area} dan menyimpan \textit{snapshot} ke direktori Git. Proses ini disebut dengan \textit{commit}.
 \end{enumerate}  
@@ -165,7 +165,7 @@ Operasi ini digunakan untuk membuat repositori lokal baru dengan nama tertentu. 
 Operasi ini digunakan untuk menandai perubahan pada \textit{file} dan memindahkan \textit{file} tersebut ke \textit{staging area}. Operasi ini juga digunakan untuk menambahkan \textit{file} yang dipantau perubahannya. Berikut adalah sintaks untuk melakukan operasi add:\\
 \texttt{\$ git add [file]}  
 \item Commit\\
-Operasi digunakan untuk merekam \textit{snapshot} atau \textit{state} \textit{file} atau sekumpulan \textit{file}. Operasi ini juga digunakan untuk memindahkan \textit{file} yang berada di \textit{stagging area} ke repositori Git. Berikut adalah sintaks untuk melakukan operasi \textit{commit}:\\
+Operasi ini digunakan untuk merekam \textit{snapshot} atau \textit{state} \textit{file} atau sekumpulan \textit{file}. Operasi ini juga digunakan untuk memindahkan \textit{file} yang berada di \textit{stagging area} ke repositori Git. Berikut adalah sintaks untuk melakukan operasi \textit{commit}:\\
 \texttt{\$ git commit -m "[descriptive message]"}  
 \item Branch\\
 Operasi ini digunakan untuk menampilkan semua \textit{branch} yang ada pada repositori Git, membuat \textit{branch} baru, dan menghapus \textit{branch}. Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{branch}:\\
@@ -203,10 +203,12 @@ Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \text
 \texttt{\$ git log}
 \end{enumerate}
 \subsection{Git Checkout}
-Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \textit{checkout} dapat digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu. Operasi \textit{checkout} dapat dilakukan menggunakan sintaks "\$ git checkout" diikuti dengan nama \textit{branch} atau \textit{SHA-1 hash}. Gambar \ref{fig:git_checkout} menunjukkan contoh \textit{checkout} pada \textit{commit}. Posisi awal \textit{HEAD} menunjuk pada \textit{branch master}, setelah dilakukan \textit{checkout} ke \textit{commit kedua}, posisi \textit{HEAD} menunjuk pada \textit{commit kedua}. \textit{Working directory} diperbarui berdasarkan \textit{state} pada \textit{commit} kedua. 
+Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \textit{checkout} dapat digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu. Operasi \textit{checkout} dapat dilakukan menggunakan sintaks \texttt{\$ git checkout} diikuti dengan nama \textit{branch} atau \textit{SHA-1 hash}. Gambar \ref{fig:git_checkout} menunjukkan contoh \textit{checkout} pada \textit{commit}. Posisi awal \textit{HEAD} menunjuk pada \textit{branch master}, setelah dilakukan \textit{checkout} ke \textit{commit kedua}, posisi \textit{HEAD} menunjuk pada \textit{commit kedua}. \textit{Working directory} diperbarui berdasarkan \textit{state} pada \textit{commit} kedua. 
+
+\textit{HEAD} yang menunjuk langsung ke suatu \textit{commit} disebut dengan \textit{detached HEAD}. Perubahan yang terjadi pada \textit{detached HEAD} tidak akan terekam oleh Git. Jika terdapat perubahan, kemudian dilakukan \textit{checkout commit} atau \textit{branch}, perubahan tersebut akan hilang. Tetapi, perubahan tersebut bisa disimpan dengan cara membuat \textit{branch} baru. Posisi \textit{HEAD} akan menunjuk pada \textit{branch} baru dan \textit{HEAD} sudah tidak lagi dalam keadaan \textit{detached HEAD}. 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.4]{Gambar/gitcheckoutcommit.png}
+		\includegraphics[scale=0.6]{Gambar/gitcheckoutcommit.png}
 	\caption{\textit{Checkout} pada \textit{commit}}
 	\label{fig:git_checkout}
 \end{figure}
@@ -224,52 +226,166 @@ Berfungsi untuk membuat repositori Git baru.
 \item public void create(boolean bare) throws IOException\\
 Berfungsi untuk membuat repositori Git baru. \\
 Parameter: jika bernilai \textit{true} maka dibuat \textit{bare repository} (repositori tanpa \textit{working directory}). 
+\item public String getBranch() throws IOException\\
+Berfungsi untuk mendapatkan nama \textit{branch} yang ditunjuk oleh \textit{HEAD}, \textit{method} ini melempar \textit{IOException}.\\ 
+Kembalian: nama dari \textit{branch} yang sedang aktif, contohnya \textit{master}.
+
+\item public ObjectId resolve(String revstr) throws AmbiguousObjectException, IncorrectObjectTypeException, RevisionSyntaxException, IOException\\
+Parameter: \textit{expression} dari \textit{git object references}. \textit{Method} ini melempar \textit{AmbiguousObjectException}, \textit{IncorrectObjectTypeException}, \textit{RevisionSyntaxException}, dan \textit{IOException}.\\
+Kembalian: sebuah objek \textit{ObjectId}.
 \end{itemize} 
+
+\subsection{FileRepository}
+\label{subsec:filerepository}
+Kelas ini merupakan turunan dari kelas \textit{Repository}. Berikut ini adalah \textit{construtor} dari kelas ini:
+\begin{itemize}
+\item public FileRepository(String gitDir) throws IOException\\
+\textit{Constructor} ini membuat repositori berdasarkan parameter, \textit{constructor} ini melempar IOException.\\
+Parameter: lokasi dari \textit{repository metadata}, lokasi ini berupa \textit{path}.
+\end{itemize}
 
 \subsection{Git}
 \label{subsec:Git}
-Kelas ini menyediakan API yang mirip Git \textit{Command Line} untuk berinteraksi dengan repositori git. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Kelas ini menyediakan API yang mirip Git \textit{Command Line} untuk berinteraksi dengan repositori git. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
+\item public Git(Repository repo)\\
+\textit{Constructor} ini membuat objek Git yang digunakan untuk berinteraksi dengan repositori Git.
+Parameter: objek \textit{Repository} yang digunakan untuk berinteraksi. Parameter tidak boleh bernilai \textit{null}. 
+
+\item public static InitCommand init()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{init}.\\
+Kembalian: objek \textit{InitCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{init}.
+
+\item public AddCommand add()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{add}.\\
+Kembalian: objek \textit{AddCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{add}.
+
 \item public LogCommand log()\\
-\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{Log}.\\
-Kembalian: objek \textit{LogCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{Log}.
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{log}.\\
+Kembalian: objek \textit{LogCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{log}.
+
 \item public CheckoutCommand checkout()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{checkout}.\\
 Kembalian: objek \textit{CheckoutCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{checkout}.
+
 \item public CommitCommand commit()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{commit}.\\
 Kembalian: objek \textit{CommitCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{commit}.
+
+\item public FetchCommand fetch()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{fetch}.\\
+Kembalian: objek \textit{FetchCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{fetch}.
+
+\item public PushCommand push()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{push}.\\
+Kembalian: objek \textit{PushCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{push}.
+
+\item public DiffCommand diff()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{diff}.\\
+Kembalian: objek \textit{DiffCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{diff}.
+
+\item public static CloneCommand cloneRepository()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{clone}.\\
+Kembalian: objek \textit{DiffCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{clone}.
+
+\item public MergeCommand merge()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{merge}.\\
+Kembalian: objek \textit{MergeCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{merge}.
+
+\item public PullCommand pull()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{pull}.\\
+Kembalian: objek \textit{PullCommand}.
+
+\item public CreateBranchCommand branchCreate()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk membuat \textit{branch} baru.\\
+Kembalian: objek \textit{CreateBranchCommand}.
+
+\item public public ListBranchCommand branchList()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk menampilkan daftar \textit{branch}.\\
+Kembalian: objek \textit{ListBranchCommand}.
+
+\item public DeleteBranchCommand branchDelete()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk menghapus \textit{branch}.\\
+Kembalian: objek \textit{DeleteBranchCommand}.
 \end{itemize}
 
 \subsection{RevWalk}
 \label{subsec:revwalk}
-Kelas ini digunakan untuk menelusuri \textit{commit graph}.  Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Kelas ini digunakan untuk menelusuri \textit{commit graph}. \textit{Instance} dari kelas ini hanya bisa melakukan  \textit{graph traversal} satu kali, untuk melakukan \textit{traversal} kedua dibutuhkan \textit{instance} baru atau memanggil \textit{method} reset(). Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
+\item public RevWalk(Repository repo)\\
+\textit{Constructor} ini membuat objek \textit{revision walker} untuk suatu \textit{repository}.\\
+Parameter: repositori yang digunakan untuk \textit{traversal}.  
+
 \item public RevCommit parseCommit(AnyObjectId id)\\
 Menempatkan \textit{reference} ke suatu \textit{commit} kemudian melakukan \textit{parsing} pada isi \textit{commit}.
 Parameter: nama dari objek \textit{commit}.\\
 Kembalian: \textit{reference} ke objek \textit{commit}.
+
 \item public void sort(RevSort s)\\
 Berfungsi untuk mengurutkan \textit{commit} berdasarkan metode dari parameter.\\
 Parameter: metode untuk mengurutkan \textit{commit}.
+
+\item public Iterator<RevCommit> iterator()\\
+Berfungsi untuk mengembalikan \textit{iterator} yang bertipe \textit{RevCommit}.\\
+Kembalian: \textit{iterator} dari \textit{RevCommit}.
+
+\item public void markStart(RevCommit c) throws MissingObjectException, IncorrectObjectTypeException, IOException\\
+Berfungsi untuk menandai \textit{commit} pertama untuk memulai \textit{traversal}. Method ini melempar MissingObjectException, IncorrectObjectTypeException, dan IOException.\\
+Parameter: \textit{commit} awal yang digunakan untuk melakukan \textit{traversal}.
+
+\item public final void reset()\\
+Berfungsi untuk mengembalkan \textit{state} dari kelas ini ke \textit{state} semula, sehingga \textit{instance RevWalk} bisa digunakan lagi.
 \end{itemize}
 
 \subsection{RevCommit}
 \label{subsec:revcommit}
-Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
+Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dari kelas ini:
 \begin{itemize}
+\item protected RevCommit(AnyObjectId id)\\
+\textit{Constructor} ini membuat objek yang merupakan \textit{reference} ke suatu \textit{commit}.\\
+Parameter: nama dari objek \textit{commit}.  
+
 \item public final String getFullMessage()\\
-Berfungsi untuk melakukan \textit{parsing} pada \textit{commit message} dan mengubahnya ke \textit{string}.\\
+Berfungsi untuk melakukan \textit{parsing} pada \textit{full commit message} dan mengubahnya ke \textit{string}.\\
 Kembalian: \textit{string} hasil \textit{decode} dari \textit{commit message}.
+
+\item public final String getShortMessage()\\
+Berfungsi untuk melakukan \textit{parsing} pada \textit{commit message} dan mengubahnya ke \textit{string}, hanya baris pertama yang dikembalikan.\\
+Kembalian: baris pertama \textit{string} hasil \textit{decode} dari \textit{commit message}.
+
 \item public final String getName()\\
 \textit{Method} ini mengembalikan \textit{SHA-1} dalam bentuk \textit{string}.
+Kembalian: \textit{string SHA-1} dalam bentuk heksadesimal. 
+
+\item public final PersonIdent getAuthorIdent()\\
+Berfungsi untuk mendapatkan informasi mengenai \textit{author} yang melakukan \textit{commit}.\\
+Kembalian: objek \textit{PersonIdent} yang memuat informasi tentang \textit{author}(nama dan \textit{email}) dan waktu dilakukannya \textit{commit}.
 \end{itemize}
+
+\subsection{PersonIdent}
+\label{subsec:personident}
+Kelas ini memberikan informasi mengenai \textit{author} dari suatu \textit{commit}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
+\begin{itemize}
+\item public String getName()\\
+Berfungsi untuk mengembalikan nama dari \textit{author} yang melakukan \textit{commit}.\\
+Kembalian: nama dari \textit{author}.
+
+\item public String getEmailAddress()\\
+Berfungsi untuk mengembalikan alamat \textit{email} dari \textit{author} yang melakukan \textit{commit}.\\
+Kembalian: alamat \textit{email} dari \textit{author}.
+
+\item public Date getWhen()\\
+Berfungsi mengembalikan waktu dilakukannya suatu \textit{commit} oleh \textit{author}.\\
+Kembalian: sebuah \textit{timestamp}.
+\end{itemize}
+
 
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
-Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC bekerja dengan cara menginjeksi kode JavaScript ke \textit{browser} ketika \textit{browser} dimuat dan menggunakan JavaScript tersebut untuk menggerakkan \textit{Application Under Test} dalam \textit{browser}. Selenium RC sekarang sudah \textit{deprecated}/tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{prototyping} kakas untuk membangun \textit{script test}.
+Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC bekerja dengan cara menginjeksi kode JavaScript ke \textit{browser} ketika \textit{browser} dimuat dan menggunakan JavaScript tersebut untuk menjalankan \textit{Application Under Test} dalam \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan kakas yang digunakan untuk mengembangkan Selenium \textit{test cases}.
 
-WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada\textit{browser} untuk automasi. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
+WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} untuk automasi. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
 
 Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
 
@@ -284,6 +400,12 @@ Berfungsi untuk menutup driver dan semua \textit{window} yang sedang terbuka.
 \item void get(String url)\\
 Berfungsi untuk memuat halaman \textit{web} pada \textit{window} saat ini. \textit{Method} ini mengirim \textit{HTPP GET Request} untuk memuat halaman, dan \textit{method} ini akan melakukan \textit{blocking} sampai halaman \textit{web} selesai dimuat.\\
 Parameter: alamat \textit{url} untuk memuat halaman \textit{web}.
+\item String getTitle()\\
+Berfungsi untuk mengembalikan judul dari halaman \textit{web} yang sedang aktif.\\
+Kembalian: judul dari halaman \textit{web}.
+\item String getCurrentUrl()\\
+Berfungi untuk mendapatkan URL yang sedang aktif di \textit{browser}.\\
+Kembalian: URL dari halaman \textit{web} yang sedang dimuat di \textit{browser}.
 \end{itemize}
 
 \subsection{WebElement}
@@ -312,13 +434,17 @@ Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \texti
 \item void sendKeys(java.lang.CharSequence... keysToSend)\\
 Berfungsi untuk mengirimkan kumpulan karakter/teks ke elemen \textit{input}. \textit{Method} ini akan melempar \textit{java.lang.IllegalArgumentException} jika parameter keysToSend bernilai \textit{null}.\\
 Parameter: kumpulan karakter/teks yang dikirim ke elemen.
+
+\item String getAttribute(String name)\\
+Berfungsi untuk mendapatkan nilai dari \textit{attribute} suatu \textit{web element}.\\
+Kembalian: nilai dari \textit{attribute} dari \textit{web element}.
 \end{itemize} 
 
 \subsection{OutputType}
 \label{subsec:output_type}
 Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
 \begin{itemize}
-\item static final OutputType<String> BASE64]\\
+\item static final OutputType<String> BASE64\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{base64 data}.
 \item static final OutputType<byte[]> BYTES\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{raw bytes}.
@@ -332,7 +458,7 @@ Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{temprorary 
 Kelas ini merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. Kelas ini hanya mempunyai satu method yaitu:
 \begin{itemize}
 \item <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException\\
-\textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan menyimpannya ke lokasi yang sudah ditentukan. Kelas\\
+\textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan menyimpannya ke lokasi yang sudah ditentukan.\\
 Kembalian: objek yang menyimpan informasi terkait \textit{screenshot} \\
 Parameter: tipe \textit{output} yang diinginkan(lihat \ref{subsec:output_type}).
 
@@ -341,5 +467,121 @@ Parameter: tipe \textit{output} yang diinginkan(lihat \ref{subsec:output_type}).
 
 \section{Apache Commons CLI}
 \label{subsec:apache_cli}
+\textit{Library} Apache Commons CLI menyediakan API untuk menguraikan \textit{command-line options} yang dikirimkan ke program\cite{Apache_Commons_CLI}. Apache Commons CLI termasuk ke dalam salah satu \textit{project} Apache Commons. Tujuan utama dari \textit{project} Apache Commons adalah membuat dan melakukan \textit{maintain} pada komponen Java yang \textit{reusable}. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Apache Commons CLI. Subbab ini mengacu pada \cite{Apache_java_doc}.
+
+\subsection{CommandLineParser}
+\label{subsec:commandlineparser}
+Kelas ini merupakan \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat menguraikan \textit{array of String} berdasarkan pada parameter/argumen yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
+\begin{itemize}
+\item CommandLine parse(Options options, String[] arguments) throws ParseException\\
+Berfungsi untuk menguraikan argumen berdasarkan pada \textit{option} yang ditentukan. \textit{Method} ini melempar \textit{ParseException}.\\
+Parameter: \textit{option} yang ditentukan, argumen \textit{command line}.\\
+Kembalian: objek \textit{CommandLine}.
+
+\item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
+Berfungsi untuk menguraikan argumen berdasarkan pada \textit{option} yang ditentukan.\\
+Parameter: \textit{option} yang ditentukan, argumen \textit{command line}, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat argumen yang tidak valid.
+\\
+Kembalian: objek \textit{CommandLine}.
+\end{itemize}
+
+\subsection{CommandLine}
+\label{subsec:commandline}
+Kelas ini merepresentasikan kumpulan argumen yang diuraikan terhadap \textit{options descriptor}.
+Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+\begin{itemize}
+\item public String getOptionValue(String opt)\\
+Berfungsi untuk mendapatkan nilai dari suatu \textit{option} berdasarkan parameter.\\
+Parameter: nama dari \textit{option}.\\
+Kembalian: nilai dari \textit{option}. Jika \textit{option} belum diatur, akan dikembalikan \textit{null}.
+\item protected void addOption(Option opt)\\
+Berfungsi untuk menambahkan \textit{option} ke \textit{command line}.\\
+Parameter: objek \textit{option} yang ingin ditambahkan.
+\item public boolean hasOption(String opt)\\
+Berfungsi untuk menentukan apakah suatu \textit{option} sudah diatur.\\
+Parameter: nama dari \textit{option}.\\
+Kembalian: \textit{true} jika \textit{option} sudah diatur, \textit{false} jika \textit{option} belum diatur.
+\item public Option[] getOptions()\\
+Berfungsi untuk mengembalikan \textit{array} dari \textit{option} yang sudah diproses.\\ 
+Kembalian: \textit{iterator} dari \textit{option} yang sudah diproses.
+\item public Iterator<Option> iterator()\\
+Berfungsi untuk mengembalikan \textit{iterator} dari \textit{option} yang sudah diproses.\\ 
+Kembalian: \textit{array} dari \textit{option} yang sudah diproses.
+
+\end{itemize}
+
+\subsection{Options}
+\label{subsec:options}
+Kelas ini merepresentasikan kumpulan dari objek \textit{Option}, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+\begin{itemize}
+\item public Options addOption(Option opt)\\
+Berfungsi untuk menambahkan objek \textit{Option} ke kelas ini.
+Parameter:\textit{option} yang akan ditambahkan.\\
+Kembalian: hasil dari \textit{option} yang ditambahkan.
+
+\item public Option getOption(String opt)\\
+Berfungsi untuk mengembalikan objek \textit{Option} sesuai dengan nama yang diberikan paramater. 
+Parameter: nama dari \textit{option} yang ingin dikembalikan.\\
+Kembalian: objek \textit{option} berdasarkan parameter.
+
+\end{itemize}
+
+
+\subsection{Option}
+\label{subsec:option}
+Kelas ini mendeskripsikan sebuah \textit{command-line option}. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} yang dimiliki kelas ini: 
+\begin{itemize}
+\item public Option(String opt, String description) throws IllegalArgumentException\\
+\textit{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
+Parameter: nama pendek \textit{option}, dan deskripsi dari \textit{option}.
+\item public Option(String opt, boolean hasArg, String description) throws IllegalArgumentException\\
+\textit{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
+Parameter: nama pendek \textit{option}, suatu \textit{boolean} yang menentukan apakah \textit{option} membutuhkan argumen, dan deskripsi dari \textit{option}.
+\item public Option(String opt, String longOpt, boolean hasArg, String description) throws IllegalArgumentException\\
+{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
+Parameter: nama pendek \textit{option}, nama panjang \textit{option}, suatu \textit{boolean} yang menentukan apakah \textit{option} membutuhkan argumen, dan deskripsi dari \textit{option}.
+\item public boolean hasArg()\\
+Berfungsi untuk mengetahui apakah suatu \textit{option} membutuhkan argumen.\\
+Kembalian: \textit{true} jika \textit{option} ini membutuhkan argumen , \textit{false} jika \textit{option} ini tidak membutuhkan argumen.
+\item public String getDescription()\\
+Berfungsi untuk mendapatkan deskripsi dari suatu \textit{option}.\\
+Kembalian: deskripsi dari \textit{option} ini.
+\item public String getArgName()\\
+Berfungsi untuk mendapatkan nama dari suatu \textit{option}.\\
+Kembalian: nama dari argumen suatu \textit{option}
+\item public String getLongOpt()\\
+Berfungsi untuk mendapatkan nama panjang dari suatu \textit{option}.\\
+Kembalian: nama panjang dari suatu \textit{option}.
+
+\end{itemize}
+
+\subsection{Option.Builder}
+\label{subsec:optionbuilder}
+Kelas ini merupakan \textit{nested class} dari kelas \textit{Option}. Kelas ini digunakan untuk membuat objek \textit{Option} dengan \textit{descriptive methods}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+\begin{itemize}
+\item public Option.Builder desc(String description)\\
+Berfungsi untuk memberikan deskripsi pada \textit{option}.\\
+Parameter: deskripsi dari \textit{option}.\\
+Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+
+\item public Option.Builder longOpt(String longOpt)\\
+Berfungsi untuk memberikan nama panjang pada \textit{option}.\\
+Parameter: nama panjang \textit{option}.\\
+Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+
+\item public public Option.Builder hasArg()\\
+Berfungsi untuk menyatakan bahwa \textit{option} ini membutuhkan argumen.\\
+Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+
+\item public Option.Builder argName(String argName)\\
+Berfungsi untuk memberi nama pada argumen.\\
+Parameter: nama argumen.\\
+Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+
+\item public Option build()\\
+Berfungi untuk membuat objek \textit{Option} berdasarkan nilai pada \textit{Option.Builder}.\\
+Kembalian: objek \textit{Option}.
+
+\end{itemize}
 
 

@@ -8,6 +8,7 @@ package id.ac.unpar.timelapsegenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -30,6 +31,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         Repository repo = new FileRepository("C:\\xampp\\htdocs\\Piktora\\.git");
+        // System.out.println(repo.getBranch());
 
         Git git = new Git(repo);
 
@@ -43,22 +45,27 @@ public class Main {
 
         for (RevCommit commit : revWalk) {
             System.out.println(commit.getName().substring(0, 7) + " " + commit.getFullMessage());
+            // Date d=commit.getAuthorIdent().getWhen();
+            //System.out.println(commit.getAuthorIdent().getName()+" "+commit.getAuthorIdent().getEmailAddress()+d.getDate()+" "+d.getMonth()+" "+d.getYear());            
             commitID.add(commit.getName().substring(0, 7));
         }
 
         for (int i = 0; i < commitID.size(); i++) {
             git.checkout().setName(commitID.get(i)).call();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-
-            driver.get("http://localhost/");
+            if (i == 0) {
+                driver = new ChromeDriver();
+                driver.manage().window().maximize();
+                driver.get("http://localhost/");
+            } else {
+                driver.navigate().refresh();
+            }
 
             File scrFile
                     = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.moveFile(scrFile, new File("hasil_screenshot\\screenshots" + i + ".png"));
+            FileUtils.moveFile(scrFile, new File("hasil_screenshot\\screenshotss" + i + ".png"));
 
-            driver.quit();
         }
-         git.checkout().setName("master").call();
+        driver.quit();
+        git.checkout().setName("master").call();
     }
 }

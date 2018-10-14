@@ -34,8 +34,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @author user
  */
 public class Main {
-    //C:\\xampp\\htdocs\\DNArtworks\\.git
-    //C:\\xampp\\htdocs\\Piktora\\.git
+    //C:/xampp/htdocs/DNArtworks/.git
+    //C:/xampp/htdocs/Piktora/.git
     public static void main(String[] args) throws IOException, GitAPIException, ParseException {
         Options options = new Options();
         Option captureURL = Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build();
@@ -90,12 +90,13 @@ public class Main {
        // driver.get(cmd.getOptionValue("before-capture"));
         //driver.quit();
         driver = new ChromeDriver();
-                driver.manage().window().maximize();
+        driver.manage().window().maximize();
+        driver.get(cmd.getOptionValue("before-capture"));
         for (int i = 0; i < commitID.size(); i++) {
             if(i==1)continue;
             git.checkout().setName(commitID.get(i)).call();
             if (i == 0) {
-                driver.get(cmd.getOptionValue("capture-url"));
+                driver.navigate().to(cmd.getOptionValue("capture-url"));
             }
             else {
                 driver.navigate().refresh();
@@ -103,7 +104,7 @@ public class Main {
 
             File scrFile
                     = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.moveFile(scrFile, new File("hasil_screenshot\\ss" + i + ".png"));
+            FileUtils.moveFile(scrFile, new File("hasil_screenshot/ss" + i + ".png"));
 
         }
         driver.quit();

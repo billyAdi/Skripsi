@@ -1,0 +1,80 @@
+\lstdefinelanguage{plaintext}{
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  identifierstyle=\color{black},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset
+{ 
+    language=plaintext,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=leftline
+}
+
+\chapter{Analisis}
+\label{chap:analisis}
+
+Pada bab ini dijelaskan mengenai analisa masalah dalam skripsi ini. Analisa tersebut mencakup tentang analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, dan analisis penggunaan Apache Commons CLI. 
+
+\section{Analisis Masalah}
+\label{sec:analisis_masalah}
+Pengembangan proyek perangkat lunak dapat dipantau perkembangannya mulai dari awal hingga akhir dengan menggunakan \textit{Version Control System}. \textit{Version Control System} yang umumnya digunakan adalah Git. Git menyimpan histori perkembangan perangkat lunak dalam bentuk \textit{commit}. Suatu \textit{commit} mengandung informasi mengenai deskripsi \textit{commit}, orang yang melakukan \textit{commit}, waktu dilakukannya \textit{commit}, dan SHA-1 dari suatu \textit{commit}. Dengan menggunakan Git, \textit{programmer} dapat melihat versi tertentu dari perangkat lunak. 
+
+Terdapat dua permasalahan dalam skripsi ini. Permasalahan pertama membahasas tentang cara membangkitkan animasi \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web. Permasalahan kedua membahasas tentang cara mengimplementasikan aplikasi tersebut. Dalam skripsi ini, digunakan dua proyek perangkat lunak berbasis web untuk membuat animasi \textit{timelapse}. Proyek tersebut adalah Piktora(http://piktora.com) dan DNArtwork(http://dnartworks.co.id). \\
+\\
+\textbf{Analisis Penggunaan Git Command Line}\\
+Git Command Line dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Git Command Line dapat menjalankan perintah-perintah Git(lihat \ref{subsec:operasi_dasar_git}). Histori \textit{commit} dapat didapatkan dengan menggunakan operasi Git Log. Sintaks untuk menjalankan operasi Git Log adalah \texttt{\$ git log}. Listring \ref{lst:commit_history_dnartworks} menunjukkan sebagian histori \textit{commit} dari proyek DNArtworks.
+
+\begin{lstlisting}[caption={Histori \textit{commit} pada proyek DNArtworks},label={lst:commit_history_dnartworks},language=plaintext]
+C:\xampp\htdocs\DNArtworks>git log
+commit 4e91b9e765258cac0debc5133fd7c9d906624417 (HEAD -> master, origin/master, origin/HEAD)
+
+Author: Pascal Alfadian Nugroho <pascal@dnartworks.co.id>
+Date:   Fri Oct 5 18:10:13 2018 +0700
+
+    Added privacy policy special page
+
+commit 725e11972903b3267f5ae1160fca0827710413b0
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Tue Oct 2 11:00:27 2018 +0700
+
+    Add sitemap.xml
+
+commit 451b5fee930b9f62a65f0da2d4317cc3ba93e8ab
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Wed Sep 26 04:37:27 2018 +0000
+
+    Add verification for google search console hizkia@dnartworks.co.id
+
+commit f6c1e760f28ebf40d92c56dae551d02f5b015def
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Tue Sep 25 17:31:51 2018 +0700
+
+    Add meta description tag
+
+commit 87a15db5581ecad1efde08389c51af63a31cc1df
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Tue Sep 25 17:27:49 2018 +0700
+
+    Add missing semicolon in navbar.php
+
+commit 0bb4a6e410b14bb071f463640ffad64ba7962c57
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Tue Sep 25 12:58:40 2018 +0700
+
+    Update office address in Menu
+    
+\end{lstlisting}
+
+
+
+

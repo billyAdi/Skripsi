@@ -120,9 +120,8 @@ public class Main {
         
         ImageOutputStream output
                 = new FileImageOutputStream(new File("hasil_screenshot/output.gif")); //file output
-
-        GifSequenceWriter writer= new GifSequenceWriter(output, firstImage.getType(), 500, false); //500ms adalah jarak antar frame, fpsnya= 1/0.5 s=2 fps. fps belum menggunakan nilai dari parameter
-
+        double frameDelay=1000.0/Integer.parseInt(cmd.getOptionValue("fps"));
+        GifSequenceWriter writer= new GifSequenceWriter(output, firstImage.getType(),(int)frameDelay , false); //500ms adalah jarak antar frame, fpsnya= 1/0.5 s=2 fps. fps belum menggunakan nilai dari parameter
         
         writer.writeToSequence(firstImage);
         for (int i = 2; i < commitID.size(); i++) {

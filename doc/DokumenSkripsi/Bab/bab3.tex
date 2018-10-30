@@ -211,7 +211,21 @@ Selain terdapat perbedaan di \textit{working tree}, terdapat juga perbedaan pada
 
 \section{Prapengujian}
 \label{sec:prapengujian}
-Pen
+Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Input dari program ini adalah alamat dari proyek Piktora dan URL untuk membuka halaman \textit{web}. Berikut ini adalah langkah-langkah pada pengujian:\\
+\begin{enumerate}
+\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
+\item Program mendapatkan seluruh \textit{commit} histori dari proyek Piktora.
+\item Program melakukan \textit{checkout} ke \textit{commit} pertama.
+\item Program menjalankan halaman proyek Piktora di \textit{localhost} menggunakan SeleniumWebDriver.
+\item SeleniumWebDriver kemudian mengambil \textit{screenshot} pada halaman \textit{web} Piktora.
+\item Langkah 3-5 diulangi untuk seluruh \textit{commit}.
+\end{enumerate}
+\ \\
+Pada proyek Piktora terdapat 58 \textit{commmit}. Pada \textit{commit} ke-1 sampai ke-38 halaman \textit{web} pada proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} ke-1 sampai ke-38 \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} ke-39 sampai ke-58 \textit{file} "index.php" berada pada \textit{folder} "httpdocs".
+
+Pada \textit{commit} ke-39 sampai ke-41, halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". \textit{Commit} ke-47 sampai ke-58 tidak terdapat \textit{password} pada \textit{file} "database.php". Terdapat perbedaan \textit{password} di \textit{file} "database.php" antara \textit{commit} ke-39 sampai ke-41 dengan \textit{commit} ke-42 sampai ke-46.
+
+Dari hasil prapengujian, dapat diambil kesimpulan bahwa tidak semua \textit{commit} dapat dibuka halaman webnya. Perbedaan konfigurasi pada \textit{file} tidak dapat dihindari. Begitu pula dengan penempatan \textit{file} "index.php". Solusi untuk mengatasi masalah tersebut adalah membatasi periode \textit{commit} yang akan digunakan untuk \textit{checkout}. Hal tersebut bisa dicapai dengan menambahkan dua parameter input, yaitu index awal \textit{commit} dan index akhir \textit{commit}. 
 
 
 

@@ -25,10 +25,11 @@
 
 Pada bab ini dijelaskan mengenai analisis aplikasi sejenis, analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, analisis penggunaan Apache Commons CLI, dan prapengujian. 
 
-\section{Analisisi Aplikasi Sejenis}
+\section{Analisis Aplikasi Sejenis}
 \label{sec:analisis_aplikasi_sejenis}
 Saat skripsi ini dibuat, aplikasi sejenis yang digunakan untuk membangkitkan animasi \textit{timelapse} adalah Gource.  
 Proyek perangkat lunak ditampilkan oleh Gource sebagai animasi pohon, dimana pusatnya adalah \textit{root directory} dari proyek perangkat lunak\cite{Gource}. Direktori ditampilkan sebagai \textit{branch}, sedangkan \textit{file} ditampilkan sebagai \textit{leaf}. Developer dapat terlihat di \textit{working tree} pada saat mereka berkontribusi untuk proyek.
+
 
 \begin{figure}[H]
 	\centering
@@ -37,9 +38,75 @@ Proyek perangkat lunak ditampilkan oleh Gource sebagai animasi pohon, dimana pus
 	\label{fig:gource}
 \end{figure}
 
-Gambar \ref{fig:gource} menunjukkan contoh visualisasi proyek perangkat lunak menggunakan Gource. Gource dapat digunakan untuk membuat visualisasi perkembangan proyek perangkat lunak, mulai dari awal perkembangan sampai akhir. Pada awalnya ukuran \textit{working tree} tidak terlalu besar. Setiap kali ditambahkan \textit{file} dan \textit{folder} baru, akan dibuat \textit{branch} dan \textit{leaf} baru pada \textit{working tree}.
+Gambar \ref{fig:gource} menunjukkan contoh visualisasi proyek perangkat lunak menggunakan Gource. Efek cahaya yang terdapat pada Gambar \ref{fig:gource} disebut dengan \textit{bloom}. Pada awalnya ukuran \textit{working tree} tidak terlalu besar. Setiap kali ditambahkan \textit{file} dan \textit{folder} baru, akan dibuat \textit{branch} dan \textit{leaf} baru pada \textit{working tree}.  
 
-Terdapat beberapa fitur penting pada Gource. Gource dapat menampilkan judul dari proyek di pojok kiri bawah. Selain itu waktu animasi dapat ditampilkan di bagian atas. Gource dapat menampilkan \textit{caption} pada saat seorang \textit{developer} menambahkan \textit{file} atau \textit{folder}. \textit{Caption} ini berisi \textit{timestamp} dan deskripsi dari \textit{caption}. Animasi yang ditampilkan dapat diatur periode waktunya.  
+\ \\
+Gource memiliki beberapa fitur. Fitur-fitur tersebut dapat diatur melalui \textit{command line options}. Berikut ini adalah beberapa \textit{command line options} yang terdapat pada Gource:
+\begin{enumerate}
+\item \texttt{gource --[WIDTH]x[HEIGHT]}\\
+Opsi ini berfungsi untuk mengatur resolusi layar dari animasi. Parameter dari opsi ini adalah lebar dan panjang layar dalam satuan piksel. 
+
+\item \texttt{gource --camera-mode [MODE]}\\
+Opsi ini berfungsi untuk mengatur mode kamera pada Gource. Parameter dari opsi ini adalah mode dari kamera. Terdapat dua mode yaitu \textit{overview} dan \textit{track}. Dalam mode \textit{track}, kamera bergerak mengikuti \textit{user} yang sedang aktif. Dalam mode \textit{overview}, kamera menampilkan seluruh repositori.
+
+\item \texttt{gource --path [PATH]}\\
+Opsi untuk berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Opsi dari parameter ini adalah \textit{path} dari direktori.
+
+\item \texttt{gource --start-date [YYYY-MM-DD hh:mm:ss +tz] --stop-date [YYYY-MM-DD hh:mm:ss +tz]}\\
+Opsi untuk berfungsi untuk mengatur periode waktu dalam menampilkan animasi. Parameter dari opsi ini adalah waktu mulai dan waktu akhir dalam format "YYYY-MM-DD hh:mm:ss +tz". Dimana YYYY adalah tahun, MM adalah bulan, DD adalah tanggal, hh adalah jam, mm adalah menit, ss adalah detik, dan +tz adalah zona waktu. Parameter jam, menit, detik, dan zona waktu bersifat opsional.    
+
+\item \texttt{gource --bloom-multiplier [FLOAT] }\\
+Opsi untuk berfungsi untuk mengatur radius dari efek \textit{bloom}. Parameter dari opsi ini adalah radius dalam format bilangan riil.
+
+\item \texttt{gource --bloom-intensity [FLOAT]}\\
+Opsi untuk berfungsi untuk mengatur intensitas dari efek \textit{bloom}. Parameter dari opsi ini adalah intensitas \textit{bloom} dalam format bilangan riil.
+
+\item \texttt{gource --disable-bloom}\\
+Opsi ini berfungsi untuk menonaktifkan animasi \textit{bloom}.
+
+\item \texttt{gource --date-format [FORMAT]}\\ 
+Opsi untuk mengatur format waktu yang ditampilkan pada bagian tengah atas. Opsi dari parameter ini adalah format waktu dalam bentuk \textit{string}.
+
+\item \texttt{gource --background [FFFFFF]}\\
+Opsi ini berfungsi untuk mengatur warna \textit{background}. Parameter dari opsi ini adalah warna dalam format heksadesimal.
+
+\item \texttt{gource --background-image [IMAGE]}\\
+Opsi ini berfungsi untuk mengatur gambar \textit{background}. Parameter dari opsi ini adalah nama \textit{file} dari gambar.
+
+\item \texttt{gource --font-size [SIZE]}\\
+Opsi ini digunakan untuk mengatur ukuran \textit{font} pada tulisan \textit{title} dan tanggal. Parameter dari opsi ini adalah ukuran \textit{font}.  
+
+\item \texttt{gource --font-colour [FFFFFF]}\\
+Opsi ini digunakan untuk mengatur warna \textit{font} pada tulisan \textit{title} dan tanggal. Parameter dari opsi ini adalah warna \textit{font} dalam format heksadesimal.
+
+\item \texttt{gource --logo [IMAGE]}\\
+Opsi ini berfungsi untuk memasukkan logo. Parameter dari opsi ini adalah nama \textit{file} dari gambar.
+
+\item \texttt{gource --logo-offset [X]x[Y]}\\
+Opsi ini berfungsi untuk mengatur posisi dari logo. Parameter dari opsi ini adalah posisi x dan posisi y dari logo. 
+
+\item \texttt{gource --title [TITLE]}\\
+Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri bawah layar. 
+
+\item \texttt{gource --output-framerate [FPS]}\\
+Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi \textit{timelapse}. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
+
+\item \texttt{gource --hide [DISPLAY-ELEMENT]}\\
+Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}. Parameter dari opsi ini adalah elemen yang akan disembunyikan. \textit{Display element} yang dapat disembunyikan yaitu:
+\begin{itemize}
+\item \textit{bloom}: efek \textit{bloom}. 
+\item \textit{date}: waktu.  
+\item \textit{dirnames}: nama direktori. 
+\item \textit{files}: ikon dari berkas. 
+\item \textit{filenames}: nama berkas. 
+\item \textit{root}: \textit{root directory}.
+\item \textit{users}: ikon dari \textit{user}.
+\item \textit{usernames}: nama dari \textit{user}.
+\end{itemize}
+Parameter yang berjumlah lebih dari satu dipisahkan dengan koma, contoh: \textit{bloom},\textit{root},\textit{users}.
+\end{enumerate}
+ 
+Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman utama suatu \textit{website}. \textit{Command line options} Gource yang dapat diimplementasikan pada program dalam skripsi ini adalah \textit{path} dan \textit{fps}. \textit{Command line options} Gource lainnya tidak dapat diimplementasikan pada program dalam skripsi ini. Program dalam skripsi memiliki \textit{command line options} yang tidak terdapat pada Gource yaitu, \textit{capture-url} dan \textit{before-capture}. Opsi \textit{capture-url} merupakan \textit{url} dari halaman \textit{website}, dimana dilakukan pengambilan \textit{screenshot} pada halaman \textit{website} ini. Opsi \textit{before-capture} merupakan \textit{url} yang akan dibuka sebelum membuka \textit{url} pada opsi \textit{capture-url}.      
  
  \section{Analisis Penggunaan Git Command Line}
 \label{sec:analisis_git}
@@ -173,7 +240,7 @@ Listing \ref{lst:checkout_piktora} menunjukkan operasi \textit{checkout} ke \tex
 	\label{fig:piktora_last_wt}
 \end{figure}
 \ \\
-Gambar \ref{fig:piktora_last_wt} menunjukkan \textit{working tree} proyek Piktora pada \textit{commit} terakhir. \textit{Folder} git menunjukkan bahwa direktori Piktora terekam oleh Git. \textit{File} dan \textit{folder} yang terdapat pada \textit{working tree} merupakan \textit{snapshot} dari suatu\textit{commit}. Setiap kali dilakukan \textit{checkout}, \textit{working tree} akan berubah sesuai dengan \textit{snapshot} pada \textit{commit} tertentu. Dengan menggunakan operasi \textit{checkout}, dapat dibandingkan \textit{file} versi sekarang dengan \textit{file} pada versi sebelumnya.    
+Gambar \ref{fig:piktora_last_wt} menunjukkan \textit{working tree} proyek Piktora pada \textit{commit} terakhir. \textit{Folder} git menunjukkan bahwa direktori Piktora terekam oleh Git. \textit{File} dan \textit{folder} yang terdapat pada \textit{working tree} merupakan \textit{snapshot} dari suatu \textit{commit}. Setiap kali dilakukan \textit{checkout}, \textit{working tree} akan berubah sesuai dengan \textit{snapshot} pada \textit{commit} tertentu. Dengan menggunakan operasi \textit{checkout}, dapat dibandingkan \textit{file} versi sekarang dengan \textit{file} pada versi sebelumnya.    
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{Gambar/piktora_first_commit.png}

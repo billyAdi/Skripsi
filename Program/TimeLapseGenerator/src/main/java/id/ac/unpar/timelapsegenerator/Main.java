@@ -39,18 +39,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 public class Main {
 
-    //C:/xampp/htdocs/DNArtworks/.git
-    //C:/xampp/htdocs/Piktora/.git
-    public static void main(String[] args) throws IOException, GitAPIException, ParseException {
+    
+    public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
         Options options = new Options();
         Option captureURL = Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build();
         Option fps = Option.builder().longOpt("fps").argName("fps").hasArg().desc("fps video").build();
-        Option beforeCapture = Option.builder().longOpt("before-capture").argName("url").hasArg().desc("migrate database").build();
+        Option migrateURL = Option.builder().longOpt("migrate-url").argName("url").hasArg().desc("url untuk migrate database").build();
         Option projectPath = Option.builder().longOpt("project-path").argName("path").hasArg().desc("project path").build();
-        options.addOption(beforeCapture);
+        Option beforeCapture = Option.builder().longOpt("before-capture").argName("path").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build();
+        Option afterCapture = Option.builder().longOpt("after-capture").argName("path").hasArg().desc("php script yang dijalankan setelah melakukan screenshot").build();
+        options.addOption(migrateURL);
         options.addOption(captureURL);
         options.addOption(fps);
         options.addOption(projectPath);
+        options.addOption(afterCapture);
+        options.addOption(beforeCapture);
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
 
@@ -58,8 +61,8 @@ public class Main {
             String temp = cmd.getOptionValue("fps");
             System.out.println(temp);
         }
-        if (cmd.hasOption("before-capture")) {
-            String temp = cmd.getOptionValue("before-capture");
+        if (cmd.hasOption("migrate-url")) {
+            String temp = cmd.getOptionValue("migrate-url");
             System.out.println(temp);
         }
         if (cmd.hasOption("capture-url")) {
@@ -70,10 +73,16 @@ public class Main {
             String temp = cmd.getOptionValue("project-path");
             System.out.println(temp);
         }
-
-//        Repository repo = new FileRepository("C:\\xampp\\htdocs\\Piktora\\.git");
+        if (cmd.hasOption("before-capture")) {
+            String temp = cmd.getOptionValue("before-capture");
+            System.out.println(temp);
+        }
+        if (cmd.hasOption("after-capture")) {
+            String temp = cmd.getOptionValue("after-capture");
+            System.out.println(temp);
+        }
+        
         Repository repo = new FileRepository(cmd.getOptionValue("project-path"));
-//        // System.out.println(repo.getBranch());
 
         Git git = new Git(repo);
 
@@ -87,35 +96,43 @@ public class Main {
 
         for (RevCommit commit : revWalk) {
             System.out.println(commit.getName().substring(0, 7) + " " + commit.getFullMessage());
-            // Date d=commit.getAuthorIdent().getWhen();
             //System.out.println(commit.getAuthorIdent().getName()+" "+commit.getAuthorIdent().getEmailAddress()+d.getDate()+" "+d.getMonth()+" "+d.getYear());            
             commitID.add(commit.getName().substring(0, 7));
         }
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(cmd.getOptionValue("before-capture"));
-        for (int i = 0; i < commitID.size(); i++) {
-            if (i == 1) {
-                continue;
+        //driver.get(cmd.getOptionValue("before-capture"));
+        String[] cmdWindows = new String[3];
+        cmdWindows[0] = "cmd.exe" ;
+        cmdWindows[1] = "/C" ;
+        Runtime rt = Runtime.getRuntime();
+        Process proc;
+
+           
+        for (int i = 42; i < commitID.size(); i++) {
+            if (i == 37) {
+                break;
             }
             git.checkout().setName(commitID.get(i)).call();
-            if (i == 0) {
-                driver.navigate().to(cmd.getOptionValue("capture-url"));
-            } else {
-                driver.navigate().refresh();
-            }
+            cmdWindows[2] = "php "+cmd.getOptionValue("before-capture");
+            proc = rt.exec(cmdWindows); 
+            proc.waitFor();
+            driver.navigate().to(cmd.getOptionValue("migrate-url"));
+            //driver.navigate().to(cmd.getOptionValue("capture-url"));
+//            cmdWindows[2] = "php "+cmd.getOptionValue("after-capture"); 
+//            proc = rt.exec(cmdWindows); 
             //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
             
             File scrFile
                     = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.moveFile(scrFile, new File("hasil_screenshot/ss" + i + ".png")); 
+            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + i + ".png")); 
 
         }
         driver.quit();
         git.checkout().setName("master").call();
 
-        BufferedImage firstImage = ImageIO.read(new File("hasil_screenshot/ss0.png")); //file pertama
+        BufferedImage firstImage = ImageIO.read(new File("hasil_screenshot/z0.png")); //file pertama
 
         
         ImageOutputStream output

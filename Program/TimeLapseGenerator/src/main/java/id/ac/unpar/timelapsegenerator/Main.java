@@ -21,6 +21,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Constants;
@@ -47,12 +48,10 @@ public class Main {
         Option migrateURL = Option.builder().longOpt("migrate-url").argName("url").hasArg().desc("url untuk migrate database").build();
         Option projectPath = Option.builder().longOpt("project-path").argName("path").hasArg().desc("project path").build();
         Option beforeCapture = Option.builder().longOpt("before-capture").argName("path").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build();
-        Option afterCapture = Option.builder().longOpt("after-capture").argName("path").hasArg().desc("php script yang dijalankan setelah melakukan screenshot").build();
         options.addOption(migrateURL);
         options.addOption(captureURL);
         options.addOption(fps);
         options.addOption(projectPath);
-        options.addOption(afterCapture);
         options.addOption(beforeCapture);
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
@@ -77,10 +76,7 @@ public class Main {
             String temp = cmd.getOptionValue("before-capture");
             System.out.println(temp);
         }
-        if (cmd.hasOption("after-capture")) {
-            String temp = cmd.getOptionValue("after-capture");
-            System.out.println(temp);
-        }
+        
         
         Repository repo = new FileRepository(cmd.getOptionValue("project-path"));
 
@@ -102,35 +98,34 @@ public class Main {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        //driver.get(cmd.getOptionValue("before-capture"));
         String[] cmdWindows = new String[3];
         cmdWindows[0] = "cmd.exe" ;
         cmdWindows[1] = "/C" ;
+        cmdWindows[2] = "php "+cmd.getOptionValue("before-capture");
         Runtime rt = Runtime.getRuntime();
         Process proc;
 
            
-        for (int i = 42; i < commitID.size(); i++) {
-            if (i == 37) {
-                break;
-            }
-            git.checkout().setName(commitID.get(i)).call();
-            cmdWindows[2] = "php "+cmd.getOptionValue("before-capture");
-            proc = rt.exec(cmdWindows); 
-            proc.waitFor();
-            driver.navigate().to(cmd.getOptionValue("migrate-url"));
-            //driver.navigate().to(cmd.getOptionValue("capture-url"));
-//            cmdWindows[2] = "php "+cmd.getOptionValue("after-capture"); 
+//        for (int i = 0; i < commitID.size(); i++) {
+////            if (i == 41) {
+////                break;
+////            }
+//            git.checkout().setName(commitID.get(i)).call();
+//            
 //            proc = rt.exec(cmdWindows); 
-            //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
-            
-            File scrFile
-                    = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + i + ".png")); 
-
-        }
-        driver.quit();
-        git.checkout().setName("master").call();
+//            proc.waitFor();
+//            driver.navigate().to(cmd.getOptionValue("migrate-url"));
+//            driver.navigate().to(cmd.getOptionValue("capture-url"));
+//            //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
+//            
+//            File scrFile
+//                    = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + i + ".png")); 
+//                
+//            git.reset().setMode(ResetType.HARD).call();
+//        }
+//        driver.quit();
+//        git.checkout().setName("master").call();
 
         BufferedImage firstImage = ImageIO.read(new File("hasil_screenshot/z0.png")); //file pertama
 
@@ -141,8 +136,8 @@ public class Main {
         GifSequenceWriter writer= new GifSequenceWriter(output, firstImage.getType(),(int)frameDelay , false); //500ms adalah jarak antar frame, fpsnya= 1/0.5 s=2 fps. fps belum menggunakan nilai dari parameter
         
         writer.writeToSequence(firstImage);
-        for (int i = 2; i < commitID.size(); i++) {
-            BufferedImage nextImage = ImageIO.read(new File("hasil_screenshot/ss"+i+".png"));
+        for (int i = 1; i < commitID.size(); i++) {
+            BufferedImage nextImage = ImageIO.read(new File("hasil_screenshot/z"+i+".png"));
             writer.writeToSequence(nextImage);
         }
 

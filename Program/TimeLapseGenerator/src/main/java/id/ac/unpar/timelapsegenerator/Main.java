@@ -45,10 +45,8 @@ public class Main {
         Options options = new Options();
         Option captureURL = Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build();
         Option fps = Option.builder().longOpt("fps").argName("fps").hasArg().desc("fps video").build();
-        Option migrateURL = Option.builder().longOpt("migrate-url").argName("url").hasArg().desc("url untuk migrate database").build();
         Option projectPath = Option.builder().longOpt("project-path").argName("path").hasArg().desc("project path").build();
         Option beforeCapture = Option.builder().longOpt("before-capture").argName("path").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build();
-        options.addOption(migrateURL);
         options.addOption(captureURL);
         options.addOption(fps);
         options.addOption(projectPath);
@@ -58,10 +56,6 @@ public class Main {
 
         if (cmd.hasOption("fps")) {
             String temp = cmd.getOptionValue("fps");
-            System.out.println(temp);
-        }
-        if (cmd.hasOption("migrate-url")) {
-            String temp = cmd.getOptionValue("migrate-url");
             System.out.println(temp);
         }
         if (cmd.hasOption("capture-url")) {
@@ -112,7 +106,6 @@ public class Main {
             
             proc = rt.exec(cmdWindows); 
             proc.waitFor();
-            driver.navigate().to(cmd.getOptionValue("migrate-url"));
             driver.navigate().to(cmd.getOptionValue("capture-url"));
             //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
             

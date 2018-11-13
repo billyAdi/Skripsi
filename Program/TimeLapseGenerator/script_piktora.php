@@ -73,8 +73,15 @@ function checkIndexPHP(){
 	}
 }
 
+function migrateDatabase(){
+	$curl = curl_init("http://localhost/migrate");
+	curl_exec($curl);
+	curl_close($curl);
+}
+
 dropDatabase();
 createDatabase();
 checkDatabaseConfig();
 checkIndexPHP();
+migrateDatabase();
 ?>

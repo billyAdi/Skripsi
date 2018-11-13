@@ -106,7 +106,7 @@ Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}
 Parameter yang berjumlah lebih dari satu dipisahkan dengan koma, contoh: \textit{bloom},\textit{root},\textit{users}.
 \end{enumerate}
  
-Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman utama suatu \textit{website}. \textit{Command line options} Gource yang dapat diimplementasikan pada program dalam skripsi ini adalah \textit{path} dan \textit{fps}. \textit{Command line options} Gource lainnya tidak dapat diimplementasikan pada program dalam skripsi ini. Program dalam skripsi memiliki \textit{command line options} yang tidak terdapat pada Gource yaitu, \textit{capture-url} dan \textit{before-capture}. Opsi \textit{capture-url} merupakan \textit{url} dari halaman \textit{website}, dimana dilakukan pengambilan \textit{screenshot} pada halaman \textit{website} ini. Opsi \textit{before-capture} merupakan \textit{url} yang akan dibuka sebelum membuka \textit{url} pada opsi \textit{capture-url}.      
+Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman utama suatu \textit{website}. \textit{Command line options} Gource yang dapat diimplementasikan pada program dalam skripsi ini adalah \textit{path} dan \textit{fps}. \textit{Command line options} Gource lainnya tidak dapat diimplementasikan pada program dalam skripsi ini. Program dalam skripsi memiliki \textit{command line options} yang tidak terdapat pada Gource yaitu, \textit{capture-url} dan \textit{migrate-url}. Opsi \textit{capture-url} merupakan \textit{url} dari halaman \textit{website}, dimana dilakukan pengambilan \textit{screenshot} pada halaman \textit{website} ini. Opsi \textit{migrate-url} merupakan \textit{url} yang akan dibuka sebelum membuka \textit{url} pada opsi \textit{capture-url}, url ini digunakan untuk migrasi \textit{database}.      
  
  \section{Analisis Penggunaan Git Command Line}
 \label{sec:analisis_git}
@@ -269,31 +269,75 @@ Selain terdapat perbedaan di \textit{working tree}, terdapat juga perbedaan pada
 %\section{Analisis Penggunaan JGit}
 %\label{sec:analisis_jgit}
 
-
 %\section{Analisis Penggunaan Selenium WebDriver}
 %\label{sec:analisis_selenium}
 
 %\section{Analisis Penggunaan Apache Commons CLI}
 %\label{sec:analisis_apache_commons}
 
-\section{Prapengujian}
+\section{Prapengujian Website Piktora}
 \label{sec:prapengujian}
 Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Input dari program ini adalah alamat dari proyek Piktora dan URL untuk membuka halaman \textit{web}. Berikut ini adalah langkah-langkah pada pengujian:\\
 \begin{enumerate}
 \item Program mengambil input dari parameter menggunakan Apache Commons CLI.
 \item Program mendapatkan seluruh \textit{commit} histori dari proyek Piktora.
 \item Program melakukan \textit{checkout} ke \textit{commit} pertama.
+\item Program melakukan migrasi \textit{database}.
 \item Program menjalankan halaman proyek Piktora di \textit{localhost} menggunakan SeleniumWebDriver.
 \item SeleniumWebDriver kemudian mengambil \textit{screenshot} pada halaman \textit{web} Piktora.
 \item Langkah 3-5 diulangi untuk seluruh \textit{commit}.
 \end{enumerate}
 \ \\
-Pada proyek Piktora terdapat 58 \textit{commmit}. Pada \textit{commit} ke-1 sampai ke-38 halaman \textit{web} pada proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} ke-1 sampai ke-38 \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} ke-39 sampai ke-58 \textit{file} "index.php" berada pada \textit{folder} "httpdocs".
 
-Pada \textit{commit} ke-39 sampai ke-41, halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". \textit{Commit} ke-47 sampai ke-58 tidak terdapat \textit{password} pada \textit{file} "database.php". Terdapat perbedaan \textit{password} di \textit{file} "database.php" antara \textit{commit} ke-39 sampai ke-41 dengan \textit{commit} ke-42 sampai ke-46.
+Pada proyek Piktora terdapat 58 \textit{commmit}. Setelah dilakukan pengujian terdapat beberapa masalah. Masalah tersebut yaitu perbedaan letak \textit{file}, migrasi \textit{database}, dan konfigurasi \textit{database}. Masalah-masalah tersebut dibahas pada subbab \ref{subsec:perbedaan_letak_file} sampai \ref{subsec:migrasi_database}.
 
-Dari hasil prapengujian, dapat diambil kesimpulan bahwa tidak semua \textit{commit} dapat dibuka halaman webnya. Perbedaan konfigurasi pada \textit{file} tidak dapat dihindari. Begitu pula dengan penempatan \textit{file} "index.php". Solusi untuk mengatasi masalah tersebut adalah membatasi periode \textit{commit} yang akan digunakan untuk \textit{checkout}. Hal tersebut bisa dicapai dengan menambahkan dua parameter input, yaitu index awal \textit{commit} dan index akhir \textit{commit}. 
+\subsection{Perbedaan Letak \textit{File}}
+\label{subsec:perbedaan_letak_file}
+Pada \textit{commit} ke-1 sampai ke-38 halaman \textit{web} pada proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} ke-1 sampai ke-38 \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} ke-39 sampai ke-58 \textit{file} "index.php" berada pada \textit{folder} "httpdocs".
+
+Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP ini mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian mengecek \textit{directory root} XAMPP pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf". Setelah \textit{script} menjalankan perintah "httpd -k restart", untuk melakukan \textit{restart} pada XAMPP. \textit{Script} PHP ini dijalankan sebelum melakukan migrasi \textit{database}.   
 
 
+\subsection{Permasalahan Konfigurasi \textit{Database}}
+\label{subsec:konfigurasi_database}
+Pada \textit{commit} ke-39 sampai ke-41, halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". Pada \textit{commit} 39 s.d. 46 dan \textit{commit} 49 terdapat \textit{password} pada \textit{file} "database.php". \textit{Commit} lainnya tidak terdapat \textit{password} pada \textit{file} "database.php". Penulis menggunakan \textit{password} "piktora" pada konfigurasi \textit{database} di XAMPP.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.5]{Gambar/piktora_commit_39.png}
+	\caption{\textit{Commit} ke-39 pada proyek Piktora}
+	\label{fig:piktora_commit_39}
+\end{figure} 
+
+Gambar \ref{fig:piktora_commit_39} merupakan isi dari \textit{file} "database.php" pada \textit{commit} ke-39.
+Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah "dmHx64\%6". Pada  \ref{fig:piktora_commit_42} \textit{password} untuk \textit{database} adalah "piktora". \textit{Commit} 39 s.d. 41 menggunakan \textit{password} "dmHx64\%6", sedangkan \textit{commit} 42 s.d.46 dan 48 menggunakan \textit{password} "piktora". Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan XAMPP berbeda, halaman \textit{website} pada \textit{commit} 39 s.d. 41 tidak bisa dibuka. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.5]{Gambar/piktora_commit_42.png}
+	\caption{\textit{Commit} ke-42 pada proyek Piktora}
+	\label{fig:piktora_commit_42}
+\end{figure} 
+
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP inilah yang mengubah \textit{password} dari \textit{file} "database.php". \textit{Script} PHP dijalankan pada program dengan menggunakan kelas Runtime dan Process yang terdapat pada library Java. \textit{Script} dijalankan sebelum melakukan migrasi \textit{database}. 
+
+Cara kerja dari \textit{Script} PHP yang dimasukkan ke \textit{command line options} adalah sebagai berikut:
+\begin{enumerate}
+\item Mengisialisasi \textit{path} dari \textit{file} "database.php"
+\item Memvalidasi \textit{path} menggunakan. Jika \textit{path} tidak valid \textit{script} selesai dijalankan.
+\item Mendapatkan semua isi \textit{file} dan menampungnya ke suatu variabel, misal "\$contents".
+\item Mencari \textit{string password} menggunakan \textit{regular expression}.
+\item Jika tidak terdapat \textit{password} atau terdapat \textit{password} berupa "piktora", isi \textit{file}tidak diubah dan \textit{script} selesai dijalankan.
+\item Jika terdapat \textit{password} berupa "dmHx64\%6", \textit{string password} pada variabel "\$contents" diubah menjadi "piktora".
+\item Melakukan \textit{overwrite} pada \textit{file} "database.php" dengan variabel "\$contents".   
+\end{enumerate}
+
+
+\subsection{Permasalahan Migrasi \textit{Database}}
+\label{subsec:migrasi_database}
+
+Pada \textit{commit} 24, terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} 23, terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 24 terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} 23 \textit{file} "20161122150001\_InitialData.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 24, \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 24. Isi \textit{file} "20161122150001\_InitialData.php" pada \textit{commit} 23 dan 24 berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
+
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} ini melakukan dua pekerjaan. Pertama, \textit{script} menghapus \textit{database} piktora dengan menggunakan \textit{query} "DROP DATABASE piktora". Setelah itu \textit{script} membuat \textit{database} piktora dengan menggunakan \textit{query} "CREATE DATABASE piktora". \textit{Script} dijalankan sebelum melakukan migrasi \textit{database}. 
 
 

@@ -106,26 +106,24 @@ public class Main {
         Process proc;
 
            
-//        for (int i = 0; i < commitID.size(); i++) {
-////            if (i == 41) {
-////                break;
-////            }
-//            git.checkout().setName(commitID.get(i)).call();
-//            
-//            proc = rt.exec(cmdWindows); 
-//            proc.waitFor();
-//            driver.navigate().to(cmd.getOptionValue("migrate-url"));
-//            driver.navigate().to(cmd.getOptionValue("capture-url"));
-//            //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
-//            
-//            File scrFile
-//                    = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + i + ".png")); 
-//                
-//            git.reset().setMode(ResetType.HARD).call();
-//        }
-//        driver.quit();
-//        git.checkout().setName("master").call();
+        for (int i = 0; i < commitID.size(); i++) {
+            
+            git.checkout().setName(commitID.get(i)).call();
+            
+            proc = rt.exec(cmdWindows); 
+            proc.waitFor();
+            driver.navigate().to(cmd.getOptionValue("migrate-url"));
+            driver.navigate().to(cmd.getOptionValue("capture-url"));
+            //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
+            
+            File scrFile
+                    = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + i + ".png")); 
+                
+            git.reset().setMode(ResetType.HARD).call();
+        }
+        driver.quit();
+        git.checkout().setName("master").call();
 
         BufferedImage firstImage = ImageIO.read(new File("hasil_screenshot/z0.png")); //file pertama
 

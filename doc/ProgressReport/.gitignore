@@ -1,3 +1,9 @@
 /*.aux
 /*.dvi
 /*.log
+/*.bbl
+/*.blg
+/*.out
+/*.gz
+
+

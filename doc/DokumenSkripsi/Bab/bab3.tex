@@ -418,4 +418,23 @@ Pada \textit{commit} 3d79d0a(27 Nov 2016), terjadi \textit{error} saat melakukan
 
 Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan melakukan dua pekerjaan. Pertama, \textit{script} akan menghapus \textit{database} piktora dengan menggunakan \textit{query} "DROP DATABASE piktora". Setelah itu \textit{script} akan membuat \textit{database} piktora dengan menggunakan \textit{query} "CREATE DATABASE piktora". \textit{Script} akan dijalankan sebelum melakukan migrasi \textit{database}. 
 
-
+\section{Analisis Command Line Options}
+\label{sec:analisis_command_line_options}
+ 
+Berikut ini adalah \textit{command line options} yang akan diimplementasikan pada skripsi ini:
+\begin{enumerate}
+\item \texttt{-project-path [PATH]}\\
+Opsi ini wajib ada.
+\item \texttt{-before-capture [PHP-SCRIPT]}\\
+Opsi ini bersifat opsional.
+\item \texttt{-capture-url [url]}\\
+Opsi ini wajib ada.
+\item \texttt{-fps [FPS]}\\
+Opsi ini bersifat opsional.
+\item \texttt{-title [TITLE]}\\
+Opsi ini bersifat opsional.
+\item \texttt{-logo [IMAGE]}\\
+Opsi ini bersifat opsional.
+\item \texttt{-start-commit [ID] -stop-commit [ID]}\\
+Opsi ini bersifat opsional.
+\end{enumerate}

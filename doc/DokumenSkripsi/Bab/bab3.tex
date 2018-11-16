@@ -88,7 +88,7 @@ Opsi ini berfungsi untuk mengatur posisi dari logo. Parameter dari opsi ini adal
 Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri bawah layar. 
 
 \item \texttt{gource --output-framerate [FPS]}\\
-Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi \textit{timelapse}. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
+Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
 
 \item \texttt{gource --hide [DISPLAY-ELEMENT]}\\
 Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}. Parameter dari opsi ini adalah elemen yang akan disembunyikan. \textit{Display element} yang dapat disembunyikan yaitu:
@@ -420,21 +420,26 @@ Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi ma
 
 \section{Analisis Command Line Options}
 \label{sec:analisis_command_line_options}
- 
-Berikut ini adalah \textit{command line options} yang akan diimplementasikan pada skripsi ini:
+Program pada skripsi ini akan menerima masukan dari Command Line Options. Selain itu konfigurasi program juga didapatkan dari Command Line Options. Berikut ini adalah \textit{command line options} yang akan diimplementasikan pada skripsi ini:
 \begin{enumerate}
 \item \texttt{-project-path [PATH]}\\
-Opsi ini wajib ada.
+Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari proyek perangkat lunak web yang terekam oleh Git. Opsi ini wajib ada.
+
 \item \texttt{-before-capture [PHP-SCRIPT]}\\
-Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk menjalankan \textit{script} PHP. \textit{Script} ini dijalankan sebelum melakukan \textit{screenshot}. Parameter dari opsi ini adalah \textit{script} PHP. Opsi ini bersifat opsional.
+
 \item \texttt{-capture-url [url]}\\
-Opsi ini wajib ada.
+Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}. Opsi ini wajib ada.
+
 \item \texttt{-fps [FPS]}\\
-Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada animasi.  Parameter dari opsi ini adalah jumlah \textit{frame} per detik. Opsi ini bersifat opsional.
+
 \item \texttt{-title [TITLE]}\\
-Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk memberi judul. Opsi ini bersifat opsional. 
+
 \item \texttt{-logo [IMAGE]}\\
-Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk memasukkan logo. Parameter dari opsi ini adalah \textit{file} gambar. Opsi ini bersifat opsional.
+
 \item \texttt{-start-commit [ID] -stop-commit [ID]}\\
-Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir. Opsi ini bersifat opsional. 
 \end{enumerate}

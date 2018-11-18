@@ -334,7 +334,7 @@ Parameter: \textit{expression} dari \textit{git object references}. \textit{Meth
 Kembalian: sebuah objek \textit{ObjectId}.
 \end{itemize} 
 
-\textbf{FileRepository}
+\textbf{FileRepository}\\
 Kelas ini merupakan turunan dari kelas \textit{Repository}. Berikut ini adalah \textit{construtor} dari kelas ini:
 \begin{itemize}
 \item public FileRepository(String gitDir) throws IOException\\
@@ -767,7 +767,42 @@ Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}
 
 		\item \textbf{Menganalisis penggunaan Selenium WebDriver dan JGit untuk membangkitkan animasi timelapse.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :}\\
+		Pada bagian ini dijelaskan mengenai analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, dan langkah-langkah dalam Membangkitkan Animasi Timelapse. 
+
+\textbf{Analisis Penggunaan JGit}\\
+JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan untuk berinteraksi dengan suatu repositori Git. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, RevWalk, dan RevWalk.
+
+Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git.
+
+Untuk mendapatkan histori \textit{commit} pada suatu repositori Git digunakan kelas RevWalk. \textit{Constructor} dari kelas ini menerima parameter bertipe Repository. Kelas RevWalk mengimplentasi \textit{interface} Iterable, sehingga memiliki Iterator yang bertipe RevCommit. Histori \textit{commit} disimpan pada Iterator dalam bentuk \textit{Directed Acyclic Graph}. RevCommit merupakan representasi dari suatu \textit{commit}. 
+
+Histori \textit{commit} dapat ditelusuri menggunakan Iterator yang terdapat pada kelas RevWalk. Posisi awal untuk melakukan penelusuran \textit{commit} dapat diatur menggunakan \textit{method} markStart(). Histori \textit{commit} yang terdapat pada Iterator disimpan dengan urutan \textit{commit} terbaru hingga terlama. Urutan penyimpanan histori \textit{commit} dapat dibalik menggunakan \textit{method} sort(), sehingga histori \textit{commit} disimpan dengan urutan \textit{commit} terlama hingga terbaru.
+
+Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit id}. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil.  
+ 
+\ \\
+\textbf{Analisis Penggunaan Selenium WebDriver}\\
+Selenium WebDriver dapat digunakan untuk \textit{web browser}. Pada analisis ini dibahas kelas-kelas pada \textit{library} Selenium WebDriver yang digunakan untuk mengotomatisasi \textit{web browser}. 
+Kelas-kelas yang dipakai yaitu WebDriver, ChromeDriver, dan TakesScreenshot.
+
+WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. 
+
+TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasi \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan bertipe File.    
+
+\ \\
+\textbf{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}\\
+Setelah melakukan analisis pada bagian sebelumnya, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
+\begin{enumerate}
+\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
+\item Program mendapatkan seluruh \textit{commit} histori dari proyek perangkat lunak berbasis web menggunakan JGit.
+\item Program melakukan \textit{checkout}, dimulai dari \textit{commit} pertama.
+\item Program menjalankan halaman \textit{web} di \textit{localhost} menggunakan Selenium WebDriver.
+\item Selenium WebDriver kemudian mengambil \textit{screenshot} pada halaman \textit{web}.
+\item Langkah 3-5 diulangi untuk seluruh \textit{commit}.
+\item Menggabungkan semua \textit{file} gambar menjadi satu \textit{file} bertipe GIF.
+\end{enumerate}
+		
 		
 		\item \textbf{Menganalisis Command Line Options.}\\
 		{\bf Status :} baru ditambahan pada semester ini.\\
@@ -803,7 +838,7 @@ Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat anima
 
 		\item \textbf{Membangun perangkat lunak.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+		{\bf Hasil :} belum ada perkembangan.
 
 		\item \textbf{Melakukan eksperimen dan pengujian pada perangkat lunak.}\\
 		{\bf Status :} Ada sejak rencana kerja skripsi.\\

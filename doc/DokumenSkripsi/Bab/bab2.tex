@@ -114,7 +114,7 @@ Alur kerja dari Git adalah sebagai berikut:
 \subsubsection{Commit}
 Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. \textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada versi/\textit{commit} keempat. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{commit} keempat. 
 
-Git melakukan \textit{check-summed} pada \textit{commit} sebelum menyimpannya ke Git repositori. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari \textit{working directory} atau struktur direktori Git.
+Git melakukan \textit{checksum} pada \textit{commit} sebelum menyimpannya ke direktori Git. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari \textit{working directory} atau struktur direktori Git.
 
 
 \begin{lstlisting}[caption={Contoh histori commit dalam pengembangan perangkat lunak},label={lst:git_histori},language=plaintext]
@@ -201,6 +201,10 @@ Operasi ini digunakan untuk berpindah ke \textit{branch} atau \textit{commit} te
 \item Log\\
 Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \textit{branch} yang sedang aktif. Berikut ini adalah sintaks untuk melakukan operasi \textit{log}:\\
 \texttt{\$ git log}
+
+\item Reset\\
+Operasi ini digunakan untuk mengatur ulang \textit{staging area} dan \textit{working tree} sesuai dengan \textit{commit} tertentu. Berikut ini adalah sintaks untuk melakukan operasi \textit{reset}:\\
+\texttt{\$ git reset --hard [commit]}
 \end{enumerate}
 \subsection{Git Checkout}
 \label{subsec:git_checkout}
@@ -250,7 +254,7 @@ Parameter: lokasi dari \textit{repository metadata}, lokasi ini berupa \textit{p
 Kelas ini menyediakan API yang mirip Git \textit{Command Line} untuk berinteraksi dengan repositori git. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item public Git(Repository repo)\\
-\textit{Constructor} ini membuat objek Git yang digunakan untuk berinteraksi dengan repositori Git.
+\textit{Constructor} ini membuat objek Git yang digunakan untuk berinteraksi dengan repositori Git.\\
 Parameter: objek \textit{Repository} yang digunakan untuk berinteraksi. Parameter tidak boleh bernilai \textit{null}. 
 
 \item public static InitCommand init()\\
@@ -308,6 +312,10 @@ Kembalian: objek \textit{ListBranchCommand}.
 \item public DeleteBranchCommand branchDelete()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk menghapus \textit{branch}.\\
 Kembalian: objek \textit{DeleteBranchCommand}.
+
+\item public ResetCommand reset()\\
+\textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{reset}.\\
+Kembalian: objek \textit{ResetCommand}.
 \end{itemize}
 
 \subsection{RevWalk}
@@ -407,6 +415,21 @@ Kembalian: judul dari halaman \textit{web}.
 \item String getCurrentUrl()\\
 Berfungi untuk mendapatkan URL yang sedang aktif di \textit{browser}.\\
 Kembalian: URL dari halaman \textit{web} yang sedang dimuat di \textit{browser}.
+\end{itemize}
+
+\subsection{WebDriver.Navigation}
+\label{subsec:webdriver_navigation}
+Kelas ini merupakan \textit{nested class} dari WebDriver. Kelas ini mengatur navigasi pada WebDriver. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+\begin{itemize}
+\item void back()\\
+Berfungsi untuk berpindah ke halaman \textit{web} sebelumnya.
+\item void forward()\\
+Berfungsi untuk bergerak maju satu halaman \textit{web}. 
+\item void refresh()\\
+Berfungsi untuk melakukan \textit{refresh} pada halaman \textit{web}.
+\item void to(String url)\\
+Berfungsi untuk memuat halaman \textit{web} baru pada \textit{window} yang sedang aktif.\\
+Parameter: URL yang akan dimuat.
 \end{itemize}
 
 \subsection{WebElement}

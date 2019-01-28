@@ -13,11 +13,6 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
@@ -42,37 +37,11 @@ public class Main {
 
     
     public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
-        Options options = new Options();
-        Option captureURL = Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build();
-        Option fps = Option.builder().longOpt("fps").argName("fps").hasArg().desc("fps video").build();
-        Option projectPath = Option.builder().longOpt("project-path").argName("path").hasArg().desc("project path").build();
-        Option beforeCapture = Option.builder().longOpt("before-capture").argName("path").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build();
-        options.addOption(captureURL);
-        options.addOption(fps);
-        options.addOption(projectPath);
-        options.addOption(beforeCapture);
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse(options, args);
 
-        if (cmd.hasOption("fps")) {
-            String temp = cmd.getOptionValue("fps");
-            System.out.println(temp);
-        }
-        if (cmd.hasOption("capture-url")) {
-            String temp = cmd.getOptionValue("capture-url");
-            System.out.println(temp);
-        }
-        if (cmd.hasOption("project-path")) {
-            String temp = cmd.getOptionValue("project-path");
-            System.out.println(temp);
-        }
-        if (cmd.hasOption("before-capture")) {
-            String temp = cmd.getOptionValue("before-capture");
-            System.out.println(temp);
-        }
+        CommandLineOptions commandLineoptions=new CommandLineOptions(args);
         
         
-        Repository repo = new FileRepository(cmd.getOptionValue("project-path"));
+        Repository repo = new FileRepository(commandLineoptions.getOptionValue("project-path"));
 
         Git git = new Git(repo);
 
@@ -95,7 +64,7 @@ public class Main {
         String[] cmdWindows = new String[3];
         cmdWindows[0] = "cmd.exe" ;
         cmdWindows[1] = "/C" ;
-        cmdWindows[2] = "php "+cmd.getOptionValue("before-capture");
+        cmdWindows[2] = "php "+commandLineoptions.getOptionValue("before-capture");
         Runtime rt = Runtime.getRuntime();
         Process proc;
 
@@ -106,7 +75,7 @@ public class Main {
             
             proc = rt.exec(cmdWindows); 
             proc.waitFor();
-            driver.navigate().to(cmd.getOptionValue("capture-url"));
+            driver.navigate().to(commandLineoptions.getOptionValue("capture-url"));
             //file gambar masih disimpan di folder hasil screenshot. Harusnya ga perlu, nanti akan ditambahkan var array of file untuk menampung image Buffered
             
             File scrFile
@@ -123,8 +92,8 @@ public class Main {
         
         ImageOutputStream output
                 = new FileImageOutputStream(new File("hasil_screenshot/output.gif")); //file output
-        double frameDelay=1000.0/Integer.parseInt(cmd.getOptionValue("fps"));
-        GifSequenceWriter writer= new GifSequenceWriter(output, firstImage.getType(),(int)frameDelay , false); //500ms adalah jarak antar frame, fpsnya= 1/0.5 s=2 fps. fps belum menggunakan nilai dari parameter
+        int frameDelay=Integer.parseInt(commandLineoptions.getOptionValue("seconds-per-commit"))*1000;
+        GifSequenceWriter writer= new GifSequenceWriter(output, firstImage.getType(),frameDelay , false);
         
         writer.writeToSequence(firstImage);
         for (int i = 1; i < commitID.size(); i++) {

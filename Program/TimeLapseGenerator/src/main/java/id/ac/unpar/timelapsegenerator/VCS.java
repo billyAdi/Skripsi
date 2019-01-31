@@ -36,11 +36,9 @@ public class VCS {
         this.revWalk.sort(RevSort.REVERSE);
 
         this.commitID = new ArrayList<String>();
-        
-        
+        this.getHistoryCommit();
     }
 
-    //belum ditambahin start commit, stop commit
     public void getHistoryCommit() {
         for (RevCommit commit : revWalk) {
             this.commitID.add(commit.getName().substring(0, 7));
@@ -58,5 +56,19 @@ public class VCS {
     public void reset() throws GitAPIException {
         this.git.reset().setMode(ResetType.HARD).call();
     }
+    
+    public int getCommitSize(){
+        return this.commitID.size();
+    }
 
+    public int getIndexCommit(String idCommit){
+        int result=-1;
+        for (int i = 0; i < this.commitID.size(); i++) {
+            if(idCommit.equals(this.commitID.get(i))){
+                result=i;
+                break;
+            }
+        }
+        return result;
+    }
 }

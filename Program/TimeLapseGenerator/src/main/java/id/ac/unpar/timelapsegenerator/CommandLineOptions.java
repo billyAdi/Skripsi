@@ -7,7 +7,12 @@ package id.ac.unpar.timelapsegenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 /**
  *
@@ -19,8 +24,7 @@ public class CommandLineOptions {
     private ArrayList<Option> listOption;
     private CommandLineParser parser;
     private CommandLine commandLine;
-    private String[] cmdArguments;
-    
+
     Runtime rt;
     Process proc;
 
@@ -33,13 +37,8 @@ public class CommandLineOptions {
         }
         this.parser = new DefaultParser();
         this.commandLine = parser.parse(this.options, args);
-        
+
         rt = Runtime.getRuntime();
-         
-        this.cmdArguments = new String[3];
-        cmdArguments[0] = "cmd.exe";
-        cmdArguments[1] = "/C";
-        cmdArguments[2] = "php " + getOptionValue("before-capture");//belum menangani kalo before-capture ga dimasukin
 
     }
 
@@ -61,7 +60,13 @@ public class CommandLineOptions {
     }
 
     public void runScript() throws IOException, InterruptedException {
-        proc = rt.exec(cmdArguments);
+        String[] arguments;
+        arguments = new String[3];
+        arguments[0] = "cmd.exe";
+        arguments[1] = "/C";
+        arguments[2] = "php " + getOptionValue("before-capture");//belum menangani kalo before-capture ga dimasukin
+
+        proc = rt.exec(arguments);
         proc.waitFor();
     }
 }

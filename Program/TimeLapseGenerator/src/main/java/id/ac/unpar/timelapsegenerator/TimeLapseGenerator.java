@@ -29,34 +29,37 @@ public class TimeLapseGenerator {
         this.commandLineoptions = commandLineoptions;
         this.vcs = vcs;
         this.seleniumWebDriver = seleniumWebDriver;
-        ArrayList<File> fileScreenshot = new ArrayList<File>();
+        this.fileScreenshot = new ArrayList<File>();
     }
 
-    public void generateScreenshot() throws GitAPIException, IOException, InterruptedException {
-        for (int i = 0; i < vcs.getCommitSize(); i++) {
-            vcs.checkoutCommit(i);
-            commandLineoptions.runScript();
+    
 
-            seleniumWebDriver.changePage(commandLineoptions.getOptionValue("capture-url"));
-            seleniumWebDriver.takeScreenshot();
+    public void generateTimelapse() throws IOException, GitAPIException, InterruptedException {
+         for (int i = 0; i < vcs.getCommitSize(); i++) {
+            this.vcs.checkoutCommit(i);
+            this.commandLineoptions.runScript();
 
-            vcs.reset();
+            this.seleniumWebDriver.changePage(commandLineoptions.getOptionValue("capture-url"));
+            this.seleniumWebDriver.takeScreenshot();
+
+            this.vcs.reset();
         }
-    }
-
-    public void generateTimelapse() throws IOException {
+        this.seleniumWebDriver.quit();
+        this.vcs.checkoutMaster();
+        
+        
         this.fileScreenshot = seleniumWebDriver.getFileScreenshot();
 
-        BufferedImage firstImage = ImageIO.read(fileScreenshot.get(0));
+        BufferedImage firstImage = ImageIO.read(this.fileScreenshot.get(0));
 
         ImageOutputStream output = new FileImageOutputStream(new File("hasil_screenshot/output.gif"));
-        int frameDelay = Integer.parseInt(commandLineoptions.getOptionValue("seconds-per-commit")) * 1000;
+        int frameDelay = Integer.parseInt(this.commandLineoptions.getOptionValue("seconds-per-commit")) * 1000;
 
         GifSequenceWriter writer = new GifSequenceWriter(output, firstImage.getType(), frameDelay, false);
 
         writer.writeToSequence(firstImage);
-        for (int i = 1; i < fileScreenshot.size(); i++) {
-            BufferedImage nextImage = ImageIO.read(fileScreenshot.get(i));
+        for (int i = 1; i < this.fileScreenshot.size(); i++) {
+            BufferedImage nextImage = ImageIO.read(this.fileScreenshot.get(i));
             writer.writeToSequence(nextImage);
         }
 

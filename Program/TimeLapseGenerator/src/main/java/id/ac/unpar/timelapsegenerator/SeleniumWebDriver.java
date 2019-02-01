@@ -19,13 +19,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class SeleniumWebDriver {
 
     private WebDriver driver;
-    private ArrayList<File> fileScrenshot;
+    private ArrayList<File> fileScreenshot;
 
     public SeleniumWebDriver() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        this.fileScrenshot = new ArrayList<File>();
+        this.fileScreenshot = new ArrayList<File>();
     }
 
     public void changePage(String url) {
@@ -37,10 +37,10 @@ public class SeleniumWebDriver {
     }
 
     public void takeScreenshot() {
-        fileScrenshot.add(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
+        fileScreenshot.add(((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE));
     }
     
     public ArrayList<File> getFileScreenshot(){
-        return fileScrenshot;
+        return fileScreenshot;
     }
 }

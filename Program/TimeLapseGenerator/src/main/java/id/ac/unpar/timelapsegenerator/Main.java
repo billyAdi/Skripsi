@@ -21,9 +21,6 @@ public class Main {
         VCS vcs = new VCS(commandLineoptions.getOptionValue("project-path"));
         SeleniumWebDriver seleniumWebDriver = new SeleniumWebDriver();
         TimeLapseGenerator timeLapseGenerator=new TimeLapseGenerator(commandLineoptions,vcs,seleniumWebDriver);
-        timeLapseGenerator.generateScreenshot();
-        seleniumWebDriver.quit();
-        vcs.checkoutMaster();
         timeLapseGenerator.generateTimelapse();
     }
 

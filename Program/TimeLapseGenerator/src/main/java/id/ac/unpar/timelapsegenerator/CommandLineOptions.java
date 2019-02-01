@@ -21,24 +21,29 @@ import org.apache.commons.cli.ParseException;
 public class CommandLineOptions {
 
     private Options options;
-    private ArrayList<Option> listOption;
     private CommandLineParser parser;
     private CommandLine commandLine;
 
-    Runtime rt;
-    Process proc;
+    private Runtime rt;
+    private Process proc;
 
     public CommandLineOptions(String[] args) throws ParseException {
         this.options = new Options();
-        this.listOption = new ArrayList<Option>();
-        this.createOptions();
+        ArrayList<Option> listOption= new ArrayList<Option>();
+         
+        listOption.add(Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build());
+        listOption.add(Option.builder().longOpt("seconds-per-commit").argName("seconds").hasArg().desc("durasi satu commit").build());
+        listOption.add(Option.builder().longOpt("project-path").argName("path").hasArg().desc("path proyek perangkat lunak").build());
+        listOption.add(Option.builder().longOpt("before-capture").argName("script").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build());
+        
+        
         for (int i = 0; i < listOption.size(); i++) {
             this.options.addOption(listOption.get(i));
         }
         this.parser = new DefaultParser();
         this.commandLine = parser.parse(this.options, args);
 
-        rt = Runtime.getRuntime();
+        this.rt = Runtime.getRuntime();
 
     }
 
@@ -52,13 +57,6 @@ public class CommandLineOptions {
         return value;
     }
 
-    public void createOptions() {
-        this.listOption.add(Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build());
-        this.listOption.add(Option.builder().longOpt("seconds-per-commit").argName("seconds").hasArg().desc("durasi satu commit").build());
-        this.listOption.add(Option.builder().longOpt("project-path").argName("path").hasArg().desc("path proyek perangkat lunak").build());
-        this.listOption.add(Option.builder().longOpt("before-capture").argName("script").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build());
-    }
-
     public void runScript() throws IOException, InterruptedException {
         String[] arguments;
         arguments = new String[3];
@@ -66,7 +64,7 @@ public class CommandLineOptions {
         arguments[1] = "/C";
         arguments[2] = "php " + getOptionValue("before-capture");//belum menangani kalo before-capture ga dimasukin
 
-        proc = rt.exec(arguments);
-        proc.waitFor();
+        this.proc = this.rt.exec(arguments);
+        this.proc.waitFor();
     }
 }

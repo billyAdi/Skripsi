@@ -35,7 +35,20 @@ public class TimeLapseGenerator {
     
 
     public void generateTimelapse() throws IOException, GitAPIException, InterruptedException {
-         for (int i = 0; i < vcs.getCommitSize(); i++) {
+        int indexAwal=0;
+        int indexAkhir=this.vcs.getCommitSize()-1;
+        
+        if(!commandLineoptions.getOptionValue("start-commit").equals("")){
+            indexAwal=this.vcs.getIndexCommit(commandLineoptions.getOptionValue("start-commit"));
+        }
+        
+        if(!commandLineoptions.getOptionValue("stop-commit").equals("")){
+            indexAkhir=this.vcs.getIndexCommit(commandLineoptions.getOptionValue("stop-commit"));
+        }
+        
+        
+         
+         for (int i = indexAwal; i <= indexAkhir; i++) {
             this.vcs.checkoutCommit(i);
             this.commandLineoptions.runScript();
 

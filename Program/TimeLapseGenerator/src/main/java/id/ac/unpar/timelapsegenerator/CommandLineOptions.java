@@ -35,7 +35,10 @@ public class CommandLineOptions {
         listOption.add(Option.builder().longOpt("seconds-per-commit").argName("seconds").hasArg().desc("durasi satu commit").build());
         listOption.add(Option.builder().longOpt("project-path").argName("path").hasArg().desc("path proyek perangkat lunak").build());
         listOption.add(Option.builder().longOpt("before-capture").argName("script").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build());
-        
+        listOption.add(Option.builder().longOpt("start-commit").argName("commit id").hasArg().desc("commit id awal untuk memangkitkan animasi").build());
+        listOption.add(Option.builder().longOpt("stop-commit").argName("commit id").hasArg().desc("commit id akhir untuk memangkitkan animasi").build());
+
+          
         
         for (int i = 0; i < listOption.size(); i++) {
             this.options.addOption(listOption.get(i));
@@ -51,8 +54,6 @@ public class CommandLineOptions {
         String value = "";
         if (this.commandLine.hasOption(optionName)) {
             value = this.commandLine.getOptionValue(optionName);
-        } else {
-            value = "no input";
         }
         return value;
     }

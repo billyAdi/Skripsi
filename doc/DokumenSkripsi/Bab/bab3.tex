@@ -483,44 +483,17 @@ Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat anima
 \ \\
 Opsi \texttt{path}, \texttt{title}, dan \texttt{image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian. Pada Gource, opsi \texttt{fps} menyatakan banyaknya \textit{frame} per detik pada video \textit{output}. Sedangkan, opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa ID \textit{commit}. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
  
-%belum beres 
-Program pada skripsi ini memiliki dua fitur. Fitur utama dari program ini adalah membangkitkan animasi timelapse. Selain itu, perangkat lunak dapat membaca masukan dan konfigurasi dari Command Line Options yang dimasukkan oleh \textit{user}. Penjelasan fitur-fitur pada perangkat lunak dapat dilihat pada Gambar \ref{fig:uc}, Tabel \ref{tab:tabel_sc_input} , dan Tabel \ref{tab:tabel_sc_animasi}.
+ 
+Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
+Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel_sc_animasi}.
 
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.5]{Gambar/UseCaseDiagram1.png}
+		\includegraphics[scale=0.8]{Gambar/UseCaseDiagram1.png}
 	\caption{\textit{Use case diagram} perangkat lunak.}
 	\label{fig:uc}
 \end{figure}
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{|p{3cm}|p{10cm}|}
-    \hline
-        Nama & Memasukkan \textit{input} dan konfigurasi\\
-    \hline
-    \hline
-        Deskripsi & Fitur untuk memasukkan \textit{input} dan konfigurasi perangkat lunak\\
-    \hline
-        Aktor & \textit{User} \\
-    \hline
-        Pre-kondisi & Xampp sudah dijalankan \\
-    \hline
-        Pos-kondisi & Input berhasil dimasukkan \\
-    \hline
-        Skenario & 
-        \begin{enumerate}
-            \item \textit{User} memasukan \textit{input} dan konfigurasi perangkat lunak melalui Command Line Options.
-            \item Sistem membaca masukan dari \textit{user}.
-        \end{enumerate}\\
-    \hline
-    \end{tabular}
-    \caption{\textit{Scenario case} memasukkan \textit{input}}
-    \label{tab:tabel_sc_input}
-\end{table}
-
-
 \begin{table}[]
     \centering
     \begin{tabular}{|p{3cm}|p{10cm}|}
@@ -532,14 +505,13 @@ Program pada skripsi ini memiliki dua fitur. Fitur utama dari program ini adalah
     \hline
         Aktor & \textit{User} \\
     \hline
-        Pre-kondisi & \textit{Input} dan konfigurasi sudah dimasukkan \\
-    \hline
         Pos-kondisi &  File animasi bertipe GIF berhasil dibuat\\
     \hline
         Skenario & 
         \begin{enumerate}
-            \item Sistem menelusuri histori perkembangan perangkat lunak berbasis \textit{web}  dengan fitur
-Git. Saat menelusuri histori perkembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman web menggunakan SeleniumWebDriver
+        \item Sistem membaca masukan \textit{input} dari Command Line Options.
+            \item Sistem menelusuri histori perkembangan perangkat lunak berbasis \textit{web} dengan fitur
+Git. Saat menelusuri histori perkembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman web menggunakan SeleniumWebDriver.
             \item Sistem menggabungkan file \textit{screenshot} menjadi satu file bertipe GIF.
         \end{enumerate}\\
     \hline

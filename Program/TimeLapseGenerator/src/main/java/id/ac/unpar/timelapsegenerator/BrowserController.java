@@ -8,6 +8,7 @@ package id.ac.unpar.timelapsegenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -20,12 +21,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author user
  */
-public class SeleniumWebDriver {
+public class BrowserController {
 
     private WebDriver driver;
-    private ArrayList<File> fileScreenshot;
+    private List<File> fileScreenshot;
     
-    public SeleniumWebDriver() {
+    public BrowserController() {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
 
@@ -43,8 +44,12 @@ public class SeleniumWebDriver {
     public void takeScreenshot() {
         this.fileScreenshot.add(((TakesScreenshot)this.driver).getScreenshotAs(OutputType.FILE));        
     }
+    
+    public void clearFileScreenshot(){
+        this.fileScreenshot.clear();
+    }
 
-    public ArrayList<File> getFileScreenshot() {
+    public List<File> getFileScreenshot() {
         return this.fileScreenshot;
     }
 }

@@ -7,6 +7,7 @@ package id.ac.unpar.timelapsegenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -24,22 +25,16 @@ import org.eclipse.jgit.revwalk.RevWalk;
 public class VCS {
 
     private Git git;
-    private RevWalk revWalk;
-    private ArrayList<String> commitID;
-    private Repository repo;
+    private List<String> commitID;
 
     public VCS(String path) throws IOException {
-        this.repo = new FileRepository(path);
-        this.git = new Git(repo);
-        this.revWalk = new RevWalk(repo);
-        this.revWalk.markStart(revWalk.parseCommit(repo.resolve(Constants.HEAD)));
-        this.revWalk.sort(RevSort.REVERSE);
+        Repository repository = new FileRepository(path);
+        this.git = new Git(repository);
+        RevWalk revWalk = new RevWalk(repository);
+        revWalk.markStart(revWalk.parseCommit(repository.resolve(Constants.HEAD)));
+        revWalk.sort(RevSort.REVERSE);
 
         this.commitID = new ArrayList<String>();
-        this.getHistoryCommit();
-    }
-
-    public void getHistoryCommit() {
         for (RevCommit commit : revWalk) {
             this.commitID.add(commit.getName().substring(0, 7));
         }
@@ -53,7 +48,7 @@ public class VCS {
         this.git.checkout().setName("master").call();
     }
 
-    public void reset() throws GitAPIException {
+    public void hardReset() throws GitAPIException {
         this.git.reset().setMode(ResetType.HARD).call();
     }
     
@@ -61,7 +56,7 @@ public class VCS {
         return this.commitID.size();
     }
 
-    public int getIndexCommit(String idCommit){
+    public int getCommitIndex(String idCommit){
         int result=-1;
         for (int i = 0; i < this.commitID.size(); i++) {
             if(idCommit.equals(this.commitID.get(i))){

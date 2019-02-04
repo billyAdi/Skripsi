@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
@@ -25,9 +26,9 @@ public class TimeLapseGenerator {
 
     private CommandLineOptions commandLineoptions;
     private VCS vcs;
-    private SeleniumWebDriver seleniumWebDriver;
+    private BrowserController seleniumWebDriver;
 
-    public TimeLapseGenerator(CommandLineOptions commandLineoptions, VCS vcs, SeleniumWebDriver seleniumWebDriver) {
+    public TimeLapseGenerator(CommandLineOptions commandLineoptions, VCS vcs, BrowserController seleniumWebDriver) {
         this.commandLineoptions = commandLineoptions;
         this.vcs = vcs;
         this.seleniumWebDriver = seleniumWebDriver;
@@ -37,12 +38,12 @@ public class TimeLapseGenerator {
         int indexAwal = 0;
         int indexAkhir = this.vcs.getCommitSize() - 1;
 
-        if (!commandLineoptions.getOptionValue("start-commit").equals("")) {
-            indexAwal = this.vcs.getIndexCommit(commandLineoptions.getOptionValue("start-commit"));
+        if (commandLineoptions.getOptionValue("start-commit")!=null) {
+            indexAwal = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("start-commit"));
         }
 
-        if (!commandLineoptions.getOptionValue("stop-commit").equals("")) {
-            indexAkhir = this.vcs.getIndexCommit(commandLineoptions.getOptionValue("stop-commit"));
+        if (commandLineoptions.getOptionValue("stop-commit")!=null) {
+            indexAkhir = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("stop-commit"));
         }
 
         for (int i = indexAwal; i <= indexAkhir; i++) {
@@ -52,12 +53,12 @@ public class TimeLapseGenerator {
             this.seleniumWebDriver.changePage(commandLineoptions.getOptionValue("capture-url"));
             this.seleniumWebDriver.takeScreenshot();
 
-            this.vcs.reset();
+            this.vcs.hardReset();
         }
         this.seleniumWebDriver.quit();
 //        this.vcs.checkoutMaster();
 
-        ArrayList<File> fileScreenshot = new ArrayList<File>();
+        List<File> fileScreenshot = new ArrayList<File>();
 
         fileScreenshot = seleniumWebDriver.getFileScreenshot();
         BufferedImage[] bufferedImage = new BufferedImage[fileScreenshot.size()];

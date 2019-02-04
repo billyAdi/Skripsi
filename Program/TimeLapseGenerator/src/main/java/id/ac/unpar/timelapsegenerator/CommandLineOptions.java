@@ -53,11 +53,12 @@ public class CommandLineOptions {
     }
 
     public String getOptionValue(String optionName) {
-        String value = "";
-        if (this.commandLine.hasOption(optionName)) {
-            value = this.commandLine.getOptionValue(optionName);
-        }
-        return value;
+//        String value = "";
+//        if (this.commandLine.hasOption(optionName)) {
+//            value = this.commandLine.getOptionValue(optionName);
+//        }
+//        return value;
+          return this.commandLine.getOptionValue(optionName);
     }
 
     public void runScript() throws IOException, InterruptedException {

@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
         CommandLineOptions commandLineoptions = new CommandLineOptions(args);
         VCS vcs = new VCS(commandLineoptions.getOptionValue("project-path"));
-        SeleniumWebDriver seleniumWebDriver = new SeleniumWebDriver();
+        BrowserController seleniumWebDriver = new BrowserController();
         TimeLapseGenerator timeLapseGenerator=new TimeLapseGenerator(commandLineoptions,vcs,seleniumWebDriver);
         timeLapseGenerator.generateTimelapse();
     }

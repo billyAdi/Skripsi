@@ -38,19 +38,30 @@ public class TimeLapseGenerator {
         int indexAwal = 0;
         int indexAkhir = this.vcs.getCommitSize() - 1;
 
-        if (commandLineoptions.getOptionValue("start-commit")!=null) {
-            indexAwal = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("start-commit"));
+        if (commandLineoptions.getOptionValue("start-commit") != null) {
+            if (this.vcs.getCommitIndex(commandLineoptions.getOptionValue("start-commit")) != -1) {
+                indexAwal = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("start-commit"));
+            }
         }
 
-        if (commandLineoptions.getOptionValue("stop-commit")!=null) {
-            indexAkhir = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("stop-commit"));
+        if (commandLineoptions.getOptionValue("stop-commit") != null) {
+            if (this.vcs.getCommitIndex(commandLineoptions.getOptionValue("stop-commit")) != -1) {
+                indexAkhir = this.vcs.getCommitIndex(commandLineoptions.getOptionValue("stop-commit"));
+            }
         }
 
+        String captureURL="http://localhost";
+        if(this.commandLineoptions.getOptionValue("capture-url")!=null){
+            captureURL=this.commandLineoptions.getOptionValue("capture-url");
+        }
+        
         for (int i = indexAwal; i <= indexAkhir; i++) {
             this.vcs.checkoutCommit(i);
-            this.commandLineoptions.runScript();
-
-            this.seleniumWebDriver.changePage(commandLineoptions.getOptionValue("capture-url"));
+            if (this.commandLineoptions.getOptionValue("before-capture") != null) {
+                this.commandLineoptions.runScript();
+            }
+            
+            this.seleniumWebDriver.changePage(captureURL);
             this.seleniumWebDriver.takeScreenshot();
 
             this.vcs.hardReset();
@@ -64,35 +75,33 @@ public class TimeLapseGenerator {
         BufferedImage[] bufferedImage = new BufferedImage[fileScreenshot.size()];
         for (int i = 0; i < fileScreenshot.size(); i++) {
             bufferedImage[i] = ImageIO.read(fileScreenshot.get(i));
-            if (!this.commandLineoptions.getOptionValue("title").equals("")) {
+            if (this.commandLineoptions.getOptionValue("title") != null) {
                 Graphics g = bufferedImage[i].getGraphics();
                 g.setFont(new Font("TimesRoman", Font.BOLD, 20));
                 g.setColor(Color.black);
                 g.drawString(this.commandLineoptions.getOptionValue("title"), 20, 580);
                 g.dispose();
             }
-            if (!this.commandLineoptions.getOptionValue("logo").equals("")) {
+            if (this.commandLineoptions.getOptionValue("logo") != null) {
                 BufferedImage logo = ImageIO.read(new File(this.commandLineoptions.getOptionValue("logo")));
 
                 Graphics g = bufferedImage[i].getGraphics();
-                g.drawImage(logo, 100, 100,null);
+                g.drawImage(logo, 100, 100, null);
                 g.dispose();
             }
 
         }
 
-//        BufferedImage firstImage = ImageIO.read(this.fileScreenshot.get(0));
         ImageOutputStream output = new FileImageOutputStream(new File("hasil_screenshot/output.gif"));
-        int frameDelay = Integer.parseInt(this.commandLineoptions.getOptionValue("seconds-per-commit")) * 1000;
-
-//        GifSequenceWriter writer = new GifSequenceWriter(output, firstImage.getType(), frameDelay, false);
+        int frameDelay=1;
+        if(this.commandLineoptions.getOptionValue("seconds-per-commit")!=null){
+             frameDelay = Integer.parseInt(this.commandLineoptions.getOptionValue("seconds-per-commit")) * 1000;
+        }
+       
         GifSequenceWriter writer = new GifSequenceWriter(output, bufferedImage[0].getType(), frameDelay, false);
 
-//        writer.writeToSequence(firstImage);
         writer.writeToSequence(bufferedImage[0]);
         for (int i = 1; i < fileScreenshot.size(); i++) {
-//            BufferedImage nextImage = ImageIO.read(this.fileScreenshot.get(i));
-//            writer.writeToSequence(nextImage);
             writer.writeToSequence(bufferedImage[i]);
         }
 

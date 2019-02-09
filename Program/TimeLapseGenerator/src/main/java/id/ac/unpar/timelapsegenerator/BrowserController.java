@@ -25,7 +25,7 @@ public class BrowserController {
 
     private WebDriver driver;
     private List<File> fileScreenshot;
-    
+
     public BrowserController() {
         this.driver = new ChromeDriver();
         this.driver.manage().window().maximize();
@@ -42,10 +42,10 @@ public class BrowserController {
     }
 
     public void takeScreenshot() {
-        this.fileScreenshot.add(((TakesScreenshot)this.driver).getScreenshotAs(OutputType.FILE));        
+        this.fileScreenshot.add(((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE));
     }
-    
-    public void clearFileScreenshot(){
+
+    public void clearFileScreenshot() {
         this.fileScreenshot.clear();
     }
 

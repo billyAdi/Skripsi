@@ -42,11 +42,7 @@ public class TimeLapseGenerator {
             }
         }
 
-        String captureURL = "http://localhost";
-
-        if (properties.getProperty("capture-url") != null) {
-            captureURL = properties.getProperty("capture-url");
-        }
+        String captureURL[] = properties.getProperty("capture-url").split(";");
 
         for (int i = indexAwal; i <= indexAkhir; i++) {
             vcs.checkoutCommit(i);
@@ -57,7 +53,9 @@ public class TimeLapseGenerator {
                 process.waitFor();
             }
 
-            seleniumWebDriver.changePage(captureURL);
+            for (int j = 0; j < captureURL.length; j++) {
+                seleniumWebDriver.changePage(j,captureURL[j]);
+            }
             seleniumWebDriver.takeScreenshot();
 
             vcs.hardReset();
@@ -77,23 +75,21 @@ public class TimeLapseGenerator {
                 graphic.setFont(new Font("Times New Roman", Font.BOLD, 18));
                 FontMetrics fontMetrics = graphic.getFontMetrics(graphic.getFont());
                 graphic.setColor(Color.black);
-                graphic.drawString(properties.getProperty("title"), 5,bufferedImage[i].getHeight()-fontMetrics.getDescent()-5);
+                graphic.drawString(properties.getProperty("title"), 5, bufferedImage[i].getHeight() - fontMetrics.getDescent() - 5);
                 graphic.dispose();
             }
             if (properties.getProperty("logo") != null) {
                 BufferedImage logo = ImageIO.read(new File(properties.getProperty("logo")));
                 Graphics graphic = bufferedImage[i].getGraphics();
-                graphic.drawImage(logo, bufferedImage[i].getWidth()-logo.getWidth()-5,bufferedImage[i].getHeight()-logo.getHeight()-5, null);
+                graphic.drawImage(logo, bufferedImage[i].getWidth() - logo.getWidth() - 5, bufferedImage[i].getHeight() - logo.getHeight() - 5, null);
                 graphic.dispose();
             }
 
         }
 
         ImageOutputStream output = new FileImageOutputStream(new File("hasil_screenshot/output.gif"));
-        int frameDelay = 1000;
-        if (properties.getProperty("seconds-per-commit") != null) {
-            frameDelay = Integer.parseInt(properties.getProperty("seconds-per-commit")) * 1000;
-        }
+
+        int frameDelay = Integer.parseInt(properties.getProperty("seconds-per-commit")) * 1000;
 
         GifSequenceWriter writer = new GifSequenceWriter(output, bufferedImage[0].getType(), frameDelay, false);
         writer.writeToSequence(bufferedImage[0]);

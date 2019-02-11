@@ -22,26 +22,34 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 public class BrowserController {
 
-    private WebDriver driver;
+    private WebDriver[] driver;
     private List<File> fileScreenshot;
 
-    public BrowserController() {
-        this.driver = new ChromeDriver();
-        this.driver.manage().window().maximize();
+    public BrowserController(int numberOfBrowsers) {
+        
+        this.driver = new WebDriver[numberOfBrowsers];
+        for (int i = 0; i < numberOfBrowsers; i++) {
+            this.driver[i] = new ChromeDriver();
+            this.driver[i].manage().window().maximize();
+        }
 
         this.fileScreenshot = new ArrayList<File>();
     }
 
-    public void changePage(String url) {
-        this.driver.navigate().to(url);
+    public void changePage(int browserIndex,String url) {
+        this.driver[browserIndex].navigate().to(url);
     }
-
+    
     public void quit() {
-        this.driver.quit();
+        for (int i = 0; i < this.driver.length; i++) {
+            this.driver[i].quit();
+        }
     }
 
     public void takeScreenshot() {
-        this.fileScreenshot.add(((TakesScreenshot) this.driver).getScreenshotAs(OutputType.FILE));
+        for (int i = 0; i < this.driver.length; i++) {
+            this.fileScreenshot.add(((TakesScreenshot) this.driver[i]).getScreenshotAs(OutputType.FILE));
+        }
     }
 
     public void clearFileScreenshot() {

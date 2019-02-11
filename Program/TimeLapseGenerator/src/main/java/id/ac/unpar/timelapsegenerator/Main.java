@@ -20,13 +20,25 @@ public class Main {
     public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
         CommandLineOptions commandLineOptions = new CommandLineOptions(args);
         Properties properties = new Properties();
+        int numberOfBrowsers=0;
         for (Option option : commandLineOptions.getParsedOptions()) {
-            properties.setProperty(option.getLongOpt(), option.getValue());
+            if (option.getLongOpt().equals("capture-url")) {
+                String[] values = option.getValues();
+                numberOfBrowsers=values.length;
+                String value = values[0];
+                for (int i = 1; i < values.length; i++) {
+                    value = value + ";" + values[i];
+                }
+                properties.setProperty(option.getLongOpt(), value);
+            } else {
+                properties.setProperty(option.getLongOpt(), option.getValue());
+            }
         }
+        String coba[]=properties.getProperty("capture-url").split(";");
         VCS vcs = new VCS(properties.getProperty("project-path"));
-        BrowserController seleniumWebDriver = new BrowserController();
+        BrowserController seleniumWebDriver = new BrowserController(numberOfBrowsers);
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
-        timeLapseGenerator.generateTimelapse(properties,vcs, seleniumWebDriver);
+        timeLapseGenerator.generateTimelapse(properties, vcs, seleniumWebDriver);
     }
 
 }

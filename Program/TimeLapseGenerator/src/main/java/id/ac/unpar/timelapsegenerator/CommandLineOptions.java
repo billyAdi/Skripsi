@@ -24,10 +24,10 @@ public class CommandLineOptions {
         CommandLineParser parser = new DefaultParser();
 
         Options options = new Options();
-
-        options.addOption(Option.builder().longOpt("capture-url").argName("url").hasArg().desc("link yang akan di capture").build());
-        options.addOption(Option.builder().longOpt("seconds-per-commit").argName("seconds").hasArg().desc("durasi satu commit").build());
-        options.addOption(Option.builder().longOpt("project-path").argName("path").hasArg().desc("path proyek perangkat lunak").build());
+        
+        options.addOption(Option.builder().required().hasArgs().longOpt("capture-url").argName("url").desc("link yang akan di capture").build());
+        options.addOption(Option.builder().required().longOpt("seconds-per-commit").argName("seconds").hasArg().desc("durasi satu commit").build());
+        options.addOption(Option.builder().required().longOpt("project-path").argName("path").hasArg().desc("path proyek perangkat lunak").build());
         options.addOption(Option.builder().longOpt("before-capture").argName("script").hasArg().desc("php script yang dijalankan sebelum melakukan screenshot").build());
         options.addOption(Option.builder().longOpt("start-commit").argName("commit id").hasArg().desc("commit id awal untuk memangkitkan animasi").build());
         options.addOption(Option.builder().longOpt("stop-commit").argName("commit id").hasArg().desc("commit id akhir untuk memangkitkan animasi").build());

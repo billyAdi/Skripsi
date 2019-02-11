@@ -6,6 +6,8 @@
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.IOException;
+import java.util.Properties;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.ParseException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -15,13 +17,16 @@ import org.eclipse.jgit.api.errors.GitAPIException;
  */
 public class Main {
 
-    
     public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
-        CommandLineOptions commandLineoptions = new CommandLineOptions(args);
-        VCS vcs = new VCS(commandLineoptions.getOptionValue("project-path"));
+        CommandLineOptions commandLineOptions = new CommandLineOptions(args);
+        Properties properties = new Properties();
+        for (Option option : commandLineOptions.getParsedOptions()) {
+            properties.setProperty(option.getLongOpt(), option.getValue());
+        }
+        VCS vcs = new VCS(properties.getProperty("project-path"));
         BrowserController seleniumWebDriver = new BrowserController();
-        TimeLapseGenerator timeLapseGenerator=new TimeLapseGenerator(commandLineoptions,vcs,seleniumWebDriver);
-        timeLapseGenerator.generateTimelapse();
+        TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
+        timeLapseGenerator.generateTimelapse(properties,vcs, seleniumWebDriver);
     }
 
 }

@@ -25,8 +25,11 @@ public class Main {
             if (option.getLongOpt().equals("capture-url")) {
                 String[] values = option.getValues();
                 numberOfBrowsers=values.length;
+                if(numberOfBrowsers>4){
+                    numberOfBrowsers=4;
+                }
                 String value = values[0];
-                for (int i = 1; i < values.length; i++) {
+                for (int i = 1; i < numberOfBrowsers; i++) {
                     value = value + ";" + values[i];
                 }
                 properties.setProperty(option.getLongOpt(), value);
@@ -34,11 +37,10 @@ public class Main {
                 properties.setProperty(option.getLongOpt(), option.getValue());
             }
         }
-        String coba[]=properties.getProperty("capture-url").split(";");
         VCS vcs = new VCS(properties.getProperty("project-path"));
-        BrowserController seleniumWebDriver = new BrowserController(numberOfBrowsers);
+        BrowserController browserController = new BrowserController(numberOfBrowsers);
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
-        timeLapseGenerator.generateTimelapse(properties, vcs, seleniumWebDriver);
+        timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
     }
 
 }

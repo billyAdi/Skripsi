@@ -6,6 +6,7 @@
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,32 +25,38 @@ public class BrowserController {
 
     private WebDriver[] driver;
     private List<File> fileScreenshot;
+    private int numberOfBrowsers;
 
     public BrowserController(int numberOfBrowsers) {
-        
+
         this.driver = new WebDriver[numberOfBrowsers];
+        this.fileScreenshot = new ArrayList<File>();
+        this.numberOfBrowsers = numberOfBrowsers;
+    }
+
+    public void open() {
         for (int i = 0; i < numberOfBrowsers; i++) {
             this.driver[i] = new ChromeDriver();
             this.driver[i].manage().window().maximize();
         }
-
-        this.fileScreenshot = new ArrayList<File>();
     }
 
-    public void changePage(int browserIndex,String url) {
+    public int getNumberOfBrowsers() {
+        return numberOfBrowsers;
+    }
+
+    public void changePage(int browserIndex, String url) {
         this.driver[browserIndex].navigate().to(url);
     }
-    
+
     public void quit() {
         for (int i = 0; i < this.driver.length; i++) {
             this.driver[i].quit();
         }
     }
 
-    public void takeScreenshot() {
-        for (int i = 0; i < this.driver.length; i++) {
-            this.fileScreenshot.add(((TakesScreenshot) this.driver[i]).getScreenshotAs(OutputType.FILE));
-        }
+    public void takeScreenshot(int browserIndex) {
+        this.fileScreenshot.add(((TakesScreenshot) this.driver[browserIndex]).getScreenshotAs(OutputType.FILE));
     }
 
     public void clearFileScreenshot() {

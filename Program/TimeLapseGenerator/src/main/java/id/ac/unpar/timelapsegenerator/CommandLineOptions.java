@@ -14,12 +14,20 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 /**
- *
- * @author user
+ * Kelas ini berfungsi untuk menyimpan semua Option yang terdapat pada program dan melakukan parsing
+ * argumen Command Line Option.
+ * 
+ * @author @author Billy Adiwijaya
  */
 public class CommandLineOptions {
     private CommandLine commandLine;
-
+    
+    /**
+     * Constructor dari kelas ini.
+     * Berfungsi untuk menentukan Option yang terdapat pada program dan melakukan parsing argumen Command Line. 
+     * @param args merupakan argumen Command Line Option yang didapatkan dari kelas Main.
+     * @throws ParseException jika terjadi masalah saat melakukan parsing.
+     */
     public CommandLineOptions(String[] args) throws ParseException {
         CommandLineParser parser = new DefaultParser();
 
@@ -37,6 +45,10 @@ public class CommandLineOptions {
         this.commandLine = parser.parse(options, args);
     }
 
+    /**
+     * Method ini berfungsi untuk mengembalikan option yang sudah diparsing
+     * @return option yang sudah diparsing berupa array of Option
+     */
     public Option[] getParsedOptions() {
         return this.commandLine.getOptions();
     }

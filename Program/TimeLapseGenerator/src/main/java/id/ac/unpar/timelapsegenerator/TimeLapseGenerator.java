@@ -23,12 +23,22 @@ import javax.imageio.stream.ImageOutputStream;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
+ * Kelas ini digunakan untuk membangkitkan animasi timelapse.
  *
- * @author user
+ * @author @author Billy Adiwijaya
  */
 public class TimeLapseGenerator {
 
-    public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController) throws IOException, GitAPIException, InterruptedException {
+    /**
+     * Method ini berfungsi untuk membangkitkan animasi timelapse.
+     * Hasil dari animasi berupa File dengan tipe GIF.
+     * @param properties variabel yang menampung key dan value Option yang sudah diparsing.
+     * @param vcs variabel bertipe VCS yang digunakan untuk berinteraksi pada proyek perangkat lunak berbasis web yang terekam oleh Git.
+     * @param browserController variabel betipe BrowserController untuk mengatur browser.
+     * @throws InterruptedException jika terjadi interupsi pada thread.
+     * @throws IOException jika terjadi masalah saat membaca file.
+     */
+    public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController) throws IOException, InterruptedException {
         int indexAwal = 0;
         int indexAkhir = vcs.getCommitSize() - 1;
 
@@ -63,7 +73,7 @@ public class TimeLapseGenerator {
             vcs.hardReset();
         }
         browserController.quit();
-//        vcs.checkoutMaster();
+        vcs.checkoutMaster();
 
         List<File> fileScreenshot = new ArrayList<File>();
 
@@ -73,7 +83,7 @@ public class TimeLapseGenerator {
         for (int i = 0; i < fileScreenshot.size(); i++) {
             bufferedImage[i] = ImageIO.read(fileScreenshot.get(i));
         }
-        
+
         BufferedImage[] bufferedImageResult = new BufferedImage[fileScreenshot.size() / browserController.getNumberOfBrowsers()];
         if (browserController.getNumberOfBrowsers() == 1) {
             bufferedImageResult = bufferedImage;
@@ -118,7 +128,7 @@ public class TimeLapseGenerator {
         for (int i = 0; i < bufferedImageResult.length; i++) {
             if (properties.getProperty("title") == null && properties.getProperty("logo") == null) {
                 break;
-            }else{
+            } else {
                 if (properties.getProperty("title") != null) {
                     Graphics2D graphic = (Graphics2D) bufferedImageResult[i].getGraphics();
                     graphic.setFont(new Font("Times New Roman", Font.BOLD, 18));
@@ -136,7 +146,7 @@ public class TimeLapseGenerator {
             }
 
         }
-        String fileName =String.format("hasil_screenshot/%s.gif",new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
+        String fileName = String.format("hasil_screenshot/%s.gif", new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
         ImageOutputStream output = new FileImageOutputStream(new File(fileName));
 
         int frameDelay = Integer.parseInt(properties.getProperty("seconds-per-commit")) * 1000;

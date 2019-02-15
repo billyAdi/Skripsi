@@ -12,12 +12,11 @@ import org.apache.commons.cli.ParseException;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
- *
- * @author user
+ * @author Billy Adiwijaya
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException, GitAPIException, ParseException, InterruptedException {
+    public static void main(String[] args) throws IOException, ParseException, InterruptedException {
         CommandLineOptions commandLineOptions = new CommandLineOptions(args);
         Properties properties = new Properties();
         int numberOfBrowsers=0;

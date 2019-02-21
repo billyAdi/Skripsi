@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
@@ -27,7 +25,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 /**
  * Kelas ini digunakan untuk membangkitkan animasi timelapse.
  *
- * @author  Billy Adiwijaya
+ * @author Billy Adiwijaya
  */
 public class TimeLapseGenerator {
 
@@ -41,24 +39,21 @@ public class TimeLapseGenerator {
      * proyek perangkat lunak berbasis web yang terekam oleh Git.
      * @param browserController variabel betipe BrowserController untuk mengatur
      * browser.
-     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Checkout atau Git Reset.
-     * @throws IOException jika terjadi masalah saat membaca file.
-     * @throws InterruptedException jika terjadi interupsi pada thread.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
+     * Checkout atau Git Reset.
+     * @throws IOException jika terjadi masalah saat membaca file Gambar.
+     * @throws InterruptedException jika terjadi interupsi pada thread saat menjalankan script PHP.
      */
     public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController) throws GitAPIException, IOException, InterruptedException {
         int indexAwal = 0;
-        int indexAkhir = vcs.getNumberOfCommits() - 1;
+        int indexAkhir = vcs.getNumberOfCommit() - 1;
 
         if (properties.getProperty("start-commit") != null) {
-//            if (vcs.getCommitIndex(properties.getProperty("start-commit")) != -1) {
             indexAwal = vcs.getCommitIndex(properties.getProperty("start-commit"));
-//            }
         }
 
         if (properties.getProperty("stop-commit") != null) {
-//            if (vcs.getCommitIndex(properties.getProperty("stop-commit")) != -1) {
             indexAkhir = vcs.getCommitIndex(properties.getProperty("stop-commit"));
-//            }
         }
 
         String captureURL[] = properties.getProperty("capture-url").split(";");
@@ -93,8 +88,8 @@ public class TimeLapseGenerator {
             bufferedImages[i] = ImageIO.read(screenshotFiles.get(i));
         }
 
-        BufferedImage[] bufferedResultImages = new BufferedImage[screenshotFiles.size() / browserController.getNumberOfBrowsers()];
-        switch (browserController.getNumberOfBrowsers()) {
+        BufferedImage[] bufferedResultImages = new BufferedImage[screenshotFiles.size() / browserController.getNumberOfBrowser()];
+        switch (browserController.getNumberOfBrowser()) {
             case 1:
                 bufferedResultImages = bufferedImages;
                 break;
@@ -154,25 +149,23 @@ public class TimeLapseGenerator {
                     graphic.dispose();
                 }
                 if (properties.getProperty("logo") != null) {
-
                     BufferedImage logo = ImageIO.read(new File(properties.getProperty("logo")));
                     Graphics2D graphic = (Graphics2D) bufferedResultImage.getGraphics();
                     graphic.drawImage(logo, bufferedResultImage.getWidth() - logo.getWidth() - 5, bufferedResultImage.getHeight() - logo.getHeight() - 5, null);
                     graphic.dispose();
-
                 }
             }
         }
         String fileName = String.format("hasil_screenshot/%s.gif", new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
         try (ImageOutputStream output = new FileImageOutputStream(new File(fileName))) {
-            int frameDelay = Integer.parseInt(properties.getProperty("seconds-per-commit")) * 1000;
+            int frameDelay = (int)(Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
 
             GifSequenceWriter writer = new GifSequenceWriter(output, bufferedResultImages[0].getType(), frameDelay, false);
             for (BufferedImage bufferedResultImage : bufferedResultImages) {
                 writer.writeToSequence(bufferedResultImage);
             }
             writer.close();
-        } 
+        }
     }
 
 }

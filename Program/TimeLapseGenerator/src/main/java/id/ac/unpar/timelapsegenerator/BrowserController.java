@@ -28,23 +28,26 @@ public class BrowserController {
 
     private final WebDriver[] drivers;
     private final List<File> screenshotFiles;
-    private final int numberOfBrowsers;
+    private final int numberOfBrowser;
 
     /**
-     * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki oleh kelas ini.
-     * @param numberOfBrowsers jumlah browser 
+     * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki 
+     * oleh kelas ini.
+     * 
+     * @param numberOfBrowsers jumlah browser. 
      */
     public BrowserController(int numberOfBrowsers) {
         this.drivers = new WebDriver[numberOfBrowsers];
         this.screenshotFiles = new ArrayList<>();
-        this.numberOfBrowsers = numberOfBrowsers;
+        this.numberOfBrowser = numberOfBrowsers;
     }
 
     /**
-     * Method ini berfungsi untuk membuka semua browser kemudian mengatur ukuran window browser menjadi maksimal.
+     * Method ini berfungsi untuk membuka semua browser, kemudian mengatur 
+     * ukuran window browser menjadi maksimal.
      */
     public void open() {
-        for (int i = 0; i < numberOfBrowsers; i++) {
+        for (int i = 0; i < numberOfBrowser; i++) {
             this.drivers[i] = new ChromeDriver();
             this.drivers[i].manage().window().maximize();
         }
@@ -56,18 +59,18 @@ public class BrowserController {
      *
      * @return jumlah browser yang dimiliki oleh kelas ini.
      */
-    public int getNumberOfBrowsers() {
-        return numberOfBrowsers;
+    public int getNumberOfBrowser() {
+        return numberOfBrowser;
     }
 
     /**
      * Method ini berfungsi untuk berpindah halaman pada browser tertentu.
      *
      * @param browserIndex indeks browser yang akan diubah halamannya.
-     * @param url alamat url untuk berpindah halaman.
+     * @param url alamat URL untuk berpindah halaman.
      */
     public void changePage(int browserIndex, String url) {
-        this.drivers[browserIndex].navigate().to(url);
+        this.drivers[browserIndex].get(url);
     }
 
     /**
@@ -80,9 +83,10 @@ public class BrowserController {
     }
 
     /**
-     * Method ini berfungsi untuk mengambil screenshot pada browser tertentu.
+     * Method ini berfungsi untuk mengambil screenshot pada browser tertentu 
+     * dan menyimpannya ke atribut screenshotFiles.
      *
-     * @param browserIndex browser yang akan diambil screenshotnya.
+     * @param browserIndex indeks browser yang akan diambil screenshotnya.
      */
     public void takeScreenshot(int browserIndex) {
         this.screenshotFiles.add(((TakesScreenshot) this.drivers[browserIndex]).getScreenshotAs(OutputType.FILE));

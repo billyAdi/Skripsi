@@ -226,18 +226,18 @@ JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{ver
 \label{subsec:repository}
 Kelas ini merepresentasikan repositori Git. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
-\item public void create() throws IOException\\
+\item public void create()\\
 Berfungsi untuk membuat repositori Git baru.
-\item public void create(boolean bare) throws IOException\\
+\item public void create(boolean bare)\\
 Berfungsi untuk membuat repositori Git baru. \\
 Parameter: jika bernilai \textit{true} maka dibuat \textit{bare repository} (repositori tanpa \textit{working directory}). 
-\item public String getBranch() throws IOException\\
-Berfungsi untuk mendapatkan nama \textit{branch} yang ditunjuk oleh \textit{HEAD}, \textit{method} ini melempar \textit{IOException}.\\ 
+\item public String getBranch()\\
+Berfungsi untuk mendapatkan nama \textit{branch} yang ditunjuk oleh \textit{HEAD}.\\
 Kembalian: nama dari \textit{branch} yang sedang aktif, contohnya \textit{master}.
-
-\item public ObjectId resolve(String revstr) throws AmbiguousObjectException, IncorrectObjectTypeException, RevisionSyntaxException, IOException\\
-Parameter: \textit{expression} dari \textit{git object references}. \textit{Method} ini melempar \textit{AmbiguousObjectException}, \textit{IncorrectObjectTypeException}, \textit{RevisionSyntaxException}, dan \textit{IOException}.\\
-Kembalian: sebuah objek \textit{ObjectId}.
+\item public Ref getRef(String name)\\
+Berfungsi untuk mendapatkan Ref berdasarkan nama yang diberikan.\\
+Parameter: nama dari Ref.\\
+Kembalian: objek Ref.
 \end{itemize} 
 
 \subsection{FileRepository}
@@ -245,13 +245,13 @@ Kembalian: sebuah objek \textit{ObjectId}.
 Kelas ini merupakan turunan dari kelas \textit{Repository}. Berikut ini adalah \textit{construtor} dari kelas ini:
 \begin{itemize}
 \item public FileRepository(String gitDir) throws IOException\\
-\textit{Constructor} ini membuat repositori berdasarkan parameter, \textit{constructor} ini melempar IOException.\\
-Parameter: lokasi dari \textit{repository metadata}, lokasi ini berupa \textit{path}.
+\textit{Constructor} ini membuat representasi dari repositori Git. \textit{Constructor} ini melempar IOException jika repositori tidak bisa diakses.\\
+Parameter: \textit{path} dari suatu repositori Git.
 \end{itemize}
 
 \subsection{Git}
 \label{subsec:Git}
-Kelas ini menyediakan API yang mirip Git \textit{Command Line} untuk berinteraksi dengan repositori git. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
+Kelas ini menyediakan API yang mirip Git Command Line untuk berinteraksi dengan repositori Git. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item public Git(Repository repo)\\
 \textit{Constructor} ini membuat objek Git yang digunakan untuk berinteraksi dengan repositori Git.\\
@@ -291,7 +291,7 @@ Kembalian: objek \textit{DiffCommand} yang berfungsi untuk mengumpulkan paramete
 
 \item public static CloneCommand cloneRepository()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{clone}.\\
-Kembalian: objek \textit{DiffCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{clone}.
+Kembalian: objek \textit{CloneCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{clone}.
 
 \item public MergeCommand merge()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{merge}.\\
@@ -318,54 +318,22 @@ Kembalian: objek \textit{DeleteBranchCommand}.
 Kembalian: objek \textit{ResetCommand}.
 \end{itemize}
 
-\subsection{RevWalk}
-\label{subsec:revwalk}
-Kelas ini digunakan untuk menelusuri \textit{commit graph}. \textit{Instance} dari kelas ini hanya bisa melakukan  \textit{graph traversal} satu kali, untuk melakukan \textit{traversal} kedua dibutuhkan \textit{instance} baru atau memanggil \textit{method} reset(). Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
-\begin{itemize}
-\item public RevWalk(Repository repo)\\
-\textit{Constructor} ini membuat objek \textit{revision walker} untuk suatu \textit{repository}.\\
-Parameter: repositori yang digunakan untuk \textit{traversal}.  
-
-\item public RevCommit parseCommit(AnyObjectId id)\\
-Menempatkan \textit{reference} ke suatu \textit{commit} kemudian melakukan \textit{parsing} pada isi \textit{commit}.
-Parameter: nama dari objek \textit{commit}.\\
-Kembalian: \textit{reference} ke objek \textit{commit}.
-
-\item public void sort(RevSort s)\\
-Berfungsi untuk mengurutkan \textit{commit} berdasarkan metode dari parameter.\\
-Parameter: metode untuk mengurutkan \textit{commit}.
-
-\item public Iterator<RevCommit> iterator()\\
-Berfungsi untuk mengembalikan \textit{iterator} yang bertipe \textit{RevCommit}.\\
-Kembalian: \textit{iterator} dari \textit{RevCommit}.
-
-\item public void markStart(RevCommit c) throws MissingObjectException, IncorrectObjectTypeException, IOException\\
-Berfungsi untuk menandai \textit{commit} pertama untuk memulai \textit{traversal}. Method ini melempar MissingObjectException, IncorrectObjectTypeException, dan IOException.\\
-Parameter: \textit{commit} awal yang digunakan untuk melakukan \textit{traversal}.
-
-\item public final void reset()\\
-Berfungsi untuk mengembalkan \textit{state} dari kelas ini ke \textit{state} semula, sehingga \textit{instance RevWalk} bisa digunakan lagi.
-\end{itemize}
 
 \subsection{RevCommit}
 \label{subsec:revcommit}
-Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dari kelas ini:
+Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah  beberapa \textit{method} dari kelas ini:
 \begin{itemize}
-\item protected RevCommit(AnyObjectId id)\\
-\textit{Constructor} ini membuat objek yang merupakan \textit{reference} ke suatu \textit{commit}.\\
-Parameter: nama dari objek \textit{commit}.  
-
 \item public final String getFullMessage()\\
-Berfungsi untuk melakukan \textit{parsing} pada \textit{full commit message} dan mengubahnya ke \textit{string}.\\
-Kembalian: \textit{string} hasil \textit{decode} dari \textit{commit message}.
+Berfungsi untuk mendapatkan deskripsi dari suatu \textit{commit}.\\
+Kembalian: deskripsi dari suatu \textit{commit} dalam bentuk String.
 
 \item public final String getShortMessage()\\
-Berfungsi untuk melakukan \textit{parsing} pada \textit{commit message} dan mengubahnya ke \textit{string}, hanya baris pertama yang dikembalikan.\\
-Kembalian: baris pertama \textit{string} hasil \textit{decode} dari \textit{commit message}.
+Berfungsi untuk mendapatkan deskripsi dari suatu \textit{commit}. Jika panjang deskripsi \textit{commit} lebih dari satu baris, maka hanya baris pertama yang dikembalikan.\\
+Kembalian: baris pertama dari deskripsi \textit{commit} dalam bentuk String.
 
 \item public final String getName()\\
-\textit{Method} ini mengembalikan \textit{SHA-1} dalam bentuk \textit{string}.
-Kembalian: \textit{string SHA-1} dalam bentuk heksadesimal. 
+\textit{Method} ini mengembalikan \textit{SHA-1} dari \textit{commit}.\\
+Kembalian: \textit{string SHA-1} dalam bentuk String. 
 
 \item public final PersonIdent getAuthorIdent()\\
 Berfungsi untuk mendapatkan informasi mengenai \textit{author} yang melakukan \textit{commit}.\\
@@ -386,55 +354,70 @@ Kembalian: alamat \textit{email} dari \textit{author}.
 
 \item public Date getWhen()\\
 Berfungsi mengembalikan waktu dilakukannya suatu \textit{commit} oleh \textit{author}.\\
-Kembalian: sebuah \textit{timestamp}.
+Kembalian: waktu dilakukannya suatu \textit{commit} berupa objek Date.
 \end{itemize}
 
 
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
-Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC bekerja dengan cara menginjeksi kode JavaScript ke \textit{browser} ketika \textit{browser} dimuat dan menggunakan JavaScript tersebut untuk menjalankan \textit{Application Under Test} dalam \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan kakas yang digunakan untuk mengembangkan Selenium \textit{test cases}.
+Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan kakas yang digunakan untuk mengembangkan Selenium \textit{test scripts}.
 
-WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} untuk automasi. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
+WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
 
-Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
 
 \subsection{WebDriver}
 \label{subsec:webdriver}
-Kelas ini merupakan \textit{interface} utama yang digunakan untuk pengujian, kelas ini merepresentasikan \textit{web browser} yang ideal . Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+Merupakan \textit{interface} utama yang digunakan untuk pengujian, \textit{interface} ini merepresentasikan \textit{web browser} yang ideal . Berikut ini adalah beberapa \textit{method} dalam \textit{interface} ini:
 \begin{itemize}
 \item void close()\\
 Berfungsi untuk menutup \textit{window} pada \textit{browser}, jika \textit{window} yang sekarang merupakan satu-satunya \textit{window} yang terbuka maka \textit{browser} akan ditutup.
 \item void quit()\\
-Berfungsi untuk menutup driver dan semua \textit{window} yang sedang terbuka.
+Berfungsi untuk menutup \textit{browser} dan semua \textit{window} yang sedang terbuka.
 \item void get(String url)\\
-Berfungsi untuk memuat halaman \textit{web} pada \textit{window} saat ini. \textit{Method} ini mengirim \textit{HTPP GET Request} untuk memuat halaman, dan \textit{method} ini akan melakukan \textit{blocking} sampai halaman \textit{web} selesai dimuat.\\
+Berfungsi untuk memuat halaman \textit{web} pada \textit{window} yang sedang aktif. \textit{Method} ini mengirim \textit{HTPP GET Request} untuk memuat halaman, dan \textit{method} ini akan melakukan \textit{blocking} sampai halaman \textit{web} selesai dimuat.\\
 Parameter: alamat \textit{url} untuk memuat halaman \textit{web}.
 \item String getTitle()\\
 Berfungsi untuk mengembalikan judul dari halaman \textit{web} yang sedang aktif.\\
 Kembalian: judul dari halaman \textit{web}.
 \item String getCurrentUrl()\\
-Berfungi untuk mendapatkan URL yang sedang aktif di \textit{browser}.\\
+Berfungsi untuk mendapatkan URL yang sedang aktif di \textit{browser}.\\
 Kembalian: URL dari halaman \textit{web} yang sedang dimuat di \textit{browser}.
+
+\item WebDriver.Options manage()\\
+Berfungsi untuk mendapatkan interface WebDriver.Options.\\
+Kembalian: interface dengan tipe WebDriver.Options. Di dalam kelas ini terdapat \textit{method} window() yang mengembalikan \textit{interface} dengan tipe WebDriver.Window. 
 \end{itemize}
 
-\subsection{WebDriver.Navigation}
-\label{subsec:webdriver_navigation}
-Kelas ini merupakan \textit{nested class} dari WebDriver. Kelas ini mengatur navigasi pada WebDriver. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+%\subsection{WebDriver.Navigation}
+%\label{subsec:webdriver_navigation}
+%Kelas ini merupakan \textit{nested class} dari WebDriver. Kelas ini mengatur navigasi pada WebDriver. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
+%\begin{itemize}
+%\item void back()\\
+%Berfungsi untuk berpindah ke halaman \textit{web} sebelumnya.
+%\item void forward()\\
+%Berfungsi untuk bergerak maju satu halaman \textit{web}. 
+%\item void refresh()\\
+%Berfungsi untuk melakukan \textit{refresh} pada halaman \textit{web}.
+%\item void to(String url)\\
+%Berfungsi untuk memuat halaman \textit{web} baru pada \textit{window} yang sedang aktif.\\
+%Parameter: URL yang akan dimuat.
+%\end{itemize}
+
+\subsection{WebDriver.Window}
+\label{subsec:webdriveroption}
+\textit{Interface} yang digunakan untuk mengatur \textit{window} pada \textit{browser}. Berikut adalah \textit{method} yang dimiliki oleh \textit{interface} ini:
 \begin{itemize}
-\item void back()\\
-Berfungsi untuk berpindah ke halaman \textit{web} sebelumnya.
-\item void forward()\\
-Berfungsi untuk bergerak maju satu halaman \textit{web}. 
-\item void refresh()\\
-Berfungsi untuk melakukan \textit{refresh} pada halaman \textit{web}.
-\item void to(String url)\\
-Berfungsi untuk memuat halaman \textit{web} baru pada \textit{window} yang sedang aktif.\\
-Parameter: URL yang akan dimuat.
+\item void maximize()\\
+Berfungsi untuk membuat ukuran \textit{window} pada \textit{browser} menjadi maksimal.
+\item public setSize(Dimension targetSize)\\
+Berfungsi untuk mengatur ukuran \textit{window} pada \textit{browser} sesuai parameter.\\
+Parameter: ukuran dari \textit{browser} berupa objek Dimension. Objek Dimension mempunyai atribut height dan weight yang menyatakan ukuran panjang dan lebar dalam satuan piksel.
 \end{itemize}
 
 \subsection{WebElement}
 \label{subsec:webelement}  
-Kelas ini adalah \textit{Interface} yang  merupakan representasi dari elemen HTML. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini:
+Merupakan \textit{interface} yang  merepresentasikan dari elemen HTML. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini:
 \begin{itemize}
 \item void click()\\
 Berfungsi untuk mengklik suatu elemen HTML.
@@ -464,9 +447,27 @@ Berfungsi untuk mendapatkan nilai dari \textit{attribute} suatu \textit{web elem
 Kembalian: nilai dari \textit{attribute} dari \textit{web element}.
 \end{itemize} 
 
+\subsection{By}
+\label{subsec:by}
+Kelas ini mendefinisikan mekanisme pencarian \textit{web element}. Berikut adalah beberapa \textit{method} yang dimiliki oleh kelas ini:
+\begin{itemize}
+\item public static By className(String className)\\
+Mekanisme pencarian berdasarkan nilai atribut class dari \textit{web element}.\\
+Parameter: nama class dari \textit{web element}.\\
+Kembalian: objek By yang sudah menemukan \textit{web element}.
+\item public static By tagName(String tagName)\\
+Mekanisme pencarian berdasarkan \textit{tag name} dari \textit{web element}.\\
+Parameter: \textit{tag name}  dari \textit{web element}.\\
+Kembalian: objek By yang sudah menemukan \textit{web element}.
+\item public static By id(String id) \\
+Mekanisme pencarian berdasarkan nilai atribut ID dari \textit{web element}.\\
+Parameter: ID dari \textit{web element}.\\
+Kembalian: objek By yang sudah menemukan \textit{web element}.
+\end{itemize} 
+
 \subsection{OutputType}
 \label{subsec:output_type}
-Kelas ini merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
+Merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
 \begin{itemize}
 \item static final OutputType<String> BASE64\\
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{base64 data}.
@@ -479,11 +480,11 @@ Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{temprorary 
 
 \subsection{TakesScreenshot}
 \label{subsec:takes_screenshot}
-Kelas ini merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. Kelas ini hanya mempunyai satu method yaitu:
+Merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. Berikut adalah \textit{method} yang terdapat dalam \textit{interface} ini:
 \begin{itemize}
 \item <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException\\
-\textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan menyimpannya ke lokasi yang sudah ditentukan.\\
-Kembalian: objek yang menyimpan informasi terkait \textit{screenshot} \\
+\textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan mengembalikan hasilnya.\\
+Kembalian: objek hasil \textit{screenshot} \\
 Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_type}).
 
 \end{itemize}
@@ -491,97 +492,107 @@ Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_
 
 \section{Apache Commons CLI}
 \label{subsec:apache_cli}
-\textit{Library} Apache Commons CLI menyediakan API untuk menguraikan \textit{command-line options} yang dikirimkan ke program\cite{Apache_Commons_CLI}. Apache Commons CLI termasuk ke dalam salah satu \textit{project} Apache Commons. Tujuan utama dari \textit{project} Apache Commons adalah membuat dan melakukan \textit{maintain} pada komponen Java yang \textit{reusable}. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} Apache Commons CLI. Subbab ini mengacu pada \cite{Apache_java_doc}.
+\textit{Library} Apache Commons CLI menyediakan API untuk melakukan \textit{parsing} argumen Command Line yang dikirimkan ke program\cite{Apache_Commons_CLI}. Apache Commons CLI termasuk ke dalam salah satu \textit{project} Apache Commons. Tujuan utama dari \textit{project} Apache Commons adalah membuat dan melakukan \textit{maintain} pada komponen Java yang \textit{reusable}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Apache Commons CLI. Subbab ini mengacu pada \cite{Apache_java_doc}.
 
 \subsection{CommandLineParser}
 \label{subsec:commandlineparser}
-Kelas ini merupakan \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat menguraikan \textit{array of String} berdasarkan pada \textit{option} yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
+Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada \textit{option} yang telah ditentukan. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk menguraikan argumen berdasarkan pada \textit{option} yang ditentukan. \textit{Method} ini melempar \textit{ParseException}.\\
-Parameter: \textit{option} yang ditentukan, argumen \textit{command line}.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
 Kembalian: objek \textit{CommandLine}.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
-Berfungsi untuk menguraikan argumen berdasarkan pada \textit{option} yang ditentukan.\\
-Parameter: \textit{option} yang ditentukan, argumen \textit{command line}, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat argumen yang tidak valid.
-\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
+Kembalian: objek \textit{CommandLine}.
+\end{itemize}
+
+
+\subsection{DefaultParser}
+\label{subsec:defaultparser}
+Merupakan kelas yang mengimplementasi \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
+\begin{itemize}
+\item CommandLine parse(Options options, String[] arguments) throws ParseException\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
+Kembalian: objek \textit{CommandLine}.
+
+\item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
 Kembalian: objek \textit{CommandLine}.
 \end{itemize}
 
 \subsection{CommandLine}
 \label{subsec:commandline}
-Kelas ini merepresentasikan kumpulan argumen yang diuraikan terhadap \textit{options descriptor}.
+Kelas ini merepresentasikan kumpulan Option hasil \textit{parsing}.
 Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public String getOptionValue(String opt)\\
-Berfungsi untuk mendapatkan nilai dari suatu \textit{option} berdasarkan parameter.\\
-Parameter: nama dari \textit{option}.\\
-Kembalian: nilai dari \textit{option}. Jika \textit{option} belum diatur, akan dikembalikan \textit{null}.
-\item protected void addOption(Option opt)\\
-Berfungsi untuk menambahkan \textit{option} ke \textit{command line}.\\
-Parameter: objek \textit{option} yang ingin ditambahkan.
-\item public boolean hasOption(String opt)\\
-Berfungsi untuk menentukan apakah suatu \textit{option} sudah diatur.\\
-Parameter: nama dari \textit{option}.\\
-Kembalian: \textit{true} jika \textit{option} sudah diatur, \textit{false} jika \textit{option} belum diatur.
+Berfungsi untuk mendapatkan nilai dari suatu Option sesuai dengan namanya.\\
+Parameter: nama dari Option.\\
+Kembalian: nilai dari suatu Option. Jika Option tidak ditemukan, akan mengembalikan \textit{null}.
+\item public String[] getOptionValues(Option option)\\
+Berfungsi untuk mendapatkan kumpulan nilai dari suatu Option.
+Parameter: nama dari Option.
+Kembalian: kumpulan nilai dari suatu Option dengan tipe \textit{array of String}. Jika Option tidak ditemukan, akan mengembalikan \textit{null}.
 \item public Option[] getOptions()\\
-Berfungsi untuk mengembalikan \textit{array} dari \textit{option} yang sudah diproses.\\ 
-Kembalian: \textit{iterator} dari \textit{option} yang sudah diproses.
-\item public Iterator<Option> iterator()\\
-Berfungsi untuk mengembalikan \textit{iterator} dari \textit{option} yang sudah diproses.\\ 
-Kembalian: \textit{array} dari \textit{option} yang sudah diproses.
+Berfungsi untuk mengembalikan Option-option hasil \textit{parsing}.\\ 
+Kembalian: \textit{array} dari Option hasil \textit{parsing}.
+
 
 \end{itemize}
 
 \subsection{Options}
 \label{subsec:options}
-Kelas ini merepresentasikan kumpulan dari objek \textit{Option}, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+Kelas ini merepresentasikan kumpulan dari objek \textit{Option}, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Options addOption(Option opt)\\
-Berfungsi untuk menambahkan objek \textit{Option} ke kelas ini.
-Parameter:\textit{option} yang akan ditambahkan.\\
-Kembalian: hasil dari \textit{option} yang ditambahkan.
-
-\item public Option getOption(String opt)\\
-Berfungsi untuk mengembalikan objek \textit{Option} sesuai dengan nama yang diberikan paramater. 
-Parameter: nama dari \textit{option} yang ingin dikembalikan.\\
-Kembalian: objek \textit{option} berdasarkan parameter.
+Berfungsi untuk menambahkan Option.\\
+Parameter: Option yang akan ditambahkan.\\
+Kembalian: hasil dari Option yang ditambahkan.
 
 \end{itemize}
 
 
 \subsection{Option}
 \label{subsec:option}
-Kelas ini mendeskripsikan sebuah \textit{command-line option}. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} yang dimiliki kelas ini: 
+Kelas ini merepresentasikan sebuah Command Line Option. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
-\item public Option(String opt, String description) throws IllegalArgumentException\\
-\textit{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
-Parameter: nama pendek \textit{option}, dan deskripsi dari \textit{option}.
-\item public Option(String opt, boolean hasArg, String description) throws IllegalArgumentException\\
-\textit{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
-Parameter: nama pendek \textit{option}, suatu \textit{boolean} yang menentukan apakah \textit{option} membutuhkan argumen, dan deskripsi dari \textit{option}.
-\item public Option(String opt, String longOpt, boolean hasArg, String description) throws IllegalArgumentException\\
-{Constructor} ini membuat objek \textit{option} sesuai dengan parameter yang diberikan.\textit{Constructor} ini melempar IllegalArgumentException.\\
-Parameter: nama pendek \textit{option}, nama panjang \textit{option}, suatu \textit{boolean} yang menentukan apakah \textit{option} membutuhkan argumen, dan deskripsi dari \textit{option}.
+\item public String getLongOpt()\\
+Berfungsi untuk mendapatkan nama panjang dari suatu \textit{option}.\\
+Kembalian: nama panjang dari suatu \textit{option}.
+\item public String getValue()\\
+Berfungsi untuk mendapatkan nilai dari Option.\\
+Kembalian: nilai dari Option. Jika terdapat lebih dari satu kembalian, hanya nilai pertama yang dikembalikan. Jika tidak ada nilai, akan mengembalikan \textit{null}.
+
+\item public String[] getValues()\\
+Berfungsi untuk mendapatkan nilai-nilai dari Option.\\
+Kembalian: nilai-nilai dari Option berupa \textit{array of String}. Jika tidak ada nilai, akan mengembalikan \textit{null}.
+
 \item public boolean hasArg()\\
 Berfungsi untuk mengetahui apakah suatu \textit{option} membutuhkan argumen.\\
 Kembalian: \textit{true} jika \textit{option} ini membutuhkan argumen , \textit{false} jika \textit{option} ini tidak membutuhkan argumen.
+
+\item public boolean hasArg()\\
+Berfungsi untuk mengetahui apakah suatu \textit{option} dapat menerima lebih dari satu argumen.\\
+Kembalian: \textit{true} jika \textit{option} ini dapat menerima lebih dari satu argumen , \textit{false} jika tidak.
+
 \item public String getDescription()\\
 Berfungsi untuk mendapatkan deskripsi dari suatu \textit{option}.\\
 Kembalian: deskripsi dari \textit{option} ini.
 \item public String getArgName()\\
 Berfungsi untuk mendapatkan nama dari suatu \textit{option}.\\
 Kembalian: nama dari argumen suatu \textit{option}
-\item public String getLongOpt()\\
-Berfungsi untuk mendapatkan nama panjang dari suatu \textit{option}.\\
-Kembalian: nama panjang dari suatu \textit{option}.
+
 
 \end{itemize}
 
 \subsection{Option.Builder}
 \label{subsec:optionbuilder}
-Kelas ini merupakan \textit{nested class} dari kelas \textit{Option}. Kelas ini digunakan untuk membuat objek \textit{Option} dengan \textit{descriptive methods}. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+Kelas ini merupakan \textit{nested class} dari kelas \textit{Option}. Kelas ini digunakan untuk membuat objek Option berdasarkan parameter yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Option.Builder desc(String description)\\
 Berfungsi untuk memberikan deskripsi pada \textit{option}.\\

@@ -7,16 +7,14 @@ package id.ac.unpar.timelapsegenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevSort;
-import org.eclipse.jgit.revwalk.RevWalk;
 
 /**
  * Kelas ini berfungsi untuk berinteraksi pada proyek perangkat lunak berbasis
@@ -27,37 +25,39 @@ import org.eclipse.jgit.revwalk.RevWalk;
 public class VCS {
 
     private final Git git;
-    private final List<String> commitID;
+    private final List<String> commitIDs;
 
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
      * dan mendapatkan seluruh histori commit pada proyek perangkat lunak
-     * berbasis web
+     * berbasis web. 
      *
      * @param path merupakah path dari proyek perangkat lunak berbasis web.
-     * @throws IOException jika Repository tidak bisa diakses.
+     * @throws IOException jika path proyek tidak valid atau repository tidak bisa diakses.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Log.
      */
-    public VCS(String path) throws IOException   {
+    public VCS(String path) throws IOException, GitAPIException   {
         Repository repository = new FileRepository(path);
-        this.git = new Git(repository);
-        RevWalk revWalk = new RevWalk(repository);
-        revWalk.markStart(revWalk.parseCommit(repository.resolve(Constants.HEAD)));
-        revWalk.sort(RevSort.REVERSE);
-
-        this.commitID = new ArrayList<>();
-        for (RevCommit commit : revWalk) {
-            this.commitID.add(commit.getName().substring(0, 7));
+        if(repository.getRef("HEAD")==null){
+            throw new IOException("Path proyek tidak valid");
         }
+        this.git = new Git(repository);
+        Iterable<RevCommit> commits=git.log().all().call();
+        this.commitIDs = new ArrayList<>();
+        for (RevCommit commit : commits) {
+            this.commitIDs.add(commit.getName().substring(0, 7));
+        }
+        Collections.reverse(commitIDs);
     }
 
     /**
-     * Berfungsi untuk melakukan checkout ke commit tertentu
+     * Berfungsi untuk melakukan checkout ke commit tertentu.
      *
-     * @param commitIndex indeks dari variabel commitID.
+     * @param commitIndex indeks dari variabel commitIDs.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Checkout.
      */
     public void checkoutCommit(int commitIndex) throws GitAPIException {
-        this.git.checkout().setName(this.commitID.get(commitIndex)).call();
+        this.git.checkout().setName(this.commitIDs.get(commitIndex)).call();
     }
 
     /**
@@ -84,20 +84,20 @@ public class VCS {
      *
      * @return jumlah commit.
      */
-    public int getNumberOfCommits() {
-        return this.commitID.size();
+    public int getNumberOfCommit() {
+        return this.commitIDs.size();
     }
 
     /**
      * Berfungsi untuk mendapatkan index dari variabel commitID.
      *
      * @param commitID merupakan Commit ID yang akan dicari indeksnya.
-     * @return indeks dari variabel commitID.
+     * @return indeks dari variabel commitIDs.
      */
     public int getCommitIndex(String commitID) {
         int result = -1;
-        for (int i = 0; i < this.commitID.size(); i++) {
-            if (commitID.equals(this.commitID.get(i))) {
+        for (int i = 0; i < this.commitIDs.size(); i++) {
+            if (commitID.equals(this.commitIDs.get(i))) {
                 result = i;
                 break;
             }

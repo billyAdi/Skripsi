@@ -22,7 +22,7 @@
 
 \chapter{Analisis}
 \label{chap:analisis}
-Pada bab ini dijelaskan mengenai analisis aplikasi sejenis, analisis penggunaan Git Command Line, analisis penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse, prapengujian, dan analisis Command Line Options. 
+Pada bab ini dijelaskan mengenai analisis aplikasi sejenis, analisis penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse, prapengujian, dan analisis fitur aplikasi yang dibangun. 
 
 \section{Analisis Aplikasi Sejenis}
 \label{sec:analisis_aplikasi_sejenis}
@@ -89,6 +89,9 @@ Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada p
 \item \texttt{gource --output-framerate [FPS]}\\
 Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
 
+\item \texttt{gource --seconds-per-day [SECONDS]}\\
+Opsi ini berfungsi untuk mengatur kecepatan visualisasi. Parameter dari opsi ini adalah waktu yang dibutuhkan untuk menampilkan satu hari.
+
 \item \texttt{gource --hide [DISPLAY-ELEMENT]}\\
 Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}. Parameter dari opsi ini adalah elemen yang akan disembunyikan. \textit{Display element} yang dapat disembunyikan yaitu:
 \begin{itemize}
@@ -104,134 +107,30 @@ Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}
 Parameter yang berjumlah lebih dari satu dipisahkan dengan koma, contoh: \textit{bloom},\textit{root},\textit{users}.
 \end{enumerate}
  
-Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman utama suatu \textit{website}.      
+Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman suatu \textit{website}.      
  
- \section{Analisis Penggunaan Git Command Line}
-\label{sec:analisis_git}
+\section{Analisis Penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse}
+\label{sec:analisis_jgit_selenium}
+Pada subbab ini dijelaskan mengenai analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, dan langkah-langkah dalam membangkitkan animasi timelapse. 
 
-Terdapat dua permasalahan dalam skripsi ini. Permasalahan pertama membahas tentang cara membangkitkan animasi \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web. Permasalahan kedua membahas tentang cara mengimplementasikan aplikasi tersebut. Pada bab ini akan dibahas analisis penggunaan beberapa \textit{library} untuk membuat animasi \textit{timelapse}. Proyek perangkat lunak yang digunakan pada bab ini adalah Piktora. 
+\subsection{Analisis Penggunaan JGit}
+\label{subsec:analisis_jgit}
+JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan untuk berinteraksi dengan suatu repositori Git. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
 
-Alamat dari \textit{website} ini adalah\footnote{http://www.piktora.com}. Alamat repositori dari perangkat lunak ini adalah\footnote{https://gitlab.com/PNDevworks/Piktora}. Piktora merupakan \textit{website} yang menawarkan layanan \textit{creative design} dan \textit{branding}. Layanan yang ditawarkan berupa \textit{graphic design} untuk poster, \textit{banner}, \textit{website}, dan aplikasi \textit{mobile}. 
+Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. Gambar \ref{fig:piktora_last_wt} merupakan contoh suatu repositori Git.
 
-Git Command Line dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Git Command Line dapat menjalankan perintah-perintah Git(lihat \ref{subsec:operasi_dasar_git}). Histori \textit{commit} dapat didapatkan dengan menggunakan operasi Git Log. Sintaks untuk menjalankan operasi Git Log adalah \texttt{\$ git log}. Listing \ref{lst:commit_history_piktora} menunjukkan sebagian histori \textit{commit} dari proyek Piktora. Pada histori \textit{commit} dapat dilihat \textit{author} dari yang melakukan \textit{commit} beserta \textit{email}nya, tanggal dan waktu dilakukan \textit{commit}, deskripsi \textit{commit}, dan nilai SHA-1 sepanjang 40 bit. 
+Untuk mendapatkan histori \textit{commit} pada suatu repositori Git digunakan operasi Git Log.
+Sintaks untuk melakukan operasi Git Log adalah \texttt{git.log().all().call();}. Dengan sintaks tersebut, akan didapatkan seluruh histori \textit{commit} pada \textit{branch} yang sedang aktif. Seluruh histori \textit{commit} akan disimpan dalam bentuk Iterable<RevCommit>. Histori \textit{commit} pada Git direpresentasikan dalam bentuk Directed Acyclic Graph seperti pada Gambar \ref{fig:DAG}. 
 
-\begin{lstlisting}[caption={Sebagian histori \textit{commit} pada proyek Piktora},label={lst:commit_history_piktora},language=plaintext]
-C:\xampp\htdocs\Piktora>git log
-commit 89000be7ce7d16f006813cddefb4ec6d70d15ed6 (HEAD -> master, origin/master, origin/HEAD)
-Author: Hizkia Steven <xvii.hs@gmail.com>
-Date:   Fri Jan 12 12:25:30 2018 +0700
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.6]{Gambar/DAG.png}
+	\caption{Histori \textit{commmit} direpresentasikan sebagai Directed Acyclic Graph.}
+	\label{fig:DAG}
+\end{figure}
 
-    Update new company address
 
-commit 6a085c1c37949e6308cfe06a117302e528388e54
-Author: Hizkia Steven <xvii.hs@gmail.com>
-Date:   Tue Dec 12 14:38:38 2017 +0700
-
-    Update company address
-
-commit 9f041ef239bfe236ab4d679ad698d773a8ba6f56
-Author: TommyAdhityaThe <toms.warior@gmail.com>
-Date:   Mon May 15 10:40:16 2017 +0700
-
-    set insta url to https://www.instagram.com/piktorastudio/
-
-commit 38711f0cc8f487aac62babac10c1185f5ee14d33
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Mon Apr 17 15:15:03 2017 +0700
-
-    fix bug ugly display when projects too high
-
-commit 9bfde3ceffc622f99e2e73cd1c9263fef72bc5b9
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Mon Apr 17 15:09:54 2017 +0700
-
-    add ignore sftp-config.json
-
-commit 18c39ef4ad68b3ad503bc13a788d3979e04ec3f9
-Author: Pascal Alfadian Nugroho <pascalalfadian@live.com>
-Date:   Thu Apr 13 15:21:49 2017 +0700
-
-    Test commit (in gitlab). Nothing much important
-
-commit 33702c2c674bb2dbb16dac1827b49af21969f24f
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Tue Feb 21 13:31:08 2017 +0700
-
-    change email sender to piktora@mailgun.dnartworks.com.au
-    
-\end{lstlisting}
-\ \\
-
-Histori \textit{commit} ditampilkan berdasarkan urutan waktu dilakukannya \textit{commit}. Pada listing \ref{lst:commit_history_piktora}, histori \textit{commit} ditampilkan mulai dari \textit{commit} terbaru hingga \textit{commit} terlama. Listing \ref{lst:commit_history_piktora} menampilkan \textit{commit} pada tanggal 12 Januari 2018, kemudian tanggal 12 Desember 2017, kemudian tanggal 15 Mei 2017, dst. Histori \textit{commit} juga dapat ditampilkan mulai dari \textit{commit} terlama hingga \textit{commit} terbaru. Perintah untuk menampilkan urutan \textit{commit} berdasarkan urutan terlama adalah \texttt{\$ git log --reverse}. Listing \ref{lst:commit_history_piktora_reverse} menunjukkan histori \textit{commit} pada tanggal 31 Oktober 2016, kemudian 5 November 2016, dst. 
-
-\begin{lstlisting}[caption={Sebagian histori \textit{commit} pada proyek Piktora, ditampilkan dengan urutan \textit{commit} terlama},label={lst:commit_history_piktora_reverse},language=plaintext]
-C:\xampp\htdocs\Piktora>git log --reverse
-commit 315d37462467f7aaa2c9e6c7a200c176e96ce5b4
-Author: Pascal Alfadian Nugroho <pascalalfadian@live.com>
-Date:   Mon Oct 31 16:52:46 2016 +0700
-
-    Basic CI files + htaccess & webconfig + database.php ignore
-
-commit 27ce3d4a22d95e0b5fbb7ecdfb8c863cdb53e895
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Sat Nov 5 13:12:43 2016 +0700
-
-    setup environment for piktora
-
-commit 65f0c9c59ac8cb9e7d572ab7a8fa91fe05232274
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Sat Nov 5 19:22:58 2016 +0700
-
-    * create structure for all pages
-    * add dummy images
-
-commit bffbae1b0fb2cbea6b66ef9699d666faf66a03a4
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Tue Nov 8 18:00:32 2016 +0700
-
-    - basic structure (navbar semi complete)
-    - add fonts
-
-commit 5c59916009bc47748b0fc2398d12ef532417548f
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Tue Nov 8 19:51:18 2016 +0700
-
-    implement navbar, footer, and projects/ page
-
-commit 77383808cd2717e1debcc75a057d414bd3135c18
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Tue Nov 8 20:05:27 2016 +0700
-
-    fix pc and ipad navbar fontsize
-
-commit 26bdbeebd42813cb2bb5f87291e4597efd221d41
-Author: Tommy Adhitya The <toms.warior@gmail.com>
-Date:   Tue Nov 8 20:16:33 2016 +0700
-
-    fix position image for desktop /projects
-    
-\end{lstlisting}
-\ \\
-Untuk dapat berpindah ke \textit{commit} tertentu digunakan operasi Git Checkout. Dengan menggunakan operasi Git Checkout, dapat dilihat \textit{state} dari \textit{file-file} pada \textit{commit} tertentu. Sintaks untuk menjalankan perintah Git Checkout pada Git Command Line adalah \texttt{\$ git checkout [SHA-1 commit]}. Dimana parameternya adalah nilai dari SHA-1 suatu \textit{commit}. SHA-1 mempunyai panjang 40 bit, tetapi cukup 7 bit pertama saja yang dimasukkan ke parameter.
-
-\begin{lstlisting}[caption={Git Checkout ke \textit{commit} pertama pada proyek Piktora},label={lst:checkout_piktora},language=plaintext]
-C:\xampp\htdocs\Piktora>git checkout 315d374
-Checking out files: 100% (5583/5583), done.
-Note: checking out '315d374'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b <new-branch-name>
-
-HEAD is now at 315d374 Basic CI files + htaccess & webconfig + database.php ignore    
-\end{lstlisting}
-\ \\   
-Listing \ref{lst:checkout_piktora} menunjukkan operasi \textit{checkout} ke \textit{commit} pertama pada proyek Piktora.  Nilai SHA-1 dari \textit{commit} pertama didapatkan pada listing \ref{lst:commit_history_piktora_reverse}, dimana hanya 7 bit pertama saja yang diambil. Baris ke-5 menunjukkan bahwa HEAD dalam keadaan \textit{DETACHED}(lihat \ref{subsec:git_checkout}). Baris ke-14 memperlihatkan bahwa HEAD sedang menunjuk pada \textit{commit} pertama.
+Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit} ID. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil. Gambar \ref{fig:piktora_last_wt} menunjukkan \textit{working tree} proyek Piktora pada \textit{commit} terakhir. Jika dilakukan operasi \textit{checkout} ke \textit{commit} pertama, \textit{working tree} proyek Piktora akan berubah seperti pada Gambar \ref{fig:piktora_first_wt}.
 
 \begin{figure}[H]
 	\centering
@@ -239,77 +138,60 @@ Listing \ref{lst:checkout_piktora} menunjukkan operasi \textit{checkout} ke \tex
 	\caption{\textit{Working tree} proyek Piktora pada \textit{commit} terakhir.}
 	\label{fig:piktora_last_wt}
 \end{figure}
-\ \\
-Gambar \ref{fig:piktora_last_wt} menunjukkan \textit{working tree} proyek Piktora pada \textit{commit} terakhir. \textit{Folder} git menunjukkan bahwa direktori Piktora terekam oleh Git. \textit{File} dan \textit{folder} yang terdapat pada \textit{working tree} merupakan \textit{snapshot} dari suatu \textit{commit}. Setiap kali dilakukan \textit{checkout}, \textit{working tree} akan berubah sesuai dengan \textit{snapshot} pada \textit{commit} tertentu. Dengan menggunakan operasi \textit{checkout}, dapat dibandingkan \textit{file} versi sekarang dengan \textit{file} pada versi sebelumnya.    
+
+
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{Gambar/piktora_first_commit.png}
 	\caption{\textit{Working tree} proyek Piktora pada \textit{commit} pertama.}
 	\label{fig:piktora_first_wt}
 \end{figure}
-\ \\
-Gambar \ref{fig:piktora_first_wt} menunjukkan \textit{working tree} proyek Piktora setelah dilakukan \textit{checkout} ke  \textit{commit} pertama. Jika dilihat, terdapat perbedaan \textit{working tree} antara \textit{commit} pertama dan terakhir. Pada \textit{commit} pertama, \textit{working tree} hanya berisi \textit{folder} git, \textit{folder} www, dan \textit{file} file gitignore.  Pada \textit{commit} terakhir, terdapat beberapa \textit{file} dan \textit{folder} baru di \textit{working tree}. 
- 
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.5]{Gambar/piktora_versi_pertama.png}
-	\caption{Halaman \textit{web} proyek Piktora pada \textit{commit} pertama.}
-	\label{fig:piktora_web_first}
-\end{figure} 
-\ \\
-Selain terdapat perbedaan di \textit{working tree}, terdapat juga perbedaan pada halaman \textit{web} versi pertama dan terakhir. Gambar \ref{fig:piktora_first_wt} menunjukkan halaman \textit{web} Piktora pada \textit{commit} pertama. Gambar \ref{fig:piktora_last_wt} menunjukkan halaman \textit{web} Piktora pada \textit{commit} terakhir.
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.5]{Gambar/piktora_versi_terakhir.png}
-	\caption{Halaman \textit{web} proyek Piktora pada \textit{commit} terakhir.}
-	\label{fig:piktora_web_last}
-\end{figure} 
-
-
-\section{Analisis Penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse}
-\label{sec:analisis_jgit_selenium}
-Pada subbab ini dijelaskan mengenai analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, dan langkah-langkah dalam Membangkitkan Animasi Timelapse. 
-
-\subsection{Analisis Penggunaan JGit}
-\label{subsec:analisis_jgit}
-JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan untuk berinteraksi dengan suatu repositori Git. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, RevWalk, dan RevWalk.
-
-Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git.
-
-Untuk mendapatkan histori \textit{commit} pada suatu repositori Git digunakan kelas RevWalk. \textit{Constructor} dari kelas ini menerima parameter bertipe Repository. Kelas RevWalk mengimplentasi \textit{interface} Iterable, sehingga memiliki Iterator yang bertipe RevCommit. Histori \textit{commit} disimpan pada Iterator dalam bentuk \textit{Directed Acyclic Graph}. RevCommit merupakan representasi dari suatu \textit{commit}. 
-
-Histori \textit{commit} dapat ditelusuri menggunakan Iterator yang terdapat pada kelas RevWalk. Posisi awal untuk melakukan penelusuran \textit{commit} dapat diatur menggunakan \textit{method} markStart(). Histori \textit{commit} yang terdapat pada Iterator disimpan dengan urutan \textit{commit} terbaru hingga terlama. Urutan penyimpanan histori \textit{commit} dapat dibalik menggunakan \textit{method} sort(), sehingga histori \textit{commit} disimpan dengan urutan \textit{commit} terlama hingga terbaru.
-
-Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit id}. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil.  
- 
 
 \subsection{Analisis Penggunaan Selenium WebDriver}
 \label{subsec:analisis_selenium}
-Selenium WebDriver dapat digunakan untuk \textit{web browser}. Pada analisis ini dibahas kelas-kelas pada \textit{library} Selenium WebDriver yang digunakan untuk mengotomatisasi \textit{web browser}. 
+Selenium WebDriver dapat digunakan untuk mengotomatisasi \textit{web browser}. Pada analisis ini dibahas kelas-kelas pada \textit{library} Selenium WebDriver yang digunakan untuk mengotomatisasi \textit{web browser}. 
 Kelas-kelas yang dipakai yaitu WebDriver, ChromeDriver, dan TakesScreenshot.
 
-WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. 
 
-TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasi \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan bertipe File.    
+WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan sebuah WebDriver. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.5]{Gambar/ChromeDriver.png}
+	\caption{WebDriver yang digunakan untuk \textit{automation testing}.}
+	\label{fig:webdriver}
+\end{figure}
+
+
+TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasi \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan adalah File.    
 
 \subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
 \label{subsec:langkah_animasi}
 Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab \ref{subsec:analisis_selenium}, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
 \begin{enumerate}
-\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
+\item Program membaca argumen Command Line menggunakan Apache Commons CLI.
 \item Program mendapatkan seluruh \textit{commit} histori dari proyek perangkat lunak berbasis web menggunakan JGit.
-\item Program melakukan \textit{checkout}, dimulai dari \textit{commit} pertama.
-\item Program menjalankan halaman \textit{web} di \textit{localhost} menggunakan Selenium WebDriver.
-\item Selenium WebDriver kemudian mengambil \textit{screenshot} pada halaman \textit{web}.
-\item Langkah 3-5 diulangi untuk seluruh \textit{commit}.
+\item Program membuka semua \textit{browser} menggunakan Selenium WebDriver. Jumlah \textit{browser} bergantung pada jumlah argumen dari Option \texttt{-capture-url}.
+\item Program melakukan \textit{checkout} dalam suatu rentang \textit{commit} tertentu. Jika tidak terdapat Option \texttt{-start-commit} dan Option \texttt{-stop-commit}, akan dilakukan \textit{checkout} ke semua \textit{commit}.
+\item Program melakukan \textit{checkout} ke suatu \textit{commit}. 
+\item Program menjalankan \textit{script} PHP jika terdapat Option \texttt{-before-capture}.
+\item Program membuka setiap URL yang didapatkan dari Option \texttt{-capture-url} menggunakan Selenium WebDriver. Setiap \textit{browser} membuka URL yang berbeda.
+\item Selenium WebDriver kemudian mengambil \textit{screenshot} pada semua \textit{browser}.
+\item Jika saat ini sedang berada pada \textit{commit} terakhir, lanjut ke langkah berikutnya. Jika tidak, ulangi langkah 5-8 untuk \textit{commit} selanjutnya.
+\item Jika terdapat lebih dari satu \textit{browser}, hasil \textit{screenshot} dari setiap \textit{browser} digabungkan menjadi satu gambar baru. 
+\item Program menambahkan judul di pojok kiri bawah jika terdapat Option \texttt{-title}.
+\item Program menambahkan logo di pojok kanan bawah jika terdapat Option \texttt{-logo}.  
 \item Menggabungkan semua \textit{file} gambar menjadi satu \textit{file} bertipe GIF.
 \end{enumerate}
 
-Penulis menggunakan \textit{library} yang didapatkan dari internet\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter/} untuk menggabungkan gambar menjadi \textit{file} GIF. 
+Penulis menggunakan \textit{library} yang didapatkan dari internet\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter} untuk menggabungkan gambar menjadi \textit{file} GIF. 
 
 \section{Prapengujian Website Piktora}
 \label{sec:prapengujian}
-Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Input dari program ini adalah alamat direktori proyek Piktora dan URL untuk membuka halaman \textit{web}. Langkah pada pengujian menggunakan langkah yang terdapat pada subbab \ref{subsec:langkah_animasi}.
+Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Piktora merupakan \textit{website} yang menawarkan layanan  \textit{creative design} dan \textit{branding}. Layanan yang ditawarkan berupa \textit{graphic design} untuk poster, \textit{banner}, \textit{website}, dan aplikasi \textit{mobile}. Alamat dari \textit{website} ini adalah\footnote{http://www.piktora.com}. Alamat repositori dari perangkat lunak ini 
+adalah\footnote{https://gitlab.com/PNDevworks/Piktora}.
+
+Prapengujian ini hanya menggunakan dua input. Input dimasukkan melalui argumen Command Line. Input dari program ini adalah alamat direktori proyek Piktora dan satu URL untuk membuka halaman \textit{web}. Langkah pada pengujian menggunakan langkah yang terdapat pada subbab \ref{subsec:langkah_animasi}. 
 
 %\begin{enumerate}
 %\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
@@ -462,13 +344,13 @@ Berikut ini adalah \textit{command line options} yang akan diimplementasikan pad
 Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari proyek perangkat lunak web yang terekam oleh Git. Opsi ini wajib ada.
 
 \item \texttt{-before-capture [PHP-SCRIPT]}\\
-Opsi ini berfungsi untuk menjalankan \textit{script} PHP. \textit{Script} ini dijalankan sebelum melakukan \textit{screenshot}. Parameter dari opsi ini adalah \textit{script} PHP. Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk menjalankan \textit{script} PHP. \textit{Script} ini dijalankan sebelum melakukan \textit{screenshot}. Parameternya adalah \textit{path} dari \textit{script} PHP. Opsi ini bersifat opsional.
 
 \item \texttt{-capture-url [URL 1, URL 2, URL 3, URL 4]}\\
 Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman yang dicapture bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
 
 \item \texttt{-seconds-per-commit [SECONDS]}\\
-Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Opsi ini bersifat opsional.
+Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol. Opsi ini bersifat opsional.
 
 \item \texttt{-title [TITLE]}\\
 Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri
@@ -476,15 +358,15 @@ bawah layar. Opsi ini bersifat opsional.
 
 \item \texttt{-logo [IMAGE]}\\
 Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
-bawah layar.Parameter dari opsi ini adalah \textit{file} gambar. Opsi ini bersifat opsional.
+bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional.
 
 \item \texttt{-start-commit [ID] -stop-commit [ID]}\\
 Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh karakter. Opsi ini bersifat opsional. 
 \end{enumerate}
 
 \ \\
-Opsi \texttt{path}, \texttt{title}, dan \texttt{image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian. Pada Gource, opsi \texttt{fps} menyatakan banyaknya \textit{frame} per detik pada video \textit{output}. Sedangkan, opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa ID \textit{commit}. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
- 
+Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
+  
  
 Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
 Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel_sc_animasi}.

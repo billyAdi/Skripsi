@@ -7,7 +7,11 @@ package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Properties;
+import javax.imageio.ImageIO;
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
@@ -29,20 +33,38 @@ public class Main {
 
         VCS vcs = null;
         try {
-            if (!new File(properties.getProperty("project-path")).exists()) {
-                throw new Exception("Path proyek tidak valid");
-            }
             vcs = new VCS(properties.getProperty("project-path"));
-            
-            if (Integer.parseInt(properties.getProperty("seconds-per-commit")) <= 0) {
+
+            if (Double.parseDouble(properties.getProperty("seconds-per-commit")) <= 0) {
                 throw new Exception("Seconds per commit harus lebih besar dari 0");
             }
-            if (properties.getProperty("before-capture") != null && !new File(properties.getProperty("before-capture")).exists()) {
-                throw new Exception("Path script PHP tidak valid");
+
+            String[] captureURLs = properties.getProperty("capture-url").split(";");
+            for (String captureURL : captureURLs) {
+                URL url = new URL(captureURL);
+                HttpURLConnection http = (HttpURLConnection) url.openConnection();
+                if (http.getResponseCode() == 404) {
+                    throw new Exception("Capture url tidak valid");
+                }
+                else if(http.getResponseCode() == 500){
+                    throw new Exception("Server error");
+                }
             }
-            if (properties.getProperty("logo") != null && !new File(properties.getProperty("logo")).exists()) {
-                throw new Exception("Path gambar tidak valid");
+
+            if (properties.getProperty("before-capture") != null) {
+                File file = new File(properties.getProperty("before-capture"));
+                if (!file.exists() || !FilenameUtils.getExtension(file.getAbsolutePath()).equals("php")) {
+                    throw new Exception("Path script PHP tidak valid");
+                }
+
             }
+            if (properties.getProperty("logo") != null) {
+                File file = new File(properties.getProperty("logo"));
+                if (!file.exists() || ImageIO.read(new File(properties.getProperty("logo"))) == null) {
+                    throw new Exception("Path gambar tidak valid");
+                }
+            }
+
             if (properties.getProperty("start-commit") != null) {
                 if (properties.getProperty("start-commit").length() != 7) {
                     throw new Exception("Panjang commit ID awal harus 7 karakter");
@@ -70,7 +92,7 @@ public class Main {
             }
         } catch (NumberFormatException e) {
             System.out.println("Animasi timelapse gagal dibuat");
-            System.out.println("Seconds per commit harus berupa bilangan bulat");
+            System.out.println("Seconds per commit harus berupa bilangan riil");
             System.exit(0);
         } catch (Exception e) {
             System.out.println("Animasi timelapse gagal dibuat");
@@ -80,6 +102,7 @@ public class Main {
 
         BrowserController browserController = new BrowserController(numberOfBrowsers);
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
+        System.out.println("Membuat animasi timelapse");
         timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
         System.out.println("Animasi timelapse berhasil dibuat");
     }

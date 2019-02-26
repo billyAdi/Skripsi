@@ -92,7 +92,7 @@ public class Main {
             }
         } catch (NumberFormatException e) {
             System.out.println("Animasi timelapse gagal dibuat");
-            System.out.println("Seconds per commit harus berupa bilangan riil");
+            System.out.println("Seconds per commit harus berupa bilangan riil atau bilangan bulat");
             System.exit(0);
         } catch (Exception e) {
             System.out.println("Animasi timelapse gagal dibuat");

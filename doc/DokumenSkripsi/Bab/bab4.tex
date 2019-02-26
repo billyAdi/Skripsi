@@ -1,3 +1,27 @@
+\lstdefinelanguage{plaintext}{
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  identifierstyle=\color{black},
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset
+{ 
+    language=plaintext,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+    frame=leftline
+}
+
+
+
 \chapter{Perancangan}
 \label{chap:Perancangan}
 
@@ -96,3 +120,85 @@ Berfungsi untuk membangkitkan animasi \textit{timelapse} berdasarkan langkah-lan
 
 \section{Perancangan Antarmuka}
 \label{sec:perancangan_antarmuka}
+Program dalam skripsi ini menggunakan dengan terminal sebagai antarmuka, dengan kata lain menggunakan Command Line Interface. \textit{Input} dari program ini dimasukkan melalui argumen Command Line. \textit{Option} yang dapat dimasukkan ke program ini dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. \textit{Output} dari program ini berupa status pada terminal dan \textit{file} hasil animasi bertipe GIF.  
+
+Listing \ref{lst:status_pesan_berhasil} menunjukkan status yang terdapat pada terminal saat program sedang dijalankan dan berhasil membangkitkan animasi \textit{timelapse}. Baris pertama menunjukkan bahwa program sedang membuat animasi \textit{timelapse}. Status pada baris ke-2 sampai baris ke-5 muncul saat program sedang menjalankan WebDriver. Baris terakhir menunjukkan bahwa animasi \textit{timelapse} berhasil dibuat.
+
+\begin{lstlisting}[caption={Status pesan pada terminal saat program sedang dijalankan dan berhasil membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_berhasil},language=plaintext]
+Membuat animasi timelapse
+Starting ChromeDriver 2.42.591088 (7b2b2dca23cca0862f674758c9a3933e685c27d5) on port 16446
+Only local connections are allowed.
+Feb 24, 2019 3:26:25 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: OSS
+Animasi timelapse berhasil dibuat
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Status pesan pada terminal saat program gagal membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_gagal},language=plaintext]
+Animasi timelapse gagal dibuat
+<Error Message>
+\end{lstlisting}
+
+
+Listing \ref{lst:status_pesan_gagal} menunjukkan status yang terdapat pada terminal saat program gagal membangkitkan animasi \textit{timelapse}. Baris pertama menunjukkan bahwa program gagal membangkitkan animasi \textit{timelapse}. Baris kedua menyatakan \textit{error message} dari program. Program akan gagal membangkitkan animasi \textit{timelapse}, jika \textit{user} memasukkan argumen Command Line yang tidak valid. Berikut ini adalah \textit{error message} yang ditampilkan saat \textit{user} memasukkan \textit{input} yang tidak valid:
+\begin{itemize}
+\item \texttt{Missing required option: [OPTION NAME]}\\
+Pesan ini muncul jika \textit{user} tidak memasukkan Option yang wajib ada. Option yang wajib dimasukkan adalah \texttt{seconds-per-commit}, \texttt{project-path}, dan \texttt{capture-url}.
+\item \texttt{Missing argument for option: [OPTION NAME]}\\
+Pesan ini muncul jika \textit{user} memasukkan Option tanpa diikuti dengan argumennya. Semua Option yang terdapat pada program ini harus memiliki argumen.
+\item \texttt{Jumlah url yang akan dicapture maksimal 4}\\
+Pesan ini muncul jika jumlah argumen pada Option \texttt{capture-url} lebih dari 4.
+\item \texttt{Seconds per commit harus lebih besar dari 0}\\
+Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bernilai lebih kecil dari 0.
+\item \texttt{Seconds per commit harus berupa bilangan riil atau bilangan bulat}\\
+Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bukan bertipe bilangan riil atau bilangan bulat. 
+\item \texttt{Capture url tidak valid}\\
+Pesan ini muncul jika argumen \texttt{capture-url} merupakan alamat URL yang tidak valid.
+\item \texttt{Path script PHP tidak valid}\\
+Pesan ini muncul jika \textit{path} pada argumen Option \texttt{before-capture} tidak ditemukan atau \texttt{path} bukan merupakan \textit{file} PHP.
+\item \texttt{Path gambar tidak valid}\\
+Pesan ini muncul jika \textit{path} gambar pada argumen Option \texttt{logo} tidak ditemukan atau \texttt{path} gambar bukan merupakan \textit{file} gambar.
+\item \texttt{Panjang commit ID awal harus 7 karakter}\\
+Pesan ini muncul jika panjang Commit ID pada argumen Option \texttt{start-commit} tidak sama dengan tujuh karakter.
+\item \texttt{Panjang commit ID akhir harus 7 karakter}\\
+Pesan ini muncul jika panjang Commit ID pada argumen Option \texttt{stop-commit} tidak sama dengan tujuh karakter.
+\item \texttt{Commit ID awal tidak ditemukan}\\
+Pesan ini muncul jika Commit ID pada argumen Option \texttt{start-commit} tidak ditemukan.
+\item \texttt{Commit ID akhir tidak ditemukan}\\
+Pesan ini muncul jika Commit ID pada argumen Option \texttt{stop-commit} tidak ditemukan.
+\item \texttt{Commit ID awal dan akhir tidak boleh sama}\\
+Pesan ini muncul jika argumen pada Option \texttt{start-commit} dan Option \texttt{stop-commit} bernilai sama.
+\item \texttt{Commit ID awal dan akhir terbalik}\\
+Pesan ini muncul jika nilai argumen pada Option \texttt{start-commit} dan Option \texttt{stop-commit} tertukar.
+
+\end{itemize}
+
+Rancangan \textit{output} dari hasil \textit{file} animasi \textit{timelapse} dapat dilihat pada Gambar \ref{fig:output1} sampai dengan Gambar \ref{fig:output4}. Gambar \ref{fig:output1} menunjukkan rancangan \textit{output} jika terdapat satu halaman \textit{web}. Gambar \ref{fig:output2} menunjukkan rancangan \textit{output} jika terdapat dua halaman \textit{web}. Gambar \ref{fig:output3} menunjukkan rancangan \textit{output} jika terdapat tiga halaman \textit{web}. Gambar \ref{fig:output4} menunjukkan rancangan \textit{output} jika terdapat empat halaman \textit{web}. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/output_1.png}
+	\caption{Rancangan \textit{output} satu halaman \textit{web}.}
+	\label{fig:output1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/output_2.png}
+	\caption{Rancangan \textit{output} dua halaman \textit{web}.}
+	\label{fig:output2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/output_3.png}
+	\caption{Rancangan \textit{output} tiga halaman \textit{web}.}
+	\label{fig:output3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/output_4.png}
+	\caption{Rancangan \textit{output} empat halaman \textit{web}.}
+	\label{fig:output4}
+\end{figure}

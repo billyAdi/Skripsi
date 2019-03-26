@@ -48,7 +48,7 @@ Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang
 	\label{fig:localvcs}
 \end{figure}
 
-Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada \textit{local directory} di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi atau \textit{state}. \textit{Local Version Control}, dapat melakukan \textit{checkout} \textit{file} ke versi atau \textit{state} tertentu.   
+Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada \textit{local directory} di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi atau \textit{state}.  
  
 \subsubsection{Centralized Version Control Systems}
 \begin{figure}[H]
@@ -84,7 +84,7 @@ Salah satu perbedaan antara Git dengan VCS lainnya adalah dalam cara Git memperl
 \end{figure}
 
 
-Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datanya sebagai sebuah kumpulan \textit{snapshot} dari sebuah miniatur \textit{file system}. Setiap kali dilakukan \textit{commit}, git merekam \textit{state} dari sekumpulan \textit{file} dan menyimpanannya sebagai \textit{reference} \textit{snapshot} tersebut. Gambar \ref{fig:snapshots}, menunjukkan \textit{snapshots} dari \textit{file} A, B, dan C. Pada versi kedua, \textit{file} B tidak mengalami perubahan, sehingga \textit{file} yang disimpan adalah referensi \textit{file} B pada versi sebelumnya.
+Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datanya sebagai sebuah kumpulan \textit{snapshot} dari sebuah miniatur \textit{file system}. Setiap kali dilakukan \textit{commit}, git merekam \textit{state} dari sekumpulan \textit{file} dan menyimpannya sebagai \textit{snapshot}. Gambar \ref{fig:snapshots}, menunjukkan \textit{snapshots} dari \textit{file} A, B, dan C. Pada versi kedua, \textit{file} B tidak mengalami perubahan, sehingga yang disimpan adalah \textit{reference} dari \textit{file} B pada versi sebelumnya.
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/snapshots.png}
@@ -93,9 +93,9 @@ Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datan
 \end{figure}
 
 \subsubsection{State pada Git}
-Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan commit.
+Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} adalah \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan \textit{commit}.
 
-Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, \textit{working directory}, dan \textit{staging area}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working tree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah \textit{file} yang menyimpan informasi mengenai apa yang menjadi \textit{commit} selanjutnya. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
+Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, \textit{working directory}, dan \textit{staging area}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working tree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah suatu \textit{file}, dimana \textit{file} ini menyimpan daftar \textit{file} yang telah ditandai untuk kemudian dilakukan \textit{commit}. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
 
 Alur kerja dari Git adalah sebagai berikut:
 \begin{enumerate}
@@ -112,9 +112,9 @@ Alur kerja dari Git adalah sebagai berikut:
 \end{figure}
 
 \subsubsection{Commit}
-Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. \textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada versi/\textit{commit} keempat. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{commit} keempat. 
+Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. \textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada \textit{version} 4. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{version} 4. 
 
-Git melakukan \textit{checksum} pada \textit{commit} sebelum menyimpannya ke direktori Git. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari \textit{working directory} atau struktur direktori Git.
+%Git melakukan \textit{checksum} pada \textit{commit} sebelum menyimpannya ke direktori Git. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari\textit{working directory} atau struktur direktori Git.
 
 
 \begin{lstlisting}[caption={Contoh histori commit dalam pengembangan perangkat lunak},label={lst:git_histori},language=plaintext]
@@ -152,7 +152,7 @@ Date:   Wed May 2 13:32:21 2018 +0700
     
 \end{lstlisting}
 
-Seperti yang diperlihatkan pada Listing \ref{lst:git_histori}, setiap \textit{commit} memiliki beberapa informasi. Baris pertama menunjukkan \textit{commit} ID yang berupa \textit{SHA-1 hash}. Pada baris ini, \textit{Master} menunjukkan \textit{branch} yang sedang aktif, \textit{master} juga merupakan \textit{pointer} ke \textit{commit} terakhir. \textit{Head} merupakan \textit{reference} ke \textit{branch master}. \textit{Origin}/\textit{master} dan \textit{origin}/\textit{HEAD} merupakan \textit{master} dan \textit{HEAD} pada \textit{remote repository}. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu terjadinya \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
+Seperti yang diperlihatkan pada Listing \ref{lst:git_histori}, setiap \textit{commit} memiliki beberapa informasi. Baris pertama menunjukkan \textit{commit} ID berupa \textit{SHA-1 hash value}, dengan panjang empat puluh karakter heksadesimal. \textit{SHA-1 hash value} ini digunakan untuk pengecekan integritas pada \textit{file}. Pada baris pertama, \textit{master} menunjukkan \textit{branch} yang sedang aktif, \textit{master} juga merupakan \textit{reference} ke \textit{commit} terakhir. \textit{HEAD} merupakan \textit{reference} ke \textit{master}. \textit{Origin}/\textit{master} dan \textit{origin}/\textit{HEAD} merupakan \textit{master} dan \textit{HEAD} pada \textit{remote repository}. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
 
 \subsection{Operasi Dasar pada Git}
 \label{subsec:operasi_dasar_git}
@@ -189,28 +189,36 @@ Operasi ini digunakan untuk menggabungkan \textit{branch} tertentu dengan \texti
 \texttt{\$ git merge [branch]/[bookmark]}
 \item Pull\\
 Operasi ini adalah gabungan dari operasi \textit{fetch} dan \textit{merge}. Berikut adalah sintaks untuk melakukan operasi \textit{pull}:\\
-\texttt{\$ git pull}
+\texttt{\$ git pull }
 \item Push\\
 Operasi ini digunakan untuk mengirim data pada reposipori Git lokal ke \textit{remote repository}.
 Berikut adalah sintaks untuk melakukan operasi \textit{push}:\\
-\texttt{\$ git push [alias] [branch]}
+\texttt{\$ git push [bookmark] [branch]}
 \item Checkout\\
 Operasi ini digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu, setelah itu memperbarui \textit{file} pada \textit{working directory} berdasarkan \textit{branch} atau \textit{commit} tersebut. Berikut ini adalah sintaks-sintaks untuk operasi \textit{checkout}:\\
-\texttt{\$ git checkout [SHA-1 commit]}\\
+\texttt{\$ git checkout [commit ID]}\\
 \texttt{\$ git checkout [branch-name]}
 \item Log\\
 Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \textit{branch} yang sedang aktif. Berikut ini adalah sintaks untuk melakukan operasi \textit{log}:\\
 \texttt{\$ git log}
 
 \item Reset\\
-Operasi ini digunakan untuk mengatur ulang \textit{staging area} dan \textit{working tree} sesuai dengan \textit{commit} tertentu. Berikut ini adalah sintaks untuk melakukan operasi \textit{reset}:\\
-\texttt{\$ git reset --hard [commit]}
+Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} tertentu, selain itu secara opsional  melakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} berdasarkan tipe \textit{reset}. Terdapat tiga tipe \textit{reset} yaitu, \textit{hard}, \textit{soft}, dan \textit{mixed}. Pada tipe \textit{hard}, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree}, selain itu, posisi \textit{HEAD} dipindah sehingga menunjuk ke \textit{commit} tertentu. Pada tipe \textit{soft}, hanya posisi \textit{HEAD} saja yang berpindah. Pada tipe \textit{mixed}, dilakukan \textit{reset} pada \textit{staging area} dan posisi \textit{HEAD} dipindah sehingga menunjuk ke \textit{commit} tertentu.
+
+Berikut ini adalah sintaks untuk melakukan operasi \textit{reset}:\\
+\texttt{\$ git reset --hard [commit]}\\
+\texttt{\$ git reset --mixed [commit]}\\
+\texttt{\$ git reset --soft [commit]}
 \end{enumerate}
 \subsection{Git Checkout}
 \label{subsec:git_checkout}
-Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \textit{checkout} dapat digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu. Operasi \textit{checkout} dapat dilakukan menggunakan sintaks \texttt{\$ git checkout} diikuti dengan nama \textit{branch} atau \textit{SHA-1 hash}. Gambar \ref{fig:git_checkout} menunjukkan contoh \textit{checkout} pada \textit{commit}. Posisi awal \textit{HEAD} menunjuk pada \textit{branch master}, setelah dilakukan \textit{checkout} ke \textit{commit kedua}, posisi \textit{HEAD} menunjuk pada \textit{commit kedua}. \textit{Working directory} diperbarui berdasarkan \textit{state} pada \textit{commit} kedua. 
+Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \textit{checkout} dapat digunakan untuk berpindah ke \textit{branch} atau \textit{commit} tertentu. Operasi \textit{checkout} dapat dilakukan menggunakan sintaks \texttt{\$ git checkout} diikuti dengan nama \textit{branch} atau \textit{commit ID}. Gambar \ref{fig:git_checkout} menunjukkan contoh \textit{checkout} pada \textit{commit}. Posisi awal \textit{HEAD} menunjuk pada \textit{branch master}, setelah dilakukan \textit{checkout} ke \textit{commit} 2, posisi \textit{HEAD} menunjuk pada \textit{commit} 2. \textit{Working directory} diperbarui berdasarkan \textit{state} pada \textit{commit} 2. 
 
-\textit{HEAD} yang menunjuk langsung ke suatu \textit{commit} disebut dengan \textit{detached HEAD}. Perubahan yang terjadi pada \textit{detached HEAD} tidak akan terekam oleh Git. Jika terdapat perubahan, kemudian dilakukan \textit{checkout commit} atau \textit{branch}, perubahan tersebut akan hilang. Tetapi, perubahan tersebut bisa disimpan dengan cara membuat \textit{branch} baru. Posisi \textit{HEAD} akan menunjuk pada \textit{branch} baru dan \textit{HEAD} sudah tidak lagi dalam keadaan \textit{detached HEAD}. 
+\textit{HEAD} yang menunjuk langsung ke suatu \textit{commit} disebut dengan \textit{detached HEAD}. Perubahan yang terjadi pada \textit{detached HEAD} tidak akan terekam oleh Git. Jika terdapat perubahan, kemudian dilakukan \textit{checkout commit} atau \textit{branch}, perubahan tersebut akan hilang. \textit{HEAD} dapat dipindahkan ke posisi semula(menunjuk pada \textit{branch master}) dengan  menggunakan sintaks \texttt{\$ git checkout master}.
+
+
+%Tetapi, perubahan tersebut bisa disimpan dengan cara membuat \textit{branch} baru. Posisi \textit{HEAD} akan menunjuk pada \textit{branch} baru dan \textit{HEAD} sudah tidak lagi dalam keadaan \textit{detached HEAD}.
+ 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{Gambar/gitcheckoutcommit.png}
@@ -222,25 +230,22 @@ Seperti yang sudah dijelaskan pada subbab \ref{subsec:operasi_dasar_git}, \texti
 \label{sec:jgit}
 JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}\cite{JGit}. Dengan menggunakan JGit, operasi-operasi dalam Git bisa dilakukan melalui program Java. Pada subbab berikut dijelaskan beberapa kelas dari \textit{library} JGit. Subbab ini mengacu pada \cite{JGit_java_doc}. 
 
-\subsection{Repository}
+\subsection{Kelas Repository}
 \label{subsec:repository}
 Kelas ini merepresentasikan repositori Git. Berikut ini adalah beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
 \item public void create()\\
-Berfungsi untuk membuat repositori Git baru.
-\item public void create(boolean bare)\\
-Berfungsi untuk membuat repositori Git baru. \\
-Parameter: jika bernilai \textit{true} maka dibuat \textit{bare repository} (repositori tanpa \textit{working directory}). 
+Berfungsi untuk membuat repositori Git baru. 
 \item public String getBranch()\\
 Berfungsi untuk mendapatkan nama \textit{branch} yang ditunjuk oleh \textit{HEAD}.\\
 Kembalian: nama dari \textit{branch} yang sedang aktif, contohnya \textit{master}.
 \item public Ref getRef(String name)\\
-Berfungsi untuk mendapatkan Ref berdasarkan nama yang diberikan.\\
-Parameter: nama dari Ref.\\
-Kembalian: objek Ref.
+Berfungsi untuk mendapatkan \textit{reference} berdasarkan nama yang diberikan.\\
+Parameter: nama dari \textit{reference}.\\
+Kembalian: \textit{object} bertipe Ref. Ref merupakan variabel yang menyimpan ID dari Git object. Salah satu contoh dari Git Object adalah \textit{commit}. 
 \end{itemize} 
 
-\subsection{FileRepository}
+\subsection{Kelas FileRepository}
 \label{subsec:filerepository}
 Kelas ini merupakan turunan dari kelas \textit{Repository}. Berikut ini adalah \textit{construtor} dari kelas ini:
 \begin{itemize}
@@ -249,7 +254,7 @@ Kelas ini merupakan turunan dari kelas \textit{Repository}. Berikut ini adalah \
 Parameter: \textit{path} dari suatu repositori Git.
 \end{itemize}
 
-\subsection{Git}
+\subsection{Kelas Git}
 \label{subsec:Git}
 Kelas ini menyediakan API yang mirip Git Command Line untuk berinteraksi dengan repositori Git. Berikut ini adalah \textit{constructor} dan beberapa \textit{method} dalam kelas ini:
 \begin{itemize}
@@ -318,8 +323,60 @@ Kembalian: objek \textit{DeleteBranchCommand}.
 Kembalian: objek \textit{ResetCommand}.
 \end{itemize}
 
+\subsection{Kelas Checkout Command}
+\label{subsec:checkoutcommand}
+Kelas yang digunakan untuk melakukan operasi \textit{checkout}.
+Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public CheckoutCommand setName(String name)\\
+Menentukan nama  \textit{branch} atau \textit{commit} untuk melakukan checkout.\\
+Parameter: nama dari \textit{branch} atau \textit{commit}.\\
+Kembalian: \textit{object} CheckoutCommand.
+\item public Ref call()\\
+Berfungsi untuk menjalankan operasi \textit{checkout}.
+\end{itemize}
 
-\subsection{RevCommit}
+\subsection{Kelas Log Command}
+\label{subsec:logcommand}
+Kelas yang digunakan untuk melakukan operasi \textit{log}.
+Berikut adalah \textit{method} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public Iterable<RevCommit> call()\\
+Berfungsi untuk menjalankan operasi \textit{log}.\\
+Kembalian: histori \textit{commit} pada \textit{branch} yang sedang aktif. 
+\end{itemize}
+
+\subsection{Kelas Reset Command}
+\label{subsec:resetcommand}
+Kelas yang digunakan untuk melakukan operasi \textit{reset}.
+Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public ResetCommand setMode(ResetCommand.ResetType mode)\\
+Menentukan tipe \textit{reset}.\\ 
+Parameter: tipe \textit{reset}.\\
+Kembalian: \textit{object} ResetCommand.
+\item public ResetCommand setRef(String ref)\\
+Mengatur nama \textit{reference} tujuan dalam operasi \textit{reset}. Secara default, \textit{reference} yang digunakan adalah \textit{HEAD}.\\
+Parameter: nama dari \textit{reference}.\\
+Kembalian: \textit{object} ResetCommand.
+\item public Ref call()\\
+Berfungsi untuk menjalankan operasi \textit{reset}.\\
+\end{itemize}
+
+\subsection{Kelas ResetCommand.ResetType}
+\label{subsec:resettype}
+Merupakan \textit{enumeration} yang menentukan tipe \textit{reset} yang digunakan pada operasi \textit{reset}.
+\textit{Enumeration} tersebut adalah sebagai berikut:
+\begin{itemize}
+\item public static final ResetCommand.ResetType SOFT\\
+Hanya mengubah posisi \textit{HEAD}. 
+\item public static final ResetCommand.ResetType HARD\\
+Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan. Selain itu, mengubah \textit{staging area} dan \textit{working directory} berdasarkan \textit{reference} tersebut.
+\item public static final ResetCommand.ResetType MIXED\\
+Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan dan mengubah \textit{staging area} berdasarkan \textit{reference} tersebut.
+\end{itemize}
+
+\subsection{Kelas RevCommit}
 \label{subsec:revcommit}
 Kelas ini merupakan \textit{reference} ke \textit{commit} yang ada di \textit{Directed Acyclic Graph}. Berikut ini adalah  beberapa \textit{method} dari kelas ini:
 \begin{itemize}
@@ -332,15 +389,15 @@ Berfungsi untuk mendapatkan deskripsi dari suatu \textit{commit}. Jika panjang d
 Kembalian: baris pertama dari deskripsi \textit{commit} dalam bentuk String.
 
 \item public final String getName()\\
-\textit{Method} ini mengembalikan \textit{SHA-1} dari \textit{commit}.\\
-Kembalian: \textit{string SHA-1} dalam bentuk String. 
+\textit{Method} ini mengembalikan \textit{commit ID}.\\
+Kembalian: \textit{commit ID} berupa SHA-1 hash value dalam bentuk String. 
 
 \item public final PersonIdent getAuthorIdent()\\
 Berfungsi untuk mendapatkan informasi mengenai \textit{author} yang melakukan \textit{commit}.\\
 Kembalian: objek \textit{PersonIdent} yang memuat informasi tentang \textit{author}(nama dan \textit{email}) dan waktu dilakukannya \textit{commit}.
 \end{itemize}
 
-\subsection{PersonIdent}
+\subsection{Kelas PersonIdent}
 \label{subsec:personident}
 Kelas ini memberikan informasi mengenai \textit{author} dari suatu \textit{commit}. Berikut ini adalah beberapa \textit{method} dari kelas ini:
 \begin{itemize}
@@ -357,18 +414,19 @@ Berfungsi mengembalikan waktu dilakukannya suatu \textit{commit} oleh \textit{au
 Kembalian: waktu dilakukannya suatu \textit{commit} berupa objek Date.
 \end{itemize}
 
-
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
-Selenium adalah kumpulan dari kakas perangkat lunak, dengan pendekatan yang berbeda pada setiap kakas dalam mendukung \textit{automation test}\cite{Selenium_doc}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), Selenium-Grid, dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan kakas yang digunakan untuk mengembangkan Selenium \textit{test scripts}.
+Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{extension} dari\textit{browser} Chrome dan Firefox yang digunakan untuk melakukan \textit{record and playback test} pada \textit{browser}. 
+ 
+WebDriver merupakan kakas untuk mengotomatisasi pengujian pada aplikasi \textit{web}\cite{Selenium_doc}. WebDriver dapat berkomunikasi secara langsung dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. WebDriver yang terdapat pada Selenium WebDriver antara lain ChromeDriver, FirefoxDriver, OperaDriver, InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver.
 
-WebDriver merupakan kakas untuk mengotomatisasi pengujian pada perangkat lunak web\cite{Selenium_doc}. WebDriver dapat berkomunikasi dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. Setiap \textit{browser} memiliki WebDriver masing-masing. WebDriver yang terdapat pada SeleniumDriver antara lain ChromeDriver, FirefoxDriver/GeckoDriver, OperaDriver, InternetExplorerDriver, dan HtmlUnitDriver. 
+ChromeDriver merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. FirefoxDriver merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. OperaDriver merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. InternetExplorerDriver merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. EdgeDriver merupakan implementasi WebDriver yang mengontrol Microsoft Edge \textit{browser}. HtmlUnitDriver merupakan implementasi WebDriver yang mengontrol HTMLUnit \textit{browser} yang bersifat \textit{headless}(tidak mempunyai GUI). 
 
-Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. WebDriver yang digunakan adalah ChromeDriver. Bahasa yang digunakan adalah Java. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. Bahasa pemrograman yang digunakan adalah java. WebDriver yang digunakan adalah ChromeDriver. Pemilihan WebDriver ini hanya berdasarkan preferensi penulis saja. Penulis tidak memilih InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver karena InternetExplorerDriver dan EdgeDriver hanya bisa berjalan pada sistem operasi Windows, selain itu  HtmlUnitDriver tidak mempunyai GUI sehingga tidak bisa dilakukan pengambilan \textit{screenshot}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
 
-\subsection{WebDriver}
+\subsection{Interface WebDriver}
 \label{subsec:webdriver}
-Merupakan \textit{interface} utama yang digunakan untuk pengujian, \textit{interface} ini merepresentasikan \textit{web browser} yang ideal . Berikut ini adalah beberapa \textit{method} dalam \textit{interface} ini:
+Merupakan \textit{interface} utama yang digunakan untuk pengujian, \textit{interface} ini merepresentasikan \textit{web browser} yang ideal. Berikut ini adalah beberapa \textit{method} dalam \textit{interface} ini:
 \begin{itemize}
 \item void close()\\
 Berfungsi untuk menutup \textit{window} pada \textit{browser}, jika \textit{window} yang sekarang merupakan satu-satunya \textit{window} yang terbuka maka \textit{browser} akan ditutup.
@@ -404,7 +462,7 @@ Kembalian: interface dengan tipe WebDriver.Options. Di dalam kelas ini terdapat 
 %Parameter: URL yang akan dimuat.
 %\end{itemize}
 
-\subsection{WebDriver.Window}
+\subsection{Interface WebDriver.Window}
 \label{subsec:webdriveroption}
 \textit{Interface} yang digunakan untuk mengatur \textit{window} pada \textit{browser}. Berikut adalah \textit{method} yang dimiliki oleh \textit{interface} ini:
 \begin{itemize}
@@ -415,57 +473,107 @@ Berfungsi untuk mengatur ukuran \textit{window} pada \textit{browser} sesuai par
 Parameter: ukuran dari \textit{browser} berupa objek Dimension. Objek Dimension mempunyai atribut height dan weight yang menyatakan ukuran panjang dan lebar dalam satuan piksel.
 \end{itemize}
 
-\subsection{WebElement}
-\label{subsec:webelement}  
-Merupakan \textit{interface} yang  merepresentasikan dari elemen HTML. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini:
+%\subsection{WebElement}
+%\label{subsec:webelement}  
+%Merupakan \textit{interface} yang  merepresentasikan dari elemen HTML. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini:
+%\begin{itemize}
+%\item void click()\\
+%Berfungsi untuk mengklik suatu elemen HTML.
+%\item void submit()\\
+%Berfungsi untuk mengirimkan elemen \textit{form} ke \textit{remote server}. Fungsi ini akan melempar \textit{NoSuchElementException} jika elemen yang dikirim tidak berada di dalam \textit{form}. 
+%\item String getText()\\
+%Berfungsi untuk mendapatkan teks pada suatu elemen.\\
+%Kembalian: Teks yang \textit{visible} pada elemen.
+
+%\item void clear()\\
+%Berfungsi untuk menghapus teks pada elemen yang digunakan untuk memasukkan teks.
+%\item WebElement findElement(By by)\\
+%Berfungsi untuk mendapatkan \textit{WebElement} pertama menggunakan metode yang diberikan parameter. \textit{Method} ini akan melempar \textit{NoSuchElementException} jika \textit{WebElement} tidak ditemukan.\\
+%Kembalian: \textit{WebElement} pertama yang sesuai dengan mekanisme pencarian.\\
+%Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
+
+%\item List<WebElement> findElements(By by)\\
+%Berfungsi untuk mendapatkan semua \textit{WebElement} sesuai dengan mekanisme yang diberikan parameter.\\
+%Kembalian: \textit{list} dari \textit{WebElement}, atau \textit{list} kosong jika pencarian tidak ditemukan.\\
+%Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
+%\item void sendKeys(java.lang.CharSequence... keysToSend)\\
+%Berfungsi untuk mengirimkan kumpulan karakter/teks ke elemen \textit{input}. \textit{Method} ini akan melempar %\textit{java.lang.IllegalArgumentException} jika parameter keysToSend bernilai \textit{null}.\\
+%Parameter: kumpulan karakter/teks yang dikirim ke elemen.
+
+%\item String getAttribute(String name)\\
+%Berfungsi untuk mendapatkan nilai dari \textit{attribute} suatu \textit{web element}.\\
+%Kembalian: nilai dari \textit{attribute} dari \textit{web element}.
+%\end{itemize} 
+
+%\subsection{By}
+%\label{subsec:by}
+%Kelas ini mendefinisikan mekanisme pencarian \textit{web element}. Berikut adalah beberapa \textit{method} yang %dimiliki oleh kelas ini:
+%\begin{itemize}
+%\item public static By className(String className)\\
+%Mekanisme pencarian berdasarkan nilai atribut class dari \textit{web element}.\\
+%Parameter: nama class dari \textit{web element}.\\
+%Kembalian: objek By yang sudah menemukan \textit{web element}.
+%\item public static By tagName(String tagName)\\
+%Mekanisme pencarian berdasarkan \textit{tag name} dari \textit{web element}.\\
+%Parameter: \textit{tag name}  dari \textit{web element}.\\
+%Kembalian: objek By yang sudah menemukan \textit{web element}.
+%\item public static By id(String id) \\
+%Mekanisme pencarian berdasarkan nilai atribut ID dari \textit{web element}.\\
+%Parameter: ID dari \textit{web element}.\\
+%Kembalian: objek By yang sudah menemukan \textit{web element}.
+%\end{itemize} 
+
+\subsection{Kelas ChromeDriver}
+\label{subsec:chromedriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
-\item void click()\\
-Berfungsi untuk mengklik suatu elemen HTML.
-\item void submit()\\
-Berfungsi untuk mengirimkan elemen \textit{form} ke \textit{remote server}. Fungsi ini akan melempar \textit{NoSuchElementException} jika elemen yang dikirim tidak berada di dalam \textit{form}. 
-\item String getText()\\
-Berfungsi untuk mendapatkan teks pada suatu elemen.\\
-Kembalian: Teks yang \textit{visible} pada elemen.
+\item public ChromeDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe ChromeDriver.
+\end{itemize}
 
-\item void clear()\\
-Berfungsi untuk menghapus teks pada elemen yang digunakan untuk memasukkan teks.
-\item WebElement findElement(By by)\\
-Berfungsi untuk mendapatkan \textit{WebElement} pertama menggunakan metode yang diberikan parameter. \textit{Method} ini akan melempar \textit{NoSuchElementException} jika \textit{WebElement} tidak ditemukan.\\
-Kembalian: \textit{WebElement} pertama yang sesuai dengan mekanisme pencarian.\\
-Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
-
-\item List<WebElement> findElements(By by)\\
-Berfungsi untuk mendapatkan semua \textit{WebElement} sesuai dengan mekanisme yang diberikan parameter.\\
-Kembalian: \textit{list} dari \textit{WebElement}, atau \textit{list} kosong jika pencarian tidak ditemukan.\\
-Parameter: mekanisme pencarian, bisa berupa pencarian dengan \textit{ID}, \textit{class}, dll.
-\item void sendKeys(java.lang.CharSequence... keysToSend)\\
-Berfungsi untuk mengirimkan kumpulan karakter/teks ke elemen \textit{input}. \textit{Method} ini akan melempar \textit{java.lang.IllegalArgumentException} jika parameter keysToSend bernilai \textit{null}.\\
-Parameter: kumpulan karakter/teks yang dikirim ke elemen.
-
-\item String getAttribute(String name)\\
-Berfungsi untuk mendapatkan nilai dari \textit{attribute} suatu \textit{web element}.\\
-Kembalian: nilai dari \textit{attribute} dari \textit{web element}.
-\end{itemize} 
-
-\subsection{By}
-\label{subsec:by}
-Kelas ini mendefinisikan mekanisme pencarian \textit{web element}. Berikut adalah beberapa \textit{method} yang dimiliki oleh kelas ini:
+\subsection{Kelas FirefoxDriver}
+\label{subsec:firefoxdriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
-\item public static By className(String className)\\
-Mekanisme pencarian berdasarkan nilai atribut class dari \textit{web element}.\\
-Parameter: nama class dari \textit{web element}.\\
-Kembalian: objek By yang sudah menemukan \textit{web element}.
-\item public static By tagName(String tagName)\\
-Mekanisme pencarian berdasarkan \textit{tag name} dari \textit{web element}.\\
-Parameter: \textit{tag name}  dari \textit{web element}.\\
-Kembalian: objek By yang sudah menemukan \textit{web element}.
-\item public static By id(String id) \\
-Mekanisme pencarian berdasarkan nilai atribut ID dari \textit{web element}.\\
-Parameter: ID dari \textit{web element}.\\
-Kembalian: objek By yang sudah menemukan \textit{web element}.
-\end{itemize} 
+\item public FirefoxDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe FirefoxDriver.
+\end{itemize}
 
-\subsection{OutputType}
+\subsection{Kelas OperaDriver}
+\label{subsec:operadriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public OperaDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe OperaDriver.
+\end{itemize}
+
+\subsection{Kelas InternetExplorerDriver}
+\label{subsec:internetexplorerdriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public InternetExplorerDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe InternetExplorerDriver.
+\end{itemize}
+
+\subsection{Kelas EdgeDriver}
+\label{subsec:edgedriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Microsoft Edge \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public EdgeDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe EdgeDriver.
+\end{itemize}
+
+
+\subsection{Kelas HtmlUnitDriver}
+\label{subsec:htmlunitdriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol HtmlUnit \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public HtmlUnitDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe HtmlUnitDriver.
+\end{itemize}
+
+
+\subsection{Interface OutputType}
 \label{subsec:output_type}
 Merupakan \textit{interface} yang menentukan tipe \textit{output} pada \textit{screenshot}. Terdapat tiga konstanta untuk menentukan tipe \textit{output} pada \textit{screenshot}. Konstanta tersebut adalah sebagai berikut:
 \begin{itemize}
@@ -477,16 +585,14 @@ Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{raw bytes}.
 Berfungsi untuk mendapatkan \textit{screenshot} dalam bentuk \textit{temprorary file} yang akan dihapus setelah program keluar dari \textit{Java Virtual Machine}.
 \end{itemize}
 
-
-\subsection{TakesScreenshot}
+\subsection{Interface TakesScreenshot}
 \label{subsec:takes_screenshot}
-Merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. Berikut adalah \textit{method} yang terdapat dalam \textit{interface} ini:
+Merupakan \textit{interface} yang digunakan untuk mengambil \textit{screenshot}. WebDriver yang mengimplementasikan \textit{interface} ini yaitu ChromeDriver, FirefoxDriver, OperaDriver, InternetExplorerDriver, dan  EdgeDriver. HtmlUnitDriver tidak mengimplentasikan \textit{interface} ini. Berikut adalah \textit{method} yang terdapat dalam \textit{interface} ini:
 \begin{itemize}
 \item <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException\\
 \textit{Method} ini berfungsi untuk mengambil \textit{screenshot} dan mengembalikan hasilnya.\\
 Kembalian: objek hasil \textit{screenshot} \\
 Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_type}).
-
 \end{itemize}
 
 
@@ -512,7 +618,7 @@ Kembalian: objek \textit{CommandLine}.
 
 \subsection{DefaultParser}
 \label{subsec:defaultparser}
-Merupakan kelas yang mengimplementasi \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
+Merupakan kelas yang mengimplementasikan \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
 Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\

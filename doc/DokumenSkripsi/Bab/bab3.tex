@@ -130,22 +130,8 @@ Sintaks untuk melakukan operasi Git Log adalah \texttt{git.log().all().call();}.
 \end{figure}
 
 
-Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit} ID. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil. Gambar \ref{fig:piktora_last_wt} menunjukkan \textit{working tree} proyek Piktora pada \textit{commit} terakhir. Jika dilakukan operasi \textit{checkout} ke \textit{commit} pertama, \textit{working tree} proyek Piktora akan berubah seperti pada Gambar \ref{fig:piktora_first_wt}.
+Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit} ID. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil.
 
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.6]{Gambar/piktora_last_commit.png}
-	\caption{\textit{Working tree} proyek Piktora pada \textit{commit} terakhir.}
-	\label{fig:piktora_last_wt}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.6]{Gambar/piktora_first_commit.png}
-	\caption{\textit{Working tree} proyek Piktora pada \textit{commit} pertama.}
-	\label{fig:piktora_first_wt}
-\end{figure}
 
 \subsection{Analisis Penggunaan Selenium WebDriver}
 \label{subsec:analisis_selenium}
@@ -153,17 +139,17 @@ Selenium WebDriver dapat digunakan untuk mengotomatisasi \textit{web browser}. P
 Kelas-kelas yang dipakai yaitu WebDriver, ChromeDriver, dan TakesScreenshot.
 
 
-WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan sebuah WebDriver. 
+WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan sebuah \textit{browser} yang dikontrol oleh ChromeDriver. 
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/ChromeDriver.png}
-	\caption{WebDriver yang digunakan untuk \textit{automation testing}.}
+	\caption{\textit{Browser} yang dikontrol oleh ChromeDriver.}
 	\label{fig:webdriver}
 \end{figure}
 
 
-TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasi \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan adalah File.    
+TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasikan \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan adalah File.    
 
 \subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
 \label{subsec:langkah_animasi}

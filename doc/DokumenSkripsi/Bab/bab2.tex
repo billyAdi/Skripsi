@@ -118,37 +118,29 @@ Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktor
 
 
 \begin{lstlisting}[caption={Contoh histori commit dalam pengembangan perangkat lunak},label={lst:git_histori},language=plaintext]
-C:\Users\user\Documents\GitHub\train-tracker-ellena-angelica>git log
+commit 89000be7ce7d16f006813cddefb4ec6d70d15ed6 (HEAD -> master, origin/master, origin/HEAD)
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Fri Jan 12 12:25:30 2018 +0700
 
-commit b8aeacbd4743619b7b2d790d45bde26b899641e0 (HEAD -> master, origin/master, origin/HEAD)
-Author: adamadamadamadamadam <adamnurmishwari@gmail.com>
-Date:   Thu May 3 01:15:31 2018 +0700
+    Update new company address
 
-    commitan terakhir. mastiin g buang memory sm batre
+commit 6a085c1c37949e6308cfe06a117302e528388e54
+Author: Hizkia Steven <xvii.hs@gmail.com>
+Date:   Tue Dec 12 14:38:38 2017 +0700
 
-commit f836cc65bf6d50e274df54aa06c6fb529667aa06
-Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
-Date:   Wed May 2 22:03:25 2018 +0700
+    Update company address
 
-    Update README.md
+commit 9f041ef239bfe236ab4d679ad698d773a8ba6f56
+Author: TommyAdhityaThe <toms.warior@gmail.com>
+Date:   Mon May 15 10:40:16 2017 +0700
 
-commit 2e1ce9a03a1f417326c3c6586503303cf6daf6b8
-Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
-Date:   Wed May 2 22:01:10 2018 +0700
+    set insta url to https://www.instagram.com/piktorastudio/
 
-    Create README.md
+commit 38711f0cc8f487aac62babac10c1185f5ee14d33
+Author: Tommy Adhitya The <toms.warior@gmail.com>
+Date:   Mon Apr 17 15:15:03 2017 +0700
 
-commit 2f04488f9008745e8e6f67da33ffb2f6c2c9e747
-Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
-Date:   Wed May 2 14:08:02 2018 +0700
-
-    fix stasiun double
-
-commit 7d8b66a9c6500de2753cdeac1084dc049c0c9f20
-Author: Evelyn Wijaya <evelynwijaya777@gmail.com>
-Date:   Wed May 2 13:32:21 2018 +0700
-
-    fix stasiun double
+    fix bug ugly display when projects too high
     
 \end{lstlisting}
 
@@ -426,7 +418,7 @@ Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver
 
 \subsection{Interface WebDriver}
 \label{subsec:webdriver}
-Merupakan \textit{interface} utama yang digunakan untuk pengujian, \textit{interface} ini merepresentasikan \textit{web browser} yang ideal. Berikut ini adalah beberapa \textit{method} dalam \textit{interface} ini:
+Merupakan \textit{interface} utama yang digunakan untuk pengujian. Berikut ini adalah beberapa \textit{method} dalam \textit{interface} ini:
 \begin{itemize}
 \item void close()\\
 Berfungsi untuk menutup \textit{window} pada \textit{browser}, jika \textit{window} yang sekarang merupakan satu-satunya \textit{window} yang terbuka maka \textit{browser} akan ditutup.

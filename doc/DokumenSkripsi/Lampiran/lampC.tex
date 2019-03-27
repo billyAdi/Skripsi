@@ -1,0 +1,316 @@
+\chapter{Kode Program Proyek Piktora}
+\label{lamp:C}
+
+\lstset{numbers=left,stepnumber=1, numbersep=5pt, frame=leftline,
+	tabsize=4, breaklines=true, basicstyle=\fontfamily{fvm}\selectfont\tiny, 
+	commentstyle=\itshape\color{gray}, keywordstyle=\bfseries\color{black}, 
+	identifierstyle=\color{black}, stringstyle=\color{black},
+	literate={-}{-}1{-\,-}{--}1,showstringspaces=false,
+} 
+
+
+\lstinputlisting[language=php, caption=auth.php]{Lampiran/Piktora/config/auth.php}
+\lstinputlisting[language=php, caption=config.php]{Lampiran/Piktora/config/config.php}
+\lstinputlisting[language=php, caption=database.php]{Lampiran/Piktora/config/database.php}
+
+\lstinputlisting[language=php, caption=About.php]{Lampiran/Piktora/controllers/About.php}
+\lstinputlisting[language=php, caption=Contact.php]{Lampiran/Piktora/controllers/Contact.php}
+\lstinputlisting[language=php, caption=About.php]{Lampiran/Piktora/controllers/Migrate.php}
+\lstinputlisting[language=php, caption=Projects.php]{Lampiran/Piktora/controllers/Projects.php}
+\lstinputlisting[language=php, caption=Welcome.php]{Lampiran/Piktora/controllers/Welcome.php}
+
+\begin{lstlisting}[language=php, caption=Auth\_model.php]
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Auth_model extends CI_Model {
+
+    private $client;
+
+    public function __construct() {
+        parent::__construct();
+
+        $this->load->config('auth');
+        $this->client = new Google_Client();
+        $this->client->setHttpClient(new GuzzleHttp\Client(array(
+//            'base_uri' => Google_Client::API_BASE_PATH, // if doesn't work, try to uncomment this.
+            'verify' => getcwd() . '/../certs/cacert.pem'
+        )));
+        $this->client->setClientId($this->config->item('google-clientid'));
+        $this->client->setClientSecret($this->config->item('google-clientsecret'));
+        $this->client->setRedirectUri($this->config->item('google-redirecturi'));
+        $this->client->addScope('https://www.googleapis.com/auth/userinfo.email');
+        $this->client->addScope('https://www.googleapis.com/auth/userinfo.profile');        
+    }
+
+    /**
+     * Panggil method ini untuk mendapatkan hyperlink untuk melakukan OAuth.
+     * Biasanya digunakan saat akan menampilkan halaman "Login with Google".
+     * @return string URL untuk login
+     */
+    public function createAuthURL() {
+        return $this->client->createAuthUrl();
+    }
+
+    /**
+     * Panggil ini untuk menerima kode autentikasi hasil redirect dari Google,
+     * dan menentukan email dan role user yang berhasil login.
+     * @param string $oauthCode kode oauth, didapat dari parameter GET "code".
+     * @return boolean TRUE selalu.
+     * @throws Exception jika autentikasi gagal (ditolak). Exception message
+     * berisi penjelasan kenapa.
+     */
+    public function authenticateOauthCode($oauthCode) {
+        $this->client->authenticate($oauthCode);
+        $oauth2Service = new Google_Service_Oauth2($this->client);
+        $userinfo = $oauth2Service->userinfo->get();
+        $email = $userinfo['email'];
+        $name = $userinfo['name'];
+
+        $this->load->model('Configuration_model');
+        $allowedUsers = $this->Configuration_model->getCSV('administrator_emails');
+        if (in_array($email, $allowedUsers)) {
+            $this->session->set_userdata('auth', array(
+                'email' => $email,
+                'name' => $name,
+            ));
+        } else {
+            throw new Exception("$email ($name) does not have access to admin page!");
+        }
+    }
+
+    public function getUserInfo() {
+        return $this->session->userdata('auth');
+    }
+
+    public function logout() {
+        $this->session->unset_userdata('auth');
+    }
+
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=php, caption=Configuration\_model.php]
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Configuration_model extends CI_Model {
+
+    public function set($id, $value) {
+        $this->db->set('value', $value);
+        $this->db->where('id', $id);
+        $this->db->update('configuration');
+    }
+    
+    public function get($id) {
+        $query = $this->db->get_where('configuration', array('id' => $id));
+        $data = $query->row();
+        if ($data !== NULL) {
+            return $data->value;
+        }
+        return NULL;
+    }
+
+    public function getCSV($id) {
+        return preg_split('/ *, */', $this->get($id));
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=php, caption=Email\_model.php]
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Email_model extends CI_Model {
+
+    public function send_email($email, $name, $subject, $message, $debug = FALSE) {
+        if ($debug === TRUE) {
+            echo $message;
+            exit();
+        }
+        $this->load->config('secrets');
+        $config = $this->config->item('email-config');
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->set_crlf("\r\n");
+        $this->email->from("piktora@mailgun.dnartworks.com.au", "PIKTORA");
+        $this->email->to("hello@piktora.com");
+        $this->email->subject($subject);
+        $this->email->message($message);
+        if (!$this->email->send()) {
+            throw new Exception("Sorry. There was system error when trying to sent your email. Please try again later.");
+        }
+    }
+
+}
+\end{lstlisting}
+
+
+
+\lstinputlisting[language=php, caption=about.php]{Lampiran/Piktora/views/about.php}
+\lstinputlisting[language=php, caption=contact.php]{Lampiran/Piktora/views/contact.php}
+\lstinputlisting[language=php, caption=projects.php]{Lampiran/Piktora/views/projects.php}
+\lstinputlisting[language=php, caption=welcome.php]{Lampiran/Piktora/views/welcome.php}
+\begin{lstlisting}[language=php, caption=project\_details.php]
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<?php $this->load->view('templates/head', array('title' => 'Project Details')); ?>
+	<style>
+		.content-text{
+			background-color:#a59c93;
+			color:#4f4745;
+			padding-top: 15px;
+			padding-left: 15px;
+			padding-bottom: 40px;
+		}
+
+		.content-text a{
+			color:#4f4745;
+			text-decoration: underline;
+			font-weight: bold;
+		}
+
+		.container-content-text{
+			padding-left: 0px;
+		}
+
+		.container-content-img img{
+			margin-bottom: 20px;
+			max-width: 80%;
+		}
+
+		.back-to-previous{
+			margin-top:20px;
+		}
+
+		.back-to-previous a{
+			color:#4f4745;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			font-size:10px;
+		}
+
+		.content-text p{
+			font-size: 10px;
+			letter-spacing: 1px;
+		}
+
+		h5{
+			letter-spacing: 2px;
+			font-size: 11px;
+		}
+
+		.content-text > div{
+			margin-bottom: 30px;
+		}
+
+		@media screen and (min-width: 768px) {
+			.content-text{
+				padding-top: 30px;
+				padding-left: 20px;
+				padding-bottom: 250px;
+			}
+
+			.container-content-img img{
+				max-width: 100%;
+				padding-right:10px;
+			}
+
+			.back-to-previous{
+				padding-left:50px;
+			}
+
+			.container-content-img{
+				overflow-y: auto;
+			}
+
+			.container-content-text{
+				overflow-y: auto;
+			}
+		}
+
+		@media screen and (min-width: 992px) {
+			.container-content-text{
+				padding-right:80px;
+			}
+
+			.content-text{
+				padding-left: 60px;
+				padding-right:60px;
+				padding-bottom: 100px;
+			}
+
+			.container-content-img img{
+				padding-right:50px;
+			}
+
+		}
+	</style>
+</head>
+<body>
+	<?php $this->load->view('templates/navbar'); ?>
+	<div class="container-fluid container-all">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-sm-push-6 col-md-7 col-md-push-5 container-content-img">
+				<?php foreach($photos as $photo): ?>
+					<img src="<?= $photo?>" alt="<?= $title?>">
+				<?php endforeach; ?>
+			</div>	
+			<div class="col-xs-12 col-sm-6 col-sm-pull-6 col-md-5 col-md-pull-7 container-content-text">
+				<div class="content-text">
+					<div>
+						<h5><?= $title ?></h5>
+						<p><?= $products ?></p>
+						<p>- <?= $categories ?></p>
+					</div>
+					<div>
+						<h5>About Client</h5>
+						<p><?= $aboutClient ?></p>
+					</div>
+					<div>
+						<h5>Our Concept</h5>
+						<p><?= $ourConcept ?></p>
+					</div>
+					<?= $additionalInfo ?>
+				</div>
+				<div class="back-to-previous">
+					<p><a href="/projects"><img src="/assets/img/icon-previous.png" alt=""> See All Projects</a></p>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<?php $this->load->view('templates/scripts'); ?>
+<script>
+	$(document).ready(function() {
+		function setContentHeight(){
+			var height = $(window).height()-$(".navigation").height()-50;
+			$('.container-content-img').css( "height", (height + 'px'));
+			$('.container-content-text').css( "height", (height + 'px'));
+		}
+		if($( window ).width()>=768){
+			setContentHeight();	
+		}
+		$( window ).resize(function() {
+			if($( window ).width()>=768){
+				setContentHeight();	
+			}
+		});	
+	});
+</script>
+</body>
+</html>
+\end{lstlisting}
+
+\lstinputlisting[language=php, caption=flashmessage.php]{Lampiran/Piktora/views/templates/flashmessage.php}
+\lstinputlisting[language=php, caption=footer.php]{Lampiran/Piktora/views/templates/footer.php}
+\lstinputlisting[language=php, caption=head.php]{Lampiran/Piktora/views/templates/head.php}
+\lstinputlisting[language=php, caption=navbar.php]{Lampiran/Piktora/views/templates/navbar.php}
+\lstinputlisting[language=php, caption=scripts.php]{Lampiran/Piktora/views/templates/scripts.php}

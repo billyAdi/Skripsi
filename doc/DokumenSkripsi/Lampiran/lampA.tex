@@ -15,32 +15,54 @@
 %
 
 
-\begin{lstlisting}[language=Java, caption=MyCode.c]
+%\begin{lstlisting}[language=Java, caption=MyCode.c]
 
-// This does not make algorithmic sense, 
-// but it shows off significant programming characters.
+%// This does not make algorithmic sense, 
+%// but it shows off significant programming characters.
 
-#include<stdio.h>
+%#include<stdio.h>
 
-void myFunction( int input, float* output ) {
-	switch ( array[i] ) {
-		case 1: // This is silly code
-			if ( a >= 0 || b <= 3 && c != x )
-				*output += 0.005 + 20050;
-			char = 'g';
-			b = 2^n + ~right_size - leftSize * MAX_SIZE;
-			c = (--aaa + &daa) / (bbb++ - ccc % 2 );
-			strcpy(a,"hello $@?"); 
-	}
-	count = ~mask | 0x00FF00AA;
-}
+%void myFunction( int input, float* output ) {
+%	switch ( array[i] ) {
+%		case 1: // This is silly code
+%			if ( a >= 0 || b <= 3 && c != x )
+%				*output += 0.005 + 20050;
+%			char = 'g';
+%			b = 2^n + ~right_size - leftSize * MAX_SIZE;
+%			c = (--aaa + &daa) / (bbb++ - ccc % 2 );
+%			strcpy(a,"hello $@?"); 
+%	}
+%	count = ~mask | 0x00FF00AA;
+%}
 
-// Fonts for Displaying Program Code in LATEX
-// Adrian P. Robson, nepsweb.co.uk
-// 8 October 2012
-// http://nepsweb.co.uk/docs/progfonts.pdf
+%// Fonts for Displaying Program Code in LATEX
+%// Adrian P. Robson, nepsweb.co.uk
+%// 8 October 2012
+%// http://nepsweb.co.uk/docs/progfonts.pdf
 
-\end{lstlisting}
+%\end{lstlisting}
+%./Lampiran/MyCode.java
 
-\lstinputlisting[language=Java, caption=MyCode.java]{./Lampiran/MyCode.java} 
+\lstset{numbers=left,stepnumber=1, numbersep=5pt, frame=leftline,
+	tabsize=4, breaklines=true, basicstyle=\fontfamily{fvm}\selectfont\tiny, 
+	commentstyle=\itshape\color{gray}, keywordstyle=\bfseries\color{black}, 
+	identifierstyle=\color{black}, stringstyle=\color{black},
+	literate={-}{-}1{-\,-}{--}1, showstringspaces=false,
+} 
+
+
+
+
+\lstinputlisting[language=Java, caption=BrowserController.java]{../../Program/TimeLapseGenerator/src/main/java/id/ac/unpar/timelapsegenerator/BrowserController.java} 
+
+\lstinputlisting[language=Java, caption=CommandLineOptions.java]{../../Program/TimeLapseGenerator/src/main/java/id/ac/unpar/timelapsegenerator/CommandLineOptions.java} 
+
+\lstinputlisting[language=Java, caption=Main.java]{../../Program/TimeLapseGenerator/src/main/java/id/ac/unpar/timelapsegenerator/Main.java} 
+
+\lstinputlisting[language=Java, caption=TimeLapseGenerator.java]{../../Program/TimeLapseGenerator/src/main/java/id/ac/unpar/timelapsegenerator/TimeLapseGenerator.java} 
+
+\lstinputlisting[language=Java, caption=VCS.java]{../../Program/TimeLapseGenerator/src/main/java/id/ac/unpar/timelapsegenerator/VCS.java}
+
+
+
 

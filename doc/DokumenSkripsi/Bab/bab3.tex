@@ -9,15 +9,15 @@
 
 \lstset
 { 
-    language=plaintext,
-    basicstyle=\footnotesize,
-    numbers=left,
-    stepnumber=1,
-    showstringspaces=false,
-    tabsize=1,
-    breaklines=true,
-    breakatwhitespace=false,
-    frame=leftline
+     language=plaintext,
+     basicstyle=\footnotesize,
+     numbers=left,
+     stepnumber=1,
+     showstringspaces=false,
+     tabsize=1,
+     breaklines=true,
+     breakatwhitespace=false,
+     frame=leftline
 }
 
 \chapter{Analisis}
@@ -39,7 +39,7 @@ Proyek perangkat lunak ditampilkan oleh Gource sebagai animasi pohon, dimana pus
 Gambar \ref{fig:gource} menunjukkan contoh visualisasi proyek perangkat lunak menggunakan Gource. Efek cahaya yang terdapat pada Gambar \ref{fig:gource} disebut dengan \textit{bloom}. Pada awalnya ukuran \textit{working tree} tidak terlalu besar. Setiap kali ditambahkan \textit{file} dan \textit{folder} baru, akan dibuat \textit{branch} dan \textit{leaf} baru pada \textit{working tree}.  
 
 \ \\
-Gource memiliki beberapa fitur. Fitur-fitur tersebut dapat diatur melalui \textit{command line options}. Berikut ini adalah beberapa \textit{command line options} yang terdapat pada Gource:
+Gource memiliki beberapa fitur. Fitur-fitur tersebut dapat diatur melalui \textit{command line option}. Berikut ini adalah beberapa \textit{command line option} yang terdapat pada Gource:
 \begin{enumerate}
 \item \texttt{gource --[WIDTH]x[HEIGHT]}\\
 Opsi ini berfungsi untuk mengatur resolusi layar dari animasi. Parameter dari opsi ini adalah lebar dan panjang layar dalam satuan piksel. 
@@ -109,28 +109,26 @@ Parameter yang berjumlah lebih dari satu dipisahkan dengan koma, contoh: \textit
  
 Gource dapat digunakan untuk berbagai macam proyek perangkat lunak. Program pada skripsi ini hanya akan berfokus untuk proyek perangkat lunak berbasis \textit{web}. Tidak seperti Gource yang menampilkan direktori dan \textit{file} pada animasi, program pada skripsi ini menampilkan \textit{screenshot} dari halaman suatu \textit{website}.      
  
-\section{Analisis Penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse}
+\section{Analisis Penggunaan JGit dan Selenium WebDriver}
 \label{sec:analisis_jgit_selenium}
-Pada subbab ini dijelaskan mengenai analisis penggunaan JGit, analisis penggunaan Selenium WebDriver, dan langkah-langkah dalam membangkitkan animasi timelapse. 
+Pada subbab ini dijelaskan mengenai analisis penggunaan JGit dan Selenium WebDriver.
 
 \subsection{Analisis Penggunaan JGit}
 \label{subsec:analisis_jgit}
 JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan untuk berinteraksi dengan suatu repositori Git. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
 
-Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. Gambar \ref{fig:piktora_last_wt} merupakan contoh suatu repositori Git.
+Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. 
 
-Untuk mendapatkan histori \textit{commit} pada suatu repositori Git digunakan operasi Git Log.
-Sintaks untuk melakukan operasi Git Log adalah \texttt{git.log().all().call();}. Dengan sintaks tersebut, akan didapatkan seluruh histori \textit{commit} pada \textit{branch} yang sedang aktif. Seluruh histori \textit{commit} akan disimpan dalam bentuk Iterable<RevCommit>. Histori \textit{commit} pada Git direpresentasikan dalam bentuk Directed Acyclic Graph seperti pada Gambar \ref{fig:DAG}. 
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, dapatkan object bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, panggil \textit{method} call() untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} berada di Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} berada di BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2,dan commit1. Operasi Git Log ini nantinya dipakai untuk mendapatkan seluruh histori \textit{commit} dari perangkat lunak berbasis \textit{web}.
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{Gambar/DAG.png}
-	\caption{Histori \textit{commmit} direpresentasikan sebagai Directed Acyclic Graph.}
+	\caption{Histori \textit{commit} direpresentasikan sebagai Directed Acyclic Graph.}
 	\label{fig:DAG}
 \end{figure}
 
-
-Operasi \textit{checkout} pada Git dapat digunakan mengubah \textit{working directory} sesuai dengan \textit{commit} tertentu. Operasi ini dilakukan dengan menggunakan kelas Git. Sintaks untuk melakukan operasi \textit{checkout} adalah \texttt{git.checkout().setName(commitID).call();}. \textit{Method} checkout() mengembalikan \textit{object} CheckoutCommand. Pada \textit{object} CheckoutCommand terdapat \textit{method} setName() dengan parameter berupa \textit{commit} ID. Untuk menjalankan operasi \textit{checkout}, \textit{method} call() milik CheckoutCommand dipanggil.
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Checkout. Dari object bertipe Git, dapatkan object bertipe CheckoutCommand dengan memanggil \textit{method} checkout(). Setelah itu, panggil \textit{method} setName() diikuti dengan parameter berupa \textit{commit ID}. Kemudian panggil \textit{method} call() untuk menjalankan operasi Git Checkout. Setelah opersi Git Checkout dijalankan, \textit{working directory} akan diperbarui sesuai dengan \textit{state} pada \textit{commit} tertentu. Operasi \textit{checkout} ini nantinya akan gigunakan untuk menelusuri \textit{commit} dari perangkat lunak berbasis \textit{web}. Penelusuran ini dilakukan dengan tujuan mendapatkan \textit{screenshot} halaman \textit{web}.    
 
 
 \subsection{Analisis Penggunaan Selenium WebDriver}
@@ -139,7 +137,7 @@ Selenium WebDriver dapat digunakan untuk mengotomatisasi \textit{web browser}. P
 Kelas-kelas yang dipakai yaitu WebDriver, ChromeDriver, dan TakesScreenshot.
 
 
-WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \textit{automation testing}. WebDriver merupakan suatu \textit{interface}. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan sebuah \textit{browser} yang dikontrol oleh ChromeDriver. 
+WebDriver merupakan \textit{interface} utama yang digunakan untuk pengujian. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan Chrome \textit{browser} yang dikontrol oleh ChromeDriver. 
 
 \begin{figure}[H]
 	\centering
@@ -149,11 +147,89 @@ WebDriver merupakan representasi dari \textit{browser} yang digunakan untuk \tex
 \end{figure}
 
 
-TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasikan \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang umum digunakan adalah File.    
+TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasikan \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang digunakan pada program dalam skripsi ini adalah File.    
 
-\subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
-\label{subsec:langkah_animasi}
-Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab \ref{subsec:analisis_selenium}, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
+
+
+\section{Analisis Fitur Aplikasi yang Dibangun}
+\label{sec:analisis_fitur_aplikasi}
+Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse}
+dari pengembangan proyek perangkat lunak berbasis web. Yang akan dibuat animasinya adalah
+halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program dapat menerima masukan dan konfigurasi dari Command Line Option. 
+
+Berikut ini adalah \textit{command line option} yang akan diimplementasikan pada skripsi ini:
+\begin{enumerate}
+\item \texttt{-project-path [PATH]}\\
+Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari proyek perangkat lunak web yang terekam oleh Git. Opsi ini wajib ada.
+
+\item \texttt{-before-capture [PHP-SCRIPT]}\\
+Opsi ini berfungsi untuk menjalankan \textit{script} PHP. \textit{Script} ini dijalankan sebelum melakukan \textit{screenshot}. Parameternya adalah \textit{path} dari \textit{script} PHP. Opsi ini bersifat opsional.
+
+\item \texttt{-capture-url [URL 1, URL 2, URL 3, URL 4]}\\
+Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman yang dicapture bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
+
+\item \texttt{-seconds-per-commit [SECONDS]}\\
+Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol. Opsi ini bersifat opsional.
+
+\item \texttt{-title [TITLE]}\\
+Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri
+bawah layar. Opsi ini bersifat opsional. 
+
+\item \texttt{-logo [IMAGE]}\\
+Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
+bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional.
+
+\item \texttt{-start-commit [ID] -stop-commit [ID]}\\
+Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh karakter. Opsi ini bersifat opsional. 
+\end{enumerate}
+
+\ \\
+Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
+  
+ 
+Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
+Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel_sc_animasi}.
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.8]{Gambar/UseCaseDiagram1.png}
+	\caption{\textit{Use case diagram} perangkat lunak.}
+	\label{fig:uc}
+\end{figure}
+\begin{table}[]
+    \centering
+    \begin{tabular}{|p{3cm}|p{10cm}|}
+    \hline
+        Nama & Membangkitkan animasi \textit{timelapse}\\
+    \hline
+    \hline
+        Deskripsi & Fitur untuk membangkitkan animasi timelapse dari pengembangan proyek perangkat lunak berbasis web\\
+    \hline
+        Aktor & \textit{User} \\
+    \hline
+        Pos-kondisi &  File animasi bertipe GIF berhasil dibuat\\
+    \hline
+        Skenario & 
+        \begin{enumerate}
+        \item Sistem membaca masukan \textit{input} dari Command Line Option.
+            \item Sistem menelusuri histori perkembangan perangkat lunak berbasis \textit{web} dengan fitur
+Git. Saat menelusuri histori perkembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman web menggunakan SeleniumWebDriver.
+            \item Sistem menggabungkan file \textit{screenshot} menjadi satu file bertipe GIF.
+        \end{enumerate}\\
+    \hline
+    \end{tabular}
+    \caption{\textit{Scenario case} membangkitkan animasi \textit{timelapse}}
+    \label{tab:tabel_sc_animasi}
+\end{table}
+
+
+%\subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
+%\label{subsec:langkah_animasi}
+%Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab \ref{subsec:analisis_selenium}, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. 
+\ \\
+
+Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
 \begin{enumerate}
 \item Program membaca argumen Command Line menggunakan Apache Commons CLI.
 \item Program mendapatkan seluruh \textit{commit} histori dari proyek perangkat lunak berbasis web menggunakan JGit.
@@ -170,14 +246,15 @@ Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab 
 \item Menggabungkan semua \textit{file} gambar menjadi satu \textit{file} bertipe GIF.
 \end{enumerate}
 
-Penulis menggunakan \textit{library} yang didapatkan dari internet\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter} untuk menggabungkan gambar menjadi \textit{file} GIF. 
+Penulis menggunakan \textit{library} yang didapatkan dari internet\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter} untuk menggabungkan gambar menjadi \textit{file} GIF.
+
 
 \section{Prapengujian Website Piktora}
 \label{sec:prapengujian}
 Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Piktora merupakan \textit{website} yang menawarkan layanan  \textit{creative design} dan \textit{branding}. Layanan yang ditawarkan berupa \textit{graphic design} untuk poster, \textit{banner}, \textit{website}, dan aplikasi \textit{mobile}. Alamat dari \textit{website} ini adalah\footnote{http://www.piktora.com}. Alamat repositori dari perangkat lunak ini 
 adalah\footnote{https://gitlab.com/PNDevworks/Piktora}.
 
-Prapengujian ini hanya menggunakan dua input. Input dimasukkan melalui argumen Command Line. Input dari program ini adalah alamat direktori proyek Piktora dan satu URL untuk membuka halaman \textit{web}. Langkah pada pengujian menggunakan langkah yang terdapat pada subbab \ref{subsec:langkah_animasi}. 
+Prapengujian ini hanya menggunakan dua input. Input dimasukkan melalui argumen Command Line. Input dari program ini adalah alamat direktori proyek Piktora dan satu URL untuk membuka halaman \textit{web}. Langkah pada pengujian menggunakan langkah yang terdapat pada subbab \ref{sec:analisis_fitur_aplikasi}. 
 
 %\begin{enumerate}
 %\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
@@ -273,7 +350,7 @@ f1ea410 - Thu Jan 5 15:23:32 2017 : fix instagram link
 \label{subsec:perbedaan_letak_file}
 Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 89000be(12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs".
 
-Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} XAMPP pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf". Setelah itu, \textit{script} akan menjalankan perintah "httpd -k restart" untuk melakukan \textit{restart} pada XAMPP. \textit{Script} PHP ini akan dijalankan sebelum melakukan migrasi \textit{database}.   
+Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} XAMPP pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada XAMPP. \textit{Script} PHP ini akan dijalankan sebelum melakukan migrasi \textit{database}.   
 
 
 \subsection{Permasalahan Konfigurasi \textit{Database}}
@@ -309,84 +386,14 @@ $db['default'] = array(
 
 Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan f1ea410(5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan XAMPP berbeda, halaman \textit{website} pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) tidak bisa dibuka. 
 
-Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak akan mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} akan mengubah \textit{password} menjadi \texttt{piktora}. 
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak akan mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} akan mengubah \textit{password} menjadi \texttt{piktora}. 
 
- \subsection{Permasalahan Migrasi \textit{Database}}
+\subsection{Permasalahan Migrasi \textit{Database}}
 \label{subsec:migrasi_database}
 
 Pada \textit{commit} 3d79d0a(27 Nov 2016), terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} a19e7f2(27 November 2016), terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 3d79d0a(27 Nov 2016) terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} a19e7f2(27 November 2016) \textit{file} "20161122150001\_InitialData.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 3d79d0a(27 Nov 2016), \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 3d79d0a(27 Nov 2016). Isi \textit{file} "20161122150001\_InitialData.php" pada \textit{commit} a19e7f2(27 November 2016) dan 3d79d0a(27 Nov 2016) berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
 
-Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line options} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan melakukan dua pekerjaan. Pertama, \textit{script} akan menghapus \textit{database} piktora dengan menggunakan \textit{query} "DROP DATABASE piktora". Setelah itu \textit{script} akan membuat \textit{database} piktora dengan menggunakan \textit{query} "CREATE DATABASE piktora". \textit{Script} akan dijalankan sebelum melakukan migrasi \textit{database}. 
-
-\section{Analisis Fitur Aplikasi yang Dibangun}
-\label{sec:analisis_fitur_aplikasi}
-Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse}
-dari pengembangan proyek perangkat lunak berbasis web. Yang akan dibuat animasinya adalah
-halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program dapat menerima masukan dan konfigurasi dari Command Line Options. 
-
-Berikut ini adalah \textit{command line options} yang akan diimplementasikan pada skripsi ini:
-\begin{enumerate}
-\item \texttt{-project-path [PATH]}\\
-Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari proyek perangkat lunak web yang terekam oleh Git. Opsi ini wajib ada.
-
-\item \texttt{-before-capture [PHP-SCRIPT]}\\
-Opsi ini berfungsi untuk menjalankan \textit{script} PHP. \textit{Script} ini dijalankan sebelum melakukan \textit{screenshot}. Parameternya adalah \textit{path} dari \textit{script} PHP. Opsi ini bersifat opsional.
-
-\item \texttt{-capture-url [URL 1, URL 2, URL 3, URL 4]}\\
-Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman yang dicapture bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
-
-\item \texttt{-seconds-per-commit [SECONDS]}\\
-Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol. Opsi ini bersifat opsional.
-
-\item \texttt{-title [TITLE]}\\
-Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri
-bawah layar. Opsi ini bersifat opsional. 
-
-\item \texttt{-logo [IMAGE]}\\
-Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
-bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional.
-
-\item \texttt{-start-commit [ID] -stop-commit [ID]}\\
-Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh karakter. Opsi ini bersifat opsional. 
-\end{enumerate}
-
-\ \\
-Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
-  
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan melakukan dua pekerjaan. Pertama, \textit{script} akan menghapus \textit{database} piktora. Setelah itu \textit{script} akan membuat \textit{database} piktora. \textit{Script} akan dijalankan sebelum melakukan migrasi \textit{database}. 
  
-Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
-Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel_sc_animasi}.
 
-
-\begin{figure}[H]
-	\centering
-		\includegraphics[scale=0.8]{Gambar/UseCaseDiagram1.png}
-	\caption{\textit{Use case diagram} perangkat lunak.}
-	\label{fig:uc}
-\end{figure}
-\begin{table}[]
-    \centering
-    \begin{tabular}{|p{3cm}|p{10cm}|}
-    \hline
-        Nama & Membangkitkan animasi \textit{timelapse}\\
-    \hline
-    \hline
-        Deskripsi & Fitur untuk membangkitkan animasi timelapse dari pengembangan proyek perangkat lunak berbasis web\\
-    \hline
-        Aktor & \textit{User} \\
-    \hline
-        Pos-kondisi &  File animasi bertipe GIF berhasil dibuat\\
-    \hline
-        Skenario & 
-        \begin{enumerate}
-        \item Sistem membaca masukan \textit{input} dari Command Line Options.
-            \item Sistem menelusuri histori perkembangan perangkat lunak berbasis \textit{web} dengan fitur
-Git. Saat menelusuri histori perkembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman web menggunakan SeleniumWebDriver.
-            \item Sistem menggabungkan file \textit{screenshot} menjadi satu file bertipe GIF.
-        \end{enumerate}\\
-    \hline
-    \end{tabular}
-    \caption{\textit{Scenario case} membangkitkan animasi \textit{timelapse}}
-    \label{tab:tabel_sc_animasi}
-\end{table}
 

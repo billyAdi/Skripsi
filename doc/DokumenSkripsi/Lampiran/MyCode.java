@@ -13,7 +13,7 @@ public class MyFurSet {
     protected int totaltrj;                            //total trajectories in the set
 
     /*
-     * Constructor
+     * Constructors
      * @param id : id of the set
      * @param totaltrj : total number of trajectories in the set
      * @param FurthestEdge : the furthest edge

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
@@ -102,7 +97,8 @@ public class Main {
 
         BrowserController browserController = new BrowserController(numberOfBrowsers);
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
-        System.out.println("Membuat animasi timelapse");
+        //System.out.println("Membuat animasi timelapse");
+		//method ini melempar exception mungkin harus di catch, terutama yang bagian process & runtime
         timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
         System.out.println("Animasi timelapse berhasil dibuat");
     }

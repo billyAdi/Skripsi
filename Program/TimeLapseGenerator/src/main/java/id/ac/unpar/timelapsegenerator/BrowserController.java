@@ -9,14 +9,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- * Kelas ini digunakan untuk mengatur browser.Operasi-operasi yang dilakukan 
- * terhadap browser yaitu membuka browser, mengambil screenshot, membuat window 
+ * Kelas ini digunakan untuk mengatur browser.Operasi-operasi yang dilakukan
+ * terhadap browser yaitu membuka browser, mengambil screenshot, membuat window
  * browser menjadi maksimal, dan menutup browser.
- * 
- * Hasil screenshot disimpan dalam bentuk List of File.
- * Variabel driver merupakan suatu representasi dari browser.
- * Kelas ini dapat memiliki maksimal empat browser.
- * 
+ *
+ * Hasil screenshot disimpan dalam bentuk List of File. Variabel driver
+ * merupakan suatu representasi dari browser. Kelas ini dapat memiliki maksimal
+ * empat browser.
+ *
  * @author Billy Adiwijaya
  */
 public class BrowserController {
@@ -26,10 +26,10 @@ public class BrowserController {
     private final int numberOfBrowser;
 
     /**
-     * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki 
+     * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki
      * oleh kelas ini.
-     * 
-     * @param numberOfBrowsers jumlah browser. 
+     *
+     * @param numberOfBrowsers jumlah browser.
      */
     public BrowserController(int numberOfBrowsers) {
         this.drivers = new WebDriver[numberOfBrowsers];
@@ -38,12 +38,12 @@ public class BrowserController {
     }
 
     /**
-     * Method ini berfungsi untuk membuka semua browser, kemudian mengatur 
+     * Method ini berfungsi untuk membuka semua browser, kemudian mengatur
      * ukuran window browser menjadi maksimal.
      */
     public void open() {
         for (int i = 0; i < numberOfBrowser; i++) {
-            this.drivers[i] = new ChromeDriver();
+            this.drivers[i] = new ChromeDriver();  
             this.drivers[i].manage().window().maximize();
         }
     }
@@ -78,8 +78,8 @@ public class BrowserController {
     }
 
     /**
-     * Method ini berfungsi untuk mengambil screenshot pada browser tertentu 
-     * dan menyimpannya ke atribut screenshotFiles.
+     * Method ini berfungsi untuk mengambil screenshot pada browser tertentu dan
+     * menyimpannya ke atribut screenshotFiles.
      *
      * @param browserIndex indeks browser yang akan diambil screenshotnya.
      */

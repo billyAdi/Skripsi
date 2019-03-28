@@ -251,10 +251,19 @@ Penulis menggunakan \textit{library} yang didapatkan dari internet\footnote{http
 
 \section{Prapengujian Website Piktora}
 \label{sec:prapengujian}
-Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Piktora merupakan \textit{website} yang menawarkan layanan  \textit{creative design} dan \textit{branding}. Layanan yang ditawarkan berupa \textit{graphic design} untuk poster, \textit{banner}, \textit{website}, dan aplikasi \textit{mobile}. Alamat dari \textit{website} ini adalah\footnote{http://www.piktora.com}. Alamat repositori dari perangkat lunak ini 
-adalah\footnote{https://gitlab.com/PNDevworks/Piktora}.
+Pengujian dilakukan dengan proyek Piktora sebagai input dari program. Piktora\footnote{http://www.piktora.com} merupakan situs \textit{web} yang menawarkan layanan  \textit{creative design} dan \textit{branding}. Layanan yang ditawarkan berupa \textit{graphic design} untuk poster, \textit{banner}, \textit{website}, dan aplikasi \textit{mobile}. Repositori dari situs \textit{web} ini disimpan pada Gitlab\footnote{https://gitlab.com/PNDevworks/Piktora}, dibutuhkan akses khusus untuk membuka repositori tersebut. Piktora dibangun dengan php  menggunakan framework Code Igniter. Piktora menggunakan MySQL sebagai basis datanya. 
 
-Prapengujian ini hanya menggunakan dua input. Input dimasukkan melalui argumen Command Line. Input dari program ini adalah alamat direktori proyek Piktora dan satu URL untuk membuka halaman \textit{web}. Langkah pada pengujian menggunakan langkah yang terdapat pada subbab \ref{sec:analisis_fitur_aplikasi}. 
+Prapengujian ini hanya menggunakan dua parameter, yaitu project-path dan capture-url(lihat subbab \ref{sec:analisis_fitur_aplikasi}). Pengujian dilakukan menggunakan prototipe program yg akan dilengkapi pada Bab \ref{chap:implementasidanpengujian}. Berikut adalah spesifikasi perangkat keras dan perangkat lunak yang digunakan untuk prapengujian:
+\begin{itemize}
+\item Processor: Intel Core i3 4030U
+\item RAM: 6GB
+\item Sistem Operasi: Windows 10 pro 64-bit
+\item Versi Apache HTTP Server: 2.4.29
+\item Versi MySQL Server: 5.5.5
+\item Versi Netbeans: 8.1
+\item Versi Google Chrome: 73.0.3683.86
+\end{itemize}
+Apache HTTP Server digunakan sebagai \textit{web server} lokal. MySQL Server digunakan untuk menyimpan basis data secara lokal dan juga digunakan sebagai \textit{database server} lokal. 
 
 %\begin{enumerate}
 %\item Program mengambil input dari parameter menggunakan Apache Commons CLI.
@@ -267,7 +276,7 @@ Prapengujian ini hanya menggunakan dua input. Input dimasukkan melalui argumen C
 %\end{enumerate}
 %\ \\
 
-Pada proyek Piktora terdapat 58 \textit{commit}. Listing \ref{lst:all_commit_piktora} menunjukkan histori \textit{commit} pada proyek Piktora. Setelah dilakukan pengujian terdapat beberapa masalah. Masalah tersebut yaitu perbedaan letak \textit{file}, migrasi \textit{database}, dan konfigurasi \textit{database}. Masalah-masalah tersebut dibahas pada subbab \ref{subsec:perbedaan_letak_file} sampai \ref{subsec:migrasi_database}.
+Pada proyek Piktora terdapat 58 \textit{commit}. Listing \ref{lst:all_commit_piktora} menunjukkan histori \textit{commit} pada proyek Piktora, histori didapatkan dengan menjalankan operasi Git Log pada terminal. Setelah dilakukan pengujian terdapat beberapa masalah. Masalah tersebut yaitu perbedaan letak \textit{file}, migrasi \textit{database}, dan konfigurasi \textit{database}. Masalah-masalah tersebut dibahas pada subbab \ref{subsec:perbedaan_letak_file} sampai \ref{subsec:migrasi_database}.
 
 \begin{lstlisting}[caption={Histori \textit{commit} pada proyek Piktora},label={lst:all_commit_piktora},language=plaintext]
 315d374 -  Oct 31 16:52:46 2016 :  Basic CI files + htaccess & webconfig + database.php ignore
@@ -348,14 +357,16 @@ f1ea410 - Thu Jan 5 15:23:32 2017 : fix instagram link
 
 \subsection{Perbedaan Letak \textit{File}}
 \label{subsec:perbedaan_letak_file}
-Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 89000be(12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs".
+Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 89000be(12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs". Akibat adanya perbedaan letak \textit{file} tersebut, maka
+konfigurasi dari apache harus diubah.
 
-Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} XAMPP pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada XAMPP. \textit{Script} PHP ini akan dijalankan sebelum melakukan migrasi \textit{database}.   
+
+Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache. \textit{Script} PHP ini akan dijalankan sebelum melakukan migrasi \textit{database}.   
 
 
 \subsection{Permasalahan Konfigurasi \textit{Database}}
 \label{subsec:konfigurasi_database}
-Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016), halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan \textit{commit} f1ea410(5 Januari 2017), di dalam \textit{file} "database.php" terdapat \textit{password} . \textit{Commit} lainnya tidak terdapat \textit{password} pada \textit{file} "database.php". Penulis menggunakan \textit{password} \texttt{"piktora"} pada konfigurasi \textit{database} di XAMPP.
+Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016), halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan \textit{commit} f1ea410(5 Januari 2017), di dalam \textit{file} "database.php" terdapat \textit{password} . \textit{Commit} lainnya tidak terdapat \textit{password} pada \textit{file} "database.php". Penulis menggunakan \textit{password} \texttt{"piktora"} pada konfigurasi \textit{database} di MySQL Server.
 
 \begin{lstlisting}[caption={Isi \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016)},label={lst:piktora_commit_f8c64fc},language=plaintext]
 $active_group = 'default';
@@ -384,7 +395,7 @@ $db['default'] = array(
 );
 \end{lstlisting}
 
-Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan f1ea410(5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan XAMPP berbeda, halaman \textit{website} pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) tidak bisa dibuka. 
+Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan f1ea410(5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan phpMyAdmin berbeda, halaman \textit{website} pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) tidak bisa dibuka. 
 
 Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang menerima sebuah \textit{script} PHP. \textit{Script} ini akan mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak akan mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} akan mengubah \textit{password} menjadi \texttt{piktora}. 
 

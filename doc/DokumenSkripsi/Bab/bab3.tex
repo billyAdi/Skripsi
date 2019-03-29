@@ -115,11 +115,11 @@ Pada subbab ini dijelaskan mengenai analisis penggunaan JGit dan Selenium WebDri
 
 \subsection{Analisis Penggunaan JGit}
 \label{subsec:analisis_jgit}
-JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan untuk berinteraksi dengan suatu repositori Git. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
+JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan pada program dalam skripsi ini. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
 
 Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. 
 
-Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, dapatkan object bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, panggil \textit{method} call() untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} berada di Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} berada di BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2,dan commit1. Operasi Git Log ini nantinya dipakai untuk mendapatkan seluruh histori \textit{commit} dari perangkat lunak berbasis \textit{web}.
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, dapatkan object bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, panggil \textit{method} call() untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} berada di Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} berada di BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2,dan commit1. Operasi Git Log ini nantinya dipakai oleh program dalam skripsi ini untuk mendapatkan seluruh histori \textit{commit} dari perangkat lunak berbasis \textit{web}.
 
 \begin{figure}[H]
 	\centering
@@ -128,16 +128,16 @@ Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe
 	\label{fig:DAG}
 \end{figure}
 
-Dibutuhkan beberapa langkah untuk melakukan operasi Git Checkout. Dari object bertipe Git, dapatkan object bertipe CheckoutCommand dengan memanggil \textit{method} checkout(). Setelah itu, panggil \textit{method} setName() diikuti dengan parameter berupa \textit{commit ID}. Kemudian panggil \textit{method} call() untuk menjalankan operasi Git Checkout. Setelah opersi Git Checkout dijalankan, \textit{working directory} akan diperbarui sesuai dengan \textit{state} pada \textit{commit} tertentu. Operasi \textit{checkout} ini nantinya akan gigunakan untuk menelusuri \textit{commit} dari perangkat lunak berbasis \textit{web}. Penelusuran ini dilakukan dengan tujuan mendapatkan \textit{screenshot} halaman \textit{web}.    
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Checkout. Dari object bertipe Git, dapatkan object bertipe CheckoutCommand dengan memanggil \textit{method} checkout(). Setelah itu, panggil \textit{method} setName() diikuti dengan parameter berupa \textit{commit ID}. Kemudian panggil \textit{method} call() untuk menjalankan operasi Git Checkout. Setelah opersi Git Checkout dijalankan, \textit{working directory} akan diperbarui sesuai dengan \textit{state} pada \textit{commit} tertentu. Operasi \textit{checkout} ini nantinya akan digunakan oleh program dalam skripsi ini untuk menelusuri \textit{commit} dan mendapatkan halaman \textit{web} dari perangkat lunak berbasis \textit{web}.    
 
 
 \subsection{Analisis Penggunaan Selenium WebDriver}
 \label{subsec:analisis_selenium}
-Selenium WebDriver dapat digunakan untuk mengotomatisasi \textit{web browser}. Pada analisis ini dibahas kelas-kelas pada \textit{library} Selenium WebDriver yang digunakan untuk mengotomatisasi \textit{web browser}. 
-Kelas-kelas yang dipakai yaitu WebDriver, ChromeDriver, dan TakesScreenshot.
+Selenium WebDriver dapat digunakan untuk mengotomatisasi \textit{web browser}. Pada analisis ini dibahas kelas dan \textit{interface} pada \textit{library} Selenium WebDriver yang digunakan dalam program pada skripsi ini. 
+Kelas yang dipakai yaitu ChromeDriver, sedangkan \textit{interface} yang dipakai adalah WebDriver dan TakeScreenshot. 
 
 
-WebDriver merupakan \textit{interface} utama yang digunakan untuk pengujian. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan Chrome \textit{browser} yang dikontrol oleh ChromeDriver. 
+WebDriver merupakan \textit{interface} utama yang digunakan untuk pengujian. WebDriver dapat diinisialisasi menggunakan \textit{object} dengan tipe ChromeDriver. Setelah melakukan inisialisasi pada WebDriver, \textit{browser} akan dijalankan. Untuk membuka suatu halaman \textit{web}, digunakan \textit{method} get() dengan parameter alamat URL. Gambar \ref{fig:webdriver} menunjukkan Chrome \textit{browser} yang dikontrol oleh ChromeDriver. WebDriver ini nantinya akan digunakan oleh program dalam skripsi ini untuk membuka halaman \textit{web} pada perangkat lunak berbasis \textit{web}. 
 
 \begin{figure}[H]
 	\centering
@@ -148,6 +148,7 @@ WebDriver merupakan \textit{interface} utama yang digunakan untuk pengujian. Web
 
 
 TakesScreenshot merupakan \textit{interface} yang digunakan untuk menangkap \textit{screenshot} halaman \textit{web} pada WebDriver. Kelas ChromeDriver mengimplementasikan \textit{interface} ini. \textit{Method} yang digunakan untuk menangkap \textit{screenshot} adalah getScreenshotAs(), diikuti dengan parameter bertipe OutputType. OutputType ini merupakan \textit{interface} yang digunakan untuk menentukan tipe \textit{output} dari hasil \textit{screenshot}. OutputType yang digunakan pada program dalam skripsi ini adalah File.    
+Tipe ini dipilih karena memudahkan kelas ImageIO\footnote{https://docs.oracle.com/javase/7/docs/api/javax/imageio/ImageIO.html} dalam membaca \textit{image}. Pada OutputType BYTES, byte harus dibaca dulu oleh kelas ByteArrayInputStream\footnote{https://docs.oracle.com/javase/7/docs/api/java/io/ByteArrayInputStream.html}, kemudian dibaca oleh kelas ImageIO. Pada OutputType BASE64, \textit{base64 data} dikonversi menjadi \textit{array of bytes}, setelah itu dibaca oleh ByteArrayInputStream, kemudian dibaca oleh kelas ImageIO. Pada OutputType FILE, \textit{file} dapat langsung dibaca oleh kelas ImageIO. TakesScreenshot ini nantinya akan digunakan oleh program dalam skripsi ini untuk mengambil \textit{screenhot} dari halaman \textit{web} pada perangkat lunak berbasis \textit{web}. 
 
 
 

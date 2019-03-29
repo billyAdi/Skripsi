@@ -37,7 +37,6 @@ public class VCS {
             throw new IOException("Path proyek tidak valid");
         }
         this.git = new Git(repository);
-//        Iterable<RevCommit> commits=git.log().all().call();
         Iterable<RevCommit> commits=git.log().call();
         this.commitIDs = new ArrayList<>();
         for (RevCommit commit : commits) {

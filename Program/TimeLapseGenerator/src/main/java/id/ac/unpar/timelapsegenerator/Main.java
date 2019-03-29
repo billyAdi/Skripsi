@@ -6,7 +6,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 import javax.imageio.ImageIO;
-import org.apache.commons.io.FilenameUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
@@ -14,7 +13,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
  */
 public class Main {
 
-    public static void main(String[] args) throws GitAPIException, IOException, InterruptedException {
+    public static void main(String[] args) {
         CommandLineOptions commandLineOptions = null;
         try {
             commandLineOptions = new CommandLineOptions(args);
@@ -40,19 +39,11 @@ public class Main {
                 HttpURLConnection http = (HttpURLConnection) url.openConnection();
                 if (http.getResponseCode() == 404) {
                     throw new Exception("Capture url tidak valid");
-                }
-                else if(http.getResponseCode() == 500){
+                } else if (http.getResponseCode() == 500) {
                     throw new Exception("Server error");
                 }
             }
 
-            if (properties.getProperty("before-capture") != null) {
-                File file = new File(properties.getProperty("before-capture"));
-                if (!file.exists() || !FilenameUtils.getExtension(file.getAbsolutePath()).equals("php")) {
-                    throw new Exception("Path script PHP tidak valid");
-                }
-
-            }
             if (properties.getProperty("logo") != null) {
                 File file = new File(properties.getProperty("logo"));
                 if (!file.exists() || ImageIO.read(new File(properties.getProperty("logo"))) == null) {
@@ -97,9 +88,18 @@ public class Main {
 
         BrowserController browserController = new BrowserController(numberOfBrowsers);
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
-        //System.out.println("Membuat animasi timelapse");
-		//method ini melempar exception mungkin harus di catch, terutama yang bagian process & runtime
-        timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
+        try {
+            timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
+        } catch (IOException | InterruptedException | GitAPIException e) {
+            System.out.println("Animasi timelapse gagal dibuat");
+
+            if (e.getClass().getCanonicalName().equals("java.io.IOException")) {
+                 System.out.println("Terminal Command tidak valid");
+            } else {
+                System.out.println(e.getMessage());
+            }
+            System.exit(0);
+        }
         System.out.println("Animasi timelapse berhasil dibuat");
     }
 

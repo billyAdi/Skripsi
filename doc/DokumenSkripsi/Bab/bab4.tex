@@ -100,7 +100,7 @@ Berfungsi untuk melakukan \textit{checkout} ke \textit{commit} tertentu. Paramet
 \item public void checkoutMaster()\\
 Berfungsi untuk melakukan \textit{checkout} ke \textit{commit} terakir.
 \item public void hardReset()\\
-Berfungsi untuk melakukan operasi Git Reset. Operasi ini menghapus perubahan pada \textit{working tree} di \textit{commit} tertentu. 
+Berfungsi untuk melakukan operasi Git Reset dengan tipe \textit{hard reset}. Operasi ini menghapus perubahan pada \textit{working tree} di \textit{commit} tertentu. 
 \item public int getNumberOfCommit()\\
 Berfungi untuk mendapatkan jumlah \textit{commit}.
 \item public int getCommitIndex(String commitID)\\
@@ -145,8 +145,10 @@ Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bernilai lebih ke
 Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bukan bertipe bilangan riil atau bilangan bulat. 
 \item \texttt{Capture url tidak valid}\\
 Pesan ini muncul jika argumen \texttt{capture-url} merupakan alamat URL yang tidak valid.
-\item \texttt{Path script PHP tidak valid}\\
-Pesan ini muncul jika \textit{path} pada argumen Option \texttt{before-capture} tidak ditemukan atau \texttt{path} bukan merupakan \textit{file} PHP.
+%\item \texttt{Path script PHP tidak valid}\\
+%Pesan ini muncul jika \textit{path} pada argumen Option \texttt{before-capture} tidak ditemukan atau \texttt{path} bukan merupakan \textit{file} PHP.
+\item \texttt{Terminal Command tidak valid}
+Pesan ini muncul jika \textit{terminal command} pada argumen Option \texttt{before-capture} tidak valid.
 \item \texttt{Path gambar tidak valid}\\
 Pesan ini muncul jika \textit{path} gambar pada argumen Option \texttt{logo} tidak ditemukan atau \texttt{path} gambar bukan merupakan \textit{file} gambar.
 \item \texttt{Panjang commit ID awal harus 7 karakter}\\

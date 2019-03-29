@@ -60,7 +60,7 @@ function checkIndexPHP(){
 			$output=str_replace($matches[0],"\"C:/xampp/htdocs/Piktora/httpdocs\"",$contents);
 			file_put_contents($pathXAMPP,$output);
 			exec("httpd -k restart");
-			sleep(3);
+			//sleep(3);
 		}
 	}
 	else if(file_exists($pathIndexPHP2)){
@@ -68,7 +68,7 @@ function checkIndexPHP(){
 			$output=str_replace($matches[0],"\"C:/xampp/htdocs/Piktora/www\"",$contents);
 			file_put_contents($pathXAMPP,$output);
 			exec("httpd -k restart");
-			sleep(3);
+			//sleep(3);
 		}
 	}
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
@@ -36,8 +37,9 @@ public class TimeLapseGenerator {
      * browser.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Checkout atau Git Reset.
-     * @throws IOException jika terjadi masalah saat membaca file Gambar.
-     * @throws InterruptedException jika terjadi interupsi pada thread saat menjalankan script PHP.
+     * @throws IOException jika terjadi masalah menjalankan terminal command.
+     * @throws InterruptedException jika terjadi interupsi pada thread saat
+     * menjalankan terminal command.
      */
     public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController) throws GitAPIException, IOException, InterruptedException {
         int indexAwal = 0;
@@ -57,11 +59,9 @@ public class TimeLapseGenerator {
             vcs.checkoutCommit(i);
 
             if (properties.getProperty("before-capture") != null) {
-                String argument = String.format("php %s", properties.getProperty("before-capture"));
                 Process process;
-
-                process = Runtime.getRuntime().exec(argument);
-                process.waitFor();
+                process = Runtime.getRuntime().exec(properties.getProperty("before-capture"));
+                if(!process.waitFor(10, TimeUnit.SECONDS)) throw new IOException();
             }
 
             for (int j = 0; j < captureURL.length; j++) {
@@ -151,9 +151,9 @@ public class TimeLapseGenerator {
                 }
             }
         }
-        String fileName = String.format("hasil_screenshot/%s.gif", new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
+        String fileName = String.format("%s.gif", new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
         try (ImageOutputStream output = new FileImageOutputStream(new File(fileName))) {
-            int frameDelay = (int)(Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
+            int frameDelay = (int) (Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
 
             GifSequenceWriter writer = new GifSequenceWriter(output, bufferedResultImages[0].getType(), frameDelay, false);
             for (BufferedImage bufferedResultImage : bufferedResultImages) {

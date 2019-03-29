@@ -24,7 +24,7 @@ public class BrowserController {
     private final WebDriver[] drivers;
     private final List<File> screenshotFiles;
     private final int numberOfBrowser;
-
+    int ct=0;
     /**
      * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki
      * oleh kelas ini.

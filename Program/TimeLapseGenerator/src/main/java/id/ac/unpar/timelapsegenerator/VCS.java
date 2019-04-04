@@ -25,22 +25,24 @@ public class VCS {
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
      * dan mendapatkan seluruh histori commit pada proyek perangkat lunak
-     * berbasis web. 
+     * berbasis web.
      *
      * @param path merupakah path dari proyek perangkat lunak berbasis web.
-     * @throws IOException jika path proyek tidak valid atau repository tidak bisa diakses.
-     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Log.
+     * @throws IOException jika path proyek tidak valid atau repository tidak
+     * bisa diakses.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
+     * Log.
      */
-    public VCS(String path) throws IOException, GitAPIException   {
+    public VCS(String path) throws IOException, GitAPIException {
         Repository repository = new FileRepository(path);
-        if(repository.getRef("HEAD")==null){
+        if (repository.getRef("HEAD") == null) {
             throw new IOException("Path proyek tidak valid");
         }
         this.git = new Git(repository);
-        Iterable<RevCommit> commits=git.log().call();
+        Iterable<RevCommit> commits = git.log().call();
         this.commitIDs = new ArrayList<>();
         for (RevCommit commit : commits) {
-            this.commitIDs.add(commit.getName().substring(0, 7));
+            this.commitIDs.add(commit.getName().substring(0, 10));
         }
         Collections.reverse(commitIDs);
     }
@@ -49,7 +51,8 @@ public class VCS {
      * Berfungsi untuk melakukan checkout ke commit tertentu.
      *
      * @param commitIndex indeks dari variabel commitIDs.
-     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Checkout.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
+     * Checkout.
      */
     public void checkoutCommit(int commitIndex) throws GitAPIException {
         this.git.checkout().setName(this.commitIDs.get(commitIndex)).call();
@@ -58,7 +61,8 @@ public class VCS {
     /**
      * Berfungsi untuk melakukan checkout ke commit terakhir.
      *
-     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Checkout.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
+     * Checkout.
      */
     public void checkoutMaster() throws GitAPIException {
         this.git.checkout().setName("master").call();
@@ -68,7 +72,8 @@ public class VCS {
      * Berfungsi untuk melakukan operasi Git Reset. Operasi ini menghapus
      * perubahan pada working tree dan staging area di commit tertentu.
      *
-     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git Reset.
+     * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
+     * Reset.
      */
     public void hardReset() throws GitAPIException {
         this.git.reset().setMode(ResetType.HARD).call();
@@ -92,7 +97,7 @@ public class VCS {
     public int getCommitIndex(String commitID) {
         int result = -1;
         for (int i = 0; i < this.commitIDs.size(); i++) {
-            if (commitID.equals(this.commitIDs.get(i))) {
+            if (commitID.equals(this.commitIDs.get(i).substring(0, commitID.length()))) {
                 result = i;
                 break;
             }

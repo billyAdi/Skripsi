@@ -28,9 +28,10 @@ public class Main {
         VCS vcs = null;
         try {
             vcs = new VCS(properties.getProperty("project-path"));
-
-            if (Double.parseDouble(properties.getProperty("seconds-per-commit")) <= 0) {
-                throw new Exception("Seconds per commit harus lebih besar dari 0");
+            if (properties.getProperty("seconds-per-commit") != null) {
+                if (Double.parseDouble(properties.getProperty("seconds-per-commit")) <= 0) {
+                    throw new Exception("Seconds per commit harus lebih besar dari 0");
+                }
             }
 
             String[] captureURLs = properties.getProperty("capture-url").split(";");
@@ -52,8 +53,8 @@ public class Main {
             }
 
             if (properties.getProperty("start-commit") != null) {
-                if (properties.getProperty("start-commit").length() != 7) {
-                    throw new Exception("Panjang commit ID awal harus 7 karakter");
+                if (properties.getProperty("start-commit").length() < 7 || properties.getProperty("start-commit").length() > 10) {
+                    throw new Exception("Panjang commit ID awal harus berada di antara 7-10 karakter");
                 }
                 if (vcs.getCommitIndex(properties.getProperty("start-commit")) == -1) {
                     throw new Exception("Commit ID awal tidak ditemukan");
@@ -61,8 +62,8 @@ public class Main {
             }
 
             if (properties.getProperty("stop-commit") != null) {
-                if (properties.getProperty("stop-commit").length() != 7) {
-                    throw new Exception("Panjang commit ID akhir harus 7 karakter");
+                if (properties.getProperty("stop-commit").length() < 7 || properties.getProperty("stop-commit").length() > 10) {
+                    throw new Exception("Panjang commit ID akhir harus berada di antara 7-10 karakter");
                 }
                 if (vcs.getCommitIndex(properties.getProperty("stop-commit")) == -1) {
                     throw new Exception("Commit ID akhir tidak ditemukan");
@@ -90,17 +91,25 @@ public class Main {
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
         try {
             timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
-        } catch (IOException | InterruptedException | GitAPIException e) {
-            System.out.println("Animasi timelapse gagal dibuat");
-
-            if (e.getClass().getCanonicalName().equals("java.io.IOException")) {
-                 System.out.println("Terminal Command tidak valid");
-            } else {
-                System.out.println(e.getMessage());
+        } catch (IOException e) {
+            try {
+                vcs.checkoutMaster();
+            } catch (GitAPIException ex) {
+            } finally {
+                System.out.println("Animasi timelapse gagal dibuat");
+                System.out.println("Terminal Command tidak valid");
+                System.exit(0);
             }
-            System.exit(0);
+        } catch (Exception e) {
+            try {
+                vcs.checkoutMaster();
+            } catch (GitAPIException ex) {
+            } finally {
+                System.out.println("Animasi timelapse gagal dibuat");
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }
         }
         System.out.println("Animasi timelapse berhasil dibuat");
     }
-
 }

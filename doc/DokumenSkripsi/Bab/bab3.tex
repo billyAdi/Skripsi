@@ -119,7 +119,7 @@ JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git.
 
 Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. 
 
-Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, dapatkan object bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, panggil \textit{method} call() untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} berada di Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} berada di BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2,dan commit1. Operasi Git Log ini nantinya dipakai oleh program dalam skripsi ini untuk mendapatkan seluruh histori \textit{commit} dari perangkat lunak berbasis \textit{web}.
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, dapatkan object bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, panggil \textit{method} call() untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} berada di Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} berada di BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2, dan commit1. Operasi Git Log ini nantinya dipakai oleh program dalam skripsi ini untuk mendapatkan seluruh histori \textit{commit} dari perangkat lunak berbasis \textit{web}.
 
 \begin{figure}[H]
 	\centering
@@ -141,7 +141,7 @@ WebDriver merupakan \textit{interface} utama yang digunakan untuk pengujian. Web
 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.5]{Gambar/ChromeDriver.png}
+		\includegraphics[scale=0.4]{Gambar/ChromeDriver.png}
 	\caption{\textit{Browser} yang dikontrol oleh ChromeDriver.}
 	\label{fig:webdriver}
 \end{figure}
@@ -156,33 +156,37 @@ Tipe ini dipilih karena memudahkan kelas ImageIO\footnote{https://docs.oracle.co
 \label{sec:analisis_fitur_aplikasi}
 Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse}
 dari pengembangan proyek perangkat lunak berbasis web. Yang akan dibuat animasinya adalah
-halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program dapat menerima masukan dan konfigurasi dari Command Line Option. 
+halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program dapat menerima masukan dan konfigurasi dari Command Line Option. Setiap \textit{option} harus memiliki argumen. 
 
 Berikut ini adalah \textit{command line option} yang akan diimplementasikan pada skripsi ini:
 \begin{enumerate}
-\item \texttt{-project-path [PATH]}\\
+\item \texttt{-project-path <PATH>}\\
 Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari proyek perangkat lunak web yang terekam oleh Git. Opsi ini wajib ada.
 
-\item \texttt{-before-capture [TERMINAL-COMMAND]}\\
-Opsi ini berfungsi untuk menjalankan \textit{terminal command}. \textit{Terminal command} ini dijalankan sebelum melakukan \textit{screenshot}. Parameter dari opsi ini adalah \textit{terminal command} dalam bentuk \textit{string} dan harus diapit dengan tanda petik ganda. Opsi ini bersifat opsional.
+\item \texttt{-before-capture <TERMINAL-COMMAND>}\\
+Opsi ini berfungsi untuk menjalankan \textit{terminal command}. \textit{Terminal command} ini dijalankan sebelum melakukan \textit{screenshot}. Parameter dari opsi ini adalah \textit{terminal command} dalam bentuk \textit{string} dan harus diapit dengan tanda petik ganda. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program tidak akan menjalankan \textit{terminal command}.
 
-\item \texttt{-capture-url [URL 1, URL 2, URL 3, URL 4]}\\
+\item \texttt{-capture-url <URL 1>[, URL 2[, URL 3[, URL 4]]]}\\
 Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman yang dicapture bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
 
-\item \texttt{-seconds-per-commit [SECONDS]}\\
-Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol. Opsi ini bersifat opsional.
+\item \texttt{-seconds-per-commit <SECONDS>}\\
+Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, nilai defaultnya adalah 1 detik.
 
-\item \texttt{-title [TITLE]}\\
+\item \texttt{-title <TITLE>}\\
 Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri
-bawah layar. Opsi ini bersifat opsional. 
+bawah layar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak akan ditampilkan.  
 
-\item \texttt{-logo [IMAGE]}\\
+\item \texttt{-logo <IMAGE>}\\
 Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
-bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional.
+bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak akan ditampilkan.
 
-\item \texttt{-start-commit [ID] -stop-commit [ID]}\\
+\item \texttt{-start-commit <COMMIT-ID> -stop-commit <COMMIT-ID>}\\
 Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh karakter. Opsi ini bersifat opsional. 
 \end{enumerate}
+
+\item \texttt{-start-commit <COMMIT-ID>}
+
+\item \texttt{-stop-commit <COMMIT-ID>}
 
 \ \\
 Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
@@ -237,7 +241,7 @@ Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai be
 \item Program membuka semua \textit{browser} menggunakan Selenium WebDriver. Jumlah \textit{browser} bergantung pada jumlah argumen dari Option \texttt{-capture-url}.
 \item Program melakukan \textit{checkout} dalam suatu rentang \textit{commit} tertentu. Jika tidak terdapat Option \texttt{-start-commit} dan Option \texttt{-stop-commit}, akan dilakukan \textit{checkout} ke semua \textit{commit}.
 \item Program melakukan \textit{checkout} ke suatu \textit{commit}. 
-\item Program menjalankan \textit{script} PHP jika terdapat Option \texttt{-before-capture}.
+\item Program menjalankan \textit{terminal Command} jika terdapat Option \texttt{-before-capture}.
 \item Program membuka setiap URL yang didapatkan dari Option \texttt{-capture-url} menggunakan Selenium WebDriver. Setiap \textit{browser} membuka URL yang berbeda.
 \item Selenium WebDriver kemudian mengambil \textit{screenshot} pada semua \textit{browser}.
 \item Jika saat ini sedang berada pada \textit{commit} terakhir, lanjut ke langkah berikutnya. Jika tidak, ulangi langkah 5-8 untuk \textit{commit} selanjutnya.
@@ -358,16 +362,15 @@ f1ea410 - Thu Jan 5 15:23:32 2017 : fix instagram link
 
 \subsection{Perbedaan Letak \textit{File}}
 \label{subsec:perbedaan_letak_file}
-Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374(31 Oktober 2016) s.d. bbd82c2(6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 89000be(12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs". Akibat adanya perbedaan letak \textit{file} tersebut, maka
-konfigurasi dari apache harus diubah.
+Pada \textit{commit} 315d374 (31 Oktober 2016) s.d. bbd82c2 (6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374 (31 Oktober 2016) s.d. bbd82c2 (6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc (6 Desember 2016) s.d. 89000be (12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs". Akibat adanya perbedaan letak \textit{file} tersebut, maka konfigurasi dari apache harus diubah.
 
 
-Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang akan menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache. \textit{Script} PHP ini akan dijalankan sebelum melakukan migrasi \textit{database}.   
+Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang akan menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache. Setelah itu \textit{script} akan melakukan migrasi \textit{database}.   
 
 
 \subsection{Permasalahan Konfigurasi \textit{Database}}
 \label{subsec:konfigurasi_database}
-Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016), halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". Pada \textit{commit} f8c64fc(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan \textit{commit} f1ea410(5 Januari 2017), di dalam \textit{file} "database.php" terdapat \textit{password} . \textit{Commit} lainnya tidak terdapat \textit{password} pada \textit{file} "database.php". Penulis menggunakan \textit{password} \texttt{"piktora"} pada konfigurasi \textit{database} di MySQL Server.
+Pada \textit{commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016), halaman \textit{web} tidak bisa dibuka. Hal ini disebabkan karena perbedaan konfigurasi pada \textit{file} "database.php". Pada \textit{commit} f8c64fc (6 Desember 2016) s.d. 57f5ea4 (15 Desember 2016) dan \textit{commit} f1ea410 (5 Januari 2017), di dalam \textit{file} "database.php" terdapat \textit{password} . \textit{Commit} lainnya tidak terdapat \textit{password} pada \textit{file} "database.php". Penulis menggunakan \textit{password} \texttt{"piktora"} pada konfigurasi \textit{database} di MySQL Server.
 
 \begin{lstlisting}[caption={Isi \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016)},label={lst:piktora_commit_f8c64fc},language=plaintext]
 $active_group = 'default';
@@ -396,14 +399,14 @@ $db['default'] = array(
 );
 \end{lstlisting}
 
-Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc(6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b(6 Desember 2016) s.d. 57f5ea4(15 Desember 2016) dan f1ea410(5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan phpMyAdmin berbeda, halaman \textit{website} pada \textit{commit} f8c64fc(6 Desember 2016) s.d. ace1988(6 Desember 2016) tidak bisa dibuka. 
+Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc (6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b (6 Desember 2016) s.d. 57f5ea4 (15 Desember 2016) dan f1ea410 (5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan phpMyAdmin berbeda, halaman \textit{website} pada \textit{commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) tidak bisa dibuka. 
 
 Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang akan menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini akan mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak akan mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} akan mengubah \textit{password} menjadi \texttt{piktora}. 
 
 \subsection{Permasalahan Migrasi \textit{Database}}
 \label{subsec:migrasi_database}
 
-Pada \textit{commit} 3d79d0a(27 Nov 2016), terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} a19e7f2(27 November 2016), terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 3d79d0a(27 Nov 2016) terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} a19e7f2(27 November 2016) \textit{file} "20161122150001\_InitialData.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 3d79d0a(27 Nov 2016), \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 3d79d0a(27 Nov 2016). Isi \textit{file} "20161122150001\_InitialData.php" pada \textit{commit} a19e7f2(27 November 2016) dan 3d79d0a(27 Nov 2016) berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
+Pada \textit{commit} 3d79d0a (27 Nov 2016), terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} a19e7f2 (27 November 2016), terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 3d79d0a (27 Nov 2016) terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} a19e7f2(27 November 2016) \textit{file} "20161122150001\_InitialData.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 3d79d0a (27 Nov 2016), \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 3d79d0a (27 Nov 2016). Isi \textit{file} "20161122150001\_InitialData.php" pada \textit{commit} a19e7f2 (27 November 2016) dan 3d79d0a (27 Nov 2016) berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
 
 Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{command line option} yang akan menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini akan melakukan dua pekerjaan. Pertama, \textit{script} akan menghapus \textit{database} piktora. Setelah itu \textit{script} akan membuat \textit{database} piktora, kemudian melakukan migrasi \textit{database}. 
  

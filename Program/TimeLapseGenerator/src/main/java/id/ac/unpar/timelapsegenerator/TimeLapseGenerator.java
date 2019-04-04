@@ -61,7 +61,9 @@ public class TimeLapseGenerator {
             if (properties.getProperty("before-capture") != null) {
                 Process process;
                 process = Runtime.getRuntime().exec(properties.getProperty("before-capture"));
-                if(!process.waitFor(10, TimeUnit.SECONDS)) throw new IOException();
+                if (!process.waitFor(10, TimeUnit.SECONDS)) {
+                    throw new IOException();
+                }
             }
 
             for (int j = 0; j < captureURL.length; j++) {
@@ -75,18 +77,19 @@ public class TimeLapseGenerator {
         vcs.checkoutMaster();
 
         List<File> screenshotFiles = new ArrayList<>();
-
+        List<File> resultImages = new ArrayList<>();
         screenshotFiles = browserController.getScreenshotFiles();
         BufferedImage[] bufferedImages = new BufferedImage[screenshotFiles.size()];
 
-        for (int i = 0; i < screenshotFiles.size(); i++) {
-            bufferedImages[i] = ImageIO.read(screenshotFiles.get(i));
-        }
-
+//        for (int i = 0; i < screenshotFiles.size(); i++) {
+//            bufferedImages[i] = ImageIO.read(screenshotFiles.get(i));
+//        }
+        
         BufferedImage[] bufferedResultImages = new BufferedImage[screenshotFiles.size() / browserController.getNumberOfBrowser()];
         switch (browserController.getNumberOfBrowser()) {
             case 1:
                 bufferedResultImages = bufferedImages;
+                resultImages = screenshotFiles;
                 break;
             case 2:
                 for (int i = 0, j = 0; i < bufferedResultImages.length; i++, j += 2) {
@@ -130,34 +133,44 @@ public class TimeLapseGenerator {
             default:
                 break;
         }
-
-        for (BufferedImage bufferedResultImage : bufferedResultImages) {
+        for (File resultImage : resultImages) {
+//        for (BufferedImage bufferedResultImage : bufferedResultImages) {
             if (properties.getProperty("title") == null && properties.getProperty("logo") == null) {
                 break;
-            } else {
-                if (properties.getProperty("title") != null) {
-                    Graphics2D graphic = (Graphics2D) bufferedResultImage.getGraphics();
-                    graphic.setFont(new Font("Times New Roman", Font.BOLD, 18));
-                    FontMetrics fontMetrics = graphic.getFontMetrics(graphic.getFont());
-                    graphic.setColor(Color.black);
-                    graphic.drawString(properties.getProperty("title"), 5, bufferedResultImage.getHeight() - fontMetrics.getDescent() - 5);
-                    graphic.dispose();
-                }
-                if (properties.getProperty("logo") != null) {
-                    BufferedImage logo = ImageIO.read(new File(properties.getProperty("logo")));
-                    Graphics2D graphic = (Graphics2D) bufferedResultImage.getGraphics();
-                    graphic.drawImage(logo, bufferedResultImage.getWidth() - logo.getWidth() - 5, bufferedResultImage.getHeight() - logo.getHeight() - 5, null);
-                    graphic.dispose();
-                }
-            }
+            } else if (properties.getProperty("title") != null) {
+                BufferedImage image = ImageIO.read(resultImage);
+//                Graphics2D graphic = (Graphics2D) bufferedResultImage.getGraphics();
+                Graphics2D graphic = (Graphics2D) image.getGraphics();
+                graphic.setFont(new Font("Times New Roman", Font.BOLD, 18));
+                FontMetrics fontMetrics = graphic.getFontMetrics(graphic.getFont());
+                graphic.setColor(Color.black);
+                graphic.drawString(properties.getProperty("title"), 5, image.getHeight() - fontMetrics.getDescent() - 5);
+//                graphic.drawString(properties.getProperty("title"), 5, bufferedResultImage.getHeight() - fontMetrics.getDescent() - 5);
+                graphic.dispose();
+                ImageIO.write(image, "png", resultImage);
+
+            } //                if (properties.getProperty("logo") != null) {
+            //                    BufferedImage logo = ImageIO.read(new File(properties.getProperty("logo")));
+            //                    Graphics2D graphic = (Graphics2D) bufferedResultImage.getGraphics();
+            //                    graphic.drawImage(logo, bufferedResultImage.getWidth() - logo.getWidth() - 5, bufferedResultImage.getHeight() - logo.getHeight() - 5, null);
+            //                    graphic.dispose();
+            //                }
         }
         String fileName = String.format("%s.gif", new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date()));
         try (ImageOutputStream output = new FileImageOutputStream(new File(fileName))) {
-            int frameDelay = (int) (Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
+            int frameDelay = 1000;
+            if (properties.getProperty("seconds-per-commit") != null) {
+                frameDelay = (int) (Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
+            }
+            GifSequenceWriter writer = new GifSequenceWriter(output, ImageIO.read(resultImages.get(0)).getType(), frameDelay, false);
 
-            GifSequenceWriter writer = new GifSequenceWriter(output, bufferedResultImages[0].getType(), frameDelay, false);
-            for (BufferedImage bufferedResultImage : bufferedResultImages) {
-                writer.writeToSequence(bufferedResultImage);
+//            GifSequenceWriter writer = new GifSequenceWriter(output, bufferedResultImages[0].getType(), frameDelay, false);
+//            for (BufferedImage bufferedResultImage : bufferedResultImages) {
+//                writer.writeToSequence(bufferedResultImage);
+//            }
+            for (File resultImage : resultImages) {
+                BufferedImage image = ImageIO.read(resultImage);
+                writer.writeToSequence(image);
             }
             writer.close();
         }

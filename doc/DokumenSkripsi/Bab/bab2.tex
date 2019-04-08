@@ -195,7 +195,15 @@ Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \text
 \texttt{\$ git log}
 
 \item Reset\\
-Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} tertentu, selain itu secara opsional  melakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} berdasarkan tipe \textit{reset}. Terdapat tiga tipe \textit{reset} yaitu, \textit{hard}, \textit{soft}, dan \textit{mixed}. Pada tipe \textit{hard}, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree}, selain itu, posisi \textit{HEAD} dipindah sehingga menunjuk ke \textit{commit} tertentu. Pada tipe \textit{soft}, hanya posisi \textit{HEAD} saja yang berpindah. Pada tipe \textit{mixed}, dilakukan \textit{reset} pada \textit{staging area} dan posisi \textit{HEAD} dipindah sehingga menunjuk ke \textit{commit} tertentu.
+Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} tertentu, selain itu secara opsional  melakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} berdasarkan tipe \textit{reset}. Terdapat tiga tipe reset yaitu:
+\begin{itemize}
+\item Soft\\
+Pada tipe ini, tidak dilakukan \textit{reset} pada \textit{staging area} dan \textit{working directory}.
+\item Hard\\
+Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree}. Selain itu perubahan di \textit{working directory} setelah \textit{commit} tertentu akan hilang.
+\item Mixed\\
+Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area}.
+\end{itemize} 
 
 Berikut ini adalah sintaks untuk melakukan operasi \textit{reset}:\\
 \texttt{\$ git reset --hard [commit]}\\

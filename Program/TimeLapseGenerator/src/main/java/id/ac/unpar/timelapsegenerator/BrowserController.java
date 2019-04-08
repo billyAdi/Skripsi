@@ -26,7 +26,7 @@ public class BrowserController {
     private final WebDriver[] drivers;
     private final List<File> screenshotFiles;
     private final int numberOfBrowser;
-    int ct=0;//buat debug
+    int ct=0;
     /**
      * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki
      * oleh kelas ini.
@@ -87,14 +87,14 @@ public class BrowserController {
      */
     public void takeScreenshot(int browserIndex) {
 //        File scrFile
-//                = ((TakesScreenshot) drivers[0]).getScreenshotAs(OutputType.FILE);
+//                = ((TakesScreenshot) drivers[browserIndex]).getScreenshotAs(OutputType.FILE);
 //        try {
 //            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + ct + ".png"));
 //
 //        } catch (IOException ex) {
-//            System.out.println("");
 //        }
 //        ct++;
+//		
         this.screenshotFiles.add(((TakesScreenshot) this.drivers[browserIndex]).getScreenshotAs(OutputType.FILE));
     }
 

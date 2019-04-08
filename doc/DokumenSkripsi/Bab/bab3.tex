@@ -178,16 +178,17 @@ bawah layar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka ju
 
 \item \texttt{-logo <IMAGE>}\\
 Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
-bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak akan ditampilkan.
+bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Format gambar yang diterima antara lain JPG, PNG, GIF dan, BMP. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak akan ditampilkan.
 
-\item \texttt{-start-commit <COMMIT-ID> -stop-commit <COMMIT-ID>}\\
-Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh karakter. Opsi ini bersifat opsional. 
+%\item \texttt{-start-commit <COMMIT-ID> -stop-commit <COMMIT-ID>}\\
+%Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. 
+%\end{enumerate}
+
+\item \texttt{-start-commit <COMMIT-ID>}\\
+Opsi ini berfungsi untuk mengatur \textit{commit} awal untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} awal , dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program akan membangkitkan animasi dimulai dari \textit{commit} paling awal.
+\item \texttt{-stop-commit <COMMIT-ID>}\\
+Opsi ini berfungsi untuk mengatur \textit{commit} akhir untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} akhir , dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program akan membangkitkan animasi sampai dengan \textit{commit} paling akhir.
 \end{enumerate}
-
-\item \texttt{-start-commit <COMMIT-ID>}
-
-\item \texttt{-stop-commit <COMMIT-ID>}
-
 \ \\
 Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture} dan \texttt{-capture-url} tidak mengacu pada Gource. Kedua opsi tersebut secara khusus dibuat karena program pada skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file}.           
   

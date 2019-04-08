@@ -46,6 +46,11 @@ function checkDatabaseConfig(){
 			$output=str_replace($matches[0],"'password' => 'piktora',",$contents);
 			file_put_contents($path,$output);
 		}
+	}else{
+		$contents=file_get_contents("C:/xampp/htdocs/Piktora/www/application/config/database-dev.php");
+		$file = fopen("C:/xampp/htdocs/Piktora/www/application/config/database.php", "w");
+		fwrite($file, $contents);
+		fclose($file);
 	}
 }
 

@@ -40,9 +40,7 @@ public class Main {
                 HttpURLConnection http = (HttpURLConnection) url.openConnection();
                 if (http.getResponseCode() == 404) {
                     throw new Exception("Capture url tidak valid");
-                } else if (http.getResponseCode() == 500) {
-                    throw new Exception("Server error");
-                }
+                } 
             }
 
             if (properties.getProperty("logo") != null) {

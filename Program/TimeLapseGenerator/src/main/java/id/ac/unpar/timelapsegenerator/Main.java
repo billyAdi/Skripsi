@@ -1,7 +1,6 @@
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
@@ -27,10 +26,17 @@ public class Main {
 
         VCS vcs = null;
         try {
-            vcs = new VCS(properties.getProperty("project-path"));
+            String branch="master";
+            if(properties.getProperty("branch")!=null){
+                branch=properties.getProperty("branch");
+            }
+            vcs = new VCS(properties.getProperty("project-path"),branch);
             if (properties.getProperty("seconds-per-commit") != null) {
                 if (Double.parseDouble(properties.getProperty("seconds-per-commit")) <= 0) {
                     throw new Exception("Seconds per commit harus lebih besar dari 0");
+                }
+                else if(Double.parseDouble(properties.getProperty("seconds-per-commit"))>655){
+                    throw new Exception("Seconds per commit harus kurang dari sama dengan 655");
                 }
             }
 
@@ -89,15 +95,6 @@ public class Main {
         TimeLapseGenerator timeLapseGenerator = new TimeLapseGenerator();
         try {
             timeLapseGenerator.generateTimelapse(properties, vcs, browserController);
-        } catch (IOException e) {
-            try {
-                vcs.checkoutMaster();
-            } catch (GitAPIException ex) {
-            } finally {
-                System.out.println("Animasi timelapse gagal dibuat");
-                System.out.println("Terminal Command tidak valid");
-                System.exit(0);
-            }
         } catch (Exception e) {
             try {
                 vcs.checkoutMaster();

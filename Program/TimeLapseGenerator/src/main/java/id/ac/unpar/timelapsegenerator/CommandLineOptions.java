@@ -39,6 +39,7 @@ public class CommandLineOptions {
         options.addOption(Option.builder().longOpt("stop-commit").argName("commit id").hasArg().desc("commit id akhir untuk memangkitkan animasi").build());
         options.addOption(Option.builder().longOpt("title").argName("title").hasArg().desc("judul proyek yang akan ditampilkan di pojok kiri bawah").build());
         options.addOption(Option.builder().longOpt("logo").argName("image path").hasArg().desc("logo yang akan ditampilkan di pojok kanan bawah").build());
+        options.addOption(Option.builder().longOpt("branch").argName("branch").hasArg().desc("branch yang digunakan untuk membangkitkan animasi").build());
 
         this.commandLine = parser.parse(options, args);
         if (this.commandLine.getOptionValues("capture-url").length > 4) {

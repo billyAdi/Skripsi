@@ -62,7 +62,7 @@ public class TimeLapseGenerator {
                 Process process;
                 process = Runtime.getRuntime().exec(properties.getProperty("before-capture"));
                 if (!process.waitFor(30, TimeUnit.SECONDS)) {
-                    throw new IOException();
+                    throw new IOException("Terminal Command Tidak Valid");
                 }
             }
 
@@ -178,6 +178,9 @@ public class TimeLapseGenerator {
             int frameDelay = 1000;
             if (properties.getProperty("seconds-per-commit") != null) {
                 frameDelay = (int) (Double.parseDouble(properties.getProperty("seconds-per-commit")) * 1000);
+                if(frameDelay==0){
+                    frameDelay=1000;
+                }
             }
             GifSequenceWriter writer = new GifSequenceWriter(output, ImageIO.read(resultImages.get(0)).getType(), frameDelay, false);
 

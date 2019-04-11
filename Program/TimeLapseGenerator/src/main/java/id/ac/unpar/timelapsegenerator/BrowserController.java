@@ -1,10 +1,8 @@
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +24,7 @@ public class BrowserController {
     private final WebDriver[] drivers;
     private final List<File> screenshotFiles;
     private final int numberOfBrowser;
-    int ct=0;
+    
     /**
      * Constructor yang berfungsi untuk menginisialisasi variabel yang dimiliki
      * oleh kelas ini.
@@ -86,15 +84,6 @@ public class BrowserController {
      * @param browserIndex indeks browser yang akan diambil screenshotnya.
      */
     public void takeScreenshot(int browserIndex) {
-//        File scrFile
-//                = ((TakesScreenshot) drivers[browserIndex]).getScreenshotAs(OutputType.FILE);
-//        try {
-//            FileUtils.moveFile(scrFile, new File("hasil_screenshot/z" + ct + ".png"));
-//
-//        } catch (IOException ex) {
-//        }
-//        ct++;
-//		
         this.screenshotFiles.add(((TakesScreenshot) this.drivers[browserIndex]).getScreenshotAs(OutputType.FILE));
     }
 

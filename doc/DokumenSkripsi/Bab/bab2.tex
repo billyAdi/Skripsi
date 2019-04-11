@@ -112,7 +112,10 @@ Alur kerja dari Git adalah sebagai berikut:
 \end{figure}
 
 \subsubsection{Commit}
-Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. \textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada \textit{version} 4. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{version} 4. 
+Commit merupakan sebuah \textit{snapshot} dari suatu \textit{file} atau direktori. Dengan kata lain yang disimpan oleh Git adalah \textit{state} dari \textit{file} atau direktori pada suatu waktu. \textit{File} disimpan oleh Git dalam bentuk \textit{blob}, sedangkan direktori disimpan dalam bentuk \textit{tree}. \textit{Commit}, \textit{blob}, dan \textit{tree} merupakan Git Object. Setiap Git Object memiliki ID berupa SHA-1 \textit{hash value} dengan panjang empat puluh karakter heksadesimal. 
+
+
+%\textit{Commit} menggambarkan \textit{state} dari \textit{working directory}. Gambar \ref{fig:snapshots} menunjukkan terdapat tiga \textit{file} pada \textit{version} 4. Dimana terdapat \textit{file} A1, B1, dan C1 pada \textit{working directory}. \textit{File} A1, B1, dan C2  merupakan \textit{state} \textit{file} A, B, dan C pada \textit{version} 4. 
 
 %Git melakukan \textit{checksum} pada \textit{commit} sebelum menyimpannya ke direktori Git. Mekanisme yang digunakan untuk melakukan \textit{check-summed} disebut dengan \textit{SHA-1 hash}. \textit{SHA-1 hash} terdiri dari empat puluh karakter heksadesimal(0-9 a-f). Nilai dari \textit{SHA-1 hash} dihitung berdasarkan isi dari\textit{working directory} atau struktur direktori Git.
 
@@ -144,7 +147,12 @@ Date:   Mon Apr 17 15:15:03 2017 +0700
     
 \end{lstlisting}
 
-Seperti yang diperlihatkan pada Listing \ref{lst:git_histori}, setiap \textit{commit} memiliki beberapa informasi. Baris pertama menunjukkan \textit{commit} ID berupa \textit{SHA-1 hash value}, dengan panjang empat puluh karakter heksadesimal. \textit{SHA-1 hash value} ini digunakan untuk pengecekan integritas pada \textit{file}. Pada baris pertama, \textit{master} menunjukkan \textit{branch} yang sedang aktif, \textit{master} juga merupakan \textit{reference} ke \textit{commit} terakhir. \textit{HEAD} merupakan \textit{reference} ke \textit{master}. \textit{Origin}/\textit{master} dan \textit{origin}/\textit{HEAD} merupakan \textit{master} dan \textit{HEAD} pada \textit{remote repository}. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
+Listing \ref{lst:git_histori} menunjukkan sebagian histori \textit{commit} pada \textit{branch} master. Baris pertama menunjukkan \textit{commit} ID berupa \textit{SHA-1 hash value}, dengan panjang empat puluh karakter heksadesimal. Baris kedua menunjukkan orang yang melakukan \textit{commit} dan alamat emailnya. Baris ketiga menunjukkan waktu \textit{commit}. Baris terakhir berisi deskripsi dari \textit{commit} tersebut.
+
+HEAD dan \textit{master} pada Listing \ref{lst:git_histori}, disebut juga dengan Git Ref / Reference. Ref merupakan suatu variabel yang menyimpan ID (SHA-1 hash value) dari suatu Git Object. Pada Listing \ref{lst:git_histori}, Ref \textit{master} menyimpan ID dari \textit{commit} yang isinya adalah 89000be7ce7d16f006813cddefb4ec6d70d15ed6. Ref HEAD tidak secara langsung menyimpan ID dari \textit{commit}, melainkan \textit{pointer} ke Ref \textit{master}. Ref yang menyimpan \textit{pointer} ke Ref lain disebut juga dengan \textit{symbolic Ref}. 
+
+Ref origin/master merupakan Ref \textit{master} yang berada pada \textit{remote repository}. 
+Ref origin/HEAD merupakan ref HEAD yang berada pada \textit{remote repository}. \textit{Remote repository} merupakan repositori yang disimpan pada suatu \textit{server}, misalnya \textit{server} Github. 
 
 \subsection{Operasi Dasar pada Git}
 \label{subsec:operasi_dasar_git}
@@ -161,7 +169,8 @@ Operasi ini digunakan untuk merekam \textit{snapshot} atau \textit{state} \texti
 \texttt{\$ git commit -m "[descriptive message]"}  
 \item Branch\\
 Operasi ini digunakan untuk menampilkan semua \textit{branch} yang ada pada repositori Git, membuat \textit{branch} baru, dan menghapus \textit{branch}. Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{branch}:\\
-\texttt{\$ git branch}\\ 
+\texttt{\$ git branch -a}\\ 
+\texttt{\$ git branch -r}\\
 \texttt{\$ git branch [branch-name]}\\
 \texttt{\$ git branch -d [branch-name]}\\
 \texttt{\$ git branch -D [branch-name]} 
@@ -242,8 +251,23 @@ Kembalian: nama dari \textit{branch} yang sedang aktif, contohnya \textit{master
 \item public Ref getRef(String name)\\
 Berfungsi untuk mendapatkan \textit{reference} berdasarkan nama yang diberikan.\\
 Parameter: nama dari \textit{reference}.\\
-Kembalian: \textit{object} bertipe Ref. Ref merupakan variabel yang menyimpan ID dari Git object. Salah satu contoh dari Git Object adalah \textit{commit}. 
+Kembalian: \textit{object} bertipe Ref.
 \end{itemize} 
+
+\subsection{Kelas Ref}
+\label{subsec:ref}
+Ref di dalam Git merupakan sebuah variabel yang menyimpan ID dari Git Object.
+Berikut adalah beberapa \textit{method} yang dimiliki oleh kelas ini:
+\begin{itemize}
+\item String getName()\\
+Berfungsi untuk mengembalikan nama dari suatu Ref.\\
+Kembalian: nama dari Ref.
+\item ObjectId getObjectId()\\
+Berfungsi untuk mengembalikan ID dari suatu Git Object.\\
+Kembalian: \textit{object} bertipe ObjectId. Di dalam kelas ObjectId terdapat \textit{method} getName() yang berfungsi untuk mengembalikan ID dari Git Object berupa SHA-1 \textit{hash value}. 
+\end{itemize}
+
+
 
 \subsection{Kelas FileRepository}
 \label{subsec:filerepository}
@@ -273,6 +297,10 @@ Kembalian: objek \textit{AddCommand} yang berfungsi untuk mengumpulkan parameter
 \item public LogCommand log()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{log}.\\
 Kembalian: objek \textit{LogCommand} yang berfungsi untuk mengumpulkan parameter opsional dan akhirnya mengeksekusi operasi \textit{log}.
+
+\item public ListBranchCommand branchList()\\
+\textit{Method} ini mengembalikan objek \textit{command} yang digunakan untuk mengeksekusi operasi \textit{branch}. Operasi ini setara dengan sintaks \texttt{git branch -r/-a}.\\
+Kembalian: objek dengan tipe ListBranchCommand.
 
 \item public CheckoutCommand checkout()\\
 \textit{Method} ini mengembalikan objek \textit{command} untuk mengeksekusi operasi \textit{checkout}.\\
@@ -323,7 +351,7 @@ Kembalian: objek \textit{DeleteBranchCommand}.
 Kembalian: objek \textit{ResetCommand}.
 \end{itemize}
 
-\subsection{Kelas Checkout Command}
+\subsection{Kelas CheckoutCommand}
 \label{subsec:checkoutcommand}
 Kelas yang digunakan untuk melakukan operasi \textit{checkout}.
 Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
@@ -336,7 +364,32 @@ Kembalian: \textit{object} CheckoutCommand.
 Berfungsi untuk menjalankan operasi \textit{checkout}.
 \end{itemize}
 
-\subsection{Kelas Log Command}
+\subsection{Kelas ListBranchCommand}
+\label{subsec:listbranchcommand}
+Kelas yang digunakan untuk melakukan operasi \textit{branch} dan mendapatkan daftar \textit{branch}.
+Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public ListBranchCommand setListMode(ListBranchCommand.ListMode listMode)\\
+Menentukan mode yang digunakan untuk mendapatkan \textit{branch}. Jika parameter tidak dimasukkan, hanya daftar \textit{branch} lokal yang didapatkan.\\
+Parameter: mode yang digunakan untuk mendapatkan \textit{branch} berupa konstanta.\\
+Kembalian: \textit{object} CheckoutCommand.
+\item public List<Ref> call()\\
+Berfungsi untuk menjalankan operasi \textit{branch}.\\
+Kembalian: daftar \textit{branch} dalam bentuk List<Ref>.
+\end{itemize}
+
+\subsection{Enum ListBranchCommand.ListMode}
+Merupakan sebuah Enum yang berisi mode yang digunakan untuk mendapatkan \textit{branch}.
+Berikut ini adalah konstanta yang terdapat pada Enum ini:
+\begin{itemize}
+\item public static final ListBranchCommand.ListMode ALL\\
+Mode ini digunakan untuk mendapatkan semua daftar \textit{branch} baik lokal maupun \textit{remote}. Mode ini setara dengan \textit{Option} \texttt{-a} pada sintaks \texttt{git branch -a}.
+\item public static final ListBranchCommand.ListMode REMOTE\\
+Mode ini digunakan untuk mendapatkan daftar \textit{remote branch}. Mode ini setara dengan \textit{Option} \texttt{-r} pada sintaks \texttt{git branch -r}. 
+\end{itemize}
+
+
+\subsection{Kelas LogCommand}
 \label{subsec:logcommand}
 Kelas yang digunakan untuk melakukan operasi \textit{log}.
 Berikut adalah \textit{method} yang terdapat pada kelas ini:
@@ -346,7 +399,7 @@ Berfungsi untuk menjalankan operasi \textit{log}.\\
 Kembalian: histori \textit{commit} pada \textit{branch} yang sedang aktif. 
 \end{itemize}
 
-\subsection{Kelas Reset Command}
+\subsection{Kelas ResetCommand}
 \label{subsec:resetcommand}
 Kelas yang digunakan untuk melakukan operasi \textit{reset}.
 Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
@@ -416,13 +469,13 @@ Kembalian: waktu dilakukannya suatu \textit{commit} berupa objek Date.
 
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
-Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan \textit{WebDriver} menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{extension} dari\textit{browser} Chrome dan Firefox yang digunakan untuk melakukan \textit{record and playback test} pada \textit{browser}. 
+Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan WebDriver menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{extension} dari\textit{browser} Chrome dan Firefox yang digunakan untuk melakukan \textit{record and playback test} pada \textit{browser}. 
  
-WebDriver merupakan kakas untuk mengotomatisasi pengujian pada aplikasi \textit{web}\cite{Selenium_doc}. WebDriver dapat berkomunikasi secara langsung dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. WebDriver yang terdapat pada Selenium WebDriver antara lain ChromeDriver, FirefoxDriver, OperaDriver, InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver.
+WebDriver merupakan kakas untuk mengotomatisasi pengujian pada aplikasi \textit{web}\cite{Selenium_doc}. WebDriver dapat berkomunikasi secara langsung dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. WebDriver yang terdapat pada Selenium WebDriver antara lain ChromeDriver, FirefoxDriver, OperaDriver, SafariDriver, InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver.
 
-ChromeDriver merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. FirefoxDriver merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. OperaDriver merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. InternetExplorerDriver merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. EdgeDriver merupakan implementasi WebDriver yang mengontrol Microsoft Edge \textit{browser}. HtmlUnitDriver merupakan implementasi WebDriver yang mengontrol HTMLUnit \textit{browser} yang bersifat \textit{headless}(tidak mempunyai GUI). 
+ChromeDriver merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. FirefoxDriver merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. OperaDriver merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. SafariDriver merupakan implementasi WebDriver yang mengontrol Safari \textit{browser}. InternetExplorerDriver merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. EdgeDriver merupakan implementasi WebDriver yang mengontrol Microsoft Edge \textit{browser}. HtmlUnitDriver merupakan implementasi WebDriver yang mengontrol HTMLUnit \textit{browser} yang bersifat \textit{headless}(tidak mempunyai GUI). 
 
-Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. Bahasa pemrograman yang digunakan adalah java. WebDriver yang digunakan adalah ChromeDriver. Pemilihan WebDriver ini hanya berdasarkan preferensi penulis saja. Penulis tidak memilih InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver karena InternetExplorerDriver dan EdgeDriver hanya bisa berjalan pada sistem operasi Windows, selain itu  HtmlUnitDriver tidak mempunyai GUI sehingga tidak bisa dilakukan pengambilan \textit{screenshot}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. Bahasa pemrograman yang digunakan adalah java. WebDriver yang digunakan adalah ChromeDriver. Pemilihan WebDriver ini hanya berdasarkan preferensi penulis saja. Penulis tidak memilih InternetExplorerDriver, EdgeDriver, dan SafariDriver karena InternetExplorerDriver dan EdgeDriver hanya bisa berjalan pada sistem operasi Windows, selain itu SafariDriver hanya bisa berjalan pada sistem operasi macOS. HtmlUnitDriver tidak dipilih karena tidak mempunyai GUI sehingga tidak bisa dilakukan pengambilan \textit{screenshot}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
 
 \subsection{Interface WebDriver}
 \label{subsec:webdriver}
@@ -545,6 +598,14 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Opera \textit{browser
 \begin{itemize}
 \item public OperaDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe OperaDriver.
+\end{itemize}
+
+\subsection{Kelas SafariDriver}
+\label{subsec:safaridriver}
+Merupakan merupakan implementasi WebDriver yang mengontrol Safari \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+\begin{itemize}
+\item public SafariDriver()\\
+\textit{Constructor} ini membuat instans dengan tipe SafariDriver.
 \end{itemize}
 
 \subsection{Kelas InternetExplorerDriver}

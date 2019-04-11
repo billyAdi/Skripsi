@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
@@ -24,21 +26,36 @@ public class VCS {
 
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
-     * dan mendapatkan seluruh histori commit pada proyek perangkat lunak
-     * berbasis web.
+     * dan mendapatkan seluruh histori commit proyek perangkat lunak
+     * berbasis web pada branch tertentu. Dimana branch tersebut diambil dari parameter constructor.
      *
      * @param path merupakah path dari proyek perangkat lunak berbasis web.
-     * @throws IOException jika path proyek tidak valid atau repository tidak
+     * @param branch nama branch yang digunakan untuk membangkitkan animasi.
+     * @throws IOException jika path proyek tidak valid atau repositori tidak
      * bisa diakses.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Log.
+     * @throws Exception jika branch tidak valid
      */
-    public VCS(String path) throws IOException, GitAPIException {
+    public VCS(String path,String branch) throws IOException, GitAPIException,Exception {
         Repository repository = new FileRepository(path);
         if (repository.getRef("HEAD") == null) {
             throw new IOException("Path proyek tidak valid");
-        }
+        }        
         this.git = new Git(repository);
+        List<Ref> refs=git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call();
+        int refIdx=-1;
+        for (int i=0;i<refs.size();i++) {
+           if(refs.get(i).getName().contains(branch)){
+               refIdx=i;
+               break;
+           }
+        }
+        
+        if(refIdx==-1){
+            throw new Exception("Branch tidak valid");
+        }
+        git.checkout().setName(refs.get(refIdx).getName()).call();
         Iterable<RevCommit> commits = git.log().call();
         this.commitIDs = new ArrayList<>();
         for (RevCommit commit : commits) {

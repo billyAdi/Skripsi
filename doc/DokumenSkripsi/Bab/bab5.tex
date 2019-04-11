@@ -153,7 +153,111 @@ Gambar \ref{fig:c1} - Gambar \ref{fig:c12} menunjukkan \textit{screenshot} setia
 
 \subsection{Pengujian Fungsional}
 \label{sec:pengujian_fungsional} 
-Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Option yang terdapat pada program sudah berjalan dengan baik. Option yang terdapat pada program dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. Lingkungan pengujian fungsional sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Hasil pengujian fungsional dapat dilihat pada Tabel 
+Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Option yang terdapat pada program sudah berjalan dengan baik. Option yang terdapat pada program dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. Lingkungan pengujian fungsional sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Pengujian dilakukan pada proyek Piktora dengan menggunakan berbagai macam tes kasus. Histori \textit{commit} proyek Piktora dapat dilihat pada subbab \ref{sec:prapengujian}. Hasil pengujian fungsional dapat dilihat pada Tabel \ref{table:hasil_pengujian1} dan Tabel \ref{table:hasil_pengujian2}.
+
+
+\begin{table}[htbp]
+	\centering
+	\caption{Tabel pengujian fungsional}
+	
+		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
+		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
+		1. & \texttt{-project-path} C:/xampp/htdocs/Piktora/.git & Program berhasil membangkitkan animasi berdasarkan path yang diberikan dan mengeluarkan status pesan "Animasi timelapse berhasil dibuat" & sesuai \\ \hline
+		2. & \texttt{-project-path} C:/xampp/htdocs  & Program gagal membuat animasi dan mengeluarkan pesan error "Path proyek tidak valid"  & sesuai \\ \hline
+		3. & \texttt{-capture-url} http://localhost & Program mengambil screenshot berdasarkan alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture1}  & sesuai	\\ \hline
+		4. & \texttt{-capture-url} http://localhost http://localhost/about & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture2}  & sesuai \\ \hline
+		5. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture3}   & sesuai\\ \hline
+		6. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects http://localhost/contact & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture4}  & sesuai \\ \hline
+		7. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects http://localhost/contact http://localhost/projects/1& Program gagal membuat animasi dan mengeluarkan pesan error "Jumlah url yang akan dicapture maksimal 4" & sesuai \\ \hline
+		8. & \texttt{-capture-url} http://localhost/project& Program gagal membuat animasi dan mengeluarkan pesan error "Capture url tidak valid"  & sesuai \\ \hline
+		9. & \texttt{-seconds-per-commit} 2 & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF yang memiliki durasi 116 detik & sesuai \\ \hline
+		10. & \texttt{-seconds-per-commit} 0 & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus lebih besar dari 0" & sesuai \\ \hline
+		11. & \texttt{-seconds-per-commit} 656 & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus kurang dari sama dengan  655" & sesuai \\ \hline
+		12. & \texttt{-before-capture} "php script\_piktora.php" & Program menjalankan \textit{terminal command} sebelum mengambil \textit{screenshot} & sesuai  \\ \hline
+		13. & \texttt{-before-capture} "php " & Program gagal membuat animasi dan mengeluarkan pesan error "Terminal Command Tidak Valid" & sesuai \\ \hline
+		14. & \texttt{-title} Piktora  & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut terdapat judul yang terletak di pojok kiri bawah(lihat Gambar \ref{fig:title}). & sesuai \\ \hline
+		
+		
+		\end{tabular}
+	\label{table:hasil_pengujian1}
+\end{table}
+
+
+\begin{table}[htbp]
+	\centering
+	\caption{Tabel pengujian fungsional}
+	
+		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
+		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
+		15. & \texttt{-logo} Logo-UNPAR.png & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut logo yang terletak di pojok kanan bawah (lihat Gambar \ref{fig:logo}) & sesuai  \\ \hline
+		16. & \texttt{-logo} script\_piktora.php & Program gagal membuat animasi dan mengeluarkan pesan error "Path gambar tidak valid" & sesuai  \\ \hline
+		17. & \texttt{-branch} master & Program membangkitkan animasi pada \textit{branch} master & sesuai  \\ \hline
+		18. & \texttt{-branch} piktora  & Program gagal membuat animasi dan mengeluarkan pesan error "Branch tidak valid" & sesuai  \\ \hline
+		19. & \texttt{-start-commit} 9b0a302 & Program membangkitkan animasi dimulai dari commit 9b0a302 & sesuai  \\ \hline		
+		
+		20. & \texttt{-start-commit} 9b0a30 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-10 karakter" & sesuai  \\ \hline
+		21. & \texttt{-start-commit} 9b0a3023ac8 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-10 karakter" & sesuai  \\ \hline
+		22. & \texttt{-stop-commit} 6a085c1  & Program membangkitkan animasi dimulai dari \textit{commit} 315d374 sampai dengan \textit{commit} 6a085c1  & sesuai  \\ \hline
+		23. & \texttt{-stop-commit} 6a085c & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-10 karakter" & sesuai  \\ \hline
+		24. & \texttt{-stop-commit} 6a085c1c379 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-10 karakter"  & sesuai  \\ \hline
+		25. & \texttt{-start-commit} 9b0a302 -stop-commit 6a085c1 & Program membangkitkan animasi dimulai dari \textit{commit} 9b0a302 sampai dengan \textit{commit} 6a085c1 & sesuai  \\ \hline
+		26. & \texttt{-start-commit} 6a085c1 -stop-commit 9b0a302 & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir terbalik"  & sesuai\\ \hline
+		27. & \texttt{-start-commit} 9b0a302  -stop-commit 9b0a302 & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir tidak boleh sama" & sesuai  \\ \hline
+\end{tabular}
+	\label{table:hasil_pengujian2}
+\end{table}
+\ \\
+\ \\
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/title.png}
+	\caption{Salah satu \textit{commit} yang terdapat pada \textit{file} hasil animasi. Terdapat judul dibagian pojok kiri bawah.}
+	\label{fig:title}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/logo.png}
+	\caption{Salah satu \textit{commit} yang terdapat pada \textit{file} hasil animasi. Terdapat logo dibagian pojok kanan bawah.}
+	\label{fig:logo}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/capture1.png}
+	\caption{Salah satu \textit{commit} pada \textit{file} hasil animasi jika terdapat satu argumen \texttt{-capture-url}.}
+	\label{fig:capture1}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/capture2.png}
+	\caption{Salah satu \textit{commit} pada \textit{file} hasil animasi jika terdapat dua argumen \texttt{-capture-url}.}
+	\label{fig:capture2}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/capture3.png}
+	\caption{Salah satu \textit{commit} pada \textit{file} hasil animasi jika terdapat tiga argumen \texttt{-capture-url}.}
+	\label{fig:capture3}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.3]{Gambar/capture4.png}
+	\caption{Salah satu \textit{commit} pada \textit{file} hasil animasi jika terdapat empat argumen \texttt{-capture-url}.}
+	\label{fig:capture4}
+\end{figure}
+
+
+
 
 \subsection{Pengujian Eksperimental}
 \label{sec:pengujian_eksperimental} 

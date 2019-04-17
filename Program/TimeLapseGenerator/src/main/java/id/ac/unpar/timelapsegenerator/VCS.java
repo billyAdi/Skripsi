@@ -26,8 +26,9 @@ public class VCS {
 
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
-     * dan mendapatkan seluruh histori commit proyek perangkat lunak
-     * berbasis web pada branch tertentu. Dimana branch tersebut diambil dari parameter constructor.
+     * dan mendapatkan seluruh histori commit proyek perangkat lunak berbasis
+     * web pada branch tertentu. Dimana branch tersebut diambil dari parameter
+     * constructor.
      *
      * @param path merupakah path dari proyek perangkat lunak berbasis web.
      * @param branch nama branch yang digunakan untuk membangkitkan animasi.
@@ -37,29 +38,29 @@ public class VCS {
      * Log.
      * @throws Exception jika branch tidak valid
      */
-    public VCS(String path,String branch) throws IOException, GitAPIException,Exception {
+    public VCS(String path, String branch) throws IOException, GitAPIException, Exception {
         Repository repository = new FileRepository(path);
         if (repository.getRef("HEAD") == null) {
             throw new IOException("Path proyek tidak valid");
-        }        
-        this.git = new Git(repository);
-        List<Ref> refs=git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call();
-        int refIdx=-1;
-        for (int i=0;i<refs.size();i++) {
-           if(refs.get(i).getName().contains(branch)){
-               refIdx=i;
-               break;
-           }
         }
-        
-        if(refIdx==-1){
+        this.git = new Git(repository);
+        List<Ref> refs = git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call();
+        int refIdx = -1;
+        for (int i = 0; i < refs.size(); i++) {
+            if (refs.get(i).getName().contains(branch)) {
+                refIdx = i;
+                break;
+            }
+        }
+
+        if (refIdx == -1) {
             throw new Exception("Branch tidak valid");
         }
         git.checkout().setName(refs.get(refIdx).getName()).call();
         Iterable<RevCommit> commits = git.log().call();
         this.commitIDs = new ArrayList<>();
         for (RevCommit commit : commits) {
-            this.commitIDs.add(commit.getName().substring(0, 10));
+            this.commitIDs.add(commit.getName());
         }
         Collections.reverse(commitIDs);
     }

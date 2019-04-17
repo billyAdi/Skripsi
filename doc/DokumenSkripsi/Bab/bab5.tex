@@ -57,94 +57,18 @@ Animasi timelapse berhasil dibuat
 
 \item \textbf{\textit{File} GIF Hasil Animasi}\\
 Selain menghasilkan status pada terminal, program juga akan menghasilkan sebuah \textit{file} GIF hasil animasi.
-Gambar \ref{fig:c1} - Gambar \ref{fig:c12} menunjukkan \textit{screenshot} setiap \textit{commit} yang terdapat pada \textit{file} GIF hasil animasi dari proyek Piktora. Piktora memiliki 58 \textit{commit}, sehingga terdapat 58 \textit{screenshot}. 
+Gambar \ref{fig:c1} menunjukkan \textit{screenshot} setiap \textit{commit} yang terdapat pada \textit{file} GIF hasil animasi dari proyek Piktora. Piktora memiliki 58 \textit{commit}, sehingga terdapat 58 \textit{screenshot}. 
+
 
 \begin{figure}[H]
 	
-		\includegraphics[scale=0.3]{Gambar/Untitled-1.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 315d374 (31 Oktober 2016) - \textit{commit} 5c59916 (8 November 2016).}
+		\includegraphics[scale=0.3]{Gambar/Piktora.png}
+	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 315d374 (31 Oktober 2016) - \textit{commit} 89000be (12 Januari 2018).}
 	\label{fig:c1}
 \end{figure}
 
 
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-2.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 7738380 (8 November 2016) - \textit{commit} 3caf535 (15 November 2016).}
-	\label{fig:c2}
-\end{figure}
 
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-3.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} c5eb3b6 (15 November 2016) - \textit{commit} 3eb7af8 (21 November 2016).}
-	\label{fig:c3}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-4.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} e87e84b (22 November 2016) - \textit{commit} f0f7270 (23 November 2016).}
-	\label{fig:c4}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-5.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 57a239b (23 November 2016) - \textit{commit} 0fcd958 (28 November 2016).}
-	\label{fig:c5}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-6.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} add3974 (28 November 2016) - \textit{commit} 0fe9aaf (29 November 2016).}
-	\label{fig:c6}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-7.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} f2326dd (29 November 2016) - \textit{commit} c4e9576 (2 Desember 2016).}
-	\label{fig:c7}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-8.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 02d04f1 (5 Desember 2016) - \textit{commit} eb49c2b (6 Desember 2016).}
-	\label{fig:c8}
-\end{figure}
-
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-9.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} ace1988 (6 Desember 2016) - \textit{commit} c83f4aa (15 Desember 2016).}
-	\label{fig:c9}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-10.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 57f5ea4 (15 Desember 2016) - \textit{commit} 1880a88 (5 Januari 2017).}
-	\label{fig:c10}
-\end{figure}
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-11.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 286aa78 (16 Januari 2017) - \textit{commit} 38711f0 (17 April 2017).}
-	\label{fig:c11}
-\end{figure}
-
-
-\begin{figure}[H]
-	
-		\includegraphics[scale=0.3]{Gambar/Untitled-12.png}
-	\caption{\textit{Screenshot} proyek Piktora pada \textit{commit} 9f041ef (15 Mei 2017) - \textit{commit} 89000be (12 Januari 2018).}
-	\label{fig:c12}
-\end{figure}
 
 
 \end{enumerate}
@@ -162,20 +86,20 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 	
 		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
 		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
-		1. & \texttt{-project-path} C:/xampp/htdocs/Piktora/.git & Program berhasil membangkitkan animasi berdasarkan path yang diberikan dan mengeluarkan status pesan "Animasi timelapse berhasil dibuat" & sesuai \\ \hline
-		2. & \texttt{-project-path} C:/xampp/htdocs  & Program gagal membuat animasi dan mengeluarkan pesan error "Path proyek tidak valid"  & sesuai \\ \hline
-		3. & \texttt{-capture-url} http://localhost & Program mengambil screenshot berdasarkan alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture1}  & sesuai	\\ \hline
-		4. & \texttt{-capture-url} http://localhost http://localhost/about & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture2}  & sesuai \\ \hline
-		5. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture3}   & sesuai\\ \hline
-		6. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects http://localhost/contact & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture4}  & sesuai \\ \hline
-		7. & \texttt{-capture-url} http://localhost http://localhost/about http://localhost/projects http://localhost/contact http://localhost/projects/1& Program gagal membuat animasi dan mengeluarkan pesan error "Jumlah url yang akan dicapture maksimal 4" & sesuai \\ \hline
-		8. & \texttt{-capture-url} http://localhost/project& Program gagal membuat animasi dan mengeluarkan pesan error "Capture url tidak valid"  & sesuai \\ \hline
-		9. & \texttt{-seconds-per-commit} 2 & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF yang memiliki durasi 116 detik & sesuai \\ \hline
-		10. & \texttt{-seconds-per-commit} 0 & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus lebih besar dari 0" & sesuai \\ \hline
-		11. & \texttt{-seconds-per-commit} 656 & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus kurang dari sama dengan  655" & sesuai \\ \hline
-		12. & \texttt{-before-capture} "php script\_piktora.php" & Program menjalankan \textit{terminal command} sebelum mengambil \textit{screenshot} & sesuai  \\ \hline
-		13. & \texttt{-before-capture} "php " & Program gagal membuat animasi dan mengeluarkan pesan error "Terminal Command Tidak Valid" & sesuai \\ \hline
-		14. & \texttt{-title} Piktora  & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut terdapat judul yang terletak di pojok kiri bawah(lihat Gambar \ref{fig:title}). & sesuai \\ \hline
+		1. & \texttt{-project-path C:/xampp/htdocs/Piktora/.git} & Program berhasil membangkitkan animasi berdasarkan path yang diberikan dan mengeluarkan status pesan "Animasi timelapse berhasil dibuat" & sesuai \\ \hline
+		2. & \texttt{-project-path C:/xampp/htdocs}  & Program gagal membuat animasi dan mengeluarkan pesan error "Path proyek tidak valid"  & sesuai \\ \hline
+		3. & \texttt{-capture-url http://localhost} & Program mengambil screenshot berdasarkan alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture1}  & sesuai	\\ \hline
+		4. & \texttt{-capture-url http://localhost http://localhost/about} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture2}  & sesuai \\ \hline
+		5. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture3}   & sesuai\\ \hline
+		6. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture4}  & sesuai \\ \hline
+		7. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact http://localhost/projects/1}& Program gagal membuat animasi dan mengeluarkan pesan error "Jumlah url yang akan dicapture maksimal 4" & sesuai \\ \hline
+		
+		8. & \texttt{-seconds-per-commit 2} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF yang memiliki durasi 116 detik & sesuai \\ \hline
+		9. & \texttt{-seconds-per-commit 0} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus lebih besar dari 0" & sesuai \\ \hline
+		10. & \texttt{-seconds-per-commit 656} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus kurang dari sama dengan  655" & sesuai \\ \hline
+		11. & \texttt{-before-capture "php script\_piktora.php"} & Program menjalankan \textit{terminal command} sebelum mengambil \textit{screenshot} & sesuai  \\ \hline
+		12. & \texttt{-before-capture "php "} & Program gagal membuat animasi dan mengeluarkan pesan error "Terminal Command Tidak Valid" & sesuai \\ \hline
+		13. & \texttt{-title Piktora}  & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut terdapat judul yang terletak di pojok kiri bawah(lihat Gambar \ref{fig:title}). & sesuai \\ \hline
 		
 		
 		\end{tabular}
@@ -189,20 +113,20 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 	
 		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
 		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
-		15. & \texttt{-logo} Logo-UNPAR.png & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut logo yang terletak di pojok kanan bawah (lihat Gambar \ref{fig:logo}) & sesuai  \\ \hline
-		16. & \texttt{-logo} script\_piktora.php & Program gagal membuat animasi dan mengeluarkan pesan error "Path gambar tidak valid" & sesuai  \\ \hline
-		17. & \texttt{-branch} master & Program membangkitkan animasi pada \textit{branch} master & sesuai  \\ \hline
-		18. & \texttt{-branch} piktora  & Program gagal membuat animasi dan mengeluarkan pesan error "Branch tidak valid" & sesuai  \\ \hline
-		19. & \texttt{-start-commit} 9b0a302 & Program membangkitkan animasi dimulai dari commit 9b0a302 & sesuai  \\ \hline		
+		14. & \texttt{-logo Logo-UNPAR.png} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut logo yang terletak di pojok kanan bawah (lihat Gambar \ref{fig:logo}) & sesuai  \\ \hline
+		15. & \texttt{-logo script\_piktora.php} & Program gagal membuat animasi dan mengeluarkan pesan error "Path gambar tidak valid" & sesuai  \\ \hline
+		16. & \texttt{-branch master} & Program membangkitkan animasi pada \textit{branch} master & sesuai  \\ \hline
+		17. & \texttt{-branch piktora}  & Program gagal membuat animasi dan mengeluarkan pesan error "Branch tidak valid" & sesuai  \\ \hline
+		18. & \texttt{-start-commit 9b0a302} & Program membangkitkan animasi dimulai dari commit 9b0a302 & sesuai  \\ \hline		
 		
-		20. & \texttt{-start-commit} 9b0a30 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-10 karakter" & sesuai  \\ \hline
-		21. & \texttt{-start-commit} 9b0a3023ac8 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-10 karakter" & sesuai  \\ \hline
-		22. & \texttt{-stop-commit} 6a085c1  & Program membangkitkan animasi dimulai dari \textit{commit} 315d374 sampai dengan \textit{commit} 6a085c1  & sesuai  \\ \hline
-		23. & \texttt{-stop-commit} 6a085c & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-10 karakter" & sesuai  \\ \hline
-		24. & \texttt{-stop-commit} 6a085c1c379 & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-10 karakter"  & sesuai  \\ \hline
-		25. & \texttt{-start-commit} 9b0a302 -stop-commit 6a085c1 & Program membangkitkan animasi dimulai dari \textit{commit} 9b0a302 sampai dengan \textit{commit} 6a085c1 & sesuai  \\ \hline
-		26. & \texttt{-start-commit} 6a085c1 -stop-commit 9b0a302 & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir terbalik"  & sesuai\\ \hline
-		27. & \texttt{-start-commit} 9b0a302  -stop-commit 9b0a302 & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir tidak boleh sama" & sesuai  \\ \hline
+		19. & \texttt{-start-commit 9b0a30} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		20. & \texttt{-start-commit 9b0a3023ac8c94c67f4c1b39388277768a483dba9} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		21. & \texttt{-stop-commit 6a085c1}  & Program membangkitkan animasi dimulai dari \textit{commit} 315d374 sampai dengan \textit{commit 6a085c1}  & sesuai  \\ \hline
+		22. & \texttt{-stop-commit 6a085c} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		23. & \texttt{-stop-commit 6a085c1c37949e6308cfe06a117302e528388e549} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter"  & sesuai  \\ \hline
+		24. & \texttt{-start-commit 9b0a302 -stop-commit 6a085c1} & Program membangkitkan animasi dimulai dari \textit{commit} 9b0a302 sampai dengan \textit{commit} 6a085c1 & sesuai  \\ \hline
+		25. & \texttt{-start-commit 6a085c1 -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir terbalik"  & sesuai\\ \hline
+		26. & \texttt{-start-commit 9b0a302  -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir tidak boleh sama" & sesuai  \\ \hline
 \end{tabular}
 	\label{table:hasil_pengujian2}
 \end{table}
@@ -261,42 +185,65 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 
 \subsection{Pengujian Eksperimental}
 \label{sec:pengujian_eksperimental} 
-Pengujian eksperimental ini dibagi menjadi dua bagian. Pengujian eksperimental bagian pertama akan menguji program menggunakan proyek Piktora dengan WebDriver yang berbeda. WebDriver yang digunakan untuk pengujian ini yaitu FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver. Pengujian eksperimental bagian kedua akan menguji progam dengan \texttt{website} Bootstrap dan Netflix Open Source Software Center. Berikut adalah rincian dari pengujian eksperimental:
+Pengujian eksperimental ini dibagi menjadi dua bagian. Pengujian eksperimental bagian pertama akan menguji program menggunakan proyek Piktora dengan WebDriver yang berbeda. WebDriver yang digunakan untuk pengujian ini yaitu FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver. Pengujian eksperimental bagian kedua akan menguji progam dengan situs \texttt{web} Bootstrap\footnote{https://getbootstrap.com/} dan Netflix Open Source Software Center\footnote{https://netflix.github.io/}. 
+
+Seperti yang sudah dijelaskan pada subbab \ref{sec:selenium_webdriver} FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver merupakan implementasi dari WebDriver yang mengontrol \textit{browser} yang mengontrol \textit{browser} tertentu. FirefoxDriver mengontrol Firefox \textit{browser}, OperaDriver mengontrol Opera \textit{browser}, dst. Tujuan dari digunakannya berbagai macam WebDriver ini adalah untuk menguji program dalam membangkitkan animasi menggunakan berbagai macam \textit{browser}.
+
+Pengujian kedua ini dilakukan dengan tujuan menguji program dengan berbagai situs \textit{web} yang berbeda dan memiliki jumlah \textit{commit} yang berbeda. Situs \textit{web} Bootstrap dan Netflix Open Source Software Center dipilih karena bersifat Open Source, repositorinya tersimpan pada Github, dan dihosting menggunakan Github Pages. Github Pages\footnote{https://pages.github.com/} merupakan sebuah layanan \textit{hosting} situs \textit{web} statis untuk melakukan \textit{host} halaman \textit{web} secara langsung dari repositori Github.     
+
+Berikut adalah rincian dari pengujian eksperimental:
 
 \begin{enumerate}
 \item \textbf{Pengujian Proyek Piktora dengan FirefoxDriver}\\
-Pengujian pada proyek Piktora dilakukan menggunakan FirefoxDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe FirefoxDriver. Versi Firefox \textit{browser} yang digunakan untuk pengujian adalah 66.0.2. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+Pengujian pada proyek Piktora dilakukan menggunakan FirefoxDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe FirefoxDriver. Versi Firefox \textit{browser} yang digunakan untuk pengujian adalah 66.0.2. Gambar \ref{fig:firefox}, menunjukkan tampilan Firefox \textit{browser} saat dikontrol oleh FirefoxDriver. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} C:/xampp/htdocs/Piktora/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-before-capture} "php script\_piktora.php"
+\item \texttt{-project-path C:/xampp/htdocs/Piktora/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-before-capture "php script\_piktora.php"}
 \end{itemize}
 Program berhasil membangkitkan animasi \textit{timelapse} pada proyek Piktora menggunakan FirefoxDriver.
 
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{Gambar/Firefox.png}
+	\caption{Tampilan pada Firefox \textit{browser} saat dikontrol oleh FirefoxDriver.}
+	\label{fig:firefox}
+\end{figure}
+
+
+
 
 \item \textbf{Pengujian Proyek Piktora dengan OperaDriver}\\
-Pengujian pada proyek Piktora dilakukan menggunakan OperaDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe OperaDriver. Versi Opera \textit{browser} yang digunakan untuk pengujian adalah 60.0.3255.27 (portable version). Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+Pengujian pada proyek Piktora dilakukan menggunakan OperaDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe OperaDriver. Versi Opera \textit{browser} yang digunakan untuk pengujian adalah 60.0.3255.27 (portable version). Gambar \ref{fig:opera} menunjukkan tampilan pada Opera \textit{browser} saat dikontrol oleh OperaDriver. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} C:/xampp/htdocs/Piktora/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-before-capture} "php script\_piktora.php"
+\item \texttt{-project-path C:/xampp/htdocs/Piktora/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-before-capture "php script\_piktora.php"}
 \end{itemize}
 
-Terdapat masalah saat melakukan pengujian. Awalnya Opera \textit{browser} yang digunakan bukan versi \textit{portable} melainkan versi standar. Saat program dijalankan, program mengeluarkan pesan \textit{error} berupa \texttt{unknown error: cannot find Opera binary}. Setelah ditelusuri, tidak ditemukan \textit{file} "opera.exe" di dalam direktori "C:/Program Files" atau "C:/Program Files (x86)". Solusi untuk mengatasi masalah ini adalah melakukan instalasi Opera \textit{browser} versi \textit{portable} pada direktori "C:/Program Files" atau "C:/Program Files (x86)". Setelah dilakukan instalasi tersebut, program berhasil membangkitkan animasi \textit{timelapse} pada proyek Piktora menggunakan OperaDriver.
+Terdapat masalah saat melakukan pengujian. Awalnya Opera \textit{browser} yang digunakan bukan versi \textit{portable} melainkan versi standar. Saat program dijalankan, program mengeluarkan pesan \textit{error} berupa \texttt{unknown error: cannot find Opera binary}. Setelah ditelusuri, tidak ditemukan \textit{file} "opera.exe" di dalam direktori "C:/Program Files" atau "C:/Program Files (x86)". Solusi untuk mengatasi masalah ini adalah melakukan instalasi Opera \textit{browser} versi \textit{portable} pada direktori "C:/Program Files" atau "C:/Program Files (x86)". Setelah dilakukan instalasi tersebut, program berhasil membangkitkan animasi \textit{timelapse} pada proyek Piktora menggunakan OperaDriver. 
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{Gambar/Opera.png}
+	\caption{Tampilan pada Opera \textit{browser} saat dikontrol oleh OperaDriver.}
+	\label{fig:opera}
+\end{figure}
+
 
 \item \textbf{Pengujian Proyek Piktora dengan EdgeDriver}\\
 Pengujian pada proyek Piktora dilakukan menggunakan EdgeDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe EdgeDriver. Versi Microsoft Edge \textit{browser} yang digunakan untuk pengujian adalah 44.17763.1.0. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} C:/xampp/htdocs/Piktora/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-before-capture} "php script\_piktora.php"
+\item \texttt{-project-path C:/xampp/htdocs/Piktora/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-before-capture "php script\_piktora.php"}
 \end{itemize}
 Hasil pengujian ini tidak sesuai dengan harapan. Tampilan halaman \textit{web} yang ditampilkan oleh Microsoft Edge \textit{browser} saat dikontrol oleh EdgeDriver tidak rapih seperti yang diperlihatkan pada Gambar \ref{fig:layout1}. Tidak diketahui apa yang menyebabkan halaman \textit{web} tersebut menjadi tidak rapih. Sebagai perbandingan, Gambar \ref{fig:layout2} menunjukkan tampilan halaman \textit{web} yang ditampilkan oleh Microsoft Edge \textit{browser} saat tidak dikontrol oleh EdgeDriver. Meskipun tampilan dari halaman \textit{web} tidak rapih, program tetap dapat membangkitkan animasi pada proyek Piktora.    
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.4]{Gambar/Layout_dengan_Edge_Driver.png}
-	\caption{Tampilan halaman \textit{web} pada \textit{browser} saat tidak dikontrol oleh EdgeDriver}
+	\caption{Tampilan halaman \textit{web} pada \textit{browser} saat dikontrol oleh EdgeDriver.}
 	\label{fig:layout1}
 \end{figure}
 
@@ -310,32 +257,48 @@ Hasil pengujian ini tidak sesuai dengan harapan. Tampilan halaman \textit{web} y
 
 
 \item \textbf{Pengujian Proyek Piktora dengan InternetExplorer}\\
-Pengujian pada proyek Piktora dilakukan menggunakan InternetExplorerDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe InternetExplorerDriver. Versi Internet Explorer \textit{browser} yang digunakan untuk pengujian adalah 11.379.17763.0. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+Pengujian pada proyek Piktora dilakukan menggunakan InternetExplorerDriver. Pada saat melakukan pengujian, dilakukan sedikit perubahan kode program pada kelas BrowserController baris ke-46 (lihat Lampiran \ref{lamp:A}). \textit{Object} bertipe WebDriver dinisialisasi menggunakan \textit{object} bertipe InternetExplorerDriver. Versi Internet Explorer \textit{browser} yang digunakan untuk pengujian adalah 11.379.17763.0. Gambar \ref{fig:ie_awal} dan Gambar \ref{fig:ie} menunjukkan tampilan pada Internet Explorer \textit{browser} saat sedang dikontrol oleh InternetExplorerDriver. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} C:/xampp/htdocs/Piktora/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-before-capture} "php script\_piktora.php"
+\item \texttt{-project-path C:/xampp/htdocs/Piktora/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-before-capture "php script\_piktora.php"}
 \end{itemize}
 Program berhasil membangkitkan animasi \textit{timelapse} pada proyek Piktora menggunakan InternetExplorerDriver.
 
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{Gambar/IE_awal.png}
+	\caption{Keadaan awal dari \textit{browser} saat dikontrol oleh InternetExplorerDriver.}
+	\label{fig:ie_awal}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.4]{Gambar/IE.png}
+	\caption{Tampilan pada \textit{browser} saat dikontrol oleh InternetExplorerDriver. }
+	\label{fig:ie}
+\end{figure}
+
+
+
 \item \textbf{Pengujian \textit{Website} Netflix Open Source Software Center}\\
-Netflix Open Source Software Center\footnote{https://netflix.github.io/} merupakan proyek Open Source yang dimiliki oleh Netflix. Repositori \textit{website} ini disimpan pada Github\footnote{https://github.com/Netflix/netflix.github.com}. Repositori ini memiliki 393 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+Netflix Open Source Software Center merupakan proyek Open Source yang dimiliki oleh Netflix. Repositori \textit{website} ini disimpan pada Github\footnote{https://github.com/Netflix/netflix.github.com}. Repositori ini memiliki 393 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} :/xampp/htdocs/netflix.github.com/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-seconds-per-commit} 0.1 
+\item \texttt{-project-path :/xampp/htdocs/netflix.github.com/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-seconds-per-commit 0.1} 
 \end{itemize}
-Program berhasil membangkitkan animasi \textit{timelapse} dari \textit{website} Netflix Open Source Software Center. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan durasi 39 detik.
+Program berhasil membangkitkan animasi \textit{timelapse} dari \textit{website} Netflix Open Source Software Center. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 17.5 MB dan berdurasi 39 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/Netflix}.
 
 
 \item \textbf{Pengujian \textit{Website} Proyek Bootstrap}\\
 Bootstrap\footnote{https://getbootstrap.com/} adalah kakas \textit{open source} untuk membangun \textit{website} yang dipakai bersama dengan HTML, CSS, dan JavaScript. Repositori\footnote{https://github.com/twbs/bootstrap} \textit{website} ini disimpan pada Github. Pengujian ini dilakukan pada \textit{branch} gh-pages, dimana di pada \textit{branch} tersebut terdapat 8547 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. 
 Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path} C:/xampp/htdocs/bootstrap/.git
-\item \texttt{-capture-url} http://localhost
-\item \texttt{-seconds-per-commit} 0.05 
-\item \texttt{-branch} gh-pages
+\item \texttt{-project-path C:/xampp/htdocs/bootstrap/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-seconds-per-commit 0.05} 
+\item \texttt{-branch gh-pages}
 \end{itemize}
 
 Terdapat beberapa masalah saat melakukan pengujian \textit{website} Bootstrap. Program suatu ketika berhenti dan mengeluarkan pesan error: "short SHA1 685039d is ambiguous". Pesan error ini muncul karena terdapat dua Git \textit{object} yang mempunyai 7 digit ID yang sama, sehingga tidak bisa melakukan \textit{checkout} ke \textit{commit} 685039d. Masalah berikutnya adalah perbedaan letak \textit{file} "index.html". Di beberapa \textit{commit}, \textit{file} "index.html" ini terletak di dalam direktori "docs". Karena perbedaan letak \textit{file} ini, halaman \textit{web} menjadi tidak muncul, yang muncul adalah struktur direktori dari \textit{website} Boostrap. Masalah yang terakhir yaitu di beberapa \textit{commit} tidak terdapat \textit{file} "index.html", sama seperti masalah sebelumnya hal ini menyebabkan halaman \textit{web} menjadi tidak muncul.
@@ -344,7 +307,7 @@ Solusi untuk mengatasi masalah pertama yaitu dengan mengubah kode program di kel
 
 Solusi untuk mengatasi masalah kedua yaitu dengan menambahkan \textit{Option} \texttt{-before-capture} saat menjalankan program. Argumen dari Option tersebut berisi \textit{terminal command} yang menjalankan \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.html" pada \textit{folder} utama dan "docs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf". Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache.
 
-Untuk masalah ketiga, belum ditemukan solusinya. Jadi program akan tetap mengambil \textit{screenshot} meskipun tidak terdapat \textit{file} "index.html". Setelah menambahkan \textit{Option} \texttt{-before-capture} dan mengubah kode program sehingga menyimpan \textit{commit} ID dengan panjang 10 digit, program berhasil membangkitkan animasi. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan durasi 7 menit   7 detik.
+Untuk masalah ketiga, belum ditemukan solusinya. Jadi program akan tetap mengambil \textit{screenshot} meskipun tidak terdapat \textit{file} "index.html". Setelah menambahkan \textit{Option} \texttt{-before-capture} dan mengubah kode program sehingga menyimpan \textit{commit} ID dengan panjang 10 digit, program berhasil membangkitkan animasi. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 281 MB dan berdurasi 7 menit 7 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini.
 
 
 

@@ -40,15 +40,7 @@ public class Main {
                 }
             }
 
-            String[] captureURLs = properties.getProperty("capture-url").split(";");
-            for (String captureURL : captureURLs) {
-                URL url = new URL(captureURL);
-                HttpURLConnection http = (HttpURLConnection) url.openConnection();
-                if (http.getResponseCode() == 404) {
-                    throw new Exception("Capture url tidak valid");
-                } 
-            }
-
+           
             if (properties.getProperty("logo") != null) {
                 File file = new File(properties.getProperty("logo"));
                 if (!file.exists() || ImageIO.read(new File(properties.getProperty("logo"))) == null) {
@@ -57,8 +49,8 @@ public class Main {
             }
 
             if (properties.getProperty("start-commit") != null) {
-                if (properties.getProperty("start-commit").length() < 7 || properties.getProperty("start-commit").length() > 10) {
-                    throw new Exception("Panjang commit ID awal harus berada di antara 7-10 karakter");
+                if (properties.getProperty("start-commit").length() < 7 || properties.getProperty("start-commit").length() > 40) {
+                    throw new Exception("Panjang commit ID awal harus berada di antara 7-40 karakter");
                 }
                 if (vcs.getCommitIndex(properties.getProperty("start-commit")) == -1) {
                     throw new Exception("Commit ID awal tidak ditemukan");
@@ -66,8 +58,8 @@ public class Main {
             }
 
             if (properties.getProperty("stop-commit") != null) {
-                if (properties.getProperty("stop-commit").length() < 7 || properties.getProperty("stop-commit").length() > 10) {
-                    throw new Exception("Panjang commit ID akhir harus berada di antara 7-10 karakter");
+                if (properties.getProperty("stop-commit").length() < 7 || properties.getProperty("stop-commit").length() > 40) {
+                    throw new Exception("Panjang commit ID akhir harus berada di antara 7-40 karakter");
                 }
                 if (vcs.getCommitIndex(properties.getProperty("stop-commit")) == -1) {
                     throw new Exception("Commit ID akhir tidak ditemukan");

@@ -166,22 +166,21 @@ Operasi ini digunakan untuk menandai perubahan pada \textit{file} dan memindahka
 \texttt{\$ git add [file]}  
 \item Commit\\
 Operasi ini digunakan untuk merekam \textit{snapshot} atau \textit{state} \textit{file} atau sekumpulan \textit{file}. Operasi ini juga digunakan untuk memindahkan \textit{file} yang berada di \textit{stagging area} ke direktori Git. Berikut adalah sintaks untuk melakukan operasi \textit{commit}:\\
-\texttt{\$ git commit -m "[descriptive message]"}  
+\texttt{\$ git commit [-m <descriptive message>]}  
 \item Branch\\
 Operasi ini digunakan untuk menampilkan semua \textit{branch} baik itu yang terdapat di \textit{local repository} maupun \textit{remote repository}, menampilkan \textit{branch} yang terdapat pada \textit{remote repository}, membuat \textit{branch} baru, dan menghapus \textit{branch}. Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{branch}:\\
-\texttt{\$ git branch -a}\\ 
-\texttt{\$ git branch -r}\\
+\texttt{\$ git branch [-a]}\\ 
+\texttt{\$ git branch [-r]}\\
 \texttt{\$ git branch [branch-name]}\\
-\texttt{\$ git branch -d [branch-name]}\\
-\texttt{\$ git branch -D [branch-name]} 
+\texttt{\$ git branch [-d <branch-name>]}\\
+\texttt{\$ git branch [-D <branch-name>]} 
 \item Diff\\
-Operasi ini digunakan untuk menampilkan perbedaan pada \textit{file} yang belum masuk \textit{staging area}, menampilkan perbedaan pada \textit{file} yang berada di \textit{staging area} dengan \textit{file} di \textit{commit} sebelumnya, dan perbedaan \textit{file} antara dua \textit{branch}.  Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{diff}:\\
+Operasi ini digunakan untuk menampilkan perbedaan pada \textit{file} yang belum masuk \textit{staging area}, dan menampilkan perbedaan pada \textit{file} yang berada di \textit{staging area} dengan \textit{file} di \textit{commit} sebelumnya.  Berikut adalah sintaks-sintaks untuk melakukan operasi \textit{diff}:\\
 \texttt{\$ git diff} \\
-\texttt{\$ git diff --staged}\\
-\texttt{\$ git diff [first-branch]...[second-branch]}
+\texttt{\$ git diff [--staged]}\\
 \item Clone\\
 Operasi ini digunakan untuk menyalin repositori Git yang berada di komputer lain atau suatu \textit{server}. Berikut adalah sintaks untuk melakukan operasi \textit{clone}:\\
-\texttt{\$ git clone [url]}
+\texttt{\$ git clone <url>}
 \item Fetch\\
 Operasi ini digunakan untuk mengambil data dari \textit{remote} repositori ke repositori lokal. Berikut adalah sintaks untuk melakukan operasi \textit{fetch}:\\
 \texttt{\$ git fetch [bookmark]}
@@ -209,9 +208,9 @@ Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} 
 \item Soft\\
 Pada tipe ini, tidak dilakukan \textit{reset} pada \textit{staging area} dan \textit{working directory}.
 \item Hard\\
-Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree}. Selain itu perubahan di \textit{working directory} setelah \textit{commit} tertentu akan hilang.
+Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} sehingga perubahan yang terdapat pada \textit{staging area} dan \textit{working directory} akan hilang.
 \item Mixed\\
-Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area}.
+Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} sehingga perubahan yang terdapat pada \textit{staging area} akan dipindahkan ke \textit{working directory}.  
 \end{itemize} 
 
 Berikut ini adalah sintaks untuk melakukan operasi \textit{reset}:\\
@@ -661,38 +660,38 @@ Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_
 \label{subsec:apache_cli}
 \textit{Library} Apache Commons CLI menyediakan API untuk melakukan \textit{parsing} argumen Command Line yang dikirimkan ke program\cite{Apache_Commons_CLI}. Apache Commons CLI termasuk ke dalam salah satu \textit{project} Apache Commons. Tujuan utama dari \textit{project} Apache Commons adalah membuat dan melakukan \textit{maintain} pada komponen Java yang \textit{reusable}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Apache Commons CLI. Subbab ini mengacu pada \cite{Apache_java_doc}.
 
-\subsection{CommandLineParser}
+\subsection{Interface CommandLineParser}
 \label{subsec:commandlineparser}
-Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada \textit{option} yang telah ditentukan. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
+Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada Option yang telah ditentukan. Kelas-kelas yang mengimplementasikan \textit{interface} ini yaitu BasicParser, GnuParser, PosixParser, dan DefaultParser. Kelas BasicParser, GnuParser, dan PosixParser sudah \textit{deprecated}. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: Option yang telah ditentukan, argumen Command Line.\\
 Kembalian: objek \textit{CommandLine}.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan.\\
+Parameter: Option yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat Option yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
 Kembalian: objek \textit{CommandLine}.
 \end{itemize}
 
 
-\subsection{DefaultParser}
+\subsection{Kelas DefaultParser}
 \label{subsec:defaultparser}
 Merupakan kelas yang mengimplementasikan \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: Option yang telah ditentukan, argumen Command Line.\\
 Kembalian: objek \textit{CommandLine}.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat argumen yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat Option yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
 Kembalian: objek \textit{CommandLine}.
 \end{itemize}
 
-\subsection{CommandLine}
+\subsection{Kelas CommandLine}
 \label{subsec:commandline}
 Kelas ini merepresentasikan kumpulan Option hasil \textit{parsing}.
 Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
@@ -706,13 +705,13 @@ Berfungsi untuk mendapatkan kumpulan nilai dari suatu Option.
 Parameter: nama dari Option.
 Kembalian: kumpulan nilai dari suatu Option dengan tipe \textit{array of String}. Jika Option tidak ditemukan, akan mengembalikan \textit{null}.
 \item public Option[] getOptions()\\
-Berfungsi untuk mengembalikan Option-option hasil \textit{parsing}.\\ 
+Berfungsi untuk mengembalikan Option hasil \textit{parsing}.\\ 
 Kembalian: \textit{array} dari Option hasil \textit{parsing}.
 
 
 \end{itemize}
 
-\subsection{Options}
+\subsection{Kelas Options}
 \label{subsec:options}
 Kelas ini merepresentasikan kumpulan dari objek \textit{Option}, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
@@ -724,7 +723,7 @@ Kembalian: hasil dari Option yang ditambahkan.
 \end{itemize}
 
 
-\subsection{Option}
+\subsection{Kelas Option}
 \label{subsec:option}
 Kelas ini merepresentasikan sebuah Command Line Option. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
@@ -740,16 +739,16 @@ Berfungsi untuk mendapatkan nilai-nilai dari Option.\\
 Kembalian: nilai-nilai dari Option berupa \textit{array of String}. Jika tidak ada nilai, akan mengembalikan \textit{null}.
 
 \item public boolean hasArg()\\
-Berfungsi untuk mengetahui apakah suatu \textit{option} membutuhkan argumen.\\
+Berfungsi untuk mengetahui apakah suatu Option membutuhkan argumen.\\
 Kembalian: \textit{true} jika \textit{option} ini membutuhkan argumen , \textit{false} jika \textit{option} ini tidak membutuhkan argumen.
 
 \item public boolean hasArg()\\
-Berfungsi untuk mengetahui apakah suatu \textit{option} dapat menerima lebih dari satu argumen.\\
+Berfungsi untuk mengetahui apakah suatu Option dapat menerima lebih dari satu argumen.\\
 Kembalian: \textit{true} jika \textit{option} ini dapat menerima lebih dari satu argumen , \textit{false} jika tidak.
 
 \item public String getDescription()\\
-Berfungsi untuk mendapatkan deskripsi dari suatu \textit{option}.\\
-Kembalian: deskripsi dari \textit{option} ini.
+Berfungsi untuk mendapatkan deskripsi dari suatu Option.\\
+Kembalian: deskripsi dari Option ini.
 \item public String getArgName()\\
 Berfungsi untuk mendapatkan nama dari suatu \textit{option}.\\
 Kembalian: nama dari argumen suatu \textit{option}
@@ -757,41 +756,41 @@ Kembalian: nama dari argumen suatu \textit{option}
 
 \end{itemize}
 
-\subsection{Option.Builder}
+\subsection{Kelas Option.Builder}
 \label{subsec:optionbuilder}
 Kelas ini merupakan \textit{nested class} dari kelas \textit{Option}. Kelas ini digunakan untuk membuat objek Option berdasarkan parameter yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Option.Builder desc(String description)\\
 Berfungsi untuk memberikan deskripsi pada \textit{option}.\\
-Parameter: deskripsi dari \textit{option}.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Parameter: deskripsi dari Option.\\
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option.Builder longOpt(String longOpt)\\
-Berfungsi untuk memberikan nama panjang pada \textit{option}.\\
+Berfungsi untuk memberikan nama panjang pada Option.\\
 Parameter: nama panjang \textit{option}.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public public Option.Builder hasArg()\\
-Berfungsi untuk menyatakan bahwa \textit{option} ini membutuhkan argumen.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Berfungsi untuk menyatakan bahwa Option ini membutuhkan argumen.\\
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public public Option.Builder hasArgs()\\
-Berfungsi untuk menyatakan bahwa \textit{option} ini membutuhkan argumen, dimana jumlah argumen bisa lebih dari satu.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Berfungsi untuk menyatakan bahwa Option ini membutuhkan argumen, dimana jumlah argumen bisa lebih dari satu.\\
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option.Builder argName(String argName)\\
 Berfungsi untuk memberi nama pada argumen.\\
 Parameter: nama argumen.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option.Builder required(boolean required)\\
 Berfungsi untuk menyatakan bahwa \textit{option} ini wajib ada.\\
 Parameter: variabel bertipe \textit{boolean} yang menentukan apakah \textit{option} ini wajib ada.\\
-Kembalian: objek \textit{Option.Builder} yang bisa digunakan untuk \textit{method chaining}.
+Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option build()\\
 Berfungi untuk membuat objek \textit{Option} berdasarkan nilai pada \textit{Option.Builder}.\\
-Kembalian: objek \textit{Option}.
+Kembalian: objek Option.
 
 \end{itemize}
 

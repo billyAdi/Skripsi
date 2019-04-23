@@ -10,7 +10,7 @@ JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{ver
 
 Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Dengan menggunakan Selenium WebDriver, pengguna dapat memasukkan \textit{script} bahasa pemrograman tertentu untuk melakukan pengujian. Bahasa pemrograman yang didukung yaitu C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium WebDriver dapat melakukan pengujian pada Google Chrome \textit{browser},  Firefox \textit{browser}, Opera \textit{browser}, Safari \textit{browser}, Internet Explorer \textit{browser}, dan Microsoft Edge \textit{browser}.  
   
-Pada skripsi ini, akan dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang akan dibuat animasinya adalah halaman \textit{web} dari perangkat lunak. Jumlah halaman web bisa lebih dari satu, tergantung pada masukan. Tujuan dari dibuatnya animasi atau visualisasi adalah melihat progres dari perangkat lunak. Sehingga \textit{programmer} bisa belajar dari proses perkembangan perangkat lunak sebelumnya dan bisa membuat perkembangan perangkat lunak menjadi lebih efisien. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan tampilan terminal/konsol. Dalam pembuatan animasi timelapse, dibutuhkan perangkat lunak Selenium WebDriver dan JGit.
+Pada skripsi ini, akan dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang akan dibuat animasinya adalah halaman \textit{web} dari perangkat lunak. Jumlah halaman web bisa lebih dari satu, tergantung pada masukan. Tujuan dari dibuatnya animasi atau visualisasi adalah melihat progres dari perangkat lunak. Sehingga \textit{programmer} bisa belajar dari proses perkembangan perangkat lunak sebelumnya dan bisa membuat perkembangan perangkat lunak menjadi lebih efisien. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan antarmuka terminal/konsol. Masukan perangkat lunak diambil dari argumen Command Line dan kemudian dilakukan \textit{parsing} dengan bantuan \textit{library} Apache Commons CLI. 
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
@@ -35,17 +35,16 @@ Tujuan dari skripsi ini adalah sebagai berikut:
 \label{sec:batasan}
 Batasan masalah pada skripsi ini adalah sebagai berikut:
 \begin{enumerate}
-		\item Perangkat lunak ini hanya membangkitkan animasi \textit{timelapse} untuk perangkat lunak berbasis \textit{web}. 
-		\item Masukan perangkat lunak berupa alamat direktori proyek perangkat lunak yang terekam oleh Git.
-	
-	    \item Jumlah maksimal halaman \textit{web} pada hasil animasi adalah empat halaman.
-	    \item \textit{Setup} perangkat lunak dilakukan secara otomatis melalui \textit{script} PHP.
+		\item Perangkat lunak ini hanya membangkitkan animasi \textit{timelapse} untuk perangkat lunak berbasis \textit{web} yang repositorinya terekam oleh Git. 
+		%\item Masukan perangkat lunak berupa alamat direktori proyek perangkat lunak yang terekam oleh Git.
+	    \item Jumlah halaman \textit{web} pada konfigurasi maksimal berjumlah empat halaman.
+	    \item \textit{Setup} perangkat lunak dilakukan secara otomatis melalui \textit{terminal command}.
 \end{enumerate}
 \section{Metodologi}
 \label{sec:metlit}
 Metodologi penelitian yang digunakan dalam skripsi ini adalah sebagai berikut:
 \begin{enumerate}
-		\item Melakukan studi literatur tentang Git, Selenium WebDriver, Git, dan JGit.
+		\item Melakukan studi literatur tentang Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
 		\item Melakukan analisis penggunaan Selenium WebDriver dan JGit untuk membangkitkan animasi timelapse.
 		\item Merancang perangkat lunak.
 		\item Membangun perangkat lunak.
@@ -58,8 +57,8 @@ Setiap bab dalam penelitian ini memiliki sistematika penulisan yang dijelaskan k
 \begin{enumerate}
 		\item Bab 1: Pendahuluan, yaitu membahas mengenai gambaran umum penelitian ini. Berisi tentang latar belakang, rumusan masalah, tujuan, batasan masalah, metode penelitian, dan sistematika penulisan.
 		\item Bab 2: Dasar Teori, yaitu membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang teori Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
-		\item Bab 3: Analisis, yaitu membahas mengenai analisa masalah. Berisi tentang analisis aplikasi sejenis, analisis penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse, prapengujian, dan analisis fitur aplikasi yang dibangun.
-		\item Bab 4: Perancangan, yaitu membahas mengenai perancangan yang dilakukan sebelum melakukan tahapan implementasi. Berisi tentang perancangan perangkat lunak pembangkit \textit{timelapse} proyek pengembangan perangkat lunak.
-		\item Bab 5: Implementasi dan Pengujian, yaitu membahas mengenai implementasi dan pengujian aplikasi yang telah dilakukan. Berisi tentang implementasi dan hasil pengujian aplikasi.
+		\item Bab 3: Analisis, yaitu membahas mengenai analisa masalah. Berisi tentang analisis aplikasi sejenis, analisis penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi timelapse, analisis fitur aplikasi yang dibangun, dan prapengujian.
+		\item Bab 4: Perancangan, yaitu membahas mengenai perancangan yang dilakukan sebelum melakukan tahapan implementasi. Berisi tentang perancangan kelas dan perancangan antarmuka dari perangkat lunak.
+		\item Bab 5: Implementasi dan Pengujian, yaitu membahas mengenai implementasi dan pengujian aplikasi yang telah dilakukan. Berisi tentang implementasi dan hasil pengujian perangkat lunak.
 		\item Bab 6: Kesimpulan dan Saran, yaitu membahas hasil kesimpulan dari keseluruhan penelitian ini dan saran-saran yang dapat diberikan untuk penelitian berikutnya.
 	\end{enumerate}

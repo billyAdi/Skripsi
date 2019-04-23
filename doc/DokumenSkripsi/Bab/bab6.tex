@@ -13,14 +13,24 @@ Dari hasil penelitian yang dilakukan, didapatkan kesimpulan-kesimpulan sebagai b
 %\item Animasi \textit{timelapse} dari proyek pengembangan perangkat lunak berbasis \textit{web} dapat dibuat dengan bantuan \textit{library} JGit, Selenium WebDriver, dan Apache Commons CLI. 
 %\item Program dapat membangkitkan animasi \textit{timelapse} dari proyek pengembangan perangkat lunak berbasis \textit{web}. 
 %\item Untuk repositori yang sederhana seperti Netflix Open Source Center, tidak dibutuhkan Option \texttt{-before-capture} untuk membangkitkan animasi. Untuk repositori yang memerlukan setup basis data seperti Piktora, dibutuhkan Option \texttt{-before-capture} untuk membangkitkan animasi. Pada repositori Bootstrap, Option \texttt{-before-capture} dibutuhkan karena letak \textit{file} "index.html" yang tidak konsisten pada beberapa \textit{commit}.
-%\item Berdasarkan hasil pengujian eksperimental, dapat diambil kesimpulan bahwa program dapat membangkitkan animasi \textit{timelapse} pada berbagai \textit{website} dan beberapa WebDriver. Saat dilakukan pengujian menggunakan EdgeDriver, tampilan \textit{layout} dari halaman menjadi tidak rapih. Karena itu tidak disarankan untuk menggunakan EdgeDriver untuk membangkitkan animasi. Program dapat membangkitkan animasi \textit{timelapse} pada repositori Bootstrap yang memiliki 8547 \textit{commit}.  
+%\item Berdasarkan hasil pengujian eksperimental, dapat diambil kesimpulan bahwa program dapat membangkitkan animasi \textit{timelapse} pada berbagai \textit{website} dan beberapa WebDriver. Saat dilakukan pengujian menggunakan EdgeDriver, tampilan \textit{layout} dari halaman menjadi tidak rapih. Karena itu tidak disarankan untuk menggunakan EdgeDriver untuk membangkitkan animasi. Program dapat membangkitkan animasi \textit{timelapse} pada repositori Bootstrap yang memiliki 8547 \textit{commit}. 
+
+\item Berdasarkan hasil pengujian menggunakan berbagai macam situs \textit{web}, dapat diambil kesimpulan bahwa semakin banyak jumlah \textit{commit}, semakin besar ukuran \textit{file} GIF yang dihasilkan. Repositori dari situs \textit{web} Yelp Open Source memiliki 99 \textit{commit}, \textit{file} GIF yang dihasilkan berukuran 4.63 MB. Repositori dari situs \textit{web} IBM Open Source memiliki 263  \textit{commit}, \textit{file} GIF yang dihasilkan berukuran 15.2 MB. Repositori dari situs \textit{web} Netflix Open Source Software Center memiliki 393  \textit{commit}, \textit{file} GIF yang dihasilkan berukuran 17.5 MB. Repositori dari situs \textit{web} React  memiliki 570  \textit{commit}, \textit{file} GIF yang dihasilkan berukuran 18.3 MB. Repositori dari situs \textit{web} Bootstrap  memiliki 8547  \textit{commit}, \textit{file} GIF yang dihasilkan berukuran 160 MB.
+ 
+\item Untuk repositori situs \textit{web} yang sederhana seperti Netflix Open Source Center, Bootstrap, IBM Open Source, React, dan Yelp Open Source, tidak dibutuhkan Option \texttt{-before-capture} untuk membangkitkan animasi. Untuk repositori yang memerlukan setup basis data seperti Piktora, dibutuhkan Option \texttt{-before-capture} untuk membangkitkan animasi. 
+ 
 \end{itemize}
 
 \section{Saran}
 \label{sec:saran}
 Dari hasil penelitian yang dilakukan, berikut adalah beberapa saran untuk pengembangan:
 \begin{enumerate}
-\item Saat ini \textit{output} dari program berupa \textit{file} bertipe GIF. \textit{File} bertipe GIF ini memiliki dua kekurangan, yaitu keterbatasan warna dan ukuran \textit{file} yang besar. GIF memakai sistem palet warna dan hanya terbatas pada 256 warna saja. Selain itu, \textit{file} hasil animasi dari situs \textit{web} Bootstrap berukuran 281 MB. Karena adanya kedua kekurangan itu, sebaiknya memakai format \textit{file} yang lebih modern seperti MP4 atau format lainnya. 
+\item Saat ini \textit{output} dari program berupa \textit{file} bertipe GIF. \textit{File} bertipe GIF ini memiliki dua kekurangan, yaitu keterbatasan warna dan ukuran \textit{file} yang besar. GIF memakai sistem palet warna dan hanya terbatas pada 256 warna saja. Selain itu, \textit{file} hasil animasi dari situs \textit{web} Bootstrap berukuran 281 MB. Dalam pengembangan berikutnya, sebaiknya menggunakan format \textit{file} yang lebih modern seperti MP4 atau format lainnya. 
 
-\item Saat ini ukuran resolusi dari \textit{file} hasil animasi bergantung pada resolusi layar yang digunakan. Dalam pengembangan berikutnya, sebaiknya ditambahkan Command Line Option untuk mengatur ukuran resolusi dari \textit{file} hasil animasi. 
+ 
+\item Saat ini ukuran screenshot dari halaman \textit{web} bergantung pada resolusi layar. Pada beberapa situs \textit{web}, tinggi dari halaman \textit{web} melebihi tinggi dari resolusi layar sehingga \textit{screenshot} hanya menampilkan sebagian konten dari halaman \textit{web}. Dalam pengembangan berikutnya, sebaiknya program bisa mendapatkan \textit{screenshot} halaman \textit{web} secara keseluruhan.  
+
+%\item Saat ini ukuran resolusi dari \textit{file} hasil animasi bergantung pada resolusi layar yang digunakan. Dalam pengembangan berikutnya, sebaiknya ditambahkan Command Line Option untuk mengatur ukuran resolusi dari \textit{file} hasil animasi.
+
+ 
 \end{enumerate}

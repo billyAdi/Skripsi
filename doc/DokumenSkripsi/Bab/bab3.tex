@@ -41,58 +41,58 @@ Gambar \ref{fig:gource} menunjukkan contoh visualisasi proyek perangkat lunak me
 \ \\
 Gource memiliki beberapa fitur. Fitur-fitur tersebut dapat diatur melalui \textit{command line option}. Berikut ini adalah beberapa \textit{command line option} yang terdapat pada Gource:
 \begin{enumerate}
-\item \texttt{gource --[WIDTH]x[HEIGHT]}\\
+\item \texttt{gource --<WIDTH>x<HEIGHT>}\\
 Opsi ini berfungsi untuk mengatur resolusi layar dari animasi. Parameter dari opsi ini adalah lebar dan panjang layar dalam satuan piksel. 
 
-\item \texttt{gource --camera-mode [MODE]}\\
+\item \texttt{gource --camera-mode <MODE>}\\
 Opsi ini berfungsi untuk mengatur mode kamera pada Gource. Parameter dari opsi ini adalah mode dari kamera. Terdapat dua mode yaitu \textit{overview} dan \textit{track}. Dalam mode \textit{track}, kamera bergerak mengikuti \textit{user} yang sedang aktif. Dalam mode \textit{overview}, kamera menampilkan seluruh repositori.
 
-\item \texttt{gource --path [PATH]}\\
+\item \texttt{gource --path <PATH>}\\
 Opsi ini berfungsi untuk mengatur \textit{path} dari direktori yang akan dibuat animasinya. Opsi dari parameter ini adalah \textit{path} dari direktori.
 
-\item \texttt{gource --start-date [YYYY-MM-DD hh:mm:ss +tz] --stop-date [YYYY-MM-DD hh:mm:ss +tz]}\\
+\item \texttt{gource --start-date <YYYY-MM-DD hh:mm:ss +tz> --stop-date <YYYY-MM-DD hh:mm:ss +tz>}\\
 Opsi ini berfungsi untuk mengatur periode waktu dalam menampilkan animasi. Parameter dari opsi ini adalah waktu mulai dan waktu akhir dalam format "YYYY-MM-DD hh:mm:ss +tz". Dimana YYYY adalah tahun, MM adalah bulan, DD adalah tanggal, hh adalah jam, mm adalah menit, ss adalah detik, dan +tz adalah zona waktu. Parameter jam, menit, detik, dan zona waktu bersifat opsional.    
 
-\item \texttt{gource --bloom-multiplier [FLOAT] }\\
+\item \texttt{gource --bloom-multiplier <FLOAT> }\\
 Opsi ini berfungsi untuk mengatur radius dari efek \textit{bloom}. Parameter dari opsi ini adalah radius dalam format bilangan riil.
 
-\item \texttt{gource --bloom-intensity [FLOAT]}\\
+\item \texttt{gource --bloom-intensity <FLOAT>}\\
 Opsi ini berfungsi untuk mengatur intensitas dari efek \textit{bloom}. Parameter dari opsi ini adalah intensitas \textit{bloom} dalam format bilangan riil.
 
 \item \texttt{gource --disable-bloom}\\
 Opsi ini berfungsi untuk menonaktifkan animasi \textit{bloom}.
 
-\item \texttt{gource --date-format [FORMAT]}\\ 
+\item \texttt{gource --date-format <FORMAT>}\\ 
 Opsi untuk mengatur format waktu yang ditampilkan pada bagian tengah atas. Opsi dari parameter ini adalah format waktu dalam bentuk \textit{string}.
 
-\item \texttt{gource --background [FFFFFF]}\\
+\item \texttt{gource --background <FFFFFF>}\\
 Opsi ini berfungsi untuk mengatur warna \textit{background}. Parameter dari opsi ini adalah warna dalam format heksadesimal.
 
-\item \texttt{gource --background-image [IMAGE]}\\
+\item \texttt{gource --background-image <IMAGE>}\\
 Opsi ini berfungsi untuk mengatur gambar \textit{background}. Parameter dari opsi ini adalah nama \textit{file} dari gambar.
 
-\item \texttt{gource --font-size [SIZE]}\\
+\item \texttt{gource --font-size <SIZE>}\\
 Opsi ini digunakan untuk mengatur ukuran \textit{font} pada tulisan \textit{title} dan tanggal. Parameter dari opsi ini adalah ukuran \textit{font}.  
 
-\item \texttt{gource --font-colour [FFFFFF]}\\
+\item \texttt{gource --font-colour <FFFFFF>}\\
 Opsi ini digunakan untuk mengatur warna \textit{font} pada tulisan \textit{title} dan tanggal. Parameter dari opsi ini adalah warna \textit{font} dalam format heksadesimal.
 
-\item \texttt{gource --logo [IMAGE]}\\
+\item \texttt{gource --logo <IMAGE>}\\
 Opsi ini berfungsi untuk memasukkan logo. Parameter dari opsi ini adalah nama \textit{file} dari gambar.
 
-\item \texttt{gource --logo-offset [X]x[Y]}\\
+\item \texttt{gource --logo-offset <X>x<Y>}\\
 Opsi ini berfungsi untuk mengatur posisi dari logo. Parameter dari opsi ini adalah posisi x dan posisi y dari logo. 
 
-\item \texttt{gource --title [TITLE]}\\
+\item \texttt{gource --title <TITLE>}\\
 Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri bawah layar. 
 
-\item \texttt{gource --output-framerate [FPS]}\\
+\item \texttt{gource --output-framerate <FPS>}\\
 Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
 
-\item \texttt{gource --seconds-per-day [SECONDS]}\\
+\item \texttt{gource --seconds-per-day <SECONDS>}\\
 Opsi ini berfungsi untuk mengatur kecepatan visualisasi. Parameter dari opsi ini adalah waktu yang dibutuhkan untuk menampilkan satu hari.
 
-\item \texttt{gource --hide [DISPLAY-ELEMENT]}\\
+\item \texttt{gource --hide <DISPLAY-ELEMENT>}\\
 Opsi ini berfungsi untuk menyembunyikan satu atau lebih \textit{display element}. Parameter dari opsi ini adalah elemen yang akan disembunyikan. \textit{Display element} yang dapat disembunyikan yaitu:
 \begin{itemize}
 \item \textit{bloom}: efek \textit{bloom}. 

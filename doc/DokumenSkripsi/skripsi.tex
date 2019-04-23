@@ -71,7 +71,6 @@
 \newcommand{\vtemplateauthor}{lionov}
 \newcommand{\dtext}[1]{{\color{lightgray} \lipsum[#1]}}%command untuk dummy text
 \newcommand{\rtext}[1]{{\color{red} \small #1}}%command untuk default text
-
 \newcommand{\vmode}{template}  % default mode
 \newtoggle{cekNPM}	 
 %\toggletrue{cekNPM} % aktifkan untuk cek NPM
@@ -79,7 +78,7 @@
 %\toggletrue{develop} % aktifkan untuk mode develop
 
 \graphicspath{{./Gambar/}}% folder tempat gambar 
-
+\usepackage{array}
 %cek apakah text default
 \newcommand{\vtext}[3]{\IfStrEq{\vmode}{template}{\newcommand{#1}{\rtext{#2}#3}}{\newcommand{#1}{#2}}}
 \newcommand{\vtextup}[3]{\IfStrEq{\vmode}{template}{\newcommand{#1}{\uppercase{\rtext{#2}}#3}}{\newcommand{#1}{\uppercase{#2}}}}

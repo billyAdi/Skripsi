@@ -77,29 +77,24 @@ Gambar \ref{fig:c1} menunjukkan \textit{screenshot} setiap \textit{commit} yang 
 
 \subsection{Pengujian Fungsional}
 \label{sec:pengujian_fungsional} 
-Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Option yang terdapat pada program sudah berjalan dengan baik. Option yang terdapat pada program dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. Lingkungan pengujian fungsional sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Pengujian dilakukan pada proyek Piktora dengan menggunakan berbagai macam tes kasus. Histori \textit{commit} proyek Piktora dapat dilihat pada subbab \ref{sec:prapengujian}. Hasil pengujian fungsional dapat dilihat pada Tabel \ref{table:hasil_pengujian1} dan Tabel \ref{table:hasil_pengujian2}.
+Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Option yang terdapat pada program sudah berjalan dengan baik. Option yang terdapat pada program dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. Lingkungan pengujian fungsional sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Pengujian dilakukan pada proyek Piktora dengan menggunakan berbagai macam tes kasus. Histori \textit{commit} proyek Piktora dapat dilihat pada subbab \ref{sec:prapengujian}. Hasil pengujian fungsional dapat dilihat pada Tabel \ref{table:hasil_pengujian1} sampai dengan Tabel \ref{table:hasil_pengujian3}.
 
 
 \begin{table}[htbp]
 	\centering
 	\caption{Tabel pengujian fungsional}
 	
-		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
-		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
-		1. & \texttt{-project-path C:/xampp/htdocs/Piktora/.git} & Program berhasil membangkitkan animasi berdasarkan path yang diberikan dan mengeluarkan status pesan "Animasi timelapse berhasil dibuat" & sesuai \\ \hline
-		2. & \texttt{-project-path C:/xampp/htdocs}  & Program gagal membuat animasi dan mengeluarkan pesan error "Path proyek tidak valid"  & sesuai \\ \hline
-		3. & \texttt{-capture-url http://localhost} & Program mengambil screenshot berdasarkan alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture1}  & sesuai	\\ \hline
-		4. & \texttt{-capture-url http://localhost http://localhost/about} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture2}  & sesuai \\ \hline
-		5. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture3}   & sesuai\\ \hline
-		6. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture4}  & sesuai \\ \hline
-		7. & \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact http://localhost/projects/1}& Program gagal membuat animasi dan mengeluarkan pesan error "Jumlah url yang akan dicapture maksimal 4" & sesuai \\ \hline
+		\begin{tabular}{|p{0.3cm}|>{\raggedright} p{5.5 cm}| p{7 cm}| p{3 cm}|} \hline
+		No & Tes Kasus	& \texttt{Output} yang diharapkan & \textit{Output} program \\ \hline
+		1. & Menguji Option \texttt{-project-path} menggunakan path yang valid. Argumen Command Line yang diberikan ke program: \texttt{-project-path C:/xampp/htdocs/Piktora/.git} & Program berhasil membangkitkan animasi berdasarkan path yang diberikan dan mengeluarkan status pesan "Animasi timelapse berhasil dibuat" & sesuai \\ \hline
+		2. & Menguji Option \texttt{-project-path} menggunakan path yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-project-path C:/xampp/htdocs}  & Program gagal membuat animasi dan mengeluarkan pesan error "Path proyek tidak valid"  & sesuai \\ \hline
+		3. & Menguji Option \texttt{-capture-url} menggunakan satu argumen. Argumen Command Line yang diberikan ke program:  \texttt{-capture-url http://localhost} & Program mengambil screenshot berdasarkan alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture1}  & sesuai	\\ \hline
+		4. & Menguji Option \texttt{-capture-url} menggunakan dua argumen. Argumen Command Line yang diberikan ke program:  \texttt{-capture-url http://localhost http://localhost/about} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture2}  & sesuai \\ \hline
+		5. & Menguji Option \texttt{-capture-url} menggunakan tiga argumen. Argumen Command Line yang diberikan ke program:  \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture3}   & sesuai\\ \hline
+		6. & Menguji Option \texttt{-capture-url} menggunakan empat argumen. Argumen Command Line yang diberikan ke program:  \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact} & Program mengambil screenshot berdasarkan alamat-alamat yang diberikan. Tampilan dari \textit{file} hasil animasi dapat dilihat pada Gambar \ref{fig:capture4}  & sesuai \\ \hline
+		7. & Menguji Option \texttt{-capture-url} menggunakan lima argumen. Argumen Command Line yang diberikan ke program:  \texttt{-capture-url http://localhost http://localhost/about http://localhost/projects http://localhost/contact http://localhost/projects/1}& Program gagal membuat animasi dan mengeluarkan pesan error "Jumlah url yang akan dicapture maksimal 4" & sesuai \\ \hline
 		
-		8. & \texttt{-seconds-per-commit 2} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF yang memiliki durasi 116 detik & sesuai \\ \hline
-		9. & \texttt{-seconds-per-commit 0} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus lebih besar dari 0" & sesuai \\ \hline
-		10. & \texttt{-seconds-per-commit 656} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus kurang dari sama dengan  655" & sesuai \\ \hline
-		11. & \texttt{-before-capture "php script\_piktora.php"} & Program menjalankan \textit{terminal command} sebelum mengambil \textit{screenshot} & sesuai  \\ \hline
-		12. & \texttt{-before-capture "php "} & Program gagal membuat animasi dan mengeluarkan pesan error "Terminal Command Tidak Valid" & sesuai \\ \hline
-		13. & \texttt{-title Piktora}  & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut terdapat judul yang terletak di pojok kiri bawah(lihat Gambar \ref{fig:title}). & sesuai \\ \hline
+		
 		
 		
 		\end{tabular}
@@ -111,25 +106,59 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 	\centering
 	\caption{Tabel pengujian fungsional}
 	
-		\begin{tabular}{|p{0.3cm}| p{5 cm}| p{7.3 cm}| p{3 cm}|} \hline
+		\begin{tabular}{|p{0.3cm}|>{\raggedright} p{7 cm}| p{5.5 cm}| p{3 cm}|} \hline
 		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
-		14. & \texttt{-logo Logo-UNPAR.png} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut logo yang terletak di pojok kanan bawah (lihat Gambar \ref{fig:logo}) & sesuai  \\ \hline
-		15. & \texttt{-logo script\_piktora.php} & Program gagal membuat animasi dan mengeluarkan pesan error "Path gambar tidak valid" & sesuai  \\ \hline
-		16. & \texttt{-branch master} & Program membangkitkan animasi pada \textit{branch} master & sesuai  \\ \hline
-		17. & \texttt{-branch piktora}  & Program gagal membuat animasi dan mengeluarkan pesan error "Branch tidak valid" & sesuai  \\ \hline
-		18. & \texttt{-start-commit 9b0a302} & Program membangkitkan animasi dimulai dari commit 9b0a302 & sesuai  \\ \hline		
+		8. & Menguji Option \texttt{-seconds-per-commit} dengan nilai 2. Argumen Command Line yang diberikan ke program: \texttt{-seconds-per-commit 2} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF yang memiliki durasi 116 detik & sesuai \\ \hline
+		9. & Menguji Option \texttt{-seconds-per-commit} dengan nilai 0. Argumen Command Line yang diberikan ke program: \texttt{-seconds-per-commit 0} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus lebih besar dari 0" & sesuai \\ \hline
+		10. & Menguji Option \texttt{-seconds-per-commit} dengan nilai 656. Argumen Command Line yang diberikan ke program: \texttt{-seconds-per-commit 656} & Program gagal membuat animasi dan mengeluarkan pesan error "Seconds per commit harus kurang dari sama dengan  655" & sesuai \\ \hline
+		11. & Menguji Option \texttt{-before-capture} menggunakan terminal command yang valid. Argumen Command Line yang diberikan ke program: \texttt{-before-capture "php script\_piktora.php"} & Program menjalankan \textit{terminal command} sebelum mengambil \textit{screenshot} & sesuai  \\ \hline
+		12. & Menguji Option \texttt{-before-capture} menggunakan terminal command yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-before-capture "php "} & Program gagal membuat animasi dan mengeluarkan pesan error "Terminal Command Tidak Valid" & sesuai \\ \hline
+		13. & Menguji Option \texttt{-title}. Argumen Command Line yang diberikan ke program: \texttt{-title Piktora}  & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut terdapat judul yang terletak di pojok kiri bawah(lihat Gambar \ref{fig:title}). & sesuai \\ \hline
+					
+		14. & Menguji Option \texttt{-logo} menggunakan \textit{path} gambar yang valid. Argumen Command Line yang diberikan ke program: \texttt{-logo Logo-UNPAR.png} & Program berhasil membangkitkan animasi dan menghasilkan \textit{file} GIF, dimana di dalam \textit{file} tersebut logo yang terletak di pojok kanan bawah (lihat Gambar \ref{fig:logo}) & sesuai  \\ \hline
+		15. & Menguji Option \texttt{-logo} menggunakan \textit{path} gambar yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-logo script\_piktora.php} & Program gagal membuat animasi dan mengeluarkan pesan error "Path gambar tidak valid" & sesuai  \\ \hline
+		16. & Menguji Option \texttt{-branch} menggunakan \textit{branch} yang valid. Argumen Command Line yang diberikan ke program: \texttt{-branch master} & Program membangkitkan animasi pada \textit{branch} master & sesuai  \\ \hline
+		17. & Menguji Option \texttt{-branch} menggunakan \textit{branch} yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-branch piktora}  & Program gagal membuat animasi dan mengeluarkan pesan error "Branch tidak valid" & sesuai  \\ \hline
+		18. & Menguji Option \texttt{-start-commit} menggunakan \textit{commit} ID dengan panjang 7 karakter. Argumen Command Line yang diberikan ke program:  \texttt{-start-commit 9b0a302} & Program membangkitkan animasi dimulai dari commit 9b0a302 & sesuai  \\ \hline		
 		
-		19. & \texttt{-start-commit 9b0a30} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
-		20. & \texttt{-start-commit 9b0a3023ac8c94c67f4c1b39388277768a483dba9} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
-		21. & \texttt{-stop-commit 6a085c1}  & Program membangkitkan animasi dimulai dari \textit{commit} 315d374 sampai dengan \textit{commit 6a085c1}  & sesuai  \\ \hline
-		22. & \texttt{-stop-commit 6a085c} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter" & sesuai  \\ \hline
-		23. & \texttt{-stop-commit 6a085c1c37949e6308cfe06a117302e528388e549} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter"  & sesuai  \\ \hline
-		24. & \texttt{-start-commit 9b0a302 -stop-commit 6a085c1} & Program membangkitkan animasi dimulai dari \textit{commit} 9b0a302 sampai dengan \textit{commit} 6a085c1 & sesuai  \\ \hline
-		25. & \texttt{-start-commit 6a085c1 -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir terbalik"  & sesuai\\ \hline
-		26. & \texttt{-start-commit 9b0a302  -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir tidak boleh sama" & sesuai  \\ \hline
+		
 \end{tabular}
 	\label{table:hasil_pengujian2}
 \end{table}
+
+
+\begin{table}[htbp]
+	\centering
+	\caption{Tabel pengujian fungsional}
+	
+		\begin{tabular}{|p{0.3cm}|>{\raggedright} p{7 cm}| p{5.5 cm}| p{3 cm}|} \hline
+		No & Tes Kasus	& \textit{Output} yang diharapkan & \textit{Output} program \\ \hline
+
+19. & Menguji Option \texttt{-start-commit} menggunakan \textit{commit} ID dengan panjang kurang dari 7 karakter. Argumen Command Line yang diberikan ke program: \texttt{-start-commit 9b0a30} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		20.&  Menguji Option \texttt{-start-commit} menggunakan \textit{commit} ID dengan panjang lebih dari 40 karakter. Argumen Command Line yang diberikan ke program:  \texttt{-start-commit 9b0a3023ac8c94c67f4c1b39388277768a4 83dba9} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID awal harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		21. & Menguji Option \texttt{-stop-commit} menggunakan \textit{commit} ID dengan panjang 7 karakter. Argumen Command Line yang diberikan ke program:  \texttt{-stop-commit 6a085c1}  & Program membangkitkan animasi dimulai dari \textit{commit} 315d374 sampai dengan \textit{commit 6a085c1}  & sesuai  \\ \hline
+		22. & Menguji Option \texttt{-stop-commit} menggunakan \textit{commit} ID dengan panjang kurang dari 7 karakter. Argumen Command Line yang diberikan ke program: \texttt{-stop-commit 6a085c} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter" & sesuai  \\ \hline
+		23. & Menguji Option \texttt{-stop-commit} menggunakan \textit{commit} ID dengan panjang lebih dari 40 karakter. Argumen Command Line yang diberikan ke program: \texttt{-stop-commit 6a085c1c37949e6308cfe06a117302e5283 88e549} & Program gagal membuat animasi dan mengeluarkan pesan error "Panjang commit ID akhir harus berada di antara 7-40 karakter"  & sesuai  \\ \hline
+		24. & Menguji Option \texttt{-start-commit} dan Option \texttt{-stop-commit} menggunakan rentang \textit{commit} yang valid. Argumen Command Line yang diberikan ke program: \texttt{-start-commit 9b0a302 -stop-commit 6a085c1} & Program membangkitkan animasi dimulai dari \textit{commit} 9b0a302 sampai dengan \textit{commit} 6a085c1 & sesuai  \\ \hline
+		25. & Menguji Option \texttt{-start-commit} dan Option \texttt{-stop-commit} menggunakan rentang \textit{commit} yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-start-commit 6a085c1 -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir terbalik"  & sesuai\\ \hline
+		26. & Menguji Option \texttt{-start-commit} dan Option \texttt{-stop-commit} menggunakan rentang \textit{commit} yang tidak valid. Argumen Command Line yang diberikan ke program: \texttt{-start-commit 9b0a302  -stop-commit 9b0a302} & Program gagal membuat animasi dan mengeluarkan pesan error "Commit ID awal dan akhir tidak boleh sama" & sesuai  \\ \hline
+
+
+
+
+\end{tabular}
+	\label{table:hasil_pengujian3}
+\end{table}
+
+
+
+
+
+
+
+
+
+
 \ \\
 \ \\
 \begin{figure}[H]
@@ -185,11 +214,11 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 
 \subsection{Pengujian Eksperimental}
 \label{sec:pengujian_eksperimental} 
-Pengujian eksperimental ini dibagi menjadi dua bagian. Pengujian eksperimental bagian pertama akan menguji program menggunakan proyek Piktora dengan WebDriver yang berbeda. WebDriver yang digunakan untuk pengujian ini yaitu FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver. Pengujian eksperimental bagian kedua akan menguji progam dengan situs \texttt{web} Bootstrap\footnote{https://getbootstrap.com/} dan Netflix Open Source Software Center\footnote{https://netflix.github.io/}. 
+Pengujian eksperimental ini dibagi menjadi dua bagian. Pengujian eksperimental bagian pertama akan menguji program menggunakan proyek Piktora dengan WebDriver yang berbeda. WebDriver yang digunakan untuk pengujian ini yaitu FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver. Pengujian eksperimental bagian kedua akan menguji progam dengan situs \texttt{web} Bootstrap\footnote{https://getbootstrap.com/}, Netflix Open Source Software Center\footnote{https://netflix.github.io/}, IBM Open Source\footnote{https://ibm.github.io/}, React\footnote{https://reactjs.org/}, dan Yelp Open Source\footnote{https://yelp.github.io/}. 
 
 Seperti yang sudah dijelaskan pada subbab \ref{sec:selenium_webdriver} FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver merupakan implementasi dari WebDriver yang mengontrol \textit{browser} yang mengontrol \textit{browser} tertentu. FirefoxDriver mengontrol Firefox \textit{browser}, OperaDriver mengontrol Opera \textit{browser}, dst. Tujuan dari digunakannya berbagai macam WebDriver ini adalah untuk menguji program dalam membangkitkan animasi menggunakan berbagai macam \textit{browser}.
 
-Pengujian kedua ini dilakukan dengan tujuan menguji program dengan berbagai situs \textit{web} yang berbeda dan memiliki jumlah \textit{commit} yang berbeda. Situs \textit{web} Bootstrap dan Netflix Open Source Software Center dipilih karena bersifat Open Source, repositorinya tersimpan pada Github, dan dihosting menggunakan Github Pages. Github Pages\footnote{https://pages.github.com/} merupakan sebuah layanan \textit{hosting} situs \textit{web} statis untuk melakukan \textit{host} halaman \textit{web} secara langsung dari repositori Github.     
+Pengujian kedua ini dilakukan dengan tujuan menguji program dengan berbagai situs \textit{web} yang berbeda dan memiliki jumlah \textit{commit} yang berbeda. Situs \textit{web} Bootstrap, Netflix Open Source Software Center, IBM Open Source, React, dan Yelp Open Source  dipilih karena bersifat Open Source, repositorinya tersimpan pada Github, dan dihosting menggunakan Github Pages. Github Pages\footnote{https://pages.github.com/} merupakan sebuah layanan \textit{hosting} situs \textit{web} untuk melakukan \textit{hosting} halaman \textit{web} secara langsung dari repositori Github.     
 
 Berikut adalah rincian dari pengujian eksperimental:
 
@@ -281,18 +310,18 @@ Program berhasil membangkitkan animasi \textit{timelapse} pada proyek Piktora me
 
 
 
-\item \textbf{Pengujian \textit{Website} Netflix Open Source Software Center}\\
-Netflix Open Source Software Center merupakan proyek Open Source yang dimiliki oleh Netflix. Repositori \textit{website} ini disimpan pada Github\footnote{https://github.com/Netflix/netflix.github.com}. Repositori ini memiliki 393 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+\item \textbf{Pengujian Situs \textit{web} Netflix Open Source Software Center}\\
+Netflix Open Source Software Center merupakan proyek Open Source yang dimiliki oleh Netflix. Repositori situs \textit{web} ini disimpan pada Github\footnote{https://github.com/Netflix/netflix.github.com}. Repositori ini memiliki 393 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
-\item \texttt{-project-path :/xampp/htdocs/netflix.github.com/.git}
+\item \texttt{-project-path C:/xampp/htdocs/netflix.github.com/.git}
 \item \texttt{-capture-url http://localhost}
 \item \texttt{-seconds-per-commit 0.1} 
 \end{itemize}
-Program berhasil membangkitkan animasi \textit{timelapse} dari \textit{website} Netflix Open Source Software Center. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 17.5 MB dan berdurasi 39 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/Netflix}.
+Program berhasil membangkitkan animasi \textit{timelapse} dari situs \textit{web} Netflix Open Source Software Center. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 17.5 MB dan berdurasi 39 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/Netflix}.
 
 
-\item \textbf{Pengujian \textit{Website} Proyek Bootstrap}\\
-Bootstrap\footnote{https://getbootstrap.com/} adalah kakas \textit{open source} untuk membangun \textit{website} yang dipakai bersama dengan HTML, CSS, dan JavaScript. Repositori\footnote{https://github.com/twbs/bootstrap} \textit{website} ini disimpan pada Github. Pengujian ini dilakukan pada \textit{branch} gh-pages, dimana di pada \textit{branch} tersebut terdapat 8547 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. 
+\item \textbf{Pengujian Situs \textit{web} Bootstrap}\\
+Bootstrap adalah kakas \textit{open source} untuk membangun \textit{website} yang dipakai bersama dengan HTML, CSS, dan JavaScript. Repositori situs \textit{web} ini disimpan pada Github\footnote{https://github.com/twbs/bootstrap}. Pengujian ini dilakukan pada \textit{branch} gh-pages, dimana di pada \textit{branch} tersebut terdapat 8547 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. 
 Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \begin{itemize}
 \item \texttt{-project-path C:/xampp/htdocs/bootstrap/.git}
@@ -301,14 +330,47 @@ Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
 \item \texttt{-branch gh-pages}
 \end{itemize}
 
-Terdapat beberapa masalah saat melakukan pengujian \textit{website} Bootstrap. Program suatu ketika berhenti dan mengeluarkan pesan error: "short SHA1 685039d is ambiguous". Pesan error ini muncul karena terdapat dua Git \textit{object} yang mempunyai 7 digit ID yang sama, sehingga tidak bisa melakukan \textit{checkout} ke \textit{commit} 685039d. Masalah berikutnya adalah perbedaan letak \textit{file} "index.html". Di beberapa \textit{commit}, \textit{file} "index.html" ini terletak di dalam direktori "docs". Karena perbedaan letak \textit{file} ini, halaman \textit{web} menjadi tidak muncul, yang muncul adalah struktur direktori dari \textit{website} Boostrap. Masalah yang terakhir yaitu di beberapa \textit{commit} tidak terdapat \textit{file} "index.html", sama seperti masalah sebelumnya hal ini menyebabkan halaman \textit{web} menjadi tidak muncul.
-
-Solusi untuk mengatasi masalah pertama yaitu dengan mengubah kode program di kelas VCS. Awalnya program hanya menyimpan \textit{commit} ID dengan panjang 7 digit. Setelah itu kode program diubah supaya bisa menyimpan \textit{commit} ID dengan panjang 10 digit. 
-
-Solusi untuk mengatasi masalah kedua yaitu dengan menambahkan \textit{Option} \texttt{-before-capture} saat menjalankan program. Argumen dari Option tersebut berisi \textit{terminal command} yang menjalankan \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.html" pada \textit{folder} utama dan "docs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf". Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache.
-
-Untuk masalah ketiga, belum ditemukan solusinya. Jadi program akan tetap mengambil \textit{screenshot} meskipun tidak terdapat \textit{file} "index.html". Setelah menambahkan \textit{Option} \texttt{-before-capture} dan mengubah kode program sehingga menyimpan \textit{commit} ID dengan panjang 10 digit, program berhasil membangkitkan animasi. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 281 MB dan berdurasi 7 menit 7 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini.
+%Terdapat beberapa masalah saat melakukan pengujian situs \textit{web} Bootstrap. Program suatu ketika berhenti dan mengeluarkan pesan error: "short SHA1 685039d is ambiguous". Pesan error ini muncul karena terdapat dua Git \textit{object} yang mempunyai 7 digit ID yang sama, sehingga tidak bisa melakukan \textit{checkout} ke \textit{commit} 685039d. Masalah berikutnya adalah perbedaan letak \textit{file} "index.html". Di beberapa \textit{commit}, \textit{file} "index.html" ini terletak di dalam direktori "docs". Karena perbedaan letak \textit{file} ini, halaman \textit{web} menjadi tidak muncul, yang muncul adalah struktur direktori dari \textit{website} Boostrap. Masalah yang terakhir yaitu di beberapa \textit{commit} tidak terdapat \textit{file} "index.html", sama seperti masalah sebelumnya hal ini menyebabkan halaman \textit{web} menjadi tidak muncul.
 
 
+Terdapat masalah saat melakukan pengujian situs \textit{web} Bootstrap. Program suatu ketika berhenti dan mengeluarkan pesan error: "short SHA1 685039d is ambiguous". Pesan error ini muncul karena terdapat dua Git \textit{object} yang mempunyai 7 digit ID yang sama, sehingga tidak bisa melakukan \textit{checkout} ke \textit{commit} 685039d. Solusi untuk mengatasi masalah tersebut yaitu dengan mengubah kode program di kelas VCS. Awalnya program hanya menyimpan \textit{commit} ID dengan panjang 7 digit. Setelah itu kode program diubah supaya bisa menyimpan \textit{commit} ID dengan panjang 40 digit.
+
+Pada beberapa \textit{commit}, \textit{file} "index.html" tidak terdapat pada \textit{root directory}. Pada beberapa \textit{commit}, \textit{file} "index.html" terletak pada direktori "docs". Karena tidak terdapat \textit{file} "index.html" halaman \textit{web} menjadi tidak muncul, yang muncul adalah struktur direktori dari repositori Boostrap. 
+
+Setelah itu dilakukan pengujian lagi dengan menggunakan dua argumen pada \texttt{-capture-url}  saat menjalankan program. Setelah menambahkan argumen berupa \texttt{http://localhost/docs} pada Option \texttt{-capture-url} dan mengubah kode program di kelas VCS, program berhasil membangkitkan animasi. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 160 MB dan berdurasi 7 menit 7 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini.
+
+%Solusi untuk mengatasi masalah pertama yaitu dengan mengubah kode program di kelas VCS. Awalnya program hanya menyimpan \textit{commit} ID dengan panjang 7 digit. Setelah itu kode program diubah supaya bisa menyimpan \textit{commit} ID dengan panjang 40 digit. 
+
+%Solusi untuk mengatasi masalah kedua yaitu dengan menambahkan \textit{Option} \texttt{-before-capture} saat menjalankan program. Argumen dari Option tersebut berisi \textit{terminal command} yang menjalankan \textit{script} PHP. \textit{Script} PHP ini akan mengecek letak \textit{file} "index.html" pada \textit{folder} utama dan "docs". \textit{Script} kemudian akan mengecek \textit{directory root} apache pada \textit{file} "httpd.conf". Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} tidak akan mengubah isi \textit{file} "httpd.conf". Jika \textit{directory root} tidak mengarah ke \textit{folder} tempat "index.html" berada, maka \textit{script} akan mengubah \textit{directory root} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada apache.
+
+%Untuk masalah ketiga, belum ditemukan solusinya. Jadi program akan tetap mengambil \textit{screenshot} meskipun tidak terdapat \textit{file} "index.html". Setelah menambahkan \textit{Option} \texttt{-before-capture} dan mengubah kode program sehingga menyimpan \textit{commit} ID dengan panjang 10 digit, program berhasil membangkitkan animasi. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 281 MB dan berdurasi 7 menit 7 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini.
+
+\item \textbf{Pengujian Situs \textit{web} IBM Open Source}\\
+IBM Open Source merupakan proyek Open Source yang dimiliki oleh IBM. Repositori situs \textit{web} ini disimpan pada Github\footnote{https://github.com/IBM/ibm.github.io}. Repositori ini memiliki 263 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+\begin{itemize}
+\item \texttt{-project-path C:/xampp/htdocs/ibm.github.io/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-seconds-per-commit 0.1} 
+\end{itemize}
+Program berhasil membangkitkan animasi \textit{timelapse} dari situs \textit{web} IBM Open Source. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 15.2 MB dan berdurasi 26 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/IBM}.
+
+\item \textbf{Pengujian Situs \textit{web} React}\\
+React merupakan \texttt{library} Java Script yang digunakan untuk membangun antarmuka. Repositori situs \textit{web} ini disimpan pada Github\footnote{https://github.com/facebook/react}. Repositori ini memiliki 570 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+\begin{itemize}
+\item \texttt{-project-path C:/xampp/htdocs/react/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-seconds-per-commit 0.05}
+\item \texttt{-branch gh-pages} 
+\end{itemize}
+Program berhasil membangkitkan animasi \textit{timelapse} dari situs \textit{web} React. Untuk beberapa \textit{commit} tidak terdapat \textit{file} "index.html". Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 18.3 MB dan berdurasi 28 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/React}.
+
+\item \textbf{Pengujian Situs \textit{web} Yelp Open Source}\\
+Yelp Open Source merupakan proyek Open Source yang dimiliki oleh Yelp. Repositori situs \textit{web} ini disimpan pada Github\footnote{https://github.com/Yelp/yelp.github.io}. Repositori ini memiliki 99 \textit{commit}. Lingkungan pengujian eksperimental ini sama dengan lingkungan implementasi yang terdapat pada subbab \ref{subsec:lingkunganimplementasi5}. Berikut ini adalah \textit{Option} yang digunakan untuk menguji program:
+\begin{itemize}
+\item \texttt{-project-path C:/xampp/htdocs/yelp.github.io/.git}
+\item \texttt{-capture-url http://localhost}
+\item \texttt{-seconds-per-commit 0.2} 
+\end{itemize}
+Program berhasil membangkitkan animasi \textit{timelapse} dari situs \textit{web} Yelp. Tidak ditemukan masalah saat melakukan pengujian. Hasil dari pengujian berupa \textit{file} hasil animasi bertipe GIF dengan ukuran 4.63 MB dan berdurasi 19 detik. Karena \textit{file} hasil animasi bertipe GIF, maka hasilnya tidak bisa ditampilkan pada skripsi ini, tapi bisa dilihat pada link berikut\footnote{https://github.com/billyAdi/Skripsi/tree/master/Program/TimeLapseGenerator/hasil\%20pengujian/Yelp}.
 
 \end{enumerate}

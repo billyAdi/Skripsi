@@ -229,30 +229,60 @@ Perangkat Lunak Berbasis Web}
 % - langsung mulai setelah '{' awal, jangan mulai menulis di baris bawahnya
 %=============================================================================
 \abstrakINA{
-Git merupakan perangkat lunak \textit{Version Control Systems}.\textit{Version control} adalah 
+Git merupakan perangkat lunak \textit{Version Control Systems}.\textit{Version Control} adalah 
 sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu. Perubahan 
-yang terjadi pada repositori dicatat oleh Git dalam bentuk histori \textit{commit}. Setiap \textit{commit} 
-mengandung informasi mengenai perubahan yang terjadi pada repositori, waktu perubahan, dan orang yang melakukan 
-perubahan. Dengan adanya histori \textit{commit}, perkembangan suatu proyek perangkat lunak dapat dipantau. Akan tetapi, untuk perangkat 
-lunak yang memiliki banyak \textit{commit}, pemantauan progres dapat memakan waktu yang lama. Karena itu proses 
-perkembangan perangkat lunak perlu divisualisasikan. 
+yang terjadi pada repositori dicatat oleh Git dalam bentuk histori \textit{commit}. Dengan adanya histori \textit{commit}, perkembangan suatu proyek perangkat lunak dapat dipantau. Akan tetapi, untuk perangkat 
+lunak yang memiliki banyak \textit{commit}, pemantauan progres dapat memakan waktu yang lama. Oleh karena itu, dibuatlah perangkat lunak yang dapat membangkitkan animasi \textit{timelapse} dari pengembangan proyek perangkat lunak.
+ 
 
 
-JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}. Dengan menggunakan
-JGit, operasi-operasi dalam Git dapat diakses melalui program Java. Dengan kata lain, histori \textit{commit} dapat 
-ditelusuri melalui program java. Selenium WebDriver merupakan bagian dari Selenium.  Selenium adalah seperangkat alat yang secara khusus 
-digunakan untuk mengotomatisasi \textit{web browsers}. Selenium WebDriver, dapat membuka suatu halaman \textit{web} 
-dan mengambil \textit{screenshot} dari halaman tersebut. Oleh karena itu, dibuatlah program yang dapat membangkitkan animasi \textit{timelapse} pada perkembangan proyek 
-perangkat lunak berbasis \textit{web} dengan bantuan JGit dan SeleniumWebDriver. Yang dibuat animasinya adalah halaman-halaman
- \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git.  
-
+Perangkat lunak pembangkit \textit{timelapse} ini hanya akan berfokus pada pengembangan proyek perangkat lunak berbasis \textit{web}. Animasi \textit{timelapse} 
+dibuat dengan cara menggabungkan \textit{screenshot} halaman \textit{web} pada setiap \textit{commit} menjadi satu \textit{file} bertipe GIF.
+Penelusuran \textit{commit} dilakukan menggunakan JGit. \textit{Screenshot} halaman \textit{web} pada setiap \textit{commit} diambil menggunakan Selenium WebDriver.
 
 Pengujian dilakukan dengan menggunakan beberapa repositori dari situs web dan WebDriver. Berdasarkan hasil pengujian, program dapat
 bejalan dengan baik pada beberapa WebDriver. Pada EdgeDriver, tampilan \textit{layout} dari halaman \textit{web} menjadi tidak rapih.
 Program dapat berjalan dengan baik dan dapat membangkitkan animasi timelapse pada beberapa repositori dari situs web. Ukuran \textit{file} hasil animasi bergantung pada
 banyaknya \textit{commit} pada repositori. Semakin banyak jumlah \textit{commit}, semakin besar ukuran \textit{file}. 
+
+
+
+
+
+
+
+%JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}. Dengan menggunakan
+%JGit, operasi-operasi dalam Git dapat diakses melalui program Java. Dengan kata lain, histori \textit{commit} dapat 
+%ditelusuri melalui program java. Selenium WebDriver merupakan bagian dari Selenium.  Selenium adalah seperangkat alat yang secara khusus 
+%digunakan untuk mengotomatisasi \textit{web browsers}. Selenium WebDriver, dapat membuka suatu halaman \textit{web} 
+%dan mengambil \textit{screenshot} dari halaman tersebut. 
+
+
+%Oleh karena itu, dibuatlah program yang dapat membangkitkan animasi \textit{timelapse} pada perkembangan proyek 
+%perangkat lunak berbasis \textit{web} dengan bantuan JGit dan SeleniumWebDriver. Yang dibuat animasinya adalah halaman-halaman
+% \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git. 
+
+
+
+
 }
-\abstrakENG{<<Tuliskan abstrak anda di sini, dalam bahasa Inggris>>} 
+\abstrakENG{
+Git is a Version Control Systems. Version control is a system that records
+changes to a file or set of files over time. Changes in a repository are recorded by Git in the form of commit history.
+Software development can be tracked via commit history. However, it will take time to monitor the progress of software that has many commits. 
+Therefore, software that can generate timelapse animation for software project development is made.
+
+This software only focus on web-based software project development. Timelapse animation can be made by combining screenshots of web page into one GIF file.
+Commits can be traversed using JGit. Screenshot of web page in every commit can be taken using Selenium WebDriver.
+
+
+Testing is done by trying to run this software using several websites and WebDriver. The result of software testing said that software can run well on several WebDriver.
+On EdgeDriver, webpage layout is not neat. Software can run well on several websites. The size of animation file depends on the number of commit in a repository. 
+The more the number of commits made, the bigger the file size of the animation file gets.
+
+
+
+} 
 %=============================================================================
 
 %_____________________________________________________________________________

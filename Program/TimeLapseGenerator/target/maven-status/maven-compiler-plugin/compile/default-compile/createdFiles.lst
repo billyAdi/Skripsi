@@ -1,0 +1,6 @@
+id\ac\unpar\timelapsegenerator\Main.class
+id\ac\unpar\timelapsegenerator\TimeLapseGenerator.class
+id\ac\unpar\timelapsegenerator\BrowserController.class
+id\ac\unpar\timelapsegenerator\VCS.class
+id\ac\unpar\timelapsegenerator\GifSequenceWriter.class
+id\ac\unpar\timelapsegenerator\CommandLineOptions.class

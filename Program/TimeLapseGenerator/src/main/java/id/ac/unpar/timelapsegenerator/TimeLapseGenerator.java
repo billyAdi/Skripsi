@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.imageio.stream.ImageOutputStream;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
@@ -37,7 +37,8 @@ public class TimeLapseGenerator {
      * browser.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Checkout atau Git Reset.
-     * @throws IOException jika terjadi masalah menjalankan terminal command.
+     * @throws IOException jika terjadi masalah saat menjalankan terminal
+     * command.
      * @throws InterruptedException jika terjadi interupsi pada thread saat
      * menjalankan terminal command.
      */
@@ -61,9 +62,7 @@ public class TimeLapseGenerator {
             if (properties.getProperty("before-capture") != null) {
                 Process process;
                 process = Runtime.getRuntime().exec(properties.getProperty("before-capture"));
-                if (!process.waitFor(30, TimeUnit.SECONDS)) {
-                    throw new IOException("Terminal Command Tidak Valid");
-                }
+                process.waitFor();
             }
 
             for (int j = 0; j < captureURL.length; j++) {
@@ -147,6 +146,14 @@ public class TimeLapseGenerator {
                 break;
             default:
                 break;
+        }
+        int ct = 0;
+        for (File resultImage : resultImages) {
+            try {
+                FileUtils.copyFile(resultImage, new File("D:/Temp/z" + ct + ".png"));
+            } catch (IOException ex) {
+            }
+            ct++;
         }
         for (File resultImage : resultImages) {
             if (properties.getProperty("title") == null && properties.getProperty("logo") == null) {

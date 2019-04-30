@@ -66,7 +66,7 @@ Constructor dari kelas ini. Berfungsi untuk menginisialisasi atribut yang dimili
 \end{itemize}
 
 \item CommandLineOptions\\
-Kelas ini berfungsi untuk menyimpan semua Option yang terdapat dalam program ini, dan melakukan \textit{parsing} argumen Command Line Options yang dimasukkan oleh \textit{user}.  
+Kelas ini berfungsi untuk menyimpan semua \textit{option} yang terdapat dalam program ini, dan melakukan \textit{parsing} argumen Command Line Options yang dimasukkan oleh \textit{user}.  
 
 Berikut adalah atribut yang terdapat pada kelas ini:
 \begin{itemize}
@@ -76,7 +76,7 @@ Berikut adalah atribut yang terdapat pada kelas ini:
 Berikut adalah \textit{method} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public CommandLineOptions(String[] args)\\
-Merupakan Constructor dari kelas ini. Berfungsi untuk menentukan Option yang terdapat pada program dan melakukan parsing argumen Command Line. Parameternya adalah argumen Command Line Option yang didapatkan dari
+Merupakan Constructor dari kelas ini. Berfungsi untuk menentukan \textit{option} yang terdapat pada program dan melakukan parsing argumen Command Line. Parameternya adalah argumen Command Line Option yang didapatkan dari
 kelas Main.
 \item public Properties getParsedOptions()\\
 Berfungsi untuk mengembalikan Command Line Option yang sudah diparsing.
@@ -113,7 +113,7 @@ Kelas ini digunakan untuk membangkitkan animasi \textit{timelapse}.
 Berikut adalah \textit{method} yang dimiliki oleh kelas ini:
 \begin{itemize}
 \item public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController)\\
-Berfungsi untuk membangkitkan animasi \textit{timelapse} berdasarkan langkah-langkah pada subbab \ref{sec:analisis_fitur_aplikasi}. Hasil animasi berupa \textit{file} bertipe GIF. Parameternya adalah objek yang bertipe VCS, BrowserController, dan Properties. Parameter properties menampung key dan value dari Option yang sudah diparsing. 
+Berfungsi untuk membangkitkan animasi \textit{timelapse} berdasarkan langkah-langkah pada subbab \ref{sec:analisis_fitur_aplikasi}. Hasil animasi berupa \textit{file} bertipe GIF. Parameternya adalah objek yang bertipe VCS, BrowserController, dan Properties. Parameter properties menampung key dan value dari \textit{option} yang sudah diparsing. 
 \end{itemize}
 
 \end{itemize}
@@ -134,9 +134,9 @@ Animasi timelapse gagal dibuat
 Listing \ref{lst:status_pesan_berhasil} menunjukkan status yang akan ditampilkan pada terminal saat program berhasil membangkitkan animasi \textit{timelapse}. Listing \ref{lst:status_pesan_gagal} menunjukkan status yang akan ditampilkan pada terminal saat program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris pertama menunjukkan bahwa program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris kedua menyatakan \textit{error message} dari program. Berikut ini adalah \textit{error message} yang akan ditampilkan saat \textit{user} memasukkan \textit{input} yang tidak valid:
 \begin{itemize}
 \item \texttt{Path proyek tidak valid}\\
-Pesan ini muncul jika \textit{path} pada argumen Option \texttt{project-path} tidak valid.
+Pesan ini muncul jika \textit{path} pada argumen \textit{option} \texttt{project-path} tidak valid.
 \item \texttt{Jumlah url yang akan dicapture maksimal 4}\\
-Pesan ini muncul jika jumlah argumen pada Option \texttt{capture-url} lebih dari 4.
+Pesan ini muncul jika jumlah argumen pada \textit{option} \texttt{capture-url} lebih dari 4.
 \item \texttt{Seconds per commit harus lebih besar dari 0}\\
 Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bernilai lebih kecil dari 0.
 
@@ -149,24 +149,24 @@ Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bukan bertipe bil
 %Pesan ini muncul jika argumen \texttt{capture-url} merupakan alamat URL yang tidak valid.
 %\item \texttt{Path script PHP tidak valid}\\
 %Pesan ini muncul jika \textit{path} pada argumen Option \texttt{before-capture} tidak ditemukan atau \texttt{path} bukan merupakan \textit{file} PHP.
-\item \texttt{Terminal Command tidak valid}\\
-Pesan ini muncul jika \textit{terminal command} pada argumen Option \texttt{before-capture} tidak valid.
+%\item \texttt{Terminal Command tidak valid}\\
+%Pesan ini muncul jika \textit{terminal command} pada argumen Option \texttt{before-capture} tidak valid.
 \item \texttt{Path gambar tidak valid}\\
-Pesan ini muncul jika \textit{path} gambar pada argumen Option \texttt{logo} tidak ditemukan atau \texttt{path} gambar bukan merupakan \textit{file} gambar.
+Pesan ini muncul jika \textit{path} gambar pada argumen \textit{option} \texttt{logo} tidak ditemukan atau \texttt{path} gambar bukan merupakan \textit{file} gambar.
 \item \texttt{Panjang commit ID awal harus berada di antara 7-40 karakter}\\
-Pesan ini muncul jika panjang Commit ID pada argumen Option \texttt{start-commit} kurang dari tujuh karakter atau lebih besar dari empat sepuluh karakter.
+Pesan ini muncul jika panjang Commit ID pada argumen \textit{option} \texttt{start-commit} kurang dari tujuh karakter atau lebih besar dari empat sepuluh karakter.
 \item \texttt{Panjang commit ID akhir harus berada di antara 7-40 karakter}\\
-Pesan ini muncul jika panjang Commit ID pada argumen Option \texttt{stop-commit} kurang dari tujuh karakter atau lebih besar dari empat sepuluh karakter.
+Pesan ini muncul jika panjang Commit ID pada argumen \textit{option} \texttt{stop-commit} kurang dari tujuh karakter atau lebih besar dari empat sepuluh karakter.
 \item \texttt{Commit ID awal tidak ditemukan}\\
-Pesan ini muncul jika Commit ID pada argumen Option \texttt{start-commit} tidak ditemukan.
+Pesan ini muncul jika Commit ID pada argumen \textit{option} \texttt{start-commit} tidak ditemukan.
 \item \texttt{Commit ID akhir tidak ditemukan}\\
-Pesan ini muncul jika Commit ID pada argumen Option \texttt{stop-commit} tidak ditemukan.
+Pesan ini muncul jika Commit ID pada argumen \textit{option} \texttt{stop-commit} tidak ditemukan.
 \item \texttt{Commit ID awal dan akhir tidak boleh sama}\\
-Pesan ini muncul jika argumen pada Option \texttt{start-commit} dan Option \texttt{stop-commit} bernilai sama.
+Pesan ini muncul jika argumen pada \textit{option} \texttt{start-commit} dan \textit{option} \texttt{stop-commit} bernilai sama.
 \item \texttt{Commit ID awal dan akhir terbalik}\\
-Pesan ini muncul jika nilai argumen pada Option \texttt{start-commit} dan Option \texttt{stop-commit} tertukar.
+Pesan ini muncul jika nilai argumen pada \textit{option} \texttt{start-commit} dan \textit{option} \texttt{stop-commit} tertukar.
 \item \texttt{Branch tidak valid}\\
-Pesain ini muncul jika nama branch pada argumen Option \texttt{branch} tidak valid.
+Pesain ini muncul jika nama branch pada argumen \textit{option} \texttt{branch} tidak valid.
 \end{itemize}
 
 Rancangan \textit{output} dari hasil \textit{file} animasi \textit{timelapse} dapat dilihat pada Gambar \ref{fig:output1} sampai dengan Gambar \ref{fig:output4}. Gambar \ref{fig:output1} menunjukkan rancangan \textit{output} jika terdapat satu halaman \textit{web}. Gambar \ref{fig:output2} menunjukkan rancangan \textit{output} jika terdapat dua halaman \textit{web}. Gambar \ref{fig:output3} menunjukkan rancangan \textit{output} jika terdapat tiga halaman \textit{web}. Gambar \ref{fig:output4} menunjukkan rancangan \textit{output} jika terdapat empat halaman \textit{web}. 

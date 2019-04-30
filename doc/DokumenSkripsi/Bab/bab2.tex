@@ -152,7 +152,7 @@ Listing \ref{lst:git_histori} menunjukkan sebagian histori \textit{commit} pada 
 HEAD dan \textit{master} pada Listing \ref{lst:git_histori}, disebut juga dengan Git Ref / Reference. Ref merupakan suatu variabel yang menyimpan ID (SHA-1 hash value) dari suatu Git Object. Pada Listing \ref{lst:git_histori}, Ref \textit{master} menyimpan ID dari \textit{commit} yang isinya adalah 89000be7ce7d16f006813cddefb4ec6d70d15ed6. Ref HEAD tidak secara langsung menyimpan ID dari \textit{commit}, melainkan \textit{pointer} ke Ref \textit{master}. Ref yang menyimpan \textit{pointer} ke Ref lain disebut juga dengan \textit{symbolic Ref}. 
 
 Ref origin/master merupakan Ref \textit{master} yang berada pada \textit{remote repository}. 
-Ref origin/HEAD merupakan ref HEAD yang berada pada \textit{remote repository}. \textit{Remote repository} merupakan repositori yang disimpan pada suatu \textit{server}, misalnya \textit{server} Github. 
+Ref origin/HEAD merupakan ref HEAD yang berada pada \textit{remote repository}. \textit{Remote repository} merupakan repositori yang disimpan pada suatu \textit{server}, misalnya \textit{server} GitHub. 
 
 \subsection{Operasi Dasar pada Git}
 \label{subsec:operasi_dasar_git}
@@ -382,9 +382,9 @@ Merupakan sebuah Enum yang berisi mode yang digunakan untuk mendapatkan \textit{
 Berikut ini adalah konstanta yang terdapat pada Enum ini:
 \begin{itemize}
 \item public static final ListBranchCommand.ListMode ALL\\
-Mode ini digunakan untuk mendapatkan semua daftar \textit{branch} baik lokal maupun \textit{remote}. Mode ini setara dengan \textit{Option} \texttt{-a} pada sintaks \texttt{git branch -a}.
+Mode ini digunakan untuk mendapatkan semua daftar \textit{branch} baik lokal maupun \textit{remote}. Mode ini setara dengan \textit{option} \texttt{-a} pada sintaks \texttt{git branch -a}.
 \item public static final ListBranchCommand.ListMode REMOTE\\
-Mode ini digunakan untuk mendapatkan daftar \textit{remote branch}. Mode ini setara dengan \textit{Option} \texttt{-r} pada sintaks \texttt{git branch -r}. 
+Mode ini digunakan untuk mendapatkan daftar \textit{remote branch}. Mode ini setara dengan \textit{option} \texttt{-r} pada sintaks \texttt{git branch -r}. 
 \end{itemize}
 
 
@@ -496,7 +496,7 @@ Kembalian: URL dari halaman \textit{web} yang sedang dimuat di \textit{browser}.
 
 \item WebDriver.Options manage()\\
 Berfungsi untuk mendapatkan interface WebDriver.Options.\\
-Kembalian: interface dengan tipe WebDriver.Options. Di dalam kelas ini terdapat \textit{method} window() yang mengembalikan \textit{interface} dengan tipe WebDriver.Window. 
+Kembalian: interface dengan tipe WebDriver.Options.  
 \end{itemize}
 
 %\subsection{WebDriver.Navigation}
@@ -514,15 +514,24 @@ Kembalian: interface dengan tipe WebDriver.Options. Di dalam kelas ini terdapat 
 %Parameter: URL yang akan dimuat.
 %\end{itemize}
 
+\subsection{Interface WebDriver.Options}
+\textit{Interface} yang digunakan untuk mengatur \textit{browser menu}. Berikut adalah
+\textit{method} yang dimiliki oleh \textit{interface} ini:
+\begin{itemize}
+\item void deleteAllCookies()\\
+Berfungsi untuk menghapus semua \textit{cookie} yang terdapat pada \textit{browser}.
+\item WebDriver.Window window()\\
+Berfungsi untuk mendapatkan \textit{interface} untuk mengatur \textit{browser window}.\\
+Kembalian: objek bertipe WebDriver.Window.
+\end{itemize}
+
+
 \subsection{Interface WebDriver.Window}
 \label{subsec:webdriveroption}
 \textit{Interface} yang digunakan untuk mengatur \textit{window} pada \textit{browser}. Berikut adalah \textit{method} yang dimiliki oleh \textit{interface} ini:
 \begin{itemize}
 \item void maximize()\\
 Berfungsi untuk membuat ukuran \textit{window} pada \textit{browser} menjadi maksimal.
-\item public setSize(Dimension targetSize)\\
-Berfungsi untuk mengatur ukuran \textit{window} pada \textit{browser} sesuai parameter.\\
-Parameter: ukuran dari \textit{browser} berupa objek Dimension. Objek Dimension mempunyai atribut height dan weight yang menyatakan ukuran panjang dan lebar dalam satuan piksel.
 \end{itemize}
 
 %\subsection{WebElement}
@@ -662,16 +671,16 @@ Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_
 
 \subsection{Interface CommandLineParser}
 \label{subsec:commandlineparser}
-Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada Option yang telah ditentukan. Kelas-kelas yang mengimplementasikan \textit{interface} ini yaitu BasicParser, GnuParser, PosixParser, dan DefaultParser. Kelas BasicParser, GnuParser, dan PosixParser sudah \textit{deprecated}. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
+Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada \textit{option} yang telah ditentukan. Kelas-kelas yang mengimplementasikan \textit{interface} ini yaitu BasicParser, GnuParser, PosixParser, dan DefaultParser. Kelas BasicParser, GnuParser, dan PosixParser sudah \textit{deprecated}. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
-Parameter: Option yang telah ditentukan, argumen Command Line.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
 Kembalian: objek \textit{CommandLine}.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan.\\
-Parameter: Option yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat Option yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat \textit{option} yang tidak valid.\\
 Kembalian: objek \textit{CommandLine}.
 \end{itemize}
 
@@ -681,44 +690,44 @@ Kembalian: objek \textit{CommandLine}.
 Merupakan kelas yang mengimplementasikan \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
-Parameter: Option yang telah ditentukan, argumen Command Line.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
 Kembalian: objek \textit{CommandLine}.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada Option yang telah ditentukan.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat Option yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat Option yang tidak valid.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat \textit{option} yang tidak valid.\\
 Kembalian: objek \textit{CommandLine}.
 \end{itemize}
 
 \subsection{Kelas CommandLine}
 \label{subsec:commandline}
-Kelas ini merepresentasikan kumpulan Option hasil \textit{parsing}.
+Kelas ini merepresentasikan kumpulan \textit{option} hasil \textit{parsing}.
 Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public String getOptionValue(String opt)\\
-Berfungsi untuk mendapatkan nilai dari suatu Option sesuai dengan namanya.\\
-Parameter: nama dari Option.\\
-Kembalian: nilai dari suatu Option. Jika Option tidak ditemukan, akan mengembalikan \textit{null}.
+Berfungsi untuk mendapatkan nilai dari suatu \textit{option} sesuai dengan namanya.\\
+Parameter: nama dari \textit{option}.\\
+Kembalian: nilai dari suatu \textit{option}. Jika \textit{option} tidak ditemukan, akan mengembalikan \textit{null}.
 \item public String[] getOptionValues(Option option)\\
-Berfungsi untuk mendapatkan kumpulan nilai dari suatu Option.
-Parameter: nama dari Option.
-Kembalian: kumpulan nilai dari suatu Option dengan tipe \textit{array of String}. Jika Option tidak ditemukan, akan mengembalikan \textit{null}.
+Berfungsi untuk mendapatkan kumpulan nilai dari suatu \textit{option}.
+Parameter: nama dari \textit{option}.
+Kembalian: kumpulan nilai dari suatu \textit{option} dengan tipe \textit{array of String}. Jika \textit{option} tidak ditemukan, akan mengembalikan \textit{null}.
 \item public Option[] getOptions()\\
-Berfungsi untuk mengembalikan Option hasil \textit{parsing}.\\ 
-Kembalian: \textit{array} dari Option hasil \textit{parsing}.
+Berfungsi untuk mengembalikan \textit{option} hasil \textit{parsing}.\\ 
+Kembalian: \textit{array} dari \textit{option} hasil \textit{parsing}.
 
 
 \end{itemize}
 
 \subsection{Kelas Options}
 \label{subsec:options}
-Kelas ini merepresentasikan kumpulan dari objek \textit{Option}, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
+Kelas ini merepresentasikan kumpulan dari objek Option, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Options addOption(Option opt)\\
-Berfungsi untuk menambahkan Option.\\
+Berfungsi untuk menambahkan \textit{option}.\\
 Parameter: Option yang akan ditambahkan.\\
-Kembalian: hasil dari Option yang ditambahkan.
+Kembalian: hasil dari \textit{option} yang ditambahkan.
 
 \end{itemize}
 
@@ -732,23 +741,23 @@ Berfungsi untuk mendapatkan nama panjang dari suatu \textit{option}.\\
 Kembalian: nama panjang dari suatu \textit{option}.
 \item public String getValue()\\
 Berfungsi untuk mendapatkan nilai dari Option.\\
-Kembalian: nilai dari Option. Jika terdapat lebih dari satu kembalian, hanya nilai pertama yang dikembalikan. Jika tidak ada nilai, akan mengembalikan \textit{null}.
+Kembalian: nilai dari \textit{option}. Jika terdapat lebih dari satu kembalian, hanya nilai pertama yang dikembalikan. Jika tidak ada nilai, akan mengembalikan \textit{null}.
 
 \item public String[] getValues()\\
-Berfungsi untuk mendapatkan nilai-nilai dari Option.\\
-Kembalian: nilai-nilai dari Option berupa \textit{array of String}. Jika tidak ada nilai, akan mengembalikan \textit{null}.
+Berfungsi untuk mendapatkan nilai-nilai dari \textit{option}.\\
+Kembalian: nilai-nilai dari \textit{option} berupa \textit{array of String}. Jika tidak ada nilai, akan mengembalikan \textit{null}.
 
 \item public boolean hasArg()\\
-Berfungsi untuk mengetahui apakah suatu Option membutuhkan argumen.\\
+Berfungsi untuk mengetahui apakah suatu \textit{option} membutuhkan argumen.\\
 Kembalian: \textit{true} jika \textit{option} ini membutuhkan argumen , \textit{false} jika \textit{option} ini tidak membutuhkan argumen.
 
 \item public boolean hasArg()\\
-Berfungsi untuk mengetahui apakah suatu Option dapat menerima lebih dari satu argumen.\\
+Berfungsi untuk mengetahui apakah suatu \textit{option} dapat menerima lebih dari satu argumen.\\
 Kembalian: \textit{true} jika \textit{option} ini dapat menerima lebih dari satu argumen , \textit{false} jika tidak.
 
 \item public String getDescription()\\
-Berfungsi untuk mendapatkan deskripsi dari suatu Option.\\
-Kembalian: deskripsi dari Option ini.
+Berfungsi untuk mendapatkan deskripsi dari suatu \textit{option}.\\
+Kembalian: deskripsi dari \textit{option} ini.
 \item public String getArgName()\\
 Berfungsi untuk mendapatkan nama dari suatu \textit{option}.\\
 Kembalian: nama dari argumen suatu \textit{option}
@@ -758,24 +767,24 @@ Kembalian: nama dari argumen suatu \textit{option}
 
 \subsection{Kelas Option.Builder}
 \label{subsec:optionbuilder}
-Kelas ini merupakan \textit{nested class} dari kelas \textit{Option}. Kelas ini digunakan untuk membuat objek Option berdasarkan parameter yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
+Kelas ini merupakan \textit{nested class} dari kelas Option. Kelas ini digunakan untuk membuat objek Option berdasarkan parameter yang diberikan. Berikut ini adalah beberapa \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Option.Builder desc(String description)\\
 Berfungsi untuk memberikan deskripsi pada \textit{option}.\\
-Parameter: deskripsi dari Option.\\
+Parameter: deskripsi dari \textit{option}.\\
 Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option.Builder longOpt(String longOpt)\\
-Berfungsi untuk memberikan nama panjang pada Option.\\
+Berfungsi untuk memberikan nama panjang pada \textit{option}.\\
 Parameter: nama panjang \textit{option}.\\
 Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public public Option.Builder hasArg()\\
-Berfungsi untuk menyatakan bahwa Option ini membutuhkan argumen.\\
+Berfungsi untuk menyatakan bahwa \textit{option} ini membutuhkan argumen.\\
 Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public public Option.Builder hasArgs()\\
-Berfungsi untuk menyatakan bahwa Option ini membutuhkan argumen, dimana jumlah argumen bisa lebih dari satu.\\
+Berfungsi untuk menyatakan bahwa \textit{option} ini membutuhkan argumen, dimana jumlah argumen bisa lebih dari satu.\\
 Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option.Builder argName(String argName)\\
@@ -789,7 +798,7 @@ Parameter: variabel bertipe \textit{boolean} yang menentukan apakah \textit{opti
 Kembalian: objek Option.Builder yang bisa digunakan untuk \textit{method chaining}.
 
 \item public Option build()\\
-Berfungi untuk membuat objek \textit{Option} berdasarkan nilai pada \textit{Option.Builder}.\\
+Berfungi untuk membuat objek Option berdasarkan nilai pada kelas Option.Builder.\\
 Kembalian: objek Option.
 
 \end{itemize}

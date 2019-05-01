@@ -1,8 +1,6 @@
 package id.ac.unpar.timelapsegenerator;
 
 import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Properties;
 import javax.imageio.ImageIO;
 import org.eclipse.jgit.api.errors.GitAPIException;

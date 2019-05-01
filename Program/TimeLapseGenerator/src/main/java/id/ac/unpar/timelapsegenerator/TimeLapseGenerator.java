@@ -147,14 +147,7 @@ public class TimeLapseGenerator {
             default:
                 break;
         }
-        int ct = 0;
-        for (File resultImage : resultImages) {
-            try {
-                FileUtils.copyFile(resultImage, new File("D:/Temp/z" + ct + ".png"));
-            } catch (IOException ex) {
-            }
-            ct++;
-        }
+        
         for (File resultImage : resultImages) {
             if (properties.getProperty("title") == null && properties.getProperty("logo") == null) {
                 break;

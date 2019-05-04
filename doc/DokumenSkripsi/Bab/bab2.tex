@@ -35,7 +35,7 @@ Git merupakan perangkat lunak \textit{Version Control Systems}. Pada subbab ini,
 
 \subsection{Version Control Systems}
 \label{subsec:vcs}
-\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam hampir semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}.
+\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}.
 
 \subsubsection{Local Version Control Systems}
 Metode \textit{version-controlled} yang banyak digunakan orang adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain. Namun cara tersebut rentan terhadap \textit{error}.
@@ -48,7 +48,7 @@ Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang
 	\label{fig:localvcs}
 \end{figure}
 
-Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada \textit{local directory} di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi atau \textit{state}.  
+Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada direktori lokal di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi.  
  
 \subsubsection{Centralized Version Control Systems}
 \begin{figure}[H]
@@ -62,7 +62,7 @@ Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control 
 
 Sistem \textit{Centralized Version Control Systems} memiliki beberapa kelebihan. Setiap \textit{user}  dapat mengetahui pekerjaan yang dilakukan oleh \textit{user} lain. Administrator dapat lebih mudah mengontrol \textit{database} \textit{Centralized Version Control Systems} dibandingkan dengan \textit{database} \textit{Local Version Control Systems} dari setiap klien.      
 
-Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati , maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
+Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati, maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
 
 \subsubsection{Distributed Version Control Systems}
 \begin{figure}[H]
@@ -93,9 +93,9 @@ Berbeda dengan \textit{Version Control Systems} lainnya, Git memperlakukan datan
 \end{figure}
 
 \subsubsection{State pada Git}
-Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}.\textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} adalah \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan \textit{commit}.
+Terdapat tiga \textit{state} pada Git yaitu \textit{committed}, \textit{modified}, and \textit{staged}. \textit{Committed} adalah \textit{state} dimana data sudah disimpan di \textit{local database}. \textit{Modified} adalah \textit{state} dimana terdapat perubahan pada \textit{file}, namun \textit{file} tersebut belum di \textit{commit} ke \textit{database}. \textit{Staged} adalah \textit{state} dimana \textit{file} telah ditandai untuk kemudian dilakukan \textit{commit}.
 
-Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, \textit{working directory}, dan \textit{staging area}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working tree} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah suatu \textit{file}, dimana \textit{file} ini menyimpan daftar \textit{file} yang telah ditandai untuk kemudian dilakukan \textit{commit}. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
+Terdapat tiga bagian utama dari sebuah \textit{project} Git yaitu direktori Git, \textit{working directory}, dan \textit{staging area}. Direktori Git merupakan tempat dimana Git menyimpan \textit{metadata} dan \textit{object database} dari \textit{project}. \textit{Working directory} adalah suatu \textit{snapshot} dari \textit{project}. Sekumpulan \textit{file} ini diambil dari \textit{database} di direktori Git dan ditempatkan pada \textit{disk} untuk digunakan dan dimodifikasi. \textit{Staging} area adalah suatu \textit{file}, dimana \textit{file} ini menyimpan daftar \textit{file} yang telah ditandai untuk kemudian dilakukan \textit{commit}. \textit{File staging area} terdapat pada direktori Git. Untuk lebih jelasnya, lihat Gambar \ref{fig:git_state}.
 
 Alur kerja dari Git adalah sebagai berikut:
 \begin{enumerate}
@@ -107,7 +107,7 @@ Alur kerja dari Git adalah sebagai berikut:
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/git_state.png}
-	\caption{ \textit{Working tree}, \textit{Staging area}, dan Git direktori\cite{chacon2014pro}.}
+	\caption{ \textit{Working directory}, \textit{Staging area}, dan Git direktori\cite{chacon2014pro}.}
 	\label{fig:git_state}
 \end{figure}
 
@@ -156,13 +156,13 @@ Ref origin/HEAD merupakan ref HEAD yang berada pada \textit{remote repository}. 
 
 \subsection{Operasi Dasar pada Git}
 \label{subsec:operasi_dasar_git}
-Pada subbab ini dijelaskan mengenai operasi dasar dalam Git dan sintaks-sintaksnya. Sintaks-sintaksnya ini dimasukkan pada Git \textit{command line}. Berikut ini adalah operasi-operasi dasar dalam Git:
+Pada subbab ini dijelaskan mengenai operasi dasar dalam Git dan sintaks-sintaksnya. Sintaks-sintaksnya ini dimasukkan pada Git Command Line. Berikut ini adalah operasi-operasi dasar dalam Git:
 \begin{enumerate}
 \item Init\\
 Operasi ini digunakan untuk membuat repositori lokal baru dengan nama tertentu. Bisa juga digunakan untuk merekam direktori yang sudah ada. Berikut adalah sintaks untuk melakukan operasi  \textit{init}:\\
 \texttt{\$ git init [project-name]}  
 \item Add\\
-Operasi ini digunakan untuk menandai perubahan pada \textit{file} dan memindahkan \textit{file} tersebut ke \textit{staging area}. Operasi ini juga digunakan untuk menambahkan \textit{file} yang dipantau perubahannya. Berikut adalah sintaks untuk melakukan operasi add:\\
+Operasi ini digunakan untuk menandai perubahan pada \textit{file} dan memindahkan \textit{file} tersebut ke \textit{staging area}. Operasi ini juga digunakan untuk menambahkan \textit{file} yang akan dipantau perubahannya. Berikut adalah sintaks untuk melakukan operasi add:\\
 \texttt{\$ git add [file]}  
 \item Commit\\
 Operasi ini digunakan untuk merekam \textit{snapshot} atau \textit{state} \textit{file} atau sekumpulan \textit{file}. Operasi ini juga digunakan untuk memindahkan \textit{file} yang berada di \textit{stagging area} ke direktori Git. Berikut adalah sintaks untuk melakukan operasi \textit{commit}:\\
@@ -179,10 +179,10 @@ Operasi ini digunakan untuk menampilkan perbedaan pada \textit{file} yang belum 
 \texttt{\$ git diff} \\
 \texttt{\$ git diff [--staged]}\\
 \item Clone\\
-Operasi ini digunakan untuk menyalin repositori Git yang berada di komputer lain atau suatu \textit{server}. Berikut adalah sintaks untuk melakukan operasi \textit{clone}:\\
+Operasi ini digunakan untuk menyalin \textit{remote repository} ke repositori lokal. Berikut adalah sintaks untuk melakukan operasi \textit{clone}:\\
 \texttt{\$ git clone <url>}
 \item Fetch\\
-Operasi ini digunakan untuk mengambil data dari \textit{remote} repositori ke repositori lokal. Berikut adalah sintaks untuk melakukan operasi \textit{fetch}:\\
+Operasi ini digunakan untuk mengambil data dari \textit{remote repository} ke repositori lokal. Berikut adalah sintaks untuk melakukan operasi \textit{fetch}:\\
 \texttt{\$ git fetch [bookmark]}
 \item Merge\\
 Operasi ini digunakan untuk menggabungkan \textit{branch} tertentu dengan \textit{branch} yang sedang aktif. Operasi ini juga digunakan untuk menggabungkan data yang diambil dari \textit{remote} repositori dengan data pada \textit{working directory}. Berikut adalah sintaks untuk melakukan operasi \textit{merge}:\\
@@ -203,12 +203,12 @@ Operasi ini digunakan untuk menampilkan semua histori \textit{commit} pada \text
 \texttt{\$ git log}
 
 \item Reset\\
-Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} tertentu, selain itu secara opsional  melakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} berdasarkan tipe \textit{reset}. Terdapat tiga tipe reset yaitu:
+Operasi ini digunakan untuk memindahkan posisi \textit{HEAD} ke \textit{commit} tertentu, selain itu secara opsional  melakukan \textit{reset} pada \textit{staging area} dan \textit{working directory} berdasarkan tipe \textit{reset}. Terdapat tiga tipe reset yaitu:
 \begin{itemize}
 \item Soft\\
 Pada tipe ini, tidak dilakukan \textit{reset} pada \textit{staging area} dan \textit{working directory}.
 \item Hard\\
-Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working tree} sehingga perubahan yang terdapat pada \textit{staging area} dan \textit{working directory} akan hilang.
+Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working directory} sehingga perubahan yang terdapat pada \textit{staging area} dan \textit{working directory} akan hilang.
 \item Mixed\\
 Pada tipe ini, dilakukan \textit{reset} pada \textit{staging area} sehingga perubahan yang terdapat pada \textit{staging area} akan dipindahkan ke \textit{working directory}.  
 \end{itemize} 
@@ -246,7 +246,7 @@ Kelas ini merepresentasikan repositori Git. Berikut ini adalah beberapa \textit{
 Berfungsi untuk membuat repositori Git baru. 
 \item public String getBranch()\\
 Berfungsi untuk mendapatkan nama \textit{branch} yang ditunjuk oleh \textit{HEAD}.\\
-Kembalian: nama dari \textit{branch} yang sedang aktif, contohnya \textit{master}.
+Kembalian: nama dari \textit{branch} yang sedang aktif.
 \item public Ref getRef(String name)\\
 Berfungsi untuk mendapatkan \textit{reference} berdasarkan nama yang diberikan.\\
 Parameter: nama dari \textit{reference}.\\
@@ -356,8 +356,8 @@ Kelas yang digunakan untuk melakukan operasi \textit{checkout}.
 Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public CheckoutCommand setName(String name)\\
-Menentukan nama  \textit{branch} atau \textit{commit} untuk melakukan checkout.\\
-Parameter: nama dari \textit{branch} atau \textit{commit}.\\
+Menentukan nama  \textit{branch} atau \textit{commit} ID untuk melakukan checkout.\\
+Parameter: nama dari \textit{branch} atau \textit{commit} ID.\\
 Kembalian: \textit{object} CheckoutCommand.
 \item public Ref call()\\
 Berfungsi untuk menjalankan operasi \textit{checkout}.
@@ -370,7 +370,7 @@ Berikut adalah beberapa \textit{method} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public ListBranchCommand setListMode(ListBranchCommand.ListMode listMode)\\
 Menentukan mode yang digunakan untuk mendapatkan \textit{branch}. Jika parameter tidak dimasukkan, hanya daftar \textit{branch} lokal yang didapatkan.\\
-Parameter: mode yang digunakan untuk mendapatkan \textit{branch} berupa konstanta.\\
+Parameter: mode yang digunakan untuk mendapatkan \textit{branch}, parameter ini berupa konstanta.\\
 Kembalian: \textit{object} CheckoutCommand.
 \item public List<Ref> call()\\
 Berfungsi untuk menjalankan operasi \textit{branch}.\\
@@ -422,10 +422,14 @@ Merupakan \textit{enumeration} yang menentukan tipe \textit{reset} yang digunaka
 \begin{itemize}
 \item public static final ResetCommand.ResetType SOFT\\
 Hanya mengubah posisi \textit{HEAD}. 
+
+
 \item public static final ResetCommand.ResetType HARD\\
-Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan. Selain itu, mengubah \textit{staging area} dan \textit{working directory} berdasarkan \textit{reference} tersebut.
+Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan. Selain itu, dilakukan \textit{reset} pada \textit{staging area} dan \textit{working directory} sehingga perubahan yang terdapat pada \textit{staging area} dan \textit{working directory} akan hilang.
+
+
 \item public static final ResetCommand.ResetType MIXED\\
-Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan dan mengubah \textit{staging area} berdasarkan \textit{reference} tersebut.
+Mengubah posisi \textit{HEAD} ke \textit{reference} tujuan. Selain itu, dilakukan \textit{reset} pada \textit{staging area} sehingga perubahan yang terdapat pada \textit{staging area} akan dipindahkan ke \textit{working directory}. 
 \end{itemize}
 
 \subsection{Kelas RevCommit}
@@ -468,13 +472,13 @@ Kembalian: waktu dilakukannya suatu \textit{commit} berupa objek Date.
 
 \section{Selenium WebDriver}
 \label{sec:selenium_webdriver}
-Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan WebDriver menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{extension} dari\textit{browser} Chrome dan Firefox yang digunakan untuk melakukan \textit{record and playback test} pada \textit{browser}. 
+Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatisasi \textit{web browsers}\cite{Selenium}. Selenium mendukung bahasa pemrograman C\#, Java, Perl, PHP, Python, Ruby, dan JavaScript. Selenium terdiri dari beberapa kakas, yaitu Selenium 1(Selenium RC), Selenium 2(Selenium WebDriver), dan Selenium IDE. Selenium RC merupakan proyek utama \textit{Selenium} untuk waktu yang lama, sebelum akhirnya bergabung dengan WebDriver menjadi Selenium 2. Selenium RC melakukan \textit{automation test} dengan cara menginjeksi kode JavaScript ke \textit{browser}. Selenium RC sekarang sudah \textit{deprecated} dan tidak digunakan lagi. Selenium Webdriver merupakan gabungan dari Selenium RC dan WebDriver. Selenium IDE merupakan \textit{extension} dari \textit{browser} Chrome dan Firefox yang digunakan untuk melakukan \textit{record and playback test} pada \textit{browser}. 
  
 WebDriver merupakan kakas untuk mengotomatisasi pengujian pada aplikasi \textit{web}\cite{Selenium_doc}. WebDriver dapat berkomunikasi secara langsung dengan \textit{browser} menggunakan \textit{native support} pada \textit{browser} tanpa melakukan injeksi kode JavaScript. WebDriver yang terdapat pada Selenium WebDriver antara lain ChromeDriver, FirefoxDriver, OperaDriver, SafariDriver, InternetExplorerDriver, EdgeDriver, dan HtmlUnitDriver.
 
 ChromeDriver merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. FirefoxDriver merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. OperaDriver merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. SafariDriver merupakan implementasi WebDriver yang mengontrol Safari \textit{browser}. InternetExplorerDriver merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. EdgeDriver merupakan implementasi WebDriver yang mengontrol Microsoft Edge \textit{browser}. HtmlUnitDriver merupakan implementasi WebDriver yang mengontrol HTMLUnit \textit{browser} yang bersifat \textit{headless}(tidak mempunyai GUI). 
 
-Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. Bahasa pemrograman yang digunakan adalah java. WebDriver yang digunakan adalah ChromeDriver. Pemilihan WebDriver ini hanya berdasarkan preferensi penulis saja. Penulis tidak memilih InternetExplorerDriver, EdgeDriver, dan SafariDriver karena InternetExplorerDriver dan EdgeDriver hanya bisa berjalan pada sistem operasi Windows, selain itu SafariDriver hanya bisa berjalan pada sistem operasi macOS. HtmlUnitDriver tidak dipilih karena tidak mempunyai GUI sehingga tidak bisa dilakukan pengambilan \textit{screenshot}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
+Pada skripsi ini \textit{tools} Selenium yang digunakan hanya Selenium WebDriver. Bahasa pemrograman yang digunakan adalah java. WebDriver yang digunakan adalah ChromeDriver. Pemilihan WebDriver ini hanya berdasarkan preferensi penulis saja. Penulis tidak memilih InternetExplorerDriver, EdgeDriver, dan SafariDriver karena InternetExplorerDriver dan EdgeDriver hanya bisa berjalan pada sistem operasi Windows, selain itu SafariDriver hanya bisa berjalan pada sistem operasi macOS. HtmlUnitDriver tidak dipilih karena WebDriver ini tidak mengimplementasikan \textit{interface} untuk mengambil \textit{screenshot}, sehingga tidak bisa dilakukan pengambilan \textit{screenshot}. Pada subbab berikut dijelaskan beberapa kelas dan \textit{interface} dari \textit{library} Selenium WebDriver. Subbab ini mengacu pada \cite{Selenium_java_doc}.
 
 \subsection{Interface WebDriver}
 \label{subsec:webdriver}
@@ -586,7 +590,7 @@ Berfungsi untuk membuat ukuran \textit{window} pada \textit{browser} menjadi mak
 
 \subsection{Kelas ChromeDriver}
 \label{subsec:chromedriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol Chrome \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public ChromeDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe ChromeDriver.
@@ -594,7 +598,7 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Chrome \textit{browse
 
 \subsection{Kelas FirefoxDriver}
 \label{subsec:firefoxdriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol Firefox \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public FirefoxDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe FirefoxDriver.
@@ -602,7 +606,7 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Firefox \textit{brows
 
 \subsection{Kelas OperaDriver}
 \label{subsec:operadriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol Opera \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public OperaDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe OperaDriver.
@@ -610,7 +614,7 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Opera \textit{browser
 
 \subsection{Kelas SafariDriver}
 \label{subsec:safaridriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol Safari \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol Safari \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public SafariDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe SafariDriver.
@@ -618,7 +622,7 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Safari \textit{browse
 
 \subsection{Kelas InternetExplorerDriver}
 \label{subsec:internetexplorerdriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol Internet Explorer \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public InternetExplorerDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe InternetExplorerDriver.
@@ -635,7 +639,7 @@ Merupakan merupakan implementasi WebDriver yang mengontrol Microsoft Edge \texti
 
 \subsection{Kelas HtmlUnitDriver}
 \label{subsec:htmlunitdriver}
-Merupakan merupakan implementasi WebDriver yang mengontrol HtmlUnit \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
+Merupakan implementasi WebDriver yang mengontrol HtmlUnit \textit{browser}. Berikut adalah \textit{constructor} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public HtmlUnitDriver()\\
 \textit{Constructor} ini membuat instans dengan tipe HtmlUnitDriver.
@@ -674,14 +678,14 @@ Parameter: tipe \textit{output} yang diinginkan(lihat subbab \ref{subsec:output_
 Merupakan sebuah \textit{interface}. Kelas yang mengimplementasikan \textit{interface} ini dapat melakukan \textit{parsing} argumen CommandLine berdasarkan pada \textit{option} yang telah ditentukan. Kelas-kelas yang mengimplementasikan \textit{interface} ini yaitu BasicParser, GnuParser, PosixParser, dan DefaultParser. Kelas BasicParser, GnuParser, dan PosixParser sudah \textit{deprecated}. Berikut ini adalah beberapa \textit{method} yang dimiliki \textit{interface} ini: 
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar ParseException jika terjadi masalah saat melakukan \textit{parsing}.\\
 Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
-Kembalian: objek \textit{CommandLine}.
+Kembalian: objek CommandLine.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
 Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat \textit{option} yang tidak valid.\\
-Kembalian: objek \textit{CommandLine}.
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek CommandLine. Jika bernilai \textit{false}, akan dilempar ParseException bila terdapat \textit{option} yang tidak valid.\\
+Kembalian: objek CommandLine.
 \end{itemize}
 
 
@@ -690,14 +694,14 @@ Kembalian: objek \textit{CommandLine}.
 Merupakan kelas yang mengimplementasikan \textit{interface} CommandLineParser. Berikut adalah \textit{method} yang dimiliki kelas ini:
 \begin{itemize}
 \item CommandLine parse(Options options, String[] arguments) throws ParseException\\
-Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar \textit{ParseException} jika terjadi masalah saat melakukan \textit{parsing}.\\
+Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan. \textit{Method} ini melempar ParseException jika terjadi masalah saat melakukan \textit{parsing}.\\
 Parameter: \textit{option} yang telah ditentukan, argumen Command Line.\\
-Kembalian: objek \textit{CommandLine}.
+Kembalian: objek CommandLine.
 
 \item CommandLine parse(Options options, String[] arguments,boolean stopAtNonOption) throws ParseException\\
 Berfungsi untuk melakukan \textit{parsing} argumen Command Line berdasarkan pada \textit{option} yang telah ditentukan.\\
-Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek \textit{CommandLine}. Jika bernilai \textit{false}, akan dilempar \textit{ParseException} bila terdapat \textit{option} yang tidak valid.\\
-Kembalian: objek \textit{CommandLine}.
+Parameter: \textit{option} yang telah ditentukan, argumen Command Line, dan suatu \textit{boolean} yang menentukan apakah \textit{parsing} dihentikan jika terdapat \textit{option} yang tidak valid. Jika bernilai \textit{true}, \textit{parsing} akan dihentikan dan semua argumen yang sudah diuraikan akan ditambahkan ke objek CommandLine. Jika bernilai \textit{false}, akan dilempar ParseException bila terdapat \textit{option} yang tidak valid.\\
+Kembalian: objek CommandLine.
 \end{itemize}
 
 \subsection{Kelas CommandLine}
@@ -711,7 +715,7 @@ Parameter: nama dari \textit{option}.\\
 Kembalian: nilai dari suatu \textit{option}. Jika \textit{option} tidak ditemukan, akan mengembalikan \textit{null}.
 \item public String[] getOptionValues(Option option)\\
 Berfungsi untuk mendapatkan kumpulan nilai dari suatu \textit{option}.
-Parameter: nama dari \textit{option}.
+Parameter: nama dari \textit{option}.\\
 Kembalian: kumpulan nilai dari suatu \textit{option} dengan tipe \textit{array of String}. Jika \textit{option} tidak ditemukan, akan mengembalikan \textit{null}.
 \item public Option[] getOptions()\\
 Berfungsi untuk mengembalikan \textit{option} hasil \textit{parsing}.\\ 
@@ -722,11 +726,11 @@ Kembalian: \textit{array} dari \textit{option} hasil \textit{parsing}.
 
 \subsection{Kelas Options}
 \label{subsec:options}
-Kelas ini merepresentasikan kumpulan dari objek Option, yang mendeskripsikan kemungkinan \textit{option} pada \textit{command line}. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
+Kelas ini merepresentasikan kumpulan dari objek Option. Berikut ini adalah \textit{method} yang dimiliki kelas ini: 
 \begin{itemize}
 \item public Options addOption(Option opt)\\
 Berfungsi untuk menambahkan \textit{option}.\\
-Parameter: Option yang akan ditambahkan.\\
+Parameter: \textit{option} yang akan ditambahkan.\\
 Kembalian: hasil dari \textit{option} yang ditambahkan.
 
 \end{itemize}
@@ -740,7 +744,7 @@ Kelas ini merepresentasikan sebuah Command Line Option. Berikut ini adalah beber
 Berfungsi untuk mendapatkan nama panjang dari suatu \textit{option}.\\
 Kembalian: nama panjang dari suatu \textit{option}.
 \item public String getValue()\\
-Berfungsi untuk mendapatkan nilai dari Option.\\
+Berfungsi untuk mendapatkan nilai dari \textit{option}.\\
 Kembalian: nilai dari \textit{option}. Jika terdapat lebih dari satu kembalian, hanya nilai pertama yang dikembalikan. Jika tidak ada nilai, akan mengembalikan \textit{null}.
 
 \item public String[] getValues()\\

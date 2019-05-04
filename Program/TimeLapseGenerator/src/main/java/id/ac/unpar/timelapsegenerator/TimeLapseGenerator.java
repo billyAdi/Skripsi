@@ -29,10 +29,10 @@ public class TimeLapseGenerator {
      * Method ini berfungsi untuk membangkitkan animasi timelapse. Hasil dari
      * animasi berupa File dengan tipe GIF.
      *
-     * @param properties variabel yang menampung key dan value Option yang sudah
+     * @param properties variabel yang menampung key dan value option yang sudah
      * diparsing.
      * @param vcs variabel bertipe VCS yang digunakan untuk berinteraksi pada
-     * proyek perangkat lunak berbasis web yang terekam oleh Git.
+     * repositori perangkat lunak berbasis web yang terekam oleh Git.
      * @param browserController variabel betipe BrowserController untuk mengatur
      * browser.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git

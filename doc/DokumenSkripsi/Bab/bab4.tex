@@ -42,11 +42,11 @@ Program pada skripsi ini memiliki lima kelas. Diagram kelas pada program ini dap
 Kelas ini digunakan untuk mengatur \textit{browser}. Operasi-operasi yang dilakukan terhadap \textit{browser} yaitu membuka \textit{browser}, mengambil \textit{screenshot}, membuat \textit{browser window} menjadi maksimal, dan menutup \textit{browser}. Berikut adalah atribut yang terdapat pada kelas ini:
 \begin{itemize}
    \item private final WebDriver[] drivers\\
-   Atribut ini adalah kumpulan \textit{browser} yang digunakan untuk keperluan \textit{automation testing}. 
+   Atribut ini adalah kumpulan WebDriver yang digunakan untuk mengontrol \textit{browser}. 
     \item private final List<File> screenshotFiles\\
 	Atribut ini berfungsi untuk menyimpan \textit{file} hasil \textit{screenshot}.
 	\item  private final int numberOfBrowser\\
-	Atribut ini menyatakan jumlah \textit{browser} yang dimiliki oleh kelas ini. Jumlah maksimal dari \textit{browser} adalah empat.
+	Atribut ini menyatakan jumlah \textit{browser} yang dimiliki oleh kelas ini.
 \end{itemize}
 
 Berikut adalah \textit{method} yang terdapat pada kelas ini:
@@ -63,48 +63,50 @@ Constructor dari kelas ini. Berfungsi untuk menginisialisasi atribut yang dimili
   Berfungsi untuk menutup semua \textit{browser}.
   \item public void takeScreenshot(int browserIndex)\\
   Berfungsi untuk mengambil \textit{screenshot} pada \textit{browser} tertentu dan menyimpannya ke atribut screenshotFiles. Parameternya adalah indeks \textit{browser} yang akan diambil screenshotnya.
+  \item public List<File> getScreenshotFiles()\\
+  Berfungsi untuk untuk mendapatkan hasil \textit{screenshot}. 
 \end{itemize}
 
 \item CommandLineOptions\\
-Kelas ini berfungsi untuk menyimpan semua \textit{option} yang terdapat dalam program ini, dan melakukan \textit{parsing} argumen Command Line Options yang dimasukkan oleh \textit{user}.  
+Kelas ini berfungsi untuk menyimpan semua \textit{option} yang terdapat dalam program ini, dan melakukan \textit{parsing} argumen Command Line yang dimasukkan oleh \textit{user}.  
 
 Berikut adalah atribut yang terdapat pada kelas ini:
 \begin{itemize}
     \item private final CommandLine commandLine\\
-    Atribut ini berfungsi untuk melakukan \textit{parsing} argumen Command Line Options dan menampung hasilnya. 
+    Atribut ini berfungsi untuk melakukan \textit{parsing} argumen Command Line dan menampung hasilnya. 
 \end{itemize}
 Berikut adalah \textit{method} yang terdapat pada kelas ini:
 \begin{itemize}
 \item public CommandLineOptions(String[] args)\\
-Merupakan Constructor dari kelas ini. Berfungsi untuk menentukan \textit{option} yang terdapat pada program dan melakukan parsing argumen Command Line. Parameternya adalah argumen Command Line Option yang didapatkan dari
+Merupakan Constructor dari kelas ini. Berfungsi untuk menentukan \textit{option} yang terdapat pada program dan melakukan parsing argumen Command Line. Parameternya adalah argumen Command Line yang didapatkan dari
 kelas Main.
 \item public Properties getParsedOptions()\\
-Berfungsi untuk mengembalikan Command Line Option yang sudah diparsing.
+Berfungsi untuk mengembalikan \textit{option} yang sudah diparsing.
 \end{itemize}
 
 \item VCS\\
-Kelas ini digunakan untuk berinteraksi pada proyek perangkat lunak yang terekam oleh Git. Berikut adalah atribut yang terdapat pada kelas ini:
+Kelas ini digunakan untuk berinteraksi dengan repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Berikut adalah atribut yang terdapat pada kelas ini:
 \begin{itemize}
    \item  private final Git git\\
-   Atribut ini digunakan untuk melakukan interaksi pada proyek perangkat lunak yang terekam oleh Git.
+   Atribut ini digunakan untuk melakukan interaksi pada repositori perangkat lunak yang terekam oleh Git.
    \item private final List<String> commitIDs\\
-   Atribut ini digunakan untuk menampung seluruh \textit{commit} ID dari hasil penelusuran histori.   
+   Atribut ini digunakan untuk menampung seluruh \textit{commit} ID dari hasil penelusuran histori \textit{commit}.   
 \end{itemize}
 
 Berikut ini adalah \textit{method} yang terdapat dalam kelas ini:
 \begin{itemize}
 \item public VCS(String path,String branch)\\
-Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git dan mendapatkan seluruh histori commit  proyek perangkat lunak berbasis web pada branch tertentu. Dimana branch tersebut diambil dari parameter constructor. Parameternya adalah \textit{path} dari proyek perangkat lunak berbasis web dan nama \textit{branch} yang digunakan untuk membangkitkan animasi.
+Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git dan mendapatkan seluruh histori \textit{commit} dari repositori perangkat lunak berbasis \textit{web} pada \textit{branch} tertentu. Dimana branch tersebut diambil dari parameter constructor. Parameternya adalah \textit{path} dari repositori perangkat lunak berbasis web dan nama \textit{branch} yang digunakan untuk membangkitkan animasi.
 \item public void checkoutCommit(int commitIndex)\\
 Berfungsi untuk melakukan \textit{checkout} ke \textit{commit} tertentu. Parameter dari \textit{method} ini adalah indeks dari variabel commitIDs.
 \item public void checkoutMaster()\\
-Berfungsi untuk melakukan \textit{checkout} ke \textit{commit} terakir.
+Berfungsi untuk melakukan \textit{checkout} ke \textit{commit} terakhir yang ada di \textit{branch} master.
 \item public void hardReset()\\
-Berfungsi untuk melakukan operasi Git Reset dengan tipe \textit{hard reset}. Operasi ini menghapus perubahan pada \textit{working tree} di \textit{commit} tertentu. 
+Berfungsi untuk melakukan operasi Git Reset dengan tipe \textit{hard reset}. Operasi ini menghapus perubahan pada \textit{working directory} dan \textit{staging area} di \textit{commit} tertentu. 
 \item public int getNumberOfCommit()\\
-Berfungi untuk mendapatkan jumlah \textit{commit}.
+Berfungsi untuk mendapatkan jumlah \textit{commit}.
 \item public int getCommitIndex(String commitID)\\
-Berfungsi untuk mendapatkan indeks dari variabel commitIDs. Parameternya adalah \textit{Commit} ID yang akan dicari indeksnya.
+Berfungsi untuk mendapatkan indeks dari variabel commitIDs. Parameternya adalah \textit{Commit} ID yang dicari indeksnya.
 \end{itemize}
 
 
@@ -113,29 +115,29 @@ Kelas ini digunakan untuk membangkitkan animasi \textit{timelapse}.
 Berikut adalah \textit{method} yang dimiliki oleh kelas ini:
 \begin{itemize}
 \item public void generateTimelapse(Properties properties, VCS vcs, BrowserController browserController)\\
-Berfungsi untuk membangkitkan animasi \textit{timelapse} berdasarkan langkah-langkah pada subbab \ref{sec:analisis_fitur_aplikasi}. Hasil animasi berupa \textit{file} bertipe GIF. Parameternya adalah objek yang bertipe VCS, BrowserController, dan Properties. Parameter properties menampung key dan value dari \textit{option} yang sudah diparsing. 
+Berfungsi untuk membangkitkan animasi \textit{timelapse} berdasarkan langkah-langkah pada subbab \ref{sec:analisis_fitur_aplikasi}. Hasil animasi berupa \textit{file} bertipe GIF. Parameternya adalah objek yang bertipe VCS, BrowserController, dan Properties. Parameter properties menampung \textit{key} dan \textit{value} dari \textit{option} yang sudah diparsing. 
 \end{itemize}
 
 \end{itemize}
 
 \section{Perancangan Antarmuka}
 \label{sec:perancangan_antarmuka}
-Program dalam skripsi ini menggunakan dengan terminal sebagai antarmuka, dengan kata lain menggunakan Command Line Interface. \textit{Input} dari program ini dimasukkan melalui argumen Command Line. \textit{Option} yang dapat dimasukkan ke program ini dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. \textit{Output} dari program ini berupa status pada terminal dan \textit{file} hasil animasi bertipe GIF.  
+Program dalam skripsi ini menggunakan terminal sebagai antarmuka (Command Line Interface). \textit{Input} dari program ini dimasukkan melalui argumen Command Line. \textit{Option} yang dapat dimasukkan ke program ini dapat dilihat pada subbab \ref{sec:analisis_fitur_aplikasi}. \textit{Output} dari program ini berupa status pada terminal dan \textit{file} hasil animasi bertipe GIF.  
 
-\begin{lstlisting}[caption={Status pesan yang akan muncul pada terminal saat program berhasil membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_berhasil},language=plaintext]
+\begin{lstlisting}[caption={Status pesan yang muncul pada terminal saat program berhasil membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_berhasil},language=plaintext]
 Animasi timelapse berhasil dibuat
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Status pesan yang akan muncul pada terminal saat program gagal membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_gagal},language=plaintext]
+\begin{lstlisting}[caption={Status pesan yang muncul pada terminal saat program gagal membangkitkan animasi \textit{timelapse}.},label={lst:status_pesan_gagal},language=plaintext]
 Animasi timelapse gagal dibuat
 <ERROR MESSAGE>
 \end{lstlisting}
 
-Listing \ref{lst:status_pesan_berhasil} menunjukkan status yang akan ditampilkan pada terminal saat program berhasil membangkitkan animasi \textit{timelapse}. Listing \ref{lst:status_pesan_gagal} menunjukkan status yang akan ditampilkan pada terminal saat program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris pertama menunjukkan bahwa program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris kedua menyatakan \textit{error message} dari program. Berikut ini adalah \textit{error message} yang akan ditampilkan saat \textit{user} memasukkan \textit{input} yang tidak valid:
+Listing \ref{lst:status_pesan_berhasil} menunjukkan status yang ditampilkan pada terminal saat program berhasil membangkitkan animasi \textit{timelapse}. Listing \ref{lst:status_pesan_gagal} menunjukkan status yang ditampilkan pada terminal saat program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris pertama menunjukkan bahwa program gagal membangkitkan animasi \textit{timelapse}. Pada Listing \ref{lst:status_pesan_gagal}, baris kedua menyatakan \textit{error message} dari program. Berikut ini adalah \textit{error message} yang ditampilkan saat \textit{user} memasukkan \textit{input} yang tidak valid:
 \begin{itemize}
-\item \texttt{Path proyek tidak valid}\\
-Pesan ini muncul jika \textit{path} pada argumen \textit{option} \texttt{project-path} tidak valid.
-\item \texttt{Jumlah url yang akan dicapture maksimal 4}\\
+\item \texttt{Path repositori tidak valid}\\
+Pesan ini muncul jika \textit{path} repositori tidak valid.
+\item \texttt{Jumlah url yang dicapture maksimal 4}\\
 Pesan ini muncul jika jumlah argumen pada \textit{option} \texttt{capture-url} lebih dari 4.
 \item \texttt{Seconds per commit harus lebih besar dari 0}\\
 Pesan ini muncul jika argumen dari \texttt{seconds-per-commit} bernilai lebih kecil dari 0.
@@ -169,7 +171,7 @@ Pesan ini muncul jika nilai argumen pada \textit{option} \texttt{start-commit} d
 Pesain ini muncul jika nama branch pada argumen \textit{option} \texttt{branch} tidak valid.
 \end{itemize}
 
-Rancangan \textit{output} dari hasil \textit{file} animasi \textit{timelapse} dapat dilihat pada Gambar \ref{fig:output1} sampai dengan Gambar \ref{fig:output4}. Gambar \ref{fig:output1} menunjukkan rancangan \textit{output} jika terdapat satu halaman \textit{web}. Gambar \ref{fig:output2} menunjukkan rancangan \textit{output} jika terdapat dua halaman \textit{web}. Gambar \ref{fig:output3} menunjukkan rancangan \textit{output} jika terdapat tiga halaman \textit{web}. Gambar \ref{fig:output4} menunjukkan rancangan \textit{output} jika terdapat empat halaman \textit{web}. 
+Rancangan \textit{output} dari \textit{file} hasil animasi \textit{timelapse} dapat dilihat pada Gambar \ref{fig:output1} sampai dengan Gambar \ref{fig:output4}. Gambar \ref{fig:output1} menunjukkan rancangan \textit{output} jika terdapat satu halaman \textit{web}. Gambar \ref{fig:output2} menunjukkan rancangan \textit{output} jika terdapat dua halaman \textit{web}. Gambar \ref{fig:output3} menunjukkan rancangan \textit{output} jika terdapat tiga halaman \textit{web}. Gambar \ref{fig:output4} menunjukkan rancangan \textit{output} jika terdapat empat halaman \textit{web}. 
 
 \begin{figure}[H]
 	\centering

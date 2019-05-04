@@ -9,13 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- * Kelas ini digunakan untuk mengatur browser.Operasi-operasi yang dilakukan
+ * Kelas ini digunakan untuk mengatur browser. Operasi-operasi yang dilakukan
  * terhadap browser yaitu membuka browser, mengambil screenshot, membuat window
- * browser menjadi maksimal, dan menutup browser.
- *
- * Hasil screenshot disimpan dalam bentuk List of File. Variabel driver
- * merupakan suatu representasi dari browser. Kelas ini dapat memiliki maksimal
- * empat browser.
+ * browser menjadi maksimal, dan menutup browser. Hasil screenshot disimpan dalam bentuk List of File.  
  *
  * @author Billy Adiwijaya
  */
@@ -88,7 +84,7 @@ public class BrowserController {
     }
 
     /**
-     * Method ini berfungsi untuk mengembalikan hasil screenshot.
+     * Method ini berfungsi untuk mendapatkan hasil screenshot.
      *
      * @return hasil screenshot berupa List of File.
      */

@@ -28,7 +28,7 @@ public class Main {
             if(properties.getProperty("branch")!=null){
                 branch=properties.getProperty("branch");
             }
-            vcs = new VCS(properties.getProperty("project-path"),branch);
+            vcs = new VCS(properties.getProperty("path"),branch);
             if (properties.getProperty("seconds-per-commit") != null) {
                 if (Double.parseDouble(properties.getProperty("seconds-per-commit")) <= 0) {
                     throw new Exception("Seconds per commit harus lebih besar dari 0");

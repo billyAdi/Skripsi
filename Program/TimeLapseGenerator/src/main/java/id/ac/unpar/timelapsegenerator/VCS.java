@@ -14,7 +14,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 /**
- * Kelas ini berfungsi untuk berinteraksi pada proyek perangkat lunak berbasis
+ * Kelas ini berfungsi untuk berinteraksi dengan repositori perangkat lunak berbasis
  * web yang terekam oleh Git.
  *
  * @author Billy Adiwijaya
@@ -26,13 +26,13 @@ public class VCS {
 
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
-     * dan mendapatkan seluruh histori commit proyek perangkat lunak berbasis
+     * dan mendapatkan seluruh histori commit repositori perangkat lunak berbasis
      * web pada branch tertentu. Dimana branch tersebut diambil dari parameter
      * constructor.
      *
-     * @param path merupakah path dari proyek perangkat lunak berbasis web.
+     * @param path merupakah path dari repositori perangkat lunak berbasis web.
      * @param branch nama branch yang digunakan untuk membangkitkan animasi.
-     * @throws IOException jika path proyek tidak valid atau repositori tidak
+     * @throws IOException jika path repositori tidak valid atau repositori tidak
      * bisa diakses.
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Log.
@@ -41,7 +41,7 @@ public class VCS {
     public VCS(String path, String branch) throws IOException, GitAPIException, Exception {
         Repository repository = new FileRepository(path);
         if (repository.getRef("HEAD") == null) {
-            throw new IOException("Path proyek tidak valid");
+            throw new IOException("Path repositori tidak valid");
         }
         this.git = new Git(repository);
         List<Ref> refs = git.branchList().setListMode(ListBranchCommand.ListMode.ALL).call();
@@ -77,7 +77,7 @@ public class VCS {
     }
 
     /**
-     * Berfungsi untuk melakukan checkout ke commit terakhir.
+     * Berfungsi untuk melakukan checkout ke commit terakhir yang ada di branch master.
      *
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Checkout.
@@ -88,7 +88,7 @@ public class VCS {
 
     /**
      * Berfungsi untuk melakukan operasi Git Reset. Operasi ini menghapus
-     * perubahan pada working tree dan staging area di commit tertentu.
+     * perubahan pada working directory dan staging area di commit tertentu.
      *
      * @throws GitAPIException jika terjadi masalah saat melakukan operasi Git
      * Reset.
@@ -109,7 +109,7 @@ public class VCS {
     /**
      * Berfungsi untuk mendapatkan index dari variabel commitID.
      *
-     * @param commitID merupakan Commit ID yang akan dicari indeksnya.
+     * @param commitID merupakan commit ID yang dicari indeksnya.
      * @return indeks dari variabel commitIDs.
      */
     public int getCommitIndex(String commitID) {

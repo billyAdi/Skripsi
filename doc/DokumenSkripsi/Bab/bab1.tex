@@ -4,7 +4,7 @@
    
 \section{Latar Belakang}
 \label{sec:label}
-Git merupakan perangkat lunak \textit{Version Control Systems}\cite{chacon2014pro}.\textit{Version Control} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu. Perubahan yang terjadi pada repositori dicatat oleh Git dalam bentuk histori \textit{commit}. Setiap \textit{commit} mengandung informasi mengenai perubahan yang terjadi pada repositori, waktu perubahan, dan orang yang melakukan perubahan. \textit{Database} pada \textit{git} tidak bersifat terpusat, melainkan terdistribusi. Setiap orang yang terlibat mempunyai \textit{database} lokal pada masing-masing komputer, sehingga pengelolaan perangkat lunak dapat dilakukan secara \textit{online} dan \textit{offline}.
+Git merupakan perangkat lunak \textit{Version Control Systems}\cite{chacon2014pro}.\textit{Version Control} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu. Perubahan yang terjadi pada repositori dicatat oleh Git dalam bentuk \textit{commit history}. Setiap \textit{commit} mengandung informasi mengenai perubahan yang terjadi pada repositori, waktu perubahan, dan orang yang melakukan perubahan. \textit{Database} pada \textit{git} tidak bersifat terpusat, melainkan terdistribusi. Setiap orang yang terlibat mempunyai \textit{database} lokal pada masing-masing komputer, sehingga pengelolaan perangkat lunak dapat dilakukan secara \textit{online} dan \textit{offline}.
 
 JGit adalah \textit{library} Java murni yang mengimplementasikan Git \textit{version control systems}\cite{JGit}. JGit dikembangkan oleh Eclipse Foundation. JGit bersifat \textit{open source}. Dengan menggunakan JGit, operasi-operasi dalam Git dapat diakses melalui program Java. 
 
@@ -12,10 +12,10 @@ Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatis
 
 %Apache Commons CLI menyediakan API untuk melakukan \textit{parsing} argumen Command Line yang dikirimkan ke program\cite{Apache_Commons_CLI}. Selain itu \textit{library} ini juga dapat mendefinisikan Command Line Option yang terdapat pada program. Command Line Option dapat digunakan untuk mengkonfigurasi program.
 
-Dengan adanya histori \textit{commit} pada Git, pengembangan suatu proyek perangkat lunak dapat dipantau. 
+Dengan adanya \textit{commit history} pada Git, pengembangan suatu proyek perangkat lunak dapat dipantau. 
 \textit{Programmer} bisa belajar dari proses pengembangan perangkat lunak pada \textit{commit} sebelumnya dan bisa membuat pengembangan perangkat lunak menjadi lebih efisien. Akan tetapi, untuk perangkat lunak yang memiliki banyak \textit{commit}, pemantauan progres dapat memakan waktu yang lama. Karena itu proses pengembangan perangkat lunak perlu divisualisasikan. 
   
-Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang dibuat animasinya adalah halaman-halaman  \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan antarmuka terminal/konsol. Masukan perangkat lunak diambil dari argumen Command Line. Perangkat lunak dibuat menggunakan bantuan \textit{library} JGit, dan Selenium WebDriver. \textit{Output} yang dihasilkan dari program ini adalah \textit{file} hasil animasi yang bertipe GIF.
+Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang dibuat animasinya adalah halaman-halaman  \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan antarmuka terminal/konsol. Masukan perangkat lunak diambil dari argumen \textit{Command Line}. Perangkat lunak dibuat menggunakan bantuan \textit{library} JGit dan Selenium WebDriver. \textit{Output} yang dihasilkan dari program ini adalah \textit{file} hasil animasi yang bertipe GIF.
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}

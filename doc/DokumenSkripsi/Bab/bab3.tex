@@ -26,8 +26,8 @@ Pada bab ini dijelaskan mengenai analisis aplikasi sejenis, analisis penggunaan 
 
 \section{Analisis Aplikasi Sejenis}
 \label{sec:analisis_aplikasi_sejenis}
-Saat skripsi ini dibuat, aplikasi sejenis yang digunakan untuk membangkitkan animasi adalah Gource.  
-Repositori perangkat lunak ditampilkan oleh Gource sebagai animasi pohon, dimana pusatnya adalah \textit{root directory} dari repositori perangkat lunak\cite{Gource}. Direktori ditampilkan sebagai \textit{branch}, sedangkan \textit{file} ditampilkan sebagai \textit{leaf}. Developer dapat terlihat di \textit{working directory} pada saat mereka berkontribusi untuk repositori.
+Aplikasi sejenis yang digunakan untuk membangkitkan animasi adalah Gource.  
+Repositori perangkat lunak ditampilkan oleh Gource sebagai animasi pohon dimana pusatnya adalah \textit{root directory} dari repositori perangkat lunak\cite{Gource}. Direktori ditampilkan sebagai \textit{branch}, sedangkan \textit{file} ditampilkan sebagai \textit{leaf}. Developer dapat terlihat di \textit{working directory} pada saat mereka berkontribusi untuk repositori.
 
 \begin{figure}[H]
 	\centering
@@ -51,7 +51,7 @@ Opsi ini berfungsi untuk mengatur mode kamera pada Gource. Parameter dari opsi i
 Opsi ini berfungsi untuk mengatur \textit{path} dari repositori yang akan dibuat animasinya. Opsi dari parameter ini adalah \textit{path} dari direktori.
 
 \item \texttt{gource --start-date <YYYY-MM-DD hh:mm:ss +tz> --stop-date <YYYY-MM-DD hh:mm:ss +tz>}\\
-Opsi ini berfungsi untuk mengatur periode waktu dalam menampilkan animasi. Parameter dari opsi ini adalah waktu awal dan waktu akhir dalam format "YYYY-MM-DD hh:mm:ss +tz". Dimana YYYY adalah tahun, MM adalah bulan, DD adalah tanggal, hh adalah jam, mm adalah menit, ss adalah detik, dan +tz adalah zona waktu. Parameter jam, menit, detik, dan zona waktu bersifat opsional.    
+Opsi ini berfungsi untuk mengatur periode waktu dalam menampilkan animasi. Parameter dari opsi ini adalah waktu awal dan waktu akhir dalam format "YYYY-MM-DD hh:mm:ss +tz". YYYY adalah tahun, MM adalah bulan, DD adalah tanggal, hh adalah jam, mm adalah menit, ss adalah detik, dan +tz adalah zona waktu. Parameter jam, menit, detik, dan zona waktu bersifat opsional.    
 
 \item \texttt{gource --bloom-multiplier <FLOAT> }\\
 Opsi ini berfungsi untuk mengatur radius dari efek \textit{bloom}. Parameter dari opsi ini adalah radius dalam format bilangan riil.
@@ -84,7 +84,7 @@ Opsi ini berfungsi untuk memasukkan logo. Parameter dari opsi ini adalah nama \t
 Opsi ini berfungsi untuk mengatur posisi dari logo. Parameter dari opsi ini adalah posisi x dan posisi y dari logo. 
 
 \item \texttt{gource --title <TITLE>}\\
-Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri bawah layar. 
+Opsi ini berfungsi untuk memberi judul. Judul tersebut ditampilkan pada pojok kiri bawah layar. 
 
 \item \texttt{gource --output-framerate <FPS>}\\
 Opsi ini berfungsi untuk mengatur jumlah \textit{frame} per detik pada video animasi. Parameter dari opsi ini adalah jumlah \textit{frame} per detik.
@@ -115,20 +115,20 @@ Pada subbab ini dijelaskan mengenai analisis penggunaan JGit dan Selenium WebDri
 
 \subsection{Analisis Penggunaan JGit}
 \label{subsec:analisis_jgit}
-JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Dimana interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan pada program dalam skripsi ini. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
+JGit dapat digunakan untuk berinteraksi dengan repositori yang terekam oleh Git. Interaksi ini dapat dilakukan melalui program java. Pada analisis ini dibahas kelas-kelas pada \textit{library} JGit yang digunakan pada program dalam skripsi ini. Kelas-kelas yang dipakai yaitu Git, Repository, FileRepository, dan RevCommit.
 
-Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. Dimana \textit{constructor} FileRepository menerima parameter berupa alamat dari direktori Git. 
+Untuk dapat berinteraksi dengan suatu repositori Git diperlukan kelas Repository dan Git. Kelas Repository dan FileRepository merepresentasikan suatu repositori Git. Kelas FileRepository merupakan turunan dari kelas Repository. Operasi-operasi pada Git dapat dilakukan dengan menggunakan kelas Git. \textit{Constructor} dari kelas Git menerima parameter bertipe Repository. Repository bersifat abstrak, karena itu tidak bisa diinisialisasi secara langsung. Repository dapat diinisialisasi menggunakan \textit{object} yang bertipe FileRepository. \textit{Constructor} FileRepository menerima parameter berupa alamat dari direktori Git. 
 
-Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, bisa didapatkan \textit{object} bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, \textit{method} call() dipanggil untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif, dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika histori seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} menunjuk ke Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} menunjuk ke BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2, dan commit1. Operasi Git Log ini dipakai oleh program dalam skripsi ini untuk mendapatkan seluruh histori \textit{commit} dari repositori perangkat lunak berbasis \textit{web}.
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Log. Dari object bertipe Git, bisa didapatkan \textit{object} bertipe LogCommand dengan memanggil \textit{method} log(). Setelah itu, \textit{method} call() dipanggil untuk melakukan operasi Git Log. Setelah operasi Git Log dijalankan, akan didapatkan seluruh \textit{commit} pada \textit{branch} yang sedang aktif dimana seluruh \textit{commit} tersebut berupa \textit{object} yang bertipe Iterable<RevCommit>. Jika \textit{commit history} seperti pada Gambar \ref{fig:DAG} dan saat ini \textit{HEAD} menunjuk ke Master, Iterable<RevCommit> akan berisi commit4, commit3, commit2, dan commit1. Jika saat ini \textit{HEAD} menunjuk ke BRANCH maka Iterable<RevCommit> akan berisi commit6, commit5, commit2, dan commit1. Operasi Git Log ini dipakai oleh program dalam skripsi ini untuk mendapatkan seluruh \textit{commit history} dari repositori perangkat lunak berbasis \textit{web}.
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{Gambar/DAG.png}
-	\caption{Histori \textit{commit} direpresentasikan sebagai Directed Acyclic Graph.}
+	\caption{\textit{Commit history} direpresentasikan sebagai Directed Acyclic Graph.}
 	\label{fig:DAG}
 \end{figure}
 
-Dibutuhkan beberapa langkah untuk melakukan operasi Git Checkout. Dari object bertipe Git, bisa  didapatkan \textit{object} bertipe CheckoutCommand dengan memanggil \textit{method} checkout(). Setelah itu, \textit{method} setName() dipanggil dengan parameter berupa \textit{commit ID}. Kemudian \textit{method} call() dipanggil untuk menjalankan operasi Git Checkout. Setelah operasi Git Checkout dijalankan, \textit{working directory} akan diperbarui sesuai dengan \textit{state} pada \textit{commit} tertentu. Operasi \textit{checkout} ini digunakan oleh program dalam skripsi ini untuk menelusuri histori \textit{commit} dan mendapatkan halaman \textit{web} dari repositori perangkat lunak berbasis \textit{web}.    
+Dibutuhkan beberapa langkah untuk melakukan operasi Git Checkout. Dari object bertipe Git, bisa  didapatkan \textit{object} bertipe CheckoutCommand dengan memanggil \textit{method} checkout(). Setelah itu, \textit{method} setName() dipanggil dengan parameter berupa \textit{commit ID}. Kemudian \textit{method} call() dipanggil untuk menjalankan operasi Git Checkout. Setelah operasi Git Checkout dijalankan, \textit{working directory} akan diperbarui sesuai dengan \textit{state} pada \textit{commit} tertentu. Operasi \textit{checkout} ini digunakan oleh program dalam skripsi ini untuk menelusuri \textit{commit history} dan mendapatkan halaman \textit{web} dari repositori perangkat lunak berbasis \textit{web}.    
 
 
 \subsection{Analisis Penggunaan Selenium WebDriver}
@@ -156,7 +156,7 @@ Tipe ini dipilih karena memudahkan kelas ImageIO\footnote{https://docs.oracle.co
 \label{sec:analisis_fitur_aplikasi}
 Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse}
 dari pengembangan proyek perangkat lunak berbasis web. Yang dibuat animasinya adalah
-halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program menerima masukan dari argumen Command Line. Konfigurasi program diatur melalui Command Line Option.
+halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai empat halaman, tergantung pada masukan dari \textit{user}. \textit{Output} dari program adalah \textit{file} hasil animasi yang bertipe GIF. Program menerima masukan dari argumen \textit{command line}. Konfigurasi program diatur melalui Command Line Option.
  
 Berikut ini adalah \textit{option} yang terdapat pada program:
 \begin{enumerate}
@@ -167,17 +167,17 @@ Opsi ini berfungsi untuk mengatur \textit{path} dari repositori perangkat lunak 
 Opsi ini berfungsi untuk menjalankan \textit{terminal command}. \textit{Terminal command} ini dijalankan sebelum mengambil \textit{screenshot}. Parameter dari opsi ini adalah \textit{terminal command} dalam bentuk \textit{string} dan harus diapit dengan tanda petik ganda. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program tidak menjalankan \textit{terminal command}.
 
 \item \texttt{-capture-url <URL 1>[, URL 2[, URL 3[, URL 4]]]}\\
-Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web}, dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
+Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web} dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
 
 \item \texttt{-seconds-per-commit <SECONDS>}\\
-Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil, dimana nilainya lebih besar dari nol dan kurang dari 656. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, nilai defaultnya adalah 1 detik.
+Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil dimana nilainya lebih besar dari nol dan kurang dari 656. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, nilai defaultnya adalah 1 detik.
 
 \item \texttt{-title <TITLE>}\\
-Opsi ini berfungsi untuk memberi judul. Dimana judul tersebut ditampilkan pada pojok kiri
+Opsi ini berfungsi untuk memberi judul. Judul tersebut ditampilkan pada pojok kiri
 bawah layar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak ditampilkan.  
 
 \item \texttt{-logo <IMAGE>}\\
-Opsi ini berfungsi untuk memasukkan logo. Dimana logo tersebut ditampilkan pada pojok kanan
+Opsi ini berfungsi untuk memasukkan logo. Logo tersebut ditampilkan pada pojok kanan
 bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Format gambar yang dapat diterima antara lain JPG, PNG, GIF dan, BMP. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka logo tidak ditampilkan.
 
 %\item \texttt{-start-commit <COMMIT-ID> -stop-commit <COMMIT-ID>}\\
@@ -185,19 +185,20 @@ bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Format
 %\end{enumerate}
 
 \item \texttt{-start-commit <COMMIT-ID>}\\
-Opsi ini berfungsi untuk mengatur \textit{commit} awal untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} awal, dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi dimulai dari \textit{commit} paling awal.
+Opsi ini berfungsi untuk mengatur \textit{commit} awal untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} awal dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi dimulai dari \textit{commit} paling awal.
 \item \texttt{-stop-commit <COMMIT-ID>}\\
-Opsi ini berfungsi untuk mengatur \textit{commit} akhir untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi sampai dengan \textit{commit} paling akhir.
+Opsi ini berfungsi untuk mengatur \textit{commit} akhir untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} akhir dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi sampai dengan \textit{commit} paling akhir.
 
 \item \texttt{-branch <BRANCH>}\\
 Opsi ini berfungsi untuk mengatur \textit{branch} dari repositori perangkat lunak berbasis \textit{web} yang akan dibangkitkan animasinya. Parameter dari opsi ini adalah nama dari \textit{branch}. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi pada \textit{branch} master.
 \end{enumerate}
 \ \\
-Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture}, \texttt{-capture-url}, dan \texttt{-branch} tidak mengacu pada Gource. Ketiga opsi tersebut secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web}, dimana halaman \textit{web} tersebut diambil dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file} pada suatu repositori.            
+Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture}, \texttt{-capture-url}, dan \texttt{-branch} tidak mengacu pada Gource. Ketiga opsi tersebut secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web} dimana halaman \textit{web} tersebut diambil dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file} pada suatu repositori.            
   
  
 Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
 Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel_sc_animasi}.
+
 
 
 \begin{figure}[H]
@@ -206,7 +207,8 @@ Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel
 	\caption{\textit{Use case diagram} perangkat lunak.}
 	\label{fig:uc}
 \end{figure}
-\begin{table}[]
+
+\begin{table}[h]
     \centering
     \begin{tabular}{|p{3cm}|p{10cm}|}
     \hline
@@ -221,9 +223,9 @@ Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel
     \hline
         Skenario & 
         \begin{enumerate}
-        \item Sistem membaca \textit{input} dari argumen Command Line.
-            \item Sistem menelusuri histori pengembangan perangkat lunak berbasis \textit{web} dengan bantuan
-JGit. Saat menelusuri histori pengembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman \textit{web} menggunakan SeleniumWebDriver.
+        \item Sistem membaca \textit{input} dari argumen \textit{command line}.
+            \item Sistem menelusuri sejarah pengembangan perangkat lunak berbasis \textit{web} dengan bantuan
+JGit. Saat menelusuri sejarah pengembangan perangkat lunak, sistem mengambil \textit{screenshot} dari halaman \textit{web} menggunakan SeleniumWebDriver.
             \item Sistem menggabungkan \textit{screenshot} menjadi satu file bertipe GIF.
         \end{enumerate}\\
     \hline
@@ -236,12 +238,12 @@ JGit. Saat menelusuri histori pengembangan perangkat lunak, sistem mengambil \te
 %\subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
 %\label{subsec:langkah_animasi}
 %Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab \ref{subsec:analisis_selenium}, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. 
-\ \\
+
 
 Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
 \begin{enumerate}
-\item Program membaca argumen Command Line menggunakan Apache Commons CLI.
-\item Program mendapatkan seluruh histori \textit{commit} dari repositori perangkat lunak berbasis web pada  menggunakan JGit. Jika terdapat \textit{option} \texttt{-branch}, program mendapatkan histori \textit{commit} pada \textit{branch} yang terdapat di argumen \textit{option} \texttt{-branch}. Jika tidak terdapat \textit{option} \texttt{-branch}, program mendapatkan seluruh histori \textit{commit} pada \textit{branch} master. 
+\item Program membaca argumen \textit{command line} menggunakan Apache Commons CLI.
+\item Program mendapatkan seluruh \textit{commit history} dari repositori perangkat lunak berbasis web pada  menggunakan JGit. Jika terdapat \textit{option} \texttt{-branch}, program mendapatkan \textit{commit history} pada \textit{branch} yang terdapat di argumen \textit{option} \texttt{-branch}. Jika tidak terdapat \textit{option} \texttt{-branch}, program mendapatkan seluruh \textit{commit history} pada \textit{branch} master. 
 \item Program membuka semua \textit{browser} menggunakan Selenium WebDriver. Jumlah \textit{browser} bergantung pada jumlah argumen dari \textit{option} \texttt{-capture-url}.
 \item Program melakukan \textit{checkout} dalam suatu rentang \textit{commit} tertentu. Jika tidak terdapat \textit{option} \texttt{-start-commit} dan \textit{option} \texttt{-stop-commit}, dilakukan \textit{checkout} ke semua \textit{commit}.
 \item Program melakukan \textit{checkout} ke \textit{commit} awal dari rentang \textit{commit}. 
@@ -286,9 +288,9 @@ Apache HTTP Server digunakan sebagai \textit{web server} lokal. MySQL Server dig
 %\end{enumerate}
 %\ \\
 
-Repositori Piktora memiliki 58 \textit{commit}. Listing \ref{lst:all_commit_piktora} menunjukkan histori \textit{commit} pada repositori Piktora, histori didapatkan dengan menjalankan operasi Git Log pada terminal. Setelah dilakukan pengujian terdapat beberapa masalah. Masalah tersebut yaitu perbedaan letak \textit{file}, migrasi \textit{database}, dan konfigurasi \textit{database}. Masalah-masalah tersebut dibahas pada subbab \ref{subsec:perbedaan_letak_file} sampai \ref{subsec:migrasi_database}.
+Repositori Piktora memiliki 58 \textit{commit}. Listing \ref{lst:all_commit_piktora} menunjukkan \textit{commit history} pada repositori Piktora, \textit{commit history} didapatkan dengan menjalankan operasi Git Log pada terminal. Setelah dilakukan pengujian terdapat beberapa masalah. Masalah tersebut yaitu perbedaan letak \textit{file}, migrasi \textit{database}, dan konfigurasi \textit{database}. Masalah-masalah tersebut dibahas pada subbab \ref{subsec:perbedaan_letak_file} sampai \ref{subsec:migrasi_database}.
 
-\begin{lstlisting}[caption={Histori \textit{commit} pada proyek Piktora},label={lst:all_commit_piktora},language=plaintext]
+\begin{lstlisting}[caption={\textit{Commit history} pada proyek Piktora},label={lst:all_commit_piktora},language=plaintext]
 315d374 -  Oct 31 16:52:46 2016 :  Basic CI files + htaccess & webconfig + database.php ignore
 
 27ce3d4 -  Nov 5 13:12:43 2016 :  setup environment for piktora
@@ -370,7 +372,7 @@ f1ea410 - Thu Jan 5 15:23:32 2017 : fix instagram link
 Pada \textit{commit} 315d374 (31 Oktober 2016) s.d. bbd82c2 (6 Desember 2016) halaman \textit{web} proyek Piktora tidak bisa dibuka. Hal ini disebabkan oleh perbedaan letak \textit{file} "index.php". Pada \textit{commit} 315d374 (31 Oktober 2016) s.d. bbd82c2 (6 Desember 2016), \textit{file} "index.php" berada pada \textit{folder} "www", sedangkan pada \textit{commit} f8c64fc (6 Desember 2016) s.d. 89000be (12 Januari 2018) \textit{file} "index.php" berada pada \textit{folder} "httpdocs". Akibat adanya perbedaan letak \textit{file} tersebut, maka konfigurasi dari Apache harus diubah.
 
 
-Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} PHP ini mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian mengecek \textit{directory root} Apache pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak mengubah isi \textit{file} "httpd.conf". Jika \textit{root directory} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{root directory} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada Apache. Setelah itu \textit{script} melakukan migrasi basis data.   
+Solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. \textit{Terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} PHP ini mengecek letak \textit{file} "index.php" pada \textit{folder} "www" dan "httpdocs". \textit{Script} kemudian mengecek \textit{directory root} Apache pada \textit{file} "httpd.conf".  Jika \textit{directory root} sudah mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} tidak mengubah isi \textit{file} "httpd.conf". Jika \textit{root directory} tidak mengarah ke \textit{folder} tempat "index.php" berada, maka \textit{script} akan mengubah \textit{root directory} pada \textit{file} "httpd.conf" dan melakukan \textit{restart} pada Apache.   
 
 
 \subsection{Permasalahan Konfigurasi \textit{Database}}
@@ -404,14 +406,14 @@ $db['default'] = array(
 );
 \end{lstlisting}
 
-Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc (6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b (6 Desember 2016) s.d. 57f5ea4 (15 Desember 2016) dan f1ea410 (5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan phpMyAdmin berbeda, halaman \textit{website} pada \textit{commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) tidak bisa dibuka. 
+Listing \ref{lst:piktora_commit_f8c64fc} merupakan isi dari \textit{file} "database.php" pada \textit{commit} f8c64fc (6 Desember 2016). Dapat dilihat bahwa \textit{password} yang terdapat pada \textit{file} "database.php" adalah \texttt{dmHx64\%6}. \textit{Commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) menggunakan \textit{password} \texttt{dmHx64\%6}, sedangkan \textit{commit} 627e65b (6 Desember 2016) s.d. 57f5ea4 (15 Desember 2016) dan f1ea410 (5 Januari 2017) menggunakan \textit{password} \texttt{piktora}. Karena konfigurasi \textit{password} pada \textit{file} "database.php" dan MySQL Server berbeda, halaman \textit{website} pada \textit{commit} f8c64fc (6 Desember 2016) s.d. ace1988 (6 Desember 2016) tidak bisa dibuka. 
 
-Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} mengubah \textit{password} menjadi \texttt{piktora}. 
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. \textit{Terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini mengecek \textit{password} yang terdapat pada \textit{file} "database.php". Jika tidak ditemukan \textit{password} atau ditemukan \textit{password} berupa \texttt{piktora}, maka \textit{script} tidak mengubah isi \textit{file} "database.php". Jika ditemukan \textit{password} berupa \texttt{dmHx64\%6}, maka \textit{script} mengubah \textit{password} menjadi \texttt{piktora}. 
 
 \subsection{Permasalahan Migrasi \textit{Database}}
 \label{subsec:migrasi_database}
 
-Pada \textit{commit} 3d79d0a (27 Nov 2016), terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} a19e7f2 (27 November 2016), terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 3d79d0a (27 Nov 2016) terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} a19e7f2(27 November 2016) \textit{file} "20161122150001\_InitialData.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 3d79d0a (27 Nov 2016), \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 3d79d0a (27 Nov 2016). Isi \textit{file} "20161122150001\_InitialData.php" pada \textit{commit} a19e7f2 (27 November 2016) dan 3d79d0a (27 Nov 2016) berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
+Pada \textit{commit} 0fcd958 (28 November 2016), terjadi \textit{error} saat melakukan migrasi database. Pada \textit{commit} 3d79d0a (27 November 2016), terdapat satu \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php". Pada \textit{commit} 0fcd958 (28 November 2016) terdapat dua \textit{file} untuk melakukan migrasi yaitu "20161122150000\_Structure.php" dan "20161122150001\_InitialData.php". Pada \textit{commit} 3d79d0a (27 November 2016) \textit{file} "20161122150000\_Structure.php" dijalankan saat melakukan migrasi. Versi migrasi \textit{database} menjadi "20161122150000". Pada \textit{commit} 0fcd958 (28 November 2016), \textit{file} "20161122150000\_Structure.php" tidak dijalankan karena dianggap sama dengan versi migrasi \textit{database} saat ini. Hanya \textit{file} "20161122150001\_InitialData.php" yang dijalankan pada \textit{commit} 0fcd958 (28 November 2016). Isi \textit{file} "20161122150000\_Structure.php" pada \textit{commit} 3d79d0a (27 November 2016) dan 0fcd958 (28 November 2016) berbeda. Hal ini yang menyebabkan terjadinya \textit{error} saat melakukan migrasi database.  
 
-Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. Dimana \textit{terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini melakukan dua pekerjaan. Pertama, \textit{script} menghapus \textit{database} piktora. Setelah itu, \textit{script} membuat dan melakukan migrasi basis data. 
+Sama seperti subbab \ref{subsec:perbedaan_letak_file}, solusi untuk mengatasi masalah ini adalah dengan menambahkan \textit{option} yang menjalankan \textit{terminal command}. \textit{Terminal command} ini berisi perintah untuk menjalankan \textit{script} PHP. \textit{Script} ini melakukan dua pekerjaan. Pertama, \textit{script} menghapus \textit{database} piktora. Setelah itu, \textit{script} membuat dan melakukan migrasi basis data. 
  

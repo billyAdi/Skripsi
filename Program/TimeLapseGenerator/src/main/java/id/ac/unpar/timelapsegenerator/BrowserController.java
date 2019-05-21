@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /**
  * Kelas ini digunakan untuk mengatur browser. Operasi-operasi yang dilakukan
  * terhadap browser yaitu membuka browser, mengambil screenshot, membuat window
- * browser menjadi maksimal, dan menutup browser. Hasil screenshot disimpan dalam bentuk List of File.  
+ * browser menjadi seukuran layar, dan menutup browser. Hasil screenshot disimpan dalam bentuk List of File.  
  *
  * @author Billy Adiwijaya
  */
@@ -35,7 +35,7 @@ public class BrowserController {
 
     /**
      * Method ini berfungsi untuk membuka semua browser, kemudian mengatur
-     * ukuran window browser menjadi maksimal.
+     * ukuran window browser menjadi seukuran layar.
      */
     public void open() {
         for (int i = 0; i < numberOfBrowser; i++) {

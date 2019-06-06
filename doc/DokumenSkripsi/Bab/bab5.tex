@@ -205,7 +205,8 @@ Pengujian ini dilakukan dengan tujuan untuk mengetahui apakah Command Line Optio
 Pengujian eksperimental dilakukan dengan menjalankan program dengan berbagai WebDriver dan situs \textit{web}. 
 WebDriver yang digunakan untuk pengujian ini yaitu FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver. Situs \textit{web} yang digunakan untuk menguji progam yaitu Bootstrap\footnote{https://getbootstrap.com/}, Netflix Open Source Software Center\footnote{https://netflix.github.io/}, IBM Open Source\footnote{https://ibm.github.io/}, React\footnote{https://reactjs.org/}, dan Yelp Open Source\footnote{https://yelp.github.io/}. 
 
-Seperti yang sudah dijelaskan pada subbab \ref{sec:selenium_webdriver}, FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver merupakan implementasi dari WebDriver yang mengontrol \textit{browser} yang mengontrol \textit{browser} tertentu. FirefoxDriver mengontrol Firefox \textit{browser}, OperaDriver mengontrol Opera \textit{browser}, dst. Tujuan dari digunakannya berbagai macam WebDriver ini adalah untuk menguji program dalam membangkitkan animasi menggunakan berbagai macam \textit{browser}.
+Seperti yang sudah dijelaskan pada subbab \ref{sec:selenium_webdriver}, FirefoxDriver, EdgeDriver, OperaDriver, dan InternetExplorerDriver merupakan implementasi dari WebDriver yang mengontrol \textit{browser} yang mengontrol \textit{browser} tertentu. FirefoxDriver mengontrol Firefox \textit{browser}, OperaDriver mengontrol Opera \textit{browser}, dst. Tujuan dari digunakannya berbagai macam WebDriver ini adalah untuk menguji apakah program dapat membangkitkan animasi \textit{timelapse} pada berbagai macam \textit{browser}.
+%dalam membangkitkan animasi menggunakan berbagai macam \textit{browser}.
 
 Pengujian menggunakan berbagai situs \textit{web} dilakukan dengan tujuan menguji program dengan berbagai situs \textit{web} yang berbeda dan memiliki jumlah \textit{commit} yang berbeda. Situs \textit{web} Bootstrap, Netflix Open Source Software Center, IBM Open Source, React, dan Yelp Open Source  dipilih karena bersifat Open Source, repositorinya tersimpan pada GitHub, dan dihosting menggunakan GitHub Pages. GitHub Pages\footnote{https://pages.github.com/} merupakan sebuah layanan \textit{hosting} situs \textit{web} untuk melakukan \textit{hosting} halaman \textit{web} secara langsung dari repositori GitHub.     
 
@@ -446,7 +447,8 @@ Hal yang menarik dari pengujian eksperimental adalah letak \textit{file} "index.
 
 Berdasarkan hasil pengujian eksperimental, didapatkan kesimpulan sebagai berikut:
 \begin{enumerate}
-\item Semakin besar jumlah \textit{commit} pada repositori semakin besar ukuran \textit{file} yang dihasilkan.
+%\item Semakin besar jumlah \textit{commit} pada repositori semakin besar ukuran \textit{file} yang dihasilkan. 
+\item \textit{File} GIF hasil animasi berukuran cukup besar. Pada situs \textit{web} Bootstrap, \textit{file} GIF hasil animasi berukuran 160 MB.
 \item Untuk repositori situs \textit{web} yang sederhana seperti Netflix Open Source Center, Bootstrap, IBM Open Source, React, dan Yelp Open Source, tidak dibutuhkan \textit{option} \texttt{-before-capture} untuk membangkitkan animasi. Untuk repositori yang memerlukan setup basis data seperti Piktora, dibutuhkan \textit{option} \texttt{-before-capture} untuk membangkitkan animasi. 
 \item Program dapat membangkitkan animasi dengan baik saat menggunakan OperaDriver, FirefoxDriver, dan InternetExplorerDriver. Saat dilakukan pengujian menggunakan EdgeDriver, tampilan dari halaman \textit{web} menjadi tidak rapih.
 \end{enumerate}

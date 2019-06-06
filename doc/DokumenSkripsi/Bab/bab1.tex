@@ -12,17 +12,20 @@ Selenium adalah seperangkat alat yang secara khusus digunakan untuk mengotomatis
 
 %Apache Commons CLI menyediakan API untuk melakukan \textit{parsing} argumen Command Line yang dikirimkan ke program\cite{Apache_Commons_CLI}. Selain itu \textit{library} ini juga dapat mendefinisikan Command Line Option yang terdapat pada program. Command Line Option dapat digunakan untuk mengkonfigurasi program.
 
-Dengan adanya \textit{commit history} pada Git, pengembangan suatu proyek perangkat lunak dapat dipantau. 
-\textit{Programmer} bisa belajar dari proses pengembangan perangkat lunak pada \textit{commit} sebelumnya dan bisa membuat pengembangan perangkat lunak menjadi lebih efisien. Akan tetapi, untuk perangkat lunak yang memiliki banyak \textit{commit}, pemantauan progres dapat memakan waktu yang lama. Karena itu proses pengembangan perangkat lunak perlu divisualisasikan. 
+%\textit{Programmer} bisa belajar dari proses pengembangan perangkat lunak pada \textit{commit} sebelumnya dan bisa membuat pengembangan perangkat lunak menjadi lebih efisien. 
+
+Dengan adanya \textit{commit history} pada Git, pengembangan suatu proyek perangkat lunak dapat dipantau. \textit{Programmer} dapat melihat kembali secara garis besar langkah-langkah yang sudah dilakukan pada \textit{commit} sebelumnya. \textit{Commit history} juga dapat digunakan untuk mengevaluasi pengembangan perangkat lunak. Akan tetapi, untuk perangkat lunak yang memiliki banyak \textit{commit}, pemantauan progres dapat memakan waktu yang lama. Karena itu proses pengembangan perangkat lunak perlu divisualisasikan. 
   
-Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang dibuat animasinya adalah halaman-halaman  \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan antarmuka terminal/konsol. Masukan perangkat lunak diambil dari argumen \textit{Command Line}. Perangkat lunak dibuat menggunakan bantuan \textit{library} JGit dan Selenium WebDriver. \textit{Output} yang dihasilkan dari program ini adalah \textit{file} hasil animasi yang bertipe GIF.
+\textit{Timelapse} berasal dari kata latin \textit{lapsus} yang bermakna "waktu yang berlalu"\cite{higgins2016time}. Secara umum \textit{timelapse} dalam fotografi menunjukkan waktu yang lebih cepat dibandingkan dengan waktu sebenarnya. \textit{Timelapse} bisa digunakan untuk mengompres waktu. Misalnya pembangunan suatu gedung dalam waktu tiga tahun bisa ditampilkan dalam bentuk \textit{timelapse} yang hanya berdurasi dua menit.   
+  
+Pada skripsi ini, dibuat sebuah perangkat lunak yang dapat membangun animasi \textit{timelapse} dari pengembangan proyek perangkat lunak berbasis \textit{web}. Yang dibuat animasinya adalah halaman-halaman  \textit{web} dari suatu perangkat lunak berbasis \textit{web} yang terekam oleh Git. Perangkat lunak ini dibangun menggunakan bahasa Java. Perangkat lunak ini menggunakan antarmuka terminal/konsol. Masukan perangkat lunak diambil dari argumen \textit{command line}. Perangkat lunak dibuat menggunakan bantuan \textit{library} JGit dan Selenium WebDriver. \textit{Output} yang dihasilkan dari program ini adalah \textit{file} hasil animasi yang bertipe GIF.
 
 \section{Rumusan Masalah}
 \label{sec:rumusan}
 Rumusan masalah dari skripsi ini adalah sebagai berikut:
 \begin{enumerate}
 	\item Bagaimana cara membangkitkan animasi \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web?
-	\item Bagaimana cara mengimplementasikan aplikasi untuk membangkitkan \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web?
+	\item Bagaimana membangun aplikasi untuk membangkitkan \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web?
 	\item Kesimpulan apa yang dapat diambil dari animasi \textit{timelapse} pada beberapa situs \textit{web} Open Source?	
 \end{enumerate}
 
@@ -31,7 +34,7 @@ Rumusan masalah dari skripsi ini adalah sebagai berikut:
 Tujuan dari skripsi ini adalah sebagai berikut:
 \begin{enumerate}
 	\item Mengetahui cara untuk membangkitkan animasi \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web.
-	\item Mengetahui cara untuk mengimplementasikan aplikasi untuk membangkitkan \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web.
+	\item Membangun aplikasi untuk membangkitkan \textit{timelapse} pada pengembangan proyek perangkat lunak berbasis web.
 	\item Mendapatkan kesimpulan dari animasi \textit{timelapse} pada beberapa situs \textit{web} Open Source.
 \end{enumerate}
 	
@@ -61,7 +64,7 @@ Metodologi penelitian yang digunakan dalam skripsi ini adalah sebagai berikut:
 Setiap bab dalam penelitian ini memiliki sistematika penulisan yang dijelaskan ke dalam poin-poin sebagai berikut:
 \begin{enumerate}
 		\item Bab 1: Pendahuluan, yaitu membahas mengenai gambaran umum penelitian ini. Berisi tentang latar belakang, rumusan masalah, tujuan, batasan masalah, metode penelitian, dan sistematika penulisan.
-		\item Bab 2: Dasar Teori, yaitu membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang teori Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
+		\item Bab 2: Dasar Teori, yaitu membahas mengenai teori-teori yang mendukung berjalannya penelitian ini. Berisi tentang teori Version Control Systems, Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
 		\item Bab 3: Analisis, yaitu membahas mengenai analisa masalah. Berisi tentang analisis aplikasi sejenis, analisis penggunaan JGit dan Selenium WebDriver untuk membangkitkan animasi \textit{timelapse}, analisis fitur aplikasi yang dibangun, dan prapengujian.
 		\item Bab 4: Perancangan, yaitu membahas mengenai perancangan yang dilakukan sebelum melakukan tahapan implementasi. Berisi tentang perancangan kelas dan perancangan antarmuka dari perangkat lunak.
 		\item Bab 5: Implementasi dan Pengujian, yaitu membahas mengenai implementasi dan pengujian aplikasi yang telah dilakukan. Berisi tentang implementasi dan hasil pengujian perangkat lunak.

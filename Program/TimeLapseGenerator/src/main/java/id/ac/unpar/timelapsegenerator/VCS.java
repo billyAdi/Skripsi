@@ -26,7 +26,7 @@ public class VCS {
 
     /**
      * Constructor dari kelas ini. Berfungsi untuk menginisialisasi variabel git
-     * dan mendapatkan seluruh histori commit repositori perangkat lunak berbasis
+     * dan mendapatkan seluruh commit history repositori perangkat lunak berbasis
      * web pada branch tertentu. Dimana branch tersebut diambil dari parameter
      * constructor.
      *

@@ -27,17 +27,14 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-Pada bab ini dibahas dasar teori yang mendukung skripsi ini. Dasar teori yang dibahas yaitu Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
+Pada bab ini dibahas dasar teori yang mendukung skripsi ini. Dasar teori yang dibahas yaitu Version Control Systems, Git, JGit, Selenium WebDriver, dan Apache Commons CLI.
 
-\section{Git}
-\label{sec:git} 
-Git merupakan perangkat lunak \textit{Version Control Systems}. Pada subbab ini, dijelaskan mengenai \textit{Version Control Systems}, cara kerja Git, Git \textit{checkout}, dan operasi-operasi dasar pada Git. Subbab ini mengacu pada \cite{chacon2014pro}.   
+\section{Version Control Systems}
+\label{sec:Version Control Systems}
+\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}. 
 
-\subsection{Version Control Systems}
-\label{subsec:vcs}
-\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}.
-
-\subsubsection{Local Version Control Systems}
+\subsection{Local Version Control Systems}
+\label{subsec:lvcs}
 Metode pengendalian versi yang biasa digunakan adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain. Namun cara tersebut rentan terhadap \textit{error}.
 Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang terdapat pada direktori B, tetapi pengguna lupa kalau dia sedang berada di direktori A, maka pengguna mengubah \textit{file} pada direktori yang salah. Untuk mengatasi masalah tersebut, dikembangkanlah \textit{Local Version Control Systems}. 
 
@@ -50,7 +47,8 @@ Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang
 
 Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada direktori lokal di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi.  
  
-\subsubsection{Centralized Version Control Systems}
+\subsection{Centralized Version Control Systems}
+\label{subsec:cvcs}
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.25]{Gambar/centralizedvcs.png}
@@ -64,7 +62,8 @@ Sistem \textit{Centralized Version Control Systems} memiliki beberapa kelebihan.
 
 Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati, maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
 
-\subsubsection{Distributed Version Control Systems}
+\subsection{Distributed Version Control Systems}
+\label{subsec:dvcs}
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.5]{Gambar/dvcs.png}
@@ -72,6 +71,51 @@ Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \te
 	\label{fig:dvcs}
 \end{figure}
 Gambar \ref{fig:dvcs} merupakan struktur dari \textit{Distributed Version Control Systems}. Dalam sebuah DVCS (seperti Git, Mercurial, Bazaar atau Darcs), klien tidak hanya melakukan \textit{checkout} untuk \textit{snapshot} terakhir setiap \textit{file}, namun klien juga memiliki salinan dari repositori tersebut. Dengan kata lain setiap klien memiliki \textit{version database local} pada komputernya. Jika server pusat mati, klien masih bisa melakukan kolaborasi dan klien manapun dapat mengirimkan kembali salinan repositori ke \textit{server}.
+
+
+\section{Git}
+\label{sec:git} 
+%Git merupakan perangkat lunak \textit{Version Control Systems}. 
+Pada subbab ini, dijelaskan mengenai cara kerja Git, Git \textit{checkout}, dan operasi-operasi dasar pada Git. Subbab ini mengacu pada \cite{chacon2014pro}.   
+
+%\subsection{Version Control Systems}
+%\label{subsec:vcs}
+%\textit{Version Control Systems} adalah sistem yang merekam perubahan pada \textit{file} atau sekumpulan \textit{file} dari waktu ke waktu.\textit{Version Control Systems} biasanya digunakan  untuk merekam file yang berisi \textit{source code program}, tetapi pada kenyataannya \textit{Version Control Systems} dapat merekam semua jenis file dalam komputer. Terdapat tiga jenis \textit{Version Control Systems}, yaitu: \textit{Local Version Control Systems}, \textit{Centralized Version Control Systems}, dan \textit{Distributed Version Control Systems}.
+
+%\subsubsection{Local Version Control Systems}
+%Metode pengendalian versi yang biasa digunakan adalah dengan cara menyalin sekumpulan \textit{file} ke direktori lain. Namun cara tersebut rentan terhadap \textit{error}.
+%Misalnya, terdapat direktori A dan B, pengguna ingin mengubah \textit{file} yang terdapat pada direktori B, tetapi pengguna lupa kalau dia sedang berada di direktori A, maka pengguna mengubah \textit{file} pada direktori yang salah. Untuk mengatasi masalah tersebut, dikembangkanlah \textit{Local Version Control Systems}. 
+
+%\begin{figure}[H]
+%	\centering
+%		\includegraphics[scale=0.25]{Gambar/localvcs.png}
+%	\caption{Local version control\cite{chacon2014pro}.}
+%	\label{fig:localvcs}
+%\end{figure}
+
+%Gambar \ref{fig:localvcs} merupakan struktur dari \textit{Local Version Control Systems}. \textit{Database local Version Control Systems} ini tersimpan pada direktori lokal di komputer. \textit{Database} ini menyimpan perubahan \textit{file} ke dalam beberapa versi.  
+ 
+%\subsubsection{Centralized Version Control Systems}
+%\begin{figure}[H]
+%	\centering
+%		\includegraphics[scale=0.25]{Gambar/centralizedvcs.png}
+%	\caption{Centralized version control\cite{chacon2014pro}.}
+%	\label{fig:cvcs}
+%\end{figure}
+
+%\textit{Local Version Control} hanya menyimpan \textit{file} pada satu komputer saja. Muncul masalah baru ketika \textit{user} ingin berkolaborasi dengan \textit{user} lain. Untuk mengatasi masalah ini dikembangkan \textit{Centralized version control}. Gambar \ref{fig:cvcs} merupakan struktur dari \textit{Centralized Version Control Systems}. Dalam \textit{Centralized Control Version Systems} terdapat sebuah \textit{server} yang menyimpan setiap versi \textit{file}, dan klien yang dapat melakukan \textit{checkout} \textit{file}.
+
+%Sistem \textit{Centralized Version Control Systems} memiliki beberapa kelebihan. Setiap \textit{user}  dapat mengetahui pekerjaan yang dilakukan oleh \textit{user} lain. Administrator dapat lebih mudah mengontrol \textit{database} \textit{Centralized Version Control Systems} dibandingkan dengan \textit{database} \textit{Local Version Control Systems} dari setiap klien.      
+
+%Sistem \textit{Centralized Version Control Systems} memiliki kelemahan. Jika \textit{server} pusat \textit{Centralized Version Control Systems} mati, maka perubahan pada \textit{file} tidak bisa disimpan. Klien juga tidak dapat melakukan kolaborasi dengan klien lain. Jika \textit{harddisk} pada server rusak, maka semua versi \textit{file} akan hilang.  
+
+%\subsubsection{Distributed Version Control Systems}
+%\begin{figure}[H]
+%		\includegraphics[scale=0.5]{Gambar/dvcs.png}
+	%\caption{Distributed version control\cite{chacon2014pro}.}
+%	\label{fig:dvcs}
+%\end{figure}
+%Gambar \ref{fig:dvcs} merupakan struktur dari \textit{Distributed Version Control Systems}. Dalam sebuah DVCS (seperti Git, Mercurial, Bazaar atau Darcs), klien tidak hanya melakukan \textit{checkout} untuk \textit{snapshot} terakhir setiap \textit{file}, namun klien juga memiliki salinan dari repositori tersebut. Dengan kata lain setiap klien memiliki \textit{version database local} pada komputernya. Jika server pusat mati, klien masih bisa melakukan kolaborasi dan klien manapun dapat mengirimkan kembali salinan repositori ke \textit{server}.
 
 \subsection{Cara Kerja Git}
 \label{subsec:cara_kerja_git}

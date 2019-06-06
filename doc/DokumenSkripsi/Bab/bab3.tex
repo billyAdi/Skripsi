@@ -161,39 +161,39 @@ halaman web dari perangkat lunak. Jumlah halaman berkisar antara satu sampai emp
 Berikut ini adalah \textit{option} yang terdapat pada program:
 \begin{enumerate}
 \item \texttt{-path <PATH>}\\
-Opsi ini berfungsi untuk mengatur \textit{path} dari repositori perangkat lunak berbasis \textit{web} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Opsi ini wajib ada.
+Opsi ini berfungsi untuk mengatur \textit{path} dari repositori perangkat lunak berbasis \textit{web} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{path} dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Opsi ini mengacu pada opsi \texttt{--path} yang terdapat pada Gource. Opsi ini wajib ada. 
 
 \item \texttt{-before-capture <TERMINAL-COMMAND>}\\
-Opsi ini berfungsi untuk menjalankan \textit{terminal command}. \textit{Terminal command} ini dijalankan sebelum mengambil \textit{screenshot}. Parameter dari opsi ini adalah \textit{terminal command} dalam bentuk \textit{string} dan harus diapit dengan tanda petik ganda. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program tidak menjalankan \textit{terminal command}.
+Opsi ini berfungsi untuk menjalankan \textit{terminal command}. \textit{Terminal command} ini dijalankan sebelum mengambil \textit{screenshot}. Parameter dari opsi ini adalah \textit{terminal command} dalam bentuk \textit{string} dan harus diapit dengan tanda petik ganda. Opsi ini secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} pada suatu repositori Git yang berisi perangkat lunak berbasis \textit{web}. Perangkat lunak berbasis \textit{web} tersebut dijalankan di komputer lokal dan terkadang membutuhkan \textit{setup} tambahan dimana \textit{setup} tersebut bisa diatur menggunakan opsi ini. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program tidak menjalankan \textit{terminal command}.
 
 \item \texttt{-capture-url <URL 1>[, URL 2[, URL 3[, URL 4]]]}\\
-Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web} dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini wajib ada.
+Opsi ini berfungsi untuk mengatur alamat \textit{url} dari halaman \textit{web} dimana dilakukan pengambilan \textit{screenshot} pada halaman ini. Jumlah halaman bisa lebih dari satu, dengan jumlah maksimal empat halaman. Parameter dari opsi ini adalah alamat \textit{url} dari halaman \textit{web}, dengan jumlah maksimal empat alamat \textit{url}. Opsi ini secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} dari kumpulan \textit{screenshot} halaman \textit{web} dimana \textit{screenshot} tersebut didapatkan dari suatu alamat \textit{url}. Opsi ini wajib ada.
 
 \item \texttt{-seconds-per-commit <SECONDS>}\\
-Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil dimana nilainya lebih besar dari nol dan kurang dari 656. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, nilai defaultnya adalah 1 detik.
+Opsi ini berfungsi untuk mengatur durasi munculnya satu \textit{commit} pada animasi. Opsi ini berfungsi juga untuk mengatur kecepatan animasi. Parameter dari opsi ini adalah durasi munculnya satu \textit{commit} dalam satuan detik. Parameter harus berupa bilangan bulat atau riil dimana nilainya lebih besar dari nol dan kurang dari 656. Opsi ini mengacu pada opsi \texttt{--seconds-per-day} yang terdapat pada Gource dengan sedikit penyesuaian. Program pada skripsi ini berfokus pada pembuatan animasi berdasarkan pada \textit{commit}, sehingga kecepatan animasinya diatur berdasarkan pada durasi kemunculan \textit{commit} .Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, nilai defaultnya adalah 1 detik.
 
 \item \texttt{-title <TITLE>}\\
 Opsi ini berfungsi untuk memberi judul. Judul tersebut ditampilkan pada pojok kiri
-bawah layar. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak ditampilkan.  
+bawah layar. Opsi ini mengacu pada opsi \texttt{--title} yang terdapat pada Gource. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka judul tidak ditampilkan.  
 
 \item \texttt{-logo <IMAGE>}\\
 Opsi ini berfungsi untuk memasukkan logo. Logo tersebut ditampilkan pada pojok kanan
-bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Format gambar yang dapat diterima antara lain JPG, PNG, GIF dan, BMP. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka logo tidak ditampilkan.
+bawah layar. Parameternya adalah \textit{path} dari \textit{file} gambar. Format gambar yang dapat diterima antara lain JPG, PNG, GIF dan, BMP. Opsi ini mengacu pada opsi \texttt{--logo} yang terdapat pada Gource. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, maka logo tidak ditampilkan.
 
 %\item \texttt{-start-commit <COMMIT-ID> -stop-commit <COMMIT-ID>}\\
 %Opsi ini berfungsi untuk mengatur rentang \textit{commit} yang akan dibuat animasinya. Parameter dari opsi ini adalah \textit{commit ID} awal dan \textit{commit ID} akhir, dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. 
 %\end{enumerate}
 
 \item \texttt{-start-commit <COMMIT-ID>}\\
-Opsi ini berfungsi untuk mengatur \textit{commit} awal untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} awal dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi dimulai dari \textit{commit} paling awal.
+Opsi ini berfungsi untuk mengatur \textit{commit} awal untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} awal dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini mengacu pada opsi \texttt{--start-date} yang terdapat pada Gource dengan sedikit penyesuaian. Program pada skripsi ini berfokus pada pembuatan animasi berdasarkan pada \textit{commit}, sehingga rentang animasi diatur dengan menggunakan rentang \textit{commit}. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi dimulai dari \textit{commit} paling awal.
 \item \texttt{-stop-commit <COMMIT-ID>}\\
-Opsi ini berfungsi untuk mengatur \textit{commit} akhir untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} akhir dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi sampai dengan \textit{commit} paling akhir.
+Opsi ini berfungsi untuk mengatur \textit{commit} akhir untuk membangkitkan animasi. Parameter dari opsi ini adalah \textit{commit ID} akhir dimana panjang \textit{commit ID} adalah tujuh sampai sepuluh karakter. Opsi ini mengacu pada opsi \texttt{--stop-date} yang terdapat pada Gource dengan sedikit penyesuaian. Program pada skripsi ini berfokus pada pembuatan animasi berdasarkan pada \textit{commit}, sehingga rentang animasi diatur dengan menggunakan rentang \textit{commit}. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi sampai dengan \textit{commit} paling akhir.
 
 \item \texttt{-branch <BRANCH>}\\
-Opsi ini berfungsi untuk mengatur \textit{branch} dari repositori perangkat lunak berbasis \textit{web} yang akan dibangkitkan animasinya. Parameter dari opsi ini adalah nama dari \textit{branch}. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi pada \textit{branch} master.
+Opsi ini berfungsi untuk mengatur \textit{branch} dari repositori perangkat lunak berbasis \textit{web} yang akan dibangkitkan animasinya. Parameter dari opsi ini adalah nama dari \textit{branch}. Opsi ini secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} pada suatu repositori Git, sedangkan Gource tidak hanya membuat visualisasi dari repositori Git tetapi juga dari VCS lainnya. Selain itu kode program pada repositori Git belum tentu berada pada \textit{branch} master, bisa saja berada pada \textit{branch} lain. Opsi ini bersifat opsional. Jika opsi ini tidak dimasukkan, program membangkitkan animasi pada \textit{branch} master.
 \end{enumerate}
 \ \\
-Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture}, \texttt{-capture-url}, dan \texttt{-branch} tidak mengacu pada Gource. Ketiga opsi tersebut secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web} dimana halaman \textit{web} tersebut diambil dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file} pada suatu repositori.            
+%Opsi \texttt{-path}, \texttt{-title}, dan \texttt{-image} mengacu pada opsi yang terdapat pada Gource. Opsi \texttt{-start-commit -stop-commit} dan \texttt{-seconds-per-commit} mengacu pada Gource, dengan sedikit penyesuaian.  Opsi \texttt{--seconds-per-day} pada Gource menyatakan durasi munculnya satu hari, sedangkan Opsi \texttt{-seconds-per-commit} menyatakan durasi munculnya satu \textit{commit}. Opsi \texttt{--start-date --stop-date} pada Gource dan opsi \texttt{-start-commit -stop-commit} mengatur periode dalam menampilkan animasi. Pada Gource, periode yang digunakan adalah rentang waktu berupa tanggal, bulan, dan tahun. Sedangkan pada opsi \texttt{-start-commit -stop-commit}, rentangnya berupa \textit{commit} ID. Opsi \texttt{-before-capture}, \texttt{-capture-url}, dan \texttt{-branch} tidak mengacu pada Gource. Ketiga opsi tersebut secara khusus dibuat karena program dalam skripsi ini membuat animasi \textit{timelapse} dari kumpulan halaman \textit{web} dimana halaman \textit{web} tersebut diambil dari repositori perangkat lunak berbasis \textit{web} yang terekam oleh Git. Sedangkan program Gource membuat animasi dari struktur \textit{folder} atau \textit{file} pada suatu repositori.            
   
  
 Program pada skripsi ini memiliki satu fitur. Fitur tersebut adalah membangkitkan animasi \textit{timelapse}.
@@ -208,7 +208,7 @@ Penjelasan fitur dapat dilihat pada Gambar \ref{fig:uc} dan Tabel \ref{tab:tabel
 	\label{fig:uc}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{|p{3cm}|p{10cm}|}
     \hline
@@ -234,31 +234,36 @@ JGit. Saat menelusuri sejarah pengembangan perangkat lunak, sistem mengambil \te
     \label{tab:tabel_sc_animasi}
 \end{table}
 
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.5]{Gambar/ActivityDiagram.png}
+	\caption{Langkah-langkah untuk membangkitkan animasi \textit{timelapse}.}
+	\label{fig:ac}
+\end{figure}
 
 %\subsection{Langkah-Langkah dalam Membangkitkan Animasi Timelapse}
 %\label{subsec:langkah_animasi}
 %Setelah melakukan analisis pada subbab \ref{subsec:analisis_jgit} sampai subbab \ref{subsec:analisis_selenium}, dapat dibuat langkah-langkah untuk membangkitkan animasi \textit{timelapse}. 
 
 
-Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
-\begin{enumerate}
-\item Program membaca argumen \textit{command line} menggunakan Apache Commons CLI.
-\item Program mendapatkan seluruh \textit{commit history} dari repositori perangkat lunak berbasis web pada  menggunakan JGit. Jika terdapat \textit{option} \texttt{-branch}, program mendapatkan \textit{commit history} pada \textit{branch} yang terdapat di argumen \textit{option} \texttt{-branch}. Jika tidak terdapat \textit{option} \texttt{-branch}, program mendapatkan seluruh \textit{commit history} pada \textit{branch} master. 
-\item Program membuka semua \textit{browser} menggunakan Selenium WebDriver. Jumlah \textit{browser} bergantung pada jumlah argumen dari \textit{option} \texttt{-capture-url}.
-\item Program melakukan \textit{checkout} dalam suatu rentang \textit{commit} tertentu. Jika tidak terdapat \textit{option} \texttt{-start-commit} dan \textit{option} \texttt{-stop-commit}, dilakukan \textit{checkout} ke semua \textit{commit}.
-\item Program melakukan \textit{checkout} ke \textit{commit} awal dari rentang \textit{commit}. 
-\item Program menjalankan \textit{terminal command} jika terdapat \textit{option} \texttt{-before-capture}.
-\item Program membuka setiap URL yang didapatkan dari \textit{option} \texttt{-capture-url} menggunakan Selenium WebDriver. Setiap \textit{browser} membuka URL yang berbeda.
-\item Selenium WebDriver kemudian mengambil \textit{screenshot} pada semua \textit{browser}.
-\item Ulangi langkah 5-8 sampai semua \textit{commit} yang berada di rentang \textit{commit} diambil \textit{screenshot} halamannya.
+%Langkah-langkah untuk membangkitkan animasi \textit{timelapse} adalah sebagai berikut:\\
+%\begin{enumerate}
+%\item Program membaca argumen \textit{command line} menggunakan Apache Commons CLI.
+%\item Program mendapatkan seluruh \textit{commit history} dari repositori perangkat lunak berbasis web pada  menggunakan JGit. Jika terdapat \textit{option} \texttt{-branch}, program mendapatkan \textit{commit history} pada \textit{branch} yang terdapat di argumen \textit{option} \texttt{-branch}. Jika tidak terdapat \textit{option} \texttt{-branch}, program mendapatkan seluruh \textit{commit history} pada \textit{branch} master. 
+%\item Program membuka semua \textit{browser} menggunakan Selenium WebDriver. Jumlah \textit{browser} bergantung pada jumlah argumen dari \textit{option} \texttt{-capture-url}.
+%\item Program melakukan \textit{checkout} dalam suatu rentang \textit{commit} tertentu. Jika tidak terdapat \textit{option} \texttt{-start-commit} dan \textit{option} \texttt{-stop-commit}, dilakukan \textit{checkout} ke semua \textit{commit}.
+%\item Program melakukan \textit{checkout} ke \textit{commit} awal dari rentang \textit{commit}. 
+%\item Program menjalankan \textit{terminal command} jika terdapat \textit{option} \texttt{-before-capture}.
+%\item Program membuka setiap URL yang didapatkan dari \textit{option} \texttt{-capture-url} menggunakan Selenium WebDriver. Setiap \textit{browser} membuka URL yang berbeda.
+%\item Selenium WebDriver kemudian mengambil \textit{screenshot} pada semua \textit{browser}.
+%\item Ulangi langkah 5-8 sampai semua \textit{commit} yang berada di rentang \textit{commit} diambil \textit{screenshot} halamannya.
 %\item Jika saat ini sedang berada pada \textit{commit} terakhir, lanjut ke langkah berikutnya. Jika tidak, ulangi langkah 5-8 untuk \textit{commit} selanjutnya.
-\item Jika terdapat lebih dari satu \textit{browser}, hasil \textit{screenshot} dari setiap \textit{browser} digabungkan menjadi satu gambar baru. 
-\item Program menambahkan judul di pojok kiri bawah jika terdapat \textit{option} \texttt{-title}.
-\item Program menambahkan logo di pojok kanan bawah jika terdapat \textit{option} \texttt{-logo}.  
-\item Program menggabungkan semua \textit{file} gambar menjadi satu \textit{file} bertipe GIF.
-\end{enumerate}
-
-Penggabungan \textit{screenshot} halaman-halaman \textit{web} menjadi \textit{file} GIF dilakukan dengan bantuan \textit{library}\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter}.
+%\item Jika terdapat lebih dari satu \textit{browser}, hasil \textit{screenshot} dari setiap \textit{browser} digabungkan menjadi satu gambar baru. 
+%\item Program menambahkan judul di pojok kiri bawah jika terdapat \textit{option} \texttt{-title}.
+%\item Program menambahkan logo di pojok kanan bawah jika terdapat \textit{option} \texttt{-logo}.  
+%\item Program menggabungkan semua \textit{file} gambar menjadi satu \textit{file} bertipe GIF.
+%\end{enumerate}
+Gambar \ref{fig:ac} menunjukkan langkah-langkah untuk membangkitkan animasi \textit{timelapse}. Penggabungan \textit{screenshot} halaman-halaman \textit{web} menjadi \textit{file} GIF dilakukan dengan bantuan \textit{library}\footnote{http://elliot.kroo.net/software/java/GifSequenceWriter}.
 
 
 \section{Prapengujian Website Piktora}
